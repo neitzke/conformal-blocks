@@ -1,0 +1,12 @@
+@cus_dep_list = (@cus_dep_list, "svg pdf 0 svg2pdf", "xopp pdf 0 xopp2pdf");
+sub svg2pdf {
+   my $curdir = cwd();
+   system("inkscape --export-area-page --export-text-to-path --export-pdf=\"$curdir/$_[0].pdf\" \"$curdir/$_[0].svg\""); }
+sub xopp2pdf {
+   my $curdir = cwd();
+   system("xournalpp -p \"$curdir/$_[0].pdf\" \"$curdir/$_[0].xopp\""); 
+   system("pdfcrop \"$curdir/$_[0].pdf\" \"$curdir/$_[0].pdf\""); }
+$pdf_mode = 1;
+$pdflatex = 'pdflatex %O -synctex=1 -interaction=nonstopmode %S';
+system('git config --global --add safe.directory /github/workspace');
+do './gitinfo2.pm'

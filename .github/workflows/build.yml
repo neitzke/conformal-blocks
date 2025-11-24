@@ -1,0 +1,67 @@
+name: compile and deploy conformal-blocks notes
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  # This workflow contains a single job called "build"
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      # Check out the repository under $GITHUB_WORKSPACE
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # fetch all history, so that log commands work right
+
+      - name: Compile all tex files
+        uses: xu-cheng/latex-action@2.7.1
+        with:
+          root_file: "*.tex"
+          extra_system_packages: "inkscape git xournalpp"
+          args: "-f"
+          glob_root_file: true
+        continue-on-error: true
+
+      - name: Authenticate to Google
+        if: success() || failure()      
+        uses: 'google-github-actions/auth@v2'
+        with:
+          # provider created using the info at https://github.com/google-github-actions/auth#setup
+          workload_identity_provider: 'projects/139710495908/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+          # service account also created using info at https://github.com/google-github-actions/auth#setup
+          # to give this service account access to a repo, can use CLI as follows:
+          # gcloud auth login
+          # export PROJECT_ID="dogwood-goods-360821"
+          # export WORKLOAD_IDENTITY_POOL_ID="projects/139710495908/locations/global/workloadIdentityPools/my-pool"
+          # export REPO="neitzke/conformal-blocks"
+          # gcloud iam service-accounts add-iam-policy-binding "my-service-account@${PROJECT_ID}.iam.gserviceaccount.com"   --project="${PROJECT_ID}"   --role="roles/iam.workloadIdentityUser"   --member="principalSet://iam.googleapis.com/${WORKLOAD_IDENTITY_POOL_ID}/attribute.repository/${REPO}"
+          service_account: 'my-service-account@dogwood-goods-360821.iam.gserviceaccount.com'
+
+      - name: Upload various files to Google Cloud bucket public-export-bucket
+        if: success() || failure()
+        uses: 'google-github-actions/upload-cloud-storage@v1.0.2'
+        with:
+          path: '.'
+          glob: '*.pdf'
+          destination: 'public-export-bucket/conformal-blocks/'
+          process_gcloudignore: false
+          # headers: expire object after 2 minutes, to avoid serving stale files
+          # also tag the objects with github SHA
+          headers: |-
+            cache-control:public, max-age=120
+            x-goog-meta-commit: ${{ github.sha }}
+
+      - uses: numtide/clean-git-action@v1
