@@ -1,0 +1,35 @@
+Things to explain
+
+- 2-d CFT and its factorization property
+-- the example of the free boson
+
+- Virasoro blocks
+-- definition
+-- their expected role in 3d Teichmuller TQFT
+-- their relation to AGT
+-- their relation to tau functions (via c=1)
+-- their relation to random matrices
+-- abelianization
+-- semiclassical blocks and their relation again to tau functions
+-- extension to W-algebras
+
+- Kac-Moody blocks
+-- their use for Chern-Simons theory / knot invariants (integer level)
+-- their use in geometric Langlands (critical level)
+-- their use for constructing/studying representations of quantum groups
+-- relation between KM blocks and nonabelian theta functions
+hopefully it's in Beauville–Laszlo, "Conformal blocks and generalized theta functions"
+or in Shrawan Kumar book from 2022; hard direction is to go from theta function to
+KM block; the idea: pull back to affine Grassmannian (quotient by G_{out} would give back
+Bun_G), get a section of some standard line bundle there; by "Borel-Weil for LG"
+this section is an element of the dual of the vacuum representation; saying it comes by pullback
+means it's invariant under G_{out} which means it gives an actual conformal block
+
+- rational CFT
+-- Verlinde formula?
+
+- minimal models
+-- their use in statistical mechanics?
+
+- the relation between Virasoro and KM blocks?
+
