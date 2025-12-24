@@ -233,18 +233,16 @@
 \newcommand{\tomega}{{\ensuremath{\widetilde \omega}}}
 \newcommand{\tF}{{\ensuremath{\widetilde F}}}
 
-\newcommand{\R}{\ensuremath{\mathbb R}}
-\newcommand{\C}{\ensuremath{\mathbb C}}
-\newcommand{\PP}{\ensuremath{\mathbb P}}
-\newcommand{\Z}{\ensuremath{\mathbb Z}}
-\newcommand{\Q}{\ensuremath{\mathbb Q}}
-\newcommand{\A}{\ensuremath{\mathbb A}}
+\newcommand{\bbR}{\ensuremath{\mathbb R}}
+\newcommand{\bbC}{\ensuremath{\mathbb C}}
+\newcommand{\bbP}{\ensuremath{\mathbb P}}
+\newcommand{\bbZ}{\ensuremath{\mathbb Z}}
+\newcommand{\bbQ}{\ensuremath{\mathbb Q}}
+\newcommand{\bbA}{\ensuremath{\mathbb A}}
 \newcommand{\bbT}{\ensuremath{\mathbb T}}
 \newcommand{\bbH}{\ensuremath{\mathbb H}}
 \newcommand{\bbI}{\ensuremath{\mathbb I}}
 \newcommand{\bbS}{\ensuremath{\mathbb S}}
-\newcommand{\bbQ}{\ensuremath{\mathbb Q}}
-\newcommand{\bbZ}{\ensuremath{\mathbb Z}}
 \newcommand{\bbF}{\ensuremath{\mathbb F}}
 
 \newcommand{\half}{\ensuremath{\frac{1}{2}}}
@@ -432,6 +430,23 @@ Please send corrections/improvements to
 \thispagestyle{fancy}
 
 \section{Introduction}
+
+\section{The free scalar field CFT}
+
+We begin with a basic example of a (Euclidean, 2-dimensional) \ti{conformal field theory}:
+the (uncompactified) \ti{free scalar field}.
+Take $C$ to be a compact Riemannian 2-manifold (maybe not orientable).
+In this field theory the basic object is a map $\phi: C \to \bbR$
+and our interest is in computing integrals over the space $\cF$ of all such maps,
+for example
+\begin{equation}
+  Z = \IP{1} = \int_{\phi \in \cF} \e^{-S(\phi)}
+\end{equation}
+where the \ti{action} is
+\begin{equation}
+  S(\phi) = \int_C \norm{\de \phi}^2 \, \de \vol_C \, .
+\end{equation}
+
 
 
 \end{document}
