@@ -170,7 +170,7 @@
 \declaretheorem[name=Definition,sibling=thm,style=noitalblue]{defn}
 \declaretheorem[name=Definition-Proposition,sibling=thm,style=noitalblue]{defprop}
 \declaretheorem[name=Example,sibling=thm,style=green]{example}
-\declaretheorem[name=Exercise,numberwithin=pset,style=noital]{exercise}
+\declaretheorem[name=Exercise,numberwithin=section,style=noital]{exercise}
 % \declaretheorem[name=Proof,style=proofstyle,numbered=no]{pf}
 
 \numberwithin{equation}{section}
@@ -220,9 +220,10 @@
 \newcommand{\cA}{\ensuremath{\mathcal A}}
 \newcommand{\cI}{\ensuremath{\mathcal I}}
 
-\newcommand{\tphi}{{\ensuremath{\widetilde \phi}}}
+\newcommand{\tphi}{{\ensuremath{\widetilde \Phi}}}
 \newcommand{\tf}{{\ensuremath{\widetilde f}}}
 \newcommand{\tg}{{\ensuremath{\widetilde g}}}
+\newcommand{\tj}{{\ensuremath{\widetilde j}}}
 \newcommand{\tiota}{{\ensuremath{\widetilde \iota}}}
 \newcommand{\talpha}{{\ensuremath{\widetilde \alpha}}}
 \newcommand{\tbeta}{{\ensuremath{\widetilde \beta}}}
@@ -244,6 +245,11 @@
 \newcommand{\bbI}{\ensuremath{\mathbb I}}
 \newcommand{\bbS}{\ensuremath{\mathbb S}}
 \newcommand{\bbF}{\ensuremath{\mathbb F}}
+
+\newcommand{\bJ}{\ensuremath{\overline J}}
+\newcommand{\bphi}{\ensuremath{\overline \phi}}
+
+\newcommand{\regular}{{\mathrm{reg}}}
 
 \newcommand{\half}{\ensuremath{\frac{1}{2}}}
 \newcommand{\qtr}{\ensuremath{\frac{1}{4}}}
@@ -269,7 +275,7 @@
 \newcommand{\hkql}[1]{/\!\!/\!\!/\!\!/\!\!_#1\,}
 \newcommand{\del}{\ensuremath{\partial}}
 \newcommand{\delbar}{\ensuremath{\overline{\partial}}}
-\newcommand{\vphi}{{\vec \phi}}
+\newcommand{\vphi}{{\vec \Phi}}
 \newcommand{\I}{{\mathrm i}}
 \newcommand{\J}{{\mathrm j}}
 \newcommand{\K}{{\mathrm k}}
@@ -387,9 +393,7 @@
 % \newcommand{\insfig}[2]{\begin{figure}[htbp] \centering \includegraphics[scale=#2]{figures/#1-crop.pdf} \label{fig:#1} \end{figure}}
 % syntax: \insfig{name}{0.5}{caption}
 
-\newcommand{\warn}[1]{{\color{red}{[#1]}}}
-\newcommand{\fixme}[1]{{\color{orange}{[#1]}}}
-\newcommand{\currentposition}{{\color{red}\noindent\makebox[\linewidth]{\hdashrule{\paperwidth}{1pt}{3mm}}}}
+\DeclareRobustCommand{\fixme}[1]{\leavevmode{\color{orange}[#1]}}
 
 % \mathtoolsset{showonlyrefs}
 
@@ -433,27 +437,434 @@ Please send corrections/improvements to
 
 \section{The free scalar field CFT}
 
-We begin with a basic example of a (Euclidean, 2-dimensional) \ti{conformal field theory}:
-the (uncompactified) \ti{free scalar field}.
-Take $C$ to be a compact Riemannian 2-manifold (maybe not orientable).
-In this field theory the basic object is a map $\phi: C \to \bbR$
-and our interest is in computing integrals over the space $\cF$ of all such maps,
-for example
-\begin{equation}
-  Z = \IP{1} = \int_{\phi \in \cF} \e^{-S(\phi)}
-\end{equation}
-where the \ti{action} is
-\begin{equation}
-  S(\phi) = \int_C \norm{\de \phi}^2 \, \de \vol_C \, .
-\end{equation}
-An important observation is that the action is \ti{conformally invariant},
-in the sense that if we rescale the metric on $C$ by
-\begin{equation}
-  g_C \to \e^{f} g_C
-\end{equation}
-we get $\vol_C \to \e^{f} \vol_C$ and $\norm{\de \phi}^2 \to \e^{-f} \norm{\de \phi}^2$,
-so that $S(\phi) \to S(\phi)$.
+\subsection{The action and its conformal invariance}
 
+Let $C$ be a Riemannian 2-manifold, with metric $g$.
+
+We begin with a basic example of a Euclidean, 2-dimensional conformal field theory:
+the (uncompactified) \ti{free scalar field}.
+It has been made rigorous under the name
+\ti{Gaussian multiplicative chaos}.
+See e.g. \cite{GuillarmouRhodesVargas2019Polyakov2d}.
+But we will stick to the more informal treatment.
+
+We consider the (loosely understood) space of fields on $C$, 
+\begin{equation}
+  \cF = \left\{ \Phi: C \to \bbR \, \Bigg\lvert  \int_C \Phi \, \de \vol = 0 \right\} \, .
+\end{equation}
+We are interested in studying ``expectation values'' of random observables on $\cF$, formally
+\begin{equation}
+  \IP{\cO} = \int_{\Phi \in \cF} \de \mu(\Phi) \, \cO(\Phi) \, \e^{-S(\Phi)}
+\end{equation}
+where $\mu$ is a measure on $\cF$,
+ $\cO$ is some function on $\cF$, and the \ti{action} $S: \cF \to \bbR$ is\footnote{We always use the Einstein summation convention of summing over repeated indices; cotangent indices are written as 
+ subscripts and tangent indices are written as superscripts; thus $g_{ij}$ is the metric on $C$ in components i.e. $g_{ij} = g(\partial_{x^i}, \partial_{x^j})$, 
+ and $g^{ij}$ is the inverse metric in components.}
+\begin{equation} \label{eq:free-boson-action}
+  S(\Phi) = \frac{1}{8\pi} \int_C \norm{\de \Phi}^2 \, \de \vol 
+  % = \frac{1}{8 \pi} \int_C \de \Phi \wedge \star \de \Phi 
+  % = -\frac{1}{8\pi}\int_C \Phi \, \de \star \de \Phi 
+  = \frac{1}{8\pi}\int_C \partial_i \Phi \, \partial_j \Phi \, g^{ij} \sqrt{\det g} \, \de^2 x
+  = \frac{1}{8 \pi} \int_C \Phi \Delta \Phi \, \de \vol \, .
+\end{equation}
+Here $\Delta$ denotes the positive-definite Laplace operator on $C$, acting on functions,
+given by
+\begin{equation}
+  \Delta = \de^* \de = - \frac{1}{\sqrt{\det g}} \partial_i \left(\sqrt{\det g}\,g^{ij}\partial_j\right).
+\end{equation}
+
+An important feature here is that the action 
+is \ti{conformally invariant}:
+for any function $\omega: C \to \bbR$, 
+if we rescale the metric on $C$ by
+\begin{equation} \label{eq:conformal-rescaling}
+  g \to \e^{2 \omega} g \, ,
+\end{equation}
+the action $S(\Phi)$ for any given $\Phi$ is unchanged.
+
+\begin{exercise}
+Verify the conformal invariance of \eqref{eq:free-boson-action}. Would it still be true in dimensions other than $2$?
+\end{exercise}
+
+It is useful to study the critical points of $S$.
+Making a small variation $\Phi \to \Phi + \delta \Phi$ 
+we get
+\begin{equation}
+  \delta S = \frac{1}{8 \pi} \int_C (\delta \Phi \Delta \Phi + \Phi \Delta (\delta \Phi)) \de \vol = \frac{1}{4 \pi} \int_C \delta \Phi \Delta \Phi \, \de \vol
+\end{equation}
+This procedure defines the \ti{variational derivative}
+\begin{equation}
+  \frac{\delta S}{\delta \Phi(x)} = \frac{1}{4 \pi} \Delta \Phi(x) \, .
+\end{equation}
+Requiring it to vanish
+gives the \ti{equation of motion}
+\begin{equation} \label{eq:scalar-equation-of-motion}
+  \Delta \Phi = 0 \, .
+\end{equation}
+It is equivalent to requiring that
+$\delta S$ vanishes for all (say, smooth) variations
+$\delta \Phi$.
+
+
+\subsection{Complex structure}
+
+A \ti{conformal structure} on $C$ means a Riemannian metric $g$
+up to local rescalings \eqref{eq:conformal-rescaling}. 
+Now recall that
+a conformal structure and orientation on $C$ 
+together are equivalent to a complex structure,
+making $C$ into a Riemann surface.
+The operator of multiplication by $\I$ in $T^* C$ 
+is induced by a rotation by a quarter-turn clockwise, which is
+also equivalent to the Hodge $\star$ operator
+acting on 1-forms.\footnote{Relative 
+to an oriented orthonormal basis of $T^* C$ we have
+$\star(1) = e_1 \wedge e_2$, $\star(e_1) = e_2$, $\star(e_2) = -e_1$, $\star (e_1 \wedge e_2) = 1$.}
+
+Thus the conformal invariance
+of \eqref{eq:free-boson-action} is equivalent to saying that it depends only on 
+the complex structure, not on the whole Riemannian metric.
+We can rewrite it to make this more manifest:\footnote{$(\Delta f) \de \vol = -2 \I \partial \bar\partial f$.}
+\begin{equation}
+S = \frac{\I}{4 \pi} \int_C \partial \Phi \wedge \bar\partial \Phi \, .
+\end{equation}
+
+\subsection{Holomorphic factorization}
+The equation of motion \eqref{eq:scalar-equation-of-motion} says, at least locally, that $\Phi$ is the
+real part of a holomorphic function: 
+\begin{equation}
+  \Phi = \phi + \bphi, \qquad \bar\partial \phi = 0 \, .
+\end{equation}
+
+This is a hint that the theory will have some kind of factorization
+into holomorphic and antiholomorphic parts.
+However, note that $\phi$ is not uniquely determined
+by $\Phi$: we have the freedom to shift $\phi$ by an imaginary
+constant.
+This suggests that the factorization will not be perfect.
+
+% This might lead one to suspect \fixme{... give a good heuristic for why the factorization occurs at level of 
+% correlation functions}
+
+
+\subsection{Currents}
+
+We have two conserved currents: if we write
+\begin{equation}
+  j = \de \Phi, \qquad \tj = \star \de \Phi
+\end{equation}
+then using \eqref{eq:scalar-equation-of-motion} we have
+\begin{equation}
+  \de j = 0, \qquad \de \tj = 0 \, .
+\end{equation}
+
+Equivalently, we can 
+decompose
+\begin{equation}
+  j = J + \bJ
+\end{equation}
+according to type, and the two pieces are separately closed: 
+\begin{equation}
+\bar\partial J = 0, \qquad \partial \bJ = 0 \, .
+\end{equation}
+
+
+\subsection{The energy-momentum tensor}
+
+We define
+\begin{equation}
+  T_{ij}(x) = \frac{2}{\sqrt{\det g}} \frac{\delta S}{\delta g^{ij}(x)} \, .
+\end{equation}
+This is the classical energy-momentum tensor. 
+A direct computation gives
+\begin{equation} \label{eq:classical-T-free-boson}
+ T_{ij} = \frac{1}{4\pi} \left( \partial_i \Phi \partial_j \Phi - \frac12 g_{ij} \partial_k \Phi \partial^k \Phi \right)
+\end{equation}
+
+\begin{exercise}
+Verify \eqref{eq:classical-T-free-boson}.
+\end{exercise}
+
+Again
+$T_{ij}$ is a conserved current, in the sense that the equations of motion imply
+\begin{equation} \label{eq:T-conserved}
+  \nabla^i T_{ij} = 0 \, .
+\end{equation}
+
+\begin{exercise}
+Verify \eqref{eq:T-conserved} for the energy-momentum tensor
+\eqref{eq:classical-T-free-boson}.
+\end{exercise}
+
+\begin{exercise}
+The equation \eqref{eq:T-conserved} holds in any field theory
+which is diffeomorphism invariant. Prove it.
+(Hint: consider a vector field
+$\xi$ on $C$ giving an infinitesimal diffeomorphism; use the
+fact that $S$
+is invariant under the simultaneous variation of all 
+fields and the metric induced by $\xi$; integrate by parts.)
+\end{exercise}
+
+In particular, the trace $T_i^i = 0$, reflecting the 
+conformal invariance.
+
+
+
+
+\subsection{Recollection on Gaussian integrals}
+
+Suppose $\cF = \bbR^N$
+with coordinates $x^1, \dots, x^N$,
+and
+\begin{equation} \label{eq:0d-action-multifield}
+  S = \half x^i M_{ij} x^j
+\end{equation}
+where $M$ is symmetric. Then we have
+\begin{equation} \label{eq:gaussian-det}
+  \IP{1} = \int_{\cF} \de \vec{x} \, \e^{-\half x^i M_{ij} x^j} = \frac{(2\pi)^{N/2}}{\sqrt{\det M}}.
+\end{equation}
+
+\begin{exercise}
+Prove that $\IP{x^{i_1} \cdots x^{i_k}} = 0$ whenever $k$ is odd,
+and compute directly 
+\begin{equation}
+\frac{\IP{x^i x^j}}{\IP{1}} = (M^{-1})^{ij} \, .  
+\end{equation}
+\end{exercise}
+
+More generally, $2m$-point functions are given by
+
+
+\subsection{Correlation functions of currents}
+
+Now we start discussing correlation functions.
+For this the global structure of $C$ matters.
+Suppose $C$ is compact connected.
+
+We formally would have
+\begin{equation}
+  \IP{1} = \frac{1}{\sqrt{\det \Delta'}}
+\end{equation}
+where $\Delta'$ is the Laplacian acting on $\cF$
+(recall this is the space of functions with integral zero;
+equivalently it is the orthocomplement of the constant function,
+with respect to the $L^2$ metric).
+
+There is a problem:
+the eigenvalues of $\Delta'$
+diverge to $\infty$, so $\det \Delta'$ has no chance of 
+existing in the ordinary sense.
+
+\begin{exercise} Suppose $C$ is a rectangular torus, with
+side lengths $R_1$ and $R_2$. Write out the eigenvalues of 
+$\Delta'$. 
+\end{exercise}
+
+We postpone dealing with the UV divergence for now, by considering
+\ti{normalized} correlation functions, where the divergence will
+cancel out. For instance,
+let us consider the 2-point correlation function
+\begin{equation}
+  \frac{\IP{J(z) J(w)}}{\IP{1}}
+\end{equation}
+According to our rules in \fixme{...} this should be given 
+by \fixme{...}
+
+
+\subsection{The $0$-point function}
+
+The energy-momentum tensor determines the variation of 
+correlation functions. In particular we expect formally
+\begin{equation}
+  \IP{T_{ij}(x)} = \frac{2}{\sqrt{\det g}} \frac{\delta}{\delta g^{ij}(x)} \IP{1} \, .
+\end{equation}
+We use this condition in its logarithmic form
+\begin{equation}
+  \frac{\IP{T_{ij}(x)}}{\IP{1}} = \frac{2}{\sqrt{\det g}} \frac{\delta}{\delta g^{ij}(x)} \log \IP{1}
+\end{equation}
+With a little work we can make the left side well defined.
+Then, 
+
+
+
+\subsection{TFT and factorization}
+
+Let's consider now a 3-dimensional field theory.
+Let $M$ be a compact oriented 3-manifold, now without a
+Riemannian metric.
+Instead of a scalar $\Phi$ we have a $1$-form $a$, and we write the action
+\begin{equation}
+S(a) = \int_M a \wedge \de a \, .  
+\end{equation}
+(We could call this ``Chern-Simons theory with gauge group $\bbR$.'')
+$S$ is invariant under $a \to a + \de \chi$ where $\chi$
+is any function: indeed the variation is
+\begin{equation}
+  \delta S = \int_M \de \chi \wedge \de a = \int_M \de(\chi \wedge \de a) = \int_{\partial M} \chi \wedge \de a
+\end{equation}
+which vanishes for $M$ without boundary.
+The equations of motion require $\de a = 0$.
+Thus the space of classical solutions modulo gauge symmetry
+is $H^1(M,\bbR)$.
+
+Then we let $M = C \times I$, for $I$ an interval.
+To formulate the field theory on $M$ we need (elliptic) 
+boundary conditions at the two ends of $I$.
+One possibility which works is to add an additional
+coupling on the boundary, of the form
+\begin{equation}
+  \pm \int_{\partial M} \norm{a}^2
+\end{equation}
+Note that this coupling uses a conformal structure on $C$.
+
+
+
+Now one of the principles of Lagrangian field theory is that an equation which holds classically
+also holds in correlation functions. (You can prove it formally by integration by parts.) 
+So in particular we expect $\bar\partial J = 0$, $\partial \bJ = 0$ to hold in correlation 
+functions. Thus, for instance, we can compute correlation functions
+\begin{equation}
+  \IP{J(z_1) \cdots J(z_k) \bJ(w_1) \cdots \bJ(w_l)}
+\end{equation}
+and they should be holomorphic 1-forms in all of the variables $z_i$,
+antiholomorphic 1-forms in all of the variables $w_i$.
+More precisely they are holomorphic \ti{away from} the diagonals where some $z_i = z_j$
+or $w_i = w_j$. 
+
+A second key property of these correlation functions is the \ti{operator product expansion}:
+this says (in correlation functions) that around $z_1 = z_2$ we have
+\begin{equation}
+  J(z_1) J(z_2) = \frac{1}{(z_1 - z_2)^2} + \regular
+\end{equation}
+\fixme{give path integral derivation}
+
+
+
+\subsection{The energy-momentum tensor}
+
+The holomorphic part at the quantum level is
+$T(z) = \frac12 :J(z)^2:$.
+
+
+
+\subsection{The zeta-regularized determinant}
+
+One expects that
+\begin{equation}
+  \IP{1} = 1 / \sqrt{\det{}' \Delta}
+\end{equation}
+Since $\Delta$ acts on an infinite-dimensional space we need to explain what we mean by
+its determinant.
+Precisely we mean the \ti{zeta-regularized} determinant.
+
+Define 
+\begin{equation}
+ \zeta_\Delta(s) = \sum_{k \ge1 }\lambda_k^{-s} 
+\end{equation}
+for
+$\re(s) > 1$, where $0=\lambda_0<\lambda_1\le\lambda_2\le\cdots$ are the eigenvalues of $\Delta$.
+In fact this function admits meromorphic continuation to the full
+$s$-plane. To see this consider the operator $\e^{-t \Delta}$ 
+giving heat flow for time $t$. This is a nice
+integral operator with a smooth kernel $K_t(x,y)$, i.e.
+\begin{equation}
+  \e^{-t \Delta} f = \int_{y \in C} K_t(x,y) f(y) \, .
+\end{equation}
+As $t \to 0$ the kernel $K_t$ 
+concentrates around the diagonal (it converges in some distributional sense to a $\delta$-function). On the diagonal we have\footnote{To understand the leading term $\frac{1}{4 \pi t}$, note the heat kernel on $\bbR^2$ is a Gaussian, $K_t(x,y) = \frac{1}{4 \pi t} \exp\left(- \frac{\abs{x-y}^2}{4t} \right)$.}
+\begin{equation}
+  K_t(x,x) \sim \frac{1}{4 \pi t} \left(1 + \frac{R}{6} t + \cdots\right)
+\end{equation}
+We can subtract these leading divergent terms from $K_t$,
+to get a new kernel $\widetilde K_t(x) = K_t(x,x) - \frac{1}{4 \pi t} - \frac{R}{24 \pi}$.
+Now, for $\Re(s) > 1$ we have an integral representation
+\begin{equation}
+  \zeta_\Delta(s) = \frac{1}{\Gamma(s)} \int_0^\infty \frac{\de t}{t} t^s \Tr{}' \e^{-t \Delta}
+\end{equation}
+
+
+
+With the analytic continuation computed, we finally have
+\begin{equation}
+\det{}'\Delta = \exp\big(-\zeta'_{\Delta}(0)\big)
+\end{equation}
+
+For example, if $C$ is a surface of genus $1$, one has \fixme{fix area-dependent factor}
+\begin{equation}
+  \det{}'\Delta = (\im \tau) \abs{\eta(\tau)}^4
+\end{equation}
+where
+\begin{equation}
+  \eta(\tau) = q^{1/24} \prod_{n=1}^\infty (1 - q^n), \qquad q = e^{2 \pi \I \tau}
+\end{equation}
+
+This zeta-regularization might seem ad hoc.
+A more physical method of regularization is as follows.
+We use the \ti{formal} identity
+\begin{equation}
+\log \det A = -\int_0^\infty \frac{\de t}{t} \Tr(\e^{-t A})
+\end{equation}
+This identity is always nonsense, because of a 
+divergence near $t = 0$. However it is true ``up to 
+an infinite constant,'' in the sense that for $a$, $b$ positive
+\begin{equation}
+  \log a - \log b = -\int_0^\infty \frac{\de t}{t} (\e^{-t a} - \e^{-t b})
+\end{equation}
+
+Then we get a regularized determinant
+\begin{equation}
+   \log \det{}' \Delta = - \int_0^\infty \frac{\de t}{t} \int_C \widetilde K_t(x)
+\end{equation}
+\fixme{explain its relation to the zeta-regularized one}
+
+The factorization of this determinant is proved in
+\cite{McIntyreTakhtajan2006}.
+
+
+
+
+\section{Free BV theories}
+
+We write the free boson in the BV language.
+Very generally this would mean we should write
+$S = \frac12 \IP{\phi, Q \phi}$
+where $(\phi,Q)$ is an elliptic complex,
+and $\IP{,}$ is integration of some local density-valued
+pairing of degree $-1$, so that $\IP{,}$ is invariant for $Q$.
+Then $Q \phi = 0$ is the equation of motion.
+In the case of the free boson we should have fields and antifields,
+i.e. $\phi = (\Phi, \Phi^+)$ 
+and $Q \Phi = 0$, $Q \Phi^+ = \Delta \Phi$.
+
+Pick $Q^{GF}$ so that $[Q,Q^{GF}] = \Delta$
+and propagator
+$P = \int_\eps^L (Q^{GF} \otimes 1) K_t \de t$
+where $K_t$ is the heat kernel.
+(Naively the propagator would be
+$\int_0^\infty K_t \de t$, reflecting the identity
+$\int_0^\infty \exp(-t \lambda) \de t = \lambda^{-1}$.)
+
+
+
+\section{General structure of CFT}
+
+\subsection{The energy-momentum tensor}
+
+We have operators $T_{ij}$ with some universal structure.
+
+The trace has $\IP{T^i_i} = \frac{c}{24 \pi} R$.
+
+The holomorphic part has the transformation law 
+\begin{equation} \label{eq:virasoro-coordinate-change}
+  T(p)^{z} = \left( \frac{\de w(p)}{\de z(p)} \right)^2 T(p)^{w} + \frac{c}{12} \{w,z\} \, ,
+\end{equation}
+where $\{\cdot,\cdot\}$ denotes the Schwarzian derivative:
+$\{f(z),z\} = \frac{f'''(z)}{f'(z)} - \frac32 \left( \frac{f''(z)}{f'(z)} \right)^2$.
+
+
+
+\printbibliography
 
 \end{document}
 
@@ -479,42 +890,6 @@ so that $S(\phi) \to S(\phi)$.
 
 % term "conformal blocks" originates in
 % \cite{BPZ1984}
-
-
-@article{BPZ1984,
-  author  = {Belavin, A. A. and Polyakov, A. M. and Zamolodchikov, A. B.},
-  title   = {Infinite conformal symmetry in two-dimensional quantum field theory},
-  journal = {Nuclear Physics B},
-  volume  = {241},
-  number  = {2},
-  year    = {1984},
-  month   = jul,
-  pages   = {333--380},
-  doi     = {10.1016/0550-3213(84)90052-X},
-  url     = {https://doi.org/10.1016/0550-3213(84)90052-X}
-}
-
-@article{Polyakov1970Conformal,
-  author  = {Polyakov, A. M.},
-  title   = {Conformal Symmetry of Critical Fluctuations},
-  journal = {JETP Letters},
-  volume  = {12},
-  number  = {12},
-  pages   = {381--383},
-  year    = {1970},
-  note    = {Translated from Pis'ma v ZhETF 12(11), 538--541 (1970).}
-}
-
-@book{DiFrancescoMathieuSenechal1997CFT,
-  author    = {Di Francesco, Philippe and Mathieu, Pierre and S{\'e}n{\'e}chal, David},
-  title     = {Conformal Field Theory},
-  series    = {Graduate Texts in Contemporary Physics},
-  publisher = {Springer},
-  address   = {New York, NY},
-  year      = {1997},
-  isbn      = {978-0-387-94785-3},
-  doi       = {10.1007/978-1-4612-2256-9}
-}
 
 
 
