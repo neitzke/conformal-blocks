@@ -458,3 +458,75 @@ so that $S(\phi) \to S(\phi)$.
 \end{document}
 
 
+
+
+% To add:
+% -1/8pi is correct normalization for free boson action if we want J = d\Phi to have 1/(x-y)^2 OPE
+% according to \cite{DiFrancescoMathieuSenechal1997CFT}
+
+% Polchinski explains why the trace of T is (-c/12) R [or maybe -c/(24\pi) R, check conventions!]
+% [integrated version of this is Polyakov's formula I think]
+% calculation: supose we know the trace is a.R for some a
+% conservation of T says \nabla^z T_{zz} = -a/2 \partial_z R
+% then make Weyl transformations on both sides
+% more generally, without assuming anything about the trace in advance,
+% this formula should come from computing second Weyl 
+% variation of the correlation function in
+% two ways: either take the T-T OPE or not
+
+% correlation functions in the full CFT use a local coordinate system around each insertion,
+% much as for the correlation functions in the chiral halves
+
+% term "conformal blocks" originates in
+% \cite{BPZ1984}
+
+
+@article{BPZ1984,
+  author  = {Belavin, A. A. and Polyakov, A. M. and Zamolodchikov, A. B.},
+  title   = {Infinite conformal symmetry in two-dimensional quantum field theory},
+  journal = {Nuclear Physics B},
+  volume  = {241},
+  number  = {2},
+  year    = {1984},
+  month   = jul,
+  pages   = {333--380},
+  doi     = {10.1016/0550-3213(84)90052-X},
+  url     = {https://doi.org/10.1016/0550-3213(84)90052-X}
+}
+
+@article{Polyakov1970Conformal,
+  author  = {Polyakov, A. M.},
+  title   = {Conformal Symmetry of Critical Fluctuations},
+  journal = {JETP Letters},
+  volume  = {12},
+  number  = {12},
+  pages   = {381--383},
+  year    = {1970},
+  note    = {Translated from Pis'ma v ZhETF 12(11), 538--541 (1970).}
+}
+
+@book{DiFrancescoMathieuSenechal1997CFT,
+  author    = {Di Francesco, Philippe and Mathieu, Pierre and S{\'e}n{\'e}chal, David},
+  title     = {Conformal Field Theory},
+  series    = {Graduate Texts in Contemporary Physics},
+  publisher = {Springer},
+  address   = {New York, NY},
+  year      = {1997},
+  isbn      = {978-0-387-94785-3},
+  doi       = {10.1007/978-1-4612-2256-9}
+}
+
+
+
+Motivation of "conformal block" from the point of view of free boson?
+For the 0-point function we know the holomorphic factorization is not quite complete until we expand in conformal blocks
+For the 1-point function? Should be zero after averaging
+For the 2-point function? e.g. <J Jbar> in genus 1? It's constant I think, something like 1/(im \tau); can calculate it directly using the Green's function, or indirectly using the conformal blocks; the answers are the same
+[the un-normalized conformal-block calculation would integrate a^2 exp(-(im\tau) a^2), that gives (im \tau)^(-3/2),
+so normalized is (im \tau)^{-1}]
+
+
+
+
+To compute JJ OPE:
+free field 
