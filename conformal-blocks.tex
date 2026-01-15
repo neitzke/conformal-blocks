@@ -450,6 +450,15 @@ Please send corrections/improvements to
 
 \section{Introduction}
 
+\subsection{Synopsis}
+
+The course is about a subject which started in physics of
+2-dimensional systems (partly string theory, but not only 
+string theory). It has turned out to have a lot of applications:
+I'll try to lay out a few of them in the second part of this
+introduction.
+
+
 \subsection{Vertex algebras and modules}
 
 The first basic datum of the course is a 
@@ -515,7 +524,7 @@ Now we can make the definition:
 
 A \emph{vertex algebra} is a quadruple \((\vertex, \mathbf{1}, \partial, Y)\) where
 \(\vertex\) is a vector space, \(\bid \in \vertex \),
-\(\partial \in \mathrm{End}(\vertex)\),
+\(T \in \mathrm{End}(\vertex)\),
 and
 \begin{equation}
 Y(\,\cdot\,,z): \vertex \to \mathrm{End}(\vertex)[[z,z^{-1}]],\qquad
@@ -534,7 +543,7 @@ $Y(\mathbf{1},z) = \bid_{\vertex}$ \, ,
 $Y(a,z)\mathbf{1}\in a+z\,\vertex[[z]]$ \, ,
 
 \item
-$[\partial,\,Y(a,z)] = \partial_z\, Y(a,z)$ \, ,
+$[T,\,Y(a,z)] = \partial_z\, Y(a,z)$ \, ,
 
 \item For all $a,b,\chi \in \vertex$
 there exists $F(z,w) \in \vertex[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
@@ -548,20 +557,39 @@ respectively.
 
 \end{defn}
 
+% \begin{exercise}
+% For all \(a,b\in\vertex\), prove that
+% \begin{align}
+% &z_0^{-1}\delta\!\left(\frac{z_1-z_2}{z_0}\right)Y(a,z_1)Y(b,z_2)
+% - z_0^{-1}\delta\!\left(\frac{z_2-z_1}{-z_0}\right)Y(b,z_2)Y(a,z_1) \\
+% &\qquad =
+% z_2^{-1}\delta\!\left(\frac{z_1-z_0}{z_2}\right)Y\!\big(Y(a,z_0)b,\,z_2\big),
+% \end{align}
+% as an identity in \(\mathrm{End}(\vertex)\big[\!\big[z_0^{\pm1},z_1^{\pm1},z_2^{\pm1}\big]\!\big]\),
+% where \(\delta(w)=\sum_{n\in\mathbb{Z}} w^n\) is the formal delta function.
+% \end{exercise}
+
+The next few exercises develop some useful facts; I think you can
+find them solved in \cite{FrenkelBenZvi2004VertexAlgebrasCurves}
+Section 3.2.
+
 \begin{exercise}
-For all \(a,b\in\vertex\), prove that
-\begin{align}
-&z_0^{-1}\delta\!\left(\frac{z_1-z_2}{z_0}\right)Y(a,z_1)Y(b,z_2)
-- z_0^{-1}\delta\!\left(\frac{z_2-z_1}{-z_0}\right)Y(b,z_2)Y(a,z_1) \\
-&\qquad =
-z_2^{-1}\delta\!\left(\frac{z_1-z_0}{z_2}\right)Y\!\big(Y(a,z_0)b,\,z_2\big),
-\end{align}
-as an identity in \(\mathrm{End}(\vertex)\big[\!\big[z_0^{\pm1},z_1^{\pm1},z_2^{\pm1}\big]\!\big]\),
-where \(\delta(w)=\sum_{n\in\mathbb{Z}} w^n\) is the formal delta function.
+Prove the translation property
+\begin{equation}
+   \e^{w T} Y(a, z) \e^{-w T} = Y(a, z+w) \, .
+\end{equation}
 \end{exercise}
 
 \begin{exercise}
-Prove that the modes of $\vertex$ form a Lie algebra, with
+Prove the skew-symmetry property
+\begin{equation}
+  Y(a,z) b = \e^{z T} Y(b, -z) a
+\end{equation}
+\end{exercise}
+
+
+\begin{exercise}
+Prove that the modes of $\vertex$ form a Lie subalgebra of $\End(\vertex)$, with
 % determined by the singularity in the 
 % products $a(z) b(w)$ at $z=w$, i.e. determined by the
 % $a_{(n)} b$ for $n \ge 0$:
@@ -574,19 +602,22 @@ Prove that the modes of $\vertex$ form a Lie algebra, with
 % Start with the simplest case where the only
 % nonzero term is $j=0$.)
 \end{exercise}
+This is a useful way of thinking about vertex algebras
+concretely, and particularly their ``local'' behavior: 
+it is determined by the corresponding Lie algebra of modes.
 
-\begin{exercise} Prove that
-\begin{equation} \label{eq:symmetry-mode-products}
-a_{(n)}b = -\sum_{j\ge 0} (-1)^{n+j}\,\frac{\partial^{\,j}}{j!}\,\bigl(b_{(n+j)}a\bigr)
-\qquad (n\ge 0) \, .
-\end{equation}
-\end{exercise}
+% \begin{exercise} Prove that
+% \begin{equation} \label{eq:symmetry-mode-products}
+% a_{(n)}b = -\sum_{j\ge 0} (-1)^{n+j}\,\frac{\partial^{\,j}}{j!}\,\bigl(b_{(n+j)}a\bigr)
+% \qquad (n\ge 0) \, .
+% \end{equation}
+% \end{exercise}
 
-\begin{exercise} The complicated shape of \eqref{eq:symmetry-mode-products} might convince you that
-there should be a more symmetric way of describing the
-singular part of the product. There is, and it's
-called the $\lambda$-bracket. Learn about it.
-\end{exercise}
+% \begin{exercise} The complicated shape of \eqref{eq:symmetry-mode-products} might convince you that
+% there should be a more symmetric way of describing the
+% singular part of the product. There is, and it's
+% called the $\lambda$-bracket. Learn about it.
+% \end{exercise}
 
 % \begin{align}
 % [a_\lambda b] &= \sum_{j\ge 0}\frac{\lambda^j}{j!}\,(a_{(j)}b),\\[4pt]
@@ -612,24 +643,31 @@ called the $\lambda$-bracket. Learn about it.
 % (which amounts to some complicated constraints on the products $(a,b) \mapsto a_{(n)} b$).
 % The official definition is in \autoref{sec:vertex-algebras}.
 
-The vertex algebras we consider are of a simple sort:
+Many of the vertex algebras we consider are of a simple sort:
 they are \ti{universal enveloping vertex algebras},
 which can be described efficiently by naming a finite number
 of generating objects, and giving the singular part
 of the expansion, i.e. giving the products $a_{(n)} b$ for 
 $n \ge 0$.
-
-Here are three main examples: 
+We won't give the complete construction now but name
+three main examples: 
 \begin{enumerate}
 \item The \ti{Heisenberg algebra} $\vertex = \Heis$. It is generated by one defect $J$ with an expansion of the form
 \begin{equation}
  J(z) J(w) = \frac{\bid(w)}{(z-w)^2} + \cdots
 \end{equation}
-i.e. the only nonzero product is $J_{(1)} J = \bid$.
+% i.e. the only nonzero product is $J_{(1)} J = \bid$.
 The corresponding mode algebra is spanned by $J_{(n)}$ $(n \in \bbZ)$ and $\bid = \bid_{(-1)}$, with
 \begin{equation}
 [J_{(m)},J_{(n)}] = m \delta_{m+n,0} \bid \, .
 \end{equation}
+% Because $Y(J,z) \bid \in J + z \vertex[[z]]$
+% we have the relations $J_{(n)} \bid = 0$ for $n \ge 0$.
+
+% As a module over the Lie algebra of modes, $\vertex$
+% is freely generated by $\bid$ modulo these relations. Thus
+% a basis for $\Heis$ is provided by elements
+% $J_{(n_1)} \cdots J_{(n_k)} \bid$ with $n_1 \le n_2 \le \cdots \le n_k < 0$.
 
 \item For any complex Lie algebra $\fg$ with invariant bilinear form $\IP{\cdot,\cdot}$ and $k \in \bbC$, 
 one has the \ti{affine Kac-Moody algebra} $\vertex = V^k(\fg)$.
@@ -669,7 +707,33 @@ from \eqref{eq:virasoro-ope} and \eqref{eq:mode-algebra}.
 % to formulate and answer this question, but the answer might not be a meromorphic product of the sort we need for a vertex algebra.}
 
 
-We always consider vertex algebras $\vertex$ which are \ti{conformal}, meaning they contain a copy of $\Vir^{c}$ for some $c$.
+% We always consider vertex algebras $\vertex$ which are \ti{conformal}, meaning they contain a copy of $\Vir^{c}$ for some $c$.
+
+
+\begin{defn}[Module for a vertex algebra]
+A \ti{$\vertex$-module} is a vector space $\vrep$
+and an operation
+\begin{equation}
+  Y^\vrep: \vertex \to \End \vrep[[z^{\pm 1}]]
+\end{equation}
+such that
+\begin{enumerate}
+
+\item 
+  $Y^\vrep(\bid, z) = \bid_\vrep$ \, ,
+
+\item $[T, Y^\vrep(a, z)] = \partial_z Y^\vrep(a,z)$ \, ,
+
+\item For all $a,b \in \vertex$ and $\chi \in \vrep$
+there exists $F(z,w) \in \vrep[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
+$Y(a,z) Y(b,w) \chi$ and 
+$Y(b,w) Y(a,z) \chi$ are the
+formal Laurent expansion of $F(z,w)$ in the regions
+$\abs{w} < \abs{z}$ and $\abs{z} < \abs{w}$
+respectively.
+\end{enumerate}
+
+\end{defn}
 
 
 \subsection{Riemann surfaces}
@@ -706,6 +770,9 @@ We often drop the data of the marked points and the representations from the not
 Kac-Moody algebras}
 
 Now we are ready to ``put $\vertex$ on the Riemann surface $C$.''
+The way this is done for a general $\vertex$ takes a while
+to appreciate. To get some examples in our hand quickly, 
+let me specialize to the case of affine Kac-Moody algebras.
 
 Before defining conformal blocks we consider correlation functions.
 I think that these are actually the more important objects.
@@ -740,8 +807,44 @@ $\IP{J^X(q) J^Y(q') \cdots}$ around $q=q'$ is
 
 \end{defn}
 
+As we defined it, this is a highly complicated and structured object. We will see shortly 
+that some of the structure is redundant: the whole correlation
+system is determined by a relatively small subset of the
+correlation functions.
+But in the applications of the theory it is important to have
+all the correlation functions available.
 
-\begin{example}[Chiral correlation systems for the Heisenberg vertex algebra]
+\begin{example}[Chiral correlation systems for the Heisenberg vertex algebra on the sphere]
+
+Here is a baby example.
+
+Suppose $\vertex = \Heis$ and $C = \bbC \bbP^1$,
+without any punctures. 
+Then we can construct a chiral correlation system as follows.
+Let $\sigma$ denote a division of $\{1, \dots, k\}$ into 
+2-element subsets $(\sigma_{i1}, \sigma_{i2})$ with $i = 1, \dots, \frac{k}{2}$. Then we can determine a chiral correlation system by
+\begin{equation}
+  \IP{J(z_1) \cdots J(z_k)} = \sum_\sigma \prod_{i=1}^k \frac{\de z_{\sigma_{i1}} \de z_{\sigma_{i2}}}{(z_{\sigma_{i1}} - z_{\sigma_{i2}})^2}
+\end{equation}
+so e.g.
+\begin{align}
+ \IP{} &= 1, \\
+ \IP{J(z_1)} &= 0, \\
+ \IP{J(z_1) J(z_2)} &= \frac{1}{(z_1 - z_2)^2} \de z_1 \de z_2, \\
+ \IP{J(z_1) J(z_2) J(z_3)} &= 0, \\
+ \IP{J(z_1) J(z_2) J(z_3) J(z_4)} &= \left( \frac{1}{(z_1 - z_2)^2 (z_3 - z_4)^2} + \frac{1}{(z_1 - z_3)^2 (z_2 - z_4)^2} + \frac{1}{(z_1 - z_4)^2 (z_2 - z_3)^2}  \right)  \de z_1 \de z_2 \de z_3 \de z_4, 
+\end{align}
+
+
+\fixme{...}
+\end{example}
+
+\begin{exercise} Prove that every 
+chiral correlation system for this $(C,\vertex)$
+is a multiple of the given one.
+\end{exercise}
+
+\begin{example}[Chiral correlation systems for the Heisenberg vertex algebra on the torus]
 \fixme{...}
 \end{example}
 
@@ -770,13 +873,20 @@ any meromorphic function on $C$, holomorphic away from
 the $p_i$. Then $f \eta$ is a meromorphic $1$-form
 on $C$, and thus
 \begin{equation}
-  \sum_{i=1}^n \Res_i (f \eta(p)) = 0 \, .
+  \sum_{i=1}^n \Res_{p_i} (f \eta) = 0 \, .
 \end{equation}
-
+So what are these residues?
 Laurent expand near each $p_i$ as
 \begin{equation}
-  f = \sum_{n \in \bbZ} f_{i,n}\, z_i^{n}.
+  f = \sum_{n \in \bbZ} f_{i,n}\, z_i^{n}
 \end{equation}
+Then, a short computation gives that
+\begin{equation}
+  \Res_{p_j} f \eta = \sum_{n \in \bbZ} \IP{\left( \prod_{i \neq j} \chi_i(p_i)  \right) f_{j,n} J^X_n \chi_j(p_j)}
+\end{equation}
+(note only finitely many terms are nonzero).
+
+This motivates the following.
 For $X\in\fg$ define a formal infinite sum
 \begin{equation}
   X(f)_i = \sum_{n \in \bbZ} f_{i,n}\, J^{X}_{n} ,
@@ -811,6 +921,24 @@ $\bigotimes_i \vrep_i \to \bbC$ which annihilates all
 elements of the form $X(f) v$.
 \end{defn}
 
+What we just explained is:
+
+\begin{prop}[Chiral correlation systems give conformal blocks]
+Given a chiral correlation system for $\vertex = V^k(\fg)$,
+the map
+\begin{equation}
+  \bigotimes_i \vrep_i \to \bbC \, .
+\end{equation}
+given by
+\begin{equation}
+  \bigotimes_i \chi_i(p_i) \mapsto  \IP{\prod_i \chi_i(p_i)}
+\end{equation}
+is a conformal block.
+\end{prop}
+
+The converse is also true \fixme{...}
+
+
 \subsection{Invariant spaces}
 
 Here is a concrete example.
@@ -826,9 +954,13 @@ we'll see this from another point of view momentarily. It also depends on $k$.} 
 descendants, leaving
 only the $R_\lambda$; what remains is the action of $X(1)$
 on $\bigotimes_i R_i$.}
+
+\begin{prop}[Conformal blocks for \tops{$V^k(\fg)$}{Vk(g)} give tensor product invariants]
 \begin{equation}
 \Conf(C, \vertex) = \Hom(\bigotimes_i R_i, \triv).
 \end{equation}
+\end{prop}
+
 With 3 punctures this is equivalent to the tensor product multiplicity spaces, i.e.
 \begin{equation}
 \Conf(C, \vertex) = \Hom(R_1 \otimes R_2, R_3^*).
@@ -839,12 +971,20 @@ structure in representation theory this way.
 
 \subsection{Connections}
 
-We can consider varying the base curve $C$, and then the spaces $\Conf(C, \vertex)$
-are the fibers of a twisted $D$-module $\Conf(\cdot, \vertex)$ over some moduli space $\cM$ of curves.
+Now let's go back to general $\vertex$ for a little while.
+
+But suppose that $\vertex$ is \ti{conformal}, i.e. it 
+contains a copy of $\Vir^c$. This is true for $V^k(\fg)$ 
+as long as $k \neq -h^\vee$).
+
+Then we can consider varying the base curve $C$, and the spaces $\Conf(C, \vertex)$
+will turn out to be the fibers of a twisted $D$-module $\Conf(\cdot, \vertex)$ over some moduli space $\cM$ of curves.
 (Here we include the marked points as part of the data of $C$ --- so a special case of varying $C$
 is to hold the bare curve fixed and just move the marked points.)
 Roughly one should think of $\Conf(\cdot, \vertex)$ as a bundle with connection $\nabla$ over $\cM$.
 
+Thus we get in particular some new structure on the
+invariant spaces above \fixme{...}
 
 
 \subsection{Link invariants}
