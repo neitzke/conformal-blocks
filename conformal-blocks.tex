@@ -40,6 +40,7 @@
 \setlength{\footskip}{18pt}
 
 \definecolor{purple}{rgb}{0.4,0.05,0.8}
+\definecolor{darkbrown}{rgb}{0.5,0.5,0.5}
 \definecolor{darkblue}{rgb}{0.1,0.1,0.6}
 \definecolor{darkred}{rgb}{0.45,0.1,0.1}
 \definecolor{darkgreen}{rgb}{0.0,0.3,0.06}
@@ -154,6 +155,7 @@
 \declaretheoremstyle[spaceabove=0.25cm,spacebelow=0.25cm,bodyfont=\normalfont\color{darkblue},notefont=\normalfont\bfseries, notebraces={(}{)}]{noitalblue}
 \declaretheoremstyle[spaceabove=0.25cm,spacebelow=0.25cm,bodyfont=\normalfont\color{darkgreen},notefont=\normalfont\bfseries, notebraces={(}{)}]{green}
 \declaretheoremstyle[spaceabove=0.25cm,spacebelow=0.25cm,bodyfont=\normalfont\color{darkred},notefont=\normalfont\bfseries, notebraces={(}{)}]{red}
+\declaretheoremstyle[spaceabove=0.25cm,spacebelow=0.25cm,bodyfont=\normalfont\color{darkbrown},notefont=\normalfont\bfseries, notebraces={(}{)}]{noitaldarkbrown}
 \declaretheoremstyle[spaceabove=0.25cm,spacebelow=0.25cm,bodyfont=\normalfont,notefont=\normalfont\bfseries,qed=$\qedsymbol$,notebraces={(}{)}]{proofstyle}
 
 \newcounter{pset}
@@ -168,7 +170,7 @@
 \declaretheorem[name=Definition,sibling=thm,style=noitalblue]{defn}
 \declaretheorem[name=Definition-Proposition,sibling=thm,style=noitalblue]{defprop}
 \declaretheorem[name=Example,sibling=thm,style=green]{example}
-\declaretheorem[name=Exercise,numberwithin=section,style=noital]{exercise}
+\declaretheorem[name=Exercise,numberwithin=section,style=noitaldarkbrown]{exercise}
 % \declaretheorem[name=Proof,style=proofstyle,numbered=no]{pf}
 
 \numberwithin{equation}{section}
@@ -192,6 +194,7 @@
 \newcommand{\fG}{{\mathfrak G}}
 \newcommand{\fgl}{{\mathfrak {gl}}}
 \newcommand{\fsl}{{\mathfrak {sl}}}
+
 \newcommand{\hfsl}{{\widehat\fsl}}
 \newcommand{\hfg}{{\widehat\fg}}
 
@@ -300,15 +303,20 @@
 \newcommand{\exact}{\mathrm{exact}}
 \newcommand{\ext}{\mathrm{ext}}
 \newcommand{\op}{\mathrm{op}}
+\newcommand{\Nek}{\mathrm{Nek}}
+\newcommand{\oneloop}{\mathrm{1-loop}}
 \newcommand{\p}{\partial}
 \newcommand{\GL}{\mathrm{GL}}
 \newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SU}{\mathrm{SU}}
 \newcommand{\Mat}{\mathrm{Mat}}
 \newcommand{\PGL}{\mathrm{PGL}}
 \newcommand{\PSL}{\mathrm{PSL}}
 \newcommand{\formal}{\mathrm{formal}}
 \newcommand{\vertex}{\mathcal{V}}
 \newcommand{\vrep}{\mathcal{R}}
+\newcommand{\coinv}{{\mathrm{coinv}}}
+\newcommand{\Coinv}{{\mathrm{Coinv}}}
 
 \newcommand{\abs}[1]{\lvert#1\rvert}
 \newcommand{\bigabs}[1]{\left\lvert#1\right\rvert}
@@ -442,90 +450,394 @@ Please send corrections/improvements to
 
 \section{Introduction}
 
-\subsection{Basic objects}
+\subsection{Vertex algebras and modules}
 
-The basic data of the course are:
+The first basic datum of the course is a 
+\ti{vertex algebra} $\vertex$. 
+% We give a full definition in \autoref{sec:vertex-algebras};
+% here we will be more informal.
+A standard reference is
+\cite{kac1998vertex}; our philosophy is close in spirit to
+\cite{FrenkelBenZvi2004VertexAlgebrasCurves}.
+
+A vertex algebra is a vector space $\vertex$ 
+with additional structure.
+We think of $a \in \vertex$ as objects which can be inserted at a point in the complex plane, giving an object $a(z)$ which varies analytically with 
+$z$. 
+
+$\vertex$ can act on a \ti{$\vertex$-module}: this means a vector space $\vrep$,
+which again can be inserted at any point of the complex plane.
+Let us put it at $z = 0$.
+Then for any $a \in \vertex$, 
+$a(z)$ should provide an endomorphism $Y^\vrep(a,z)$ of $\vrep$,
+depending analytically on $z$.
+We don't expect that $Y^\vrep(a,z)$ exists at $z = 0$; our motivation is
+from local defects in quantum field theory, and often there are
+singularities when two defects are placed at the same point.
+But still we can expand in a series around $z = 0$.
+Thus for $\chi \in \vrep$ we weill have
+\begin{equation} \label{eq:y-series}
+  Y^\vrep(a,z) \chi = \sum_{n \in \bbZ} z^{-n-1} a^\vrep_{(n)} \chi
+\end{equation}
+where each $a^\vrep_{(n)} \in \End \vrep$. 
+One useful special case is that $\vertex$ is a module over itself
+(``vacuum module''):
+in that case we just write $Y(a,z)$ for $Y^\vertex(a,z)$,
+and $a_{(n)}$ for $a^\vertex_{(n)}$.
+
+Usually we consider
+\ti{ordinary $\vertex$-modules}, which means that \eqref{eq:y-series} is a Laurent series,
+i.e. $a^\vrep_{(n)} \chi = 0$ for $n \gg 0$, i.e. $Y^\vrep(a,z) \chi$ is formally meromorphic in $z$. In particular, we require
+that $\vertex$ itself is an ordinary $\vertex$-module.
+
+When we have $a, b \in \vertex$ we also want to consider
+a combined object $a(z) b(w)$. This 
+object should again provide an endomorphism
+of $\vrep$, depending
+analytically on $z$ and $w$ away from $z = 0$ or $w = 0$, 
+except that it can also have a pole at $z = w$.
+This means that it may have different Laurent expansions
+around $z = w = 0$ depending on whether
+$\abs{w} < \abs{z}$ or $\abs{w} > \abs{z}$.\footnote{Recall the example
+\begin{equation}
+ f(z,w) = \frac{1}{z-w} = \begin{cases} z^{-1} \sum_{n \ge 0} (w/z)^n & \text{ for } \abs{w} < \abs{z}, \\ -w^{-1} \sum_{n \ge 0} (z/w)^n & \text{ for } \abs{w} > \abs{z}. \end{cases}
+\end{equation}
+}
+We interpret these two expansions as $Y^\vrep(a,z) Y^\vrep(b,w) \chi$ and $Y^\vrep(b,w) Y^\vrep(a,z) \chi$ respectively.\footnote{
+The idea is that the operator closer to $0$ acts first,
+and then the operator farther from $0$ acts on the 
+resulting object. We won't attempt to formalize this statement
+precisely now; for physicists it is an instance of \ti{radial quantization}; it can be formalized in the language of \ti{holomorphic factorization algebras}, see e.g. \cite{CostelloGwilliam2021FA2}.}
+
+Now we can make the definition:
+
+\begin{defn}[Vertex algebra]
+
+A \emph{vertex algebra} is a quadruple \((\vertex, \mathbf{1}, \partial, Y)\) where
+\(\vertex\) is a vector space, \(\bid \in \vertex \),
+\(\partial \in \mathrm{End}(\vertex)\),
+and
+\begin{equation}
+Y(\,\cdot\,,z): \vertex \to \mathrm{End}(\vertex)[[z,z^{-1}]],\qquad
+Y(a,z) = \sum_{n\in \mathbb{Z}} a_{(n)} z^{-n-1},
+\end{equation}
+is a linear map, such that:
 
 \begin{enumerate}
-\item A \ti{vertex algebra} $\vertex$. This means a vector space $\vertex$ of ``states'' or ``(local) defects.'' We think of the 
-states $\psi \in \vertex$ as objects which can be inserted at a point in the complex plane, giving an object $\psi(z)$.
-Moreover, when we have $\psi, \phi \in \vertex$ we can make a ``product'' $\psi(z) \phi(w)$,
-getting a meromorphic expansion of the form 
-\begin{equation}
- \psi(z) \phi(w) = \sum_{n} (z-w)^{-n-1} (\psi_{(n)} \phi)(w) 
+
+\item For each \(a, b \in \vertex \) we have \(a_{(n)}b=0\) for all \(n\gg 0\) \, ,
+
+\item  
+$Y(\mathbf{1},z) = \bid_{\vertex}$ \, ,
+
+\item
+$Y(a,z)\mathbf{1}\in a+z\,\vertex[[z]]$ \, ,
+
+\item
+$[\partial,\,Y(a,z)] = \partial_z\, Y(a,z)$ \, ,
+
+\item For all $a,b,\chi \in \vertex$
+there exists $F(z,w) \in \vertex[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
+$Y(a,z) Y(b,w) \chi$ and 
+$Y(b,w) Y(a,z) \chi$ are the
+formal Laurent expansion of $F(z,w)$ in the regions
+$\abs{w} < \abs{z}$ and $\abs{z} < \abs{w}$
+respectively.
+
+\end{enumerate}
+
+\end{defn}
+
+\begin{exercise}
+For all \(a,b\in\vertex\), prove that
+\begin{align}
+&z_0^{-1}\delta\!\left(\frac{z_1-z_2}{z_0}\right)Y(a,z_1)Y(b,z_2)
+- z_0^{-1}\delta\!\left(\frac{z_2-z_1}{-z_0}\right)Y(b,z_2)Y(a,z_1) \\
+&\qquad =
+z_2^{-1}\delta\!\left(\frac{z_1-z_0}{z_2}\right)Y\!\big(Y(a,z_0)b,\,z_2\big),
+\end{align}
+as an identity in \(\mathrm{End}(\vertex)\big[\!\big[z_0^{\pm1},z_1^{\pm1},z_2^{\pm1}\big]\!\big]\),
+where \(\delta(w)=\sum_{n\in\mathbb{Z}} w^n\) is the formal delta function.
+\end{exercise}
+
+\begin{exercise}
+Prove that the modes of $\vertex$ form a Lie algebra, with
+% determined by the singularity in the 
+% products $a(z) b(w)$ at $z=w$, i.e. determined by the
+% $a_{(n)} b$ for $n \ge 0$:
+\begin{equation} \label{eq:mode-algebra}
+[a_{(m)},\,b_{(n)}]
+= \sum_{j\ge 0} \binom{m}{j}\,\bigl(a_{(j)}b\bigr)_{(m+n-j)} \, .
 \end{equation}
-where each $\psi_{(n)} \phi \in \vertex$.
-This operation is supposed to be associative in a precise sense
-(which amounts to some complicated constraints on the products $(a,b) \mapsto a_{(n)} b$).
+% (Hint: represent the modes of $a$ and $b$ as contour integrals
+% around $z=0$. Then calculate by residues at $z=w$. 
+% Start with the simplest case where the only
+% nonzero term is $j=0$.)
+\end{exercise}
+
+\begin{exercise} Prove that
+\begin{equation} \label{eq:symmetry-mode-products}
+a_{(n)}b = -\sum_{j\ge 0} (-1)^{n+j}\,\frac{\partial^{\,j}}{j!}\,\bigl(b_{(n+j)}a\bigr)
+\qquad (n\ge 0) \, .
+\end{equation}
+\end{exercise}
+
+\begin{exercise} The complicated shape of \eqref{eq:symmetry-mode-products} might convince you that
+there should be a more symmetric way of describing the
+singular part of the product. There is, and it's
+called the $\lambda$-bracket. Learn about it.
+\end{exercise}
+
+% \begin{align}
+% [a_\lambda b] &= \sum_{j\ge 0}\frac{\lambda^j}{j!}\,(a_{(j)}b),\\[4pt]
+% a(z) &= \sum_{m\in\mathbb Z} a_{(m)}\,z^{-m-1},\\[4pt]
+% \bigl[a_{(m)},\,b_{(n)}\bigr]
+% &= \sum_{j\ge 0} \binom{m}{j}\,\bigl(a_{(j)}b\bigr)_{(m+n-j)}.
+% \end{align}
+
+% Heisenberg example:  [a_\lambda a]=\kappa\,\lambda  so a_{(1)}a=\kappa and a_{(j)}a=0 for j\neq 1.
+% Hence
+% If a_{(1)}a=\kappa\mathbf{1} (a constant), then (a_{(1)}a)_{(r)}=\kappa\,\delta_{r,-1},
+% giving  [a_{(m)},a_{(n)}]= m\,\kappa\,\delta_{m+n,0}.
+
+
+% getting a meromorphic expansion of the form 
+% \begin{equation}
+%  \psi(z) \phi(w) = \sum_{n \in \bbZ} 
+%  (z-w)^{-n-1} (\psi_{(n)} \phi)(w) 
+% \end{equation}
+% where each $\psi_{(n)} \phi \in \vertex$.
+% This operation is supposed to be commutative and 
+% associative in a precise sense
+% (which amounts to some complicated constraints on the products $(a,b) \mapsto a_{(n)} b$).
+% The official definition is in \autoref{sec:vertex-algebras}.
+
+The vertex algebras we consider are of a simple sort:
+they are \ti{universal enveloping vertex algebras},
+which can be described efficiently by naming a finite number
+of generating objects, and giving the singular part
+of the expansion, i.e. giving the products $a_{(n)} b$ for 
+$n \ge 0$.
 
 Here are three main examples: 
 \begin{enumerate}
-\item The \ti{Heisenberg algebra} $\vertex = \Heis$. It is freely generated by one defect $J$ with an expansion of the form
+\item The \ti{Heisenberg algebra} $\vertex = \Heis$. It is generated by one defect $J$ with an expansion of the form
 \begin{equation}
  J(z) J(w) = \frac{\bid(w)}{(z-w)^2} + \cdots
 \end{equation}
-\item For any simple complex Lie algebra $\fg$ and $k \in \bbC$ one has the \ti{affine Kac-Moody algebra} $\vertex = V^k(\fg)$, e.g. $V^k(\fsl_2)$.
-It is freely generated by defects $J_X$ for every $X \in \fg$, with an expansion of the form
+i.e. the only nonzero product is $J_{(1)} J = \bid$.
+The corresponding mode algebra is spanned by $J_{(n)}$ $(n \in \bbZ)$ and $\bid = \bid_{(-1)}$, with
 \begin{equation}
-  J_X(z) J_Y(w) = \frac{k \IP{X,Y} \bid(w)}{(z-w)^2} + \frac{J_{[X,Y]}(w)}{z-w} + \cdots
+[J_{(m)},J_{(n)}] = m \delta_{m+n,0} \bid \, .
 \end{equation}
-where $\IP{\cdot,\cdot}$ is the Killing form.
-\item For any $c \in \bbC$ one has the \ti{Virasoro algebra} $\Vir^c$. It is freely generated by a defect $T$, with an expansion of the form
+
+\item For any complex Lie algebra $\fg$ with invariant bilinear form $\IP{\cdot,\cdot}$ and $k \in \bbC$, 
+one has the \ti{affine Kac-Moody algebra} $\vertex = V^k(\fg)$.
+It is generated by defects $J_X$ for every $X \in \fg$, with an expansion of the form
+\begin{equation} \label{eq:kac-moody-ope}
+  J^X(z) J^Y(w) = \frac{k \IP{X,Y} \bid(w)}{(z-w)^2} + \frac{J^{[X,Y]}(w)}{z-w} + \cdots
+\end{equation}
+i.e. $J^X_{(1)} J^Y = k \IP{X,Y}$ and $J^X_{(0)} J^Y = J^{[X,Y]}$.
+The corresponding mode algebra is
 \begin{equation}
+[J^X_{(m)},J^Y_{(n)}] = J^{[X,Y]}_{(m+n)} + m k \IP{X,Y} \delta_{m+n,0} \bid \, .
+\end{equation}
+Note the Heisenberg algebra is a special case, where $\fg$ is
+abelian of rank $1$.
+
+\item For any $c \in \bbC$ one has the \ti{Virasoro algebra} $\Vir^c$. It is generated by a defect $T$, with an expansion of the form
+\begin{equation} \label{eq:virasoro-ope}
   T(z) T(w) = \frac{\frac{c}{2} \bid(w)}{(z-w)^4} + \frac{2 T(w)}{(z-w)^2} + \frac{\partial_w T(w)}{z-w} + \cdots
+\end{equation}
+The corresponding mode Lie algebra is
+\begin{equation} \label{eq:virasoro-mode-algebra}
+[L_{(m)},L_{(n)}]
+=(m-n)\,L_{(m+n-1)}+\frac{c}{12}\,m(m-1)(m-2)\,\delta_{m+n,2} \, .
 \end{equation}
 \end{enumerate}
 
-We also have a notion of a \ti{representation} of $\vertex$: this means another vector space $\vrep$, such that given
-$\psi \in \vertex$ and $\chi \in \vrep$ we also have a meromorphic expansion $\psi(z) \chi(w) = \sum_n (z-w)^n (\psi_{(n)} \chi)(w)$,
-with each $\psi_{(n)} \chi \in \vrep$. Again the operation is supposed to be associative.\footnote{It seems like $\vertex$ and $\vrep$ play
-similar roles, so you might wonder why not combine them into a bigger vertex algebra. The reason is that we haven't specified anything
-about what happens when we bring two elements of $\vrep$ close together. In many cases there is a sensible way
-to formulate and answer this question, but the answer might not be a meromorphic product of the sort we need for a vertex algebra.}
+\begin{exercise}
+Derive the Lie algebra \eqref{eq:virasoro-mode-algebra}
+from \eqref{eq:virasoro-ope} and \eqref{eq:mode-algebra}.
+\end{exercise}
 
-We give a full definition in \fixme{appendix}.
+% We also have a notion of a \ti{representation} of $\vertex$:\footnote{To be more precise I think I mean \ti{ordinary module}.} this means another vector space $\vrep$, such that given
+% $\psi \in \vertex$ and $\chi \in \vrep$ we also have a meromorphic expansion $\psi(z) \chi(w) = \sum_n (z-w)^{-n-1} (\psi_{(n)} \chi)(w)$,
+% with each $\psi_{(n)} \chi \in \vrep$. Again the operation is supposed to be associative.\footnote{It seems like $\vertex$ and $\vrep$ play
+% similar roles, so you might wonder why not combine them into a bigger vertex algebra. The reason is that we haven't specified anything
+% about what happens when we bring two elements of $\vrep$ close together. In many cases there is a sensible way
+% to formulate and answer this question, but the answer might not be a meromorphic product of the sort we need for a vertex algebra.}
+
 
 We always consider vertex algebras $\vertex$ which are \ti{conformal}, meaning they contain a copy of $\Vir^{c}$ for some $c$.
 
-\item A \ti{Riemann surface} $C$, usually compact, perhaps with marked points, each marked point labeled by a representation of $\vertex$
-(and maybe some additional tangent-space data, like a local coordinate).
-We often drop the data of the marked points and the representations from the notation, just writing the whole object as $C$.
+
+\subsection{Riemann surfaces}
+
+The second main datum of the course is a \ti{Riemann surface} $C$, 
+i.e. a complex manifold of complex dimension $1$. 
+We usually take $C$ to be compact. 
+Two fundamental examples are 
+\begin{enumerate}
+\item the \ti{Riemann sphere} $C = \bbC \bbP^1$, covered by two patches with coordinates $z$ and $z'$, related by $z' = 1/z$.
+\item the \ti{torus} $C = \bbC / (\bbZ \oplus \tau \bbZ)$, depending
+on the parameter $\tau \in \bbC$ with $\im \tau > 0$.
 \end{enumerate}
 
+We also often include marked points $p_i$ on $C$, each 
+equipped with a local coordinate around it. 
+Each marked point $p_i$ will be labeled by a $\vertex$-module 
+$\vrep_i$.
 
-\subsection{Conformal blocks}
+We often drop the data of the marked points and the representations from the notation, just writing the whole object as $C$.
 
-Given these data there is a space of \ti{conformal blocks}
+
+% \subsection{Conformal blocks}
+
+% Given these data there is a space of \ti{conformal blocks}
+% \begin{equation}
+%   \Conf(C, \vertex) \, .
+% \end{equation}
+% The spaces $\Conf(C, \vertex)$ are the main object of study in this course. In this section I'll tell you some things about them,
+% but not give a fully general definition yet.
+
+
+\subsection{Chiral correlation functions for affine
+Kac-Moody algebras}
+
+Now we are ready to ``put $\vertex$ on the Riemann surface $C$.''
+
+Before defining conformal blocks we consider correlation functions.
+I think that these are actually the more important objects.
+
+\begin{defn}[Chiral correlation system]
+Suppose given a Riemann surface $C$, with $n \ge 0$ marked
+points $p_i$ and $\vertex$-modules $\vrep_i$, with fixed local
+coordinate $z_i$ around each $p_i$.
+A \ti{chiral correlation system} for $V^k(\fg)$
+on $C$ is a rule that assigns an element
 \begin{equation}
-  \Conf(C, \vertex)
+  \bigg\langle \prod_{j=1}^m J^{X_j}(q_j) \prod_{i=1}^n \chi_i(p_i) \bigg\rangle \in \bigotimes_{j=1}^m T^*_{q_j} C  
 \end{equation}
-The spaces $\Conf(C, \vertex)$ are the main object of study in this course.
-Before defining them I want to try to convince you they are worth learning about.
-Here are some of their uses.
+for every $m \ge 0$, $X_j \in \fg$, $q_j \in C$, $\chi_i \in \vrep_i$,
+which:
+\begin{itemize}
+  \item is linear in each $X_i$ and in each $\chi_j$,
+  \item is symmetric under the interchange of the $J^{X_i}(q_i)$,
+  \item is holomorphic in the $q_i$, away from
+  loci where some $q_i = q_j$ or some $q_j = p_i$,
+  \item has Laurent expansion around $q_j = p_i$ given by
+\begin{equation}
+  \IP{J^X(q) \chi(p) \cdots} = \sum_{n \in \bbZ} z^{-n-1} \IP{(J^X_{(n)} \chi)(p) \cdots} \, ,
+\end{equation}
+  \item satisfies the relations \eqref{eq:kac-moody-ope} around $q_i = q_j$, i.e.
+  the polar part of
+$\IP{J^X(q) J^Y(q') \cdots}$ around $q=q'$ is 
+\begin{equation}
+  \IP{J^X(q) J^Y(q') \cdots} = \frac{\IP{\cdots} \de z(q) \de z(q')}{(z(q)-z(q'))^2} + \frac{\IP{J^{[X,Y]}(q) \cdots} \de z(q')}{z(q)-z(q')} + \cdots \, .
+\end{equation}
+\end{itemize}
+
+\end{defn}
 
 
-\subsubsection{Invariant spaces}
+\begin{example}[Chiral correlation systems for the Heisenberg vertex algebra]
+\fixme{...}
+\end{example}
 
-Suppose $\vertex = V^k(\fg)$, with Cartan $\fh \subset \fg$. 
-Then for each dominant integral weight $\lambda \in \fh^*$ 
-there is a corresponding finite-dimensional representation $R_\lambda$ of $\fg$,
-and also a corresponding infinite-dimensional representation $M_\lambda$ of $V^k(\fg)$.
+
+\subsection{Conformal blocks for affine Kac-Moody algebras}
+
+Continue with the setup of the last section.
+Given a chiral correlation system we could consider just the 
+sector with $m=0$, i.e. the quantities
+\begin{equation}
+  \IP{\prod_i \chi_i(p_i)}
+\end{equation}
+which give a map
+\begin{equation}
+  \bigotimes_i \vrep_i \to \bbC \, .
+\end{equation}
+Now suppose $C$ is compact. In that case
+this map is not arbitrary: it obeys some constraints,
+coming from the existence of the meromorphic 1-forms
+\begin{equation}
+ \eta = \IP{J^X(\cdot) \prod_i \chi_i(p_i)} \, .
+\end{equation}
+To formulate the constraints,
+let $f$ be any global section of $\cO(*p)$, i.e. 
+any meromorphic function on $C$, holomorphic away from 
+the $p_i$. Then $f \eta$ is a meromorphic $1$-form
+on $C$, and thus
+\begin{equation}
+  \sum_{i=1}^n \Res_i (f \eta(p)) = 0 \, .
+\end{equation}
+
+Laurent expand near each $p_i$ as
+\begin{equation}
+  f = \sum_{n \in \bbZ} f_{i,n}\, z_i^{n}.
+\end{equation}
+For $X\in\fg$ define a formal infinite sum
+\begin{equation}
+  X(f)_i = \sum_{n \in \bbZ} f_{i,n}\, J^{X}_{n} ,
+\end{equation}
+and let $X(f) \in \End(\bigotimes_i \vrep_i)$ be\footnote{The operator $X(f)_i$ depends on the local coordinate $z_i$ we chose; different choices differ by conjugation by an operator in
+$\End(\vrep_i)$, 
+built by exponentiating a Virasoro action. Thus in the end
+the spaces $\Coinv(C,\vertex)$ for different choices of local 
+coordinate are canonically isomorphic. \fixme{watch out for choice of log in defining $\lambda^{L_0}$}}\footnote{For any vector $v \in \vrep_i$ we always have $J^X_n v = 0$ for large enough $n$, so $X(f)_i v$ is well defined.}
+\begin{equation}
+  X(f) = \sum_{i=1}^n \, 
+  \bid\otimes\cdots\otimes X(f)_i \otimes\cdots\otimes \bid \, .
+\end{equation}
+
+\begin{defn}[Kac-Moody vertex algebra coinvariants on a Riemann surface]
+The space of coinvariants is
+\begin{equation}
+  \Coinv(C, \vertex)
+  = \Bigl(\bigotimes_{i=1}^n \vrep_i\Bigr)\Big/\Big\langle
+  X(f)\,v \ \Big|\ X\in\fg,\ f\in H^0(\cO(*p)),\
+  v\in\bigotimes_i \vrep_i
+  \Big\rangle
+\end{equation}
+\end{defn}
+
+\begin{defn}[Conformal block for Kac-Moody vertex algebra]
+\begin{equation}
+  \Conf(C, \vertex) = \Coinv(C, \vertex)^* \, .
+\end{equation}
+In other words, a conformal block is a map
+$\bigotimes_i \vrep_i \to \bbC$ which annihilates all
+elements of the form $X(f) v$.
+\end{defn}
+
+\subsection{Invariant spaces}
+
+Here is a concrete example.
+
+Suppose $\vertex = V^k(\fg)$, for any $k \in \bbC$.
+Then for each finite-dimensional representation $R$ of $\fg$,
+there is a corresponding infinite-dimensional representation $M(R)$ of $V^k(\fg)$.
 
 Now take $C = \bbC\bbP^1$, with marked points $z_1, \dots, z_n$, carrying representations
-$M_{\lambda_1}, \dots, M_{\lambda_n}$. Then one has\footnote{The isomorphism we get here depends on $z_1 ,\dots, z_n$;
-we'll see this from another point of view momentarily. It alos depends on $k$.}
+$M(R_1), \dots, M(R_n)$. 
+Then one has\footnote{The isomorphism we get here depends on $z_1 ,\dots, z_n$;
+we'll see this from another point of view momentarily. It also depends on $k$.} \footnote{Proof idea: we can find a function $f$ realizing any polar parts; use their $X(f)$ to kill all the 
+descendants, leaving
+only the $R_\lambda$; what remains is the action of $X(1)$
+on $\bigotimes_i R_i$.}
 \begin{equation}
-\Conf(C, \vertex) = \Hom(R_{\lambda_1} \otimes \cdots \otimes R_{\lambda_n}, R_0).
+\Conf(C, \vertex) = \Hom(\bigotimes_i R_i, \triv).
 \end{equation}
 With 3 punctures this is equivalent to the tensor product multiplicity spaces, i.e.
 \begin{equation}
-\Conf(C, \vertex) = \Hom(R_{\lambda_1} \otimes R_{\lambda_2}, R_{\lambda_3}^*).
+\Conf(C, \vertex) = \Hom(R_1 \otimes R_2, R_3^*).
 \end{equation}
 But $\Conf(C,\vertex)$ has lots of extra structures, so we get some new
 structure in representation theory this way.
 
 
-\subsubsection{Connections and braiding}
+\subsection{Connections}
 
 We can consider varying the base curve $C$, and then the spaces $\Conf(C, \vertex)$
 are the fibers of a twisted $D$-module $\Conf(\cdot, \vertex)$ over some moduli space $\cM$ of curves.
@@ -533,33 +845,38 @@ are the fibers of a twisted $D$-module $\Conf(\cdot, \vertex)$ over some moduli 
 is to hold the bare curve fixed and just move the marked points.)
 Roughly one should think of $\Conf(\cdot, \vertex)$ as a bundle with connection $\nabla$ over $\cM$.
 
-For instance, suppose $C$ is $\bbC\bbP^1$ with $n$ 
-marked points $z_1, \dots, z_n$ in the finite plane, each one carrying a representation of $\vertex$. 
-Then consider
-moving any marked point $z_i$ along any loop in $C \setminus \{z_1, \dots, \hat{z}_i, \dots, z_n \}$.
-The parallel transport of the connection $\nabla$ then gives an automorphism of $\Conf(C,\vertex)$.
-Thus $\Conf(C,\vertex)$ carries an action of the braid group on $n$ strands.
-One obtains interesting representations in this way.
 
 
-\subsubsection{Link invariants}
+\subsection{Link invariants}
 
 In fact you get a little more, if $\vertex$ is sufficiently nice, e.g. \ti{strongly rational}. 
 
-An example of a strongly rational vertex algebra
-is: consider $V^k(\fg)$; it is simple for $k \notin \bbZ_+$; for $k \in \bbZ_+$ it is not simple 
-but has a simple quotient $L_k(\fg)$, and $L_k(\fg)$ is strongly rational.
+To get an example of a strongly rational vertex algebra
+consider $V^k(\fg)$; it is simple for generic $k$, meaning
+that as a module over itself it contains no proper submodule; 
+for $k \in \bbZ_+$ it is not simple\footnote{A simple example: in $V^k(\fsl_2)$ the element $E_{-1}^k \bid$ generates a proper
+submodule.} 
+but it has a simple quotient $L_k(\fg)$, and $L_k(\fg)$ is strongly rational. Similarly $\Vir^c$ has strongly rational quotients
+for special values of $c$.
 
-If $\vertex$ is strongly rational, in particular it has only finitely many irreducible representations, 
-and moreover the spaces $\Conf(C, \vertex)$ are finite-dimensional, for any compact $C$, with any
-irreducible representations inserted at punctures. So this is a nice world where we do not have to worry
-about functional analysis, ind- or pro-objects, etc: everything will be about finite-dimensional spaces.
+If $\vertex$ is strongly rational, then it has only finitely many irreducible representations.\footnote{Fine print: I really mean \ti{ordinary modules}.}
+Moreover the spaces $\Conf(C, \vertex)$ are finite-dimensional, 
+for any compact $C$, with any irreducible representations inserted at punctures. So this is a nice world where all vector spaces
+around are finite-dimensional, and we do not have to worry
+about functional analysis, double duals, ind- or pro-objects, etc.
 
-In this case
-the representations $\vrep$ are objects of a \ti{modular tensor category}.
-It means in particular that you have, in addition to the braiding, ``cup'' and ``cap''
+Now suppose $C$ is $\bbC\bbP^1$ with $n$ 
+marked points $z_1, \dots, z_n$ in the finite plane, each one carrying a representation of $\vertex$. 
+Then consider
+moving any marked point $z_i$ along any loop in $C \setminus \{z_1, \dots, \hat{z}_i, \dots, z_n \}$.
+The parallel transport of the connection $\nabla$ along 
+this loop then gives an automorphism of $\Conf(C,\vertex)$.
+Thus $\Conf(C,\vertex)$ carries an action of the braid group on $n$ strands.
+
+Moreover you have, in addition to the braiding, ``cup'' and ``cap''
 operations which create/destroy a pair of marked points.
-Then you can use them to build framed link invariants: indeed, letting $C$ be
+Combining these you can build 
+framed link invariants: indeed, letting $C$ be
 $\bbC\bbP^1$ with \ti{no} marked points, each link in $\bbR^3$
 gives a linear operator acting on a finite-dimensional space $\Conf(C, \vertex)$, 
 and its trace is a link invariant.
@@ -567,8 +884,13 @@ and its trace is a link invariant.
 One basic example: if $\vertex = L_k(\fsl_2)$ with $k \in \bbZ_+$, then the link invariant we get
 is the \ti{Jones polynomial} $J_L(q)$, with $q = \exp(2 \pi \I / (k+2))$.
 
+In this case
+the representations $\vrep$ are objects of a \ti{modular tensor category}.
 
-\subsubsection{Holomorphic factorization} In a 2-dimensional conformal field theory
+
+\subsection{Holomorphic factorization} 
+
+In a 2-dimensional conformal field theory
 one computes correlation functions of observables. 
 These correlation functions are almost factorized into products of ``holomorphic'' and ``antiholomorphic'' parts,
 but not exactly factorized; the nontrivial space of conformal blocks is the obstruction to factorization.
@@ -576,12 +898,12 @@ but not exactly factorized; the nontrivial space of conformal blocks is the obst
 For example, in the CFT of the \ti{free boson} $\Phi$,
 one is interested in correlation functions of the form
 \begin{equation}
-  \DIP{J(z_1) \cdots J(z_n) \bJ(z_1) \cdots \bJ(z_m)} 
+  \DIP{J(z_1) \cdots J(z_n) \bJ(w_1) \cdots \bJ(w_m)} 
 \end{equation}
 where classically $J = \partial \Phi$ and $\bJ = \overline\partial \Phi$.
 Then one finds an approximate factorization
 \begin{equation}
-  \DIP{J(z_1) \cdots J(z_n) \bJ(z_1) \cdots \bJ(z_m)} = \int \de a \, \IP{J(z_1) \cdots J(z_n)}_{\Psi_a} \IP{\bJ(z_1) \cdots \bJ(z_m)}_{\overline\Psi_a}
+  \DIP{J(z_1) \cdots J(z_n) \bJ(w_1) \cdots \bJ(w_m)} = \int \de a \, \IP{J(z_1) \cdots J(z_n)}_{\Psi_a} \IP{\bJ(w_1) \cdots \bJ(w_m)}_{\overline\Psi_a}
 \end{equation}
 where $\IP{J(z_1) \cdots J(z_n)}_{\Psi_a}$ are holomorphic in a strong sense --- they
 are holomorphic in the $z_i$, in $a$, and in the moduli of $C$.
@@ -600,10 +922,36 @@ scales as $A$, because $\zeta_\Delta(0) = \frac{1}{6} \chi - 1$,
 the $-1$ coming from the zero mode;
 this requirement tells us that we should compensate the removal
 of the zero mode by inserting the factor $\sqrt{A}$ in the 
-numerator. Or, slightly more abstractly: the
-determinant $1 / \sqrt{\det \Delta}$ should most naturally be
-understood as providing a measure on the space of zero modes,
-which is $\frac{\de \Phi_0}{\sqrt{\det \Delta'}} = \frac{\sqrt{A}}{\sqrt{\det \Delta'}} \mu_{L^2}$.}
+numerator. 
+We can probably get the same factor from proper treatment of
+the shift symmetry $\Phi \to \Phi + \alpha$? 
+}
+
+
+% BRST treatment
+% of the shift symmetry?
+% Write $Q \Phi = c$, $Q \bar{c} = b$, $Q c = Q b = 0$,
+% $G(\Phi) = \int_C \star \Phi$, so 
+% $S_{GF} = Q (\bar{c} G(\Phi)) = b \int_C \star \Phi - A \overline{c} c$,
+
+
+% Or, slightly more abstractly: 
+% we attempt to define the path integral using the $L^2$ measure
+% over all modes. Then the integral over nonzero modes produces
+% the factor $1 / \sqrt{\det \Delta'}$, and we still have
+% remaining the $L^2$ measure on the zero modes.
+% So the result of the path integral is best understood as
+% $\frac{\mu_{L^2}}{\sqrt{\det \Delta'}}$. The zero mode field 
+% $\phi = 1 / \sqrt{A}$ is properly normalized, so
+% if we write $\phi = x_0 / \sqrt{A} + \cdots$ then 
+% $\mu_{L^2} = \de x_0$. The total integral of such $\phi$
+% against the area measure is $y_0 = \sqrt{A} x_0$,
+% so $\mu_{L^2} = \sqrt{A} \, \de y_0$.
+% Thus the result of the path integral is
+% $\frac{\sqrt{A}}{\sqrt{\det \Delta'}} \de y_0$,
+% and $\DIP{1}$ is scale invariant when measured
+% in units of $\de y_0$.
+
 \begin{equation} \label{eq:free-boson-partition-function-torus}
   \DIP{1} = \frac{\sqrt{A}}{\sqrt{\det \Delta'}} = \frac{1}{\sqrt{\im \tau} \abs{\eta(\tau)}^2}
   \end{equation}
@@ -621,11 +969,48 @@ has conformal blocks $\Psi_a$ parameterized by $a \in \bbC$, with the correlatio
 \end{equation}
 The blocks relevant for the free boson are the ones with $a \in \I \bbR$.
 Then we have
+\begin{equation} \label{eq:factorization-free-boson}
+  \DIP{1} = \int_{a \in \I \bbR} \left(  \frac{\de a}{2 \pi \I} \right) \, \abs{\IP{1}_{\Psi_a}}^2  = \frac{1}{\sqrt{2 \im \tau} \abs{\eta(\tau)}^2}
+\end{equation}
+There is a similar, but more elaborate, story for 
+higher genus surfaces \cite{McIntyreTakhtajan2006}.
+
+
+\subsection{Liouville theory}
+
+A more sophisticated example is provided by another 2d
+CFT, \ti{Liouville theory}. In this case the relevant
+vertex algebra is $\Vir^c$ rather than $\Heis$.
+
+One needs a bit of notation: introduce a parameter $b$
+related to the central charge by
 \begin{equation}
-  \DIP{1} = \int_{a \in \I \bbR} \frac{\de a}{2 \pi \I} \, \abs{\IP{1}_{\Psi_a}}^2  = \frac{1}{\sqrt{2 \im \tau} \abs{\eta(\tau)}^2}
+c = 1 + 6 Q^2, \qquad Q = b + \frac{1}{b}
+\end{equation}
+and also let
+\begin{equation}
+  \Delta = j(Q-j) \, , j = \frac12 Q + \I p
 \end{equation}
 
-\subsubsection{Tau functions}
+Now, for a simple example,
+consider $C_q = \bbC \bbP^1$ with $4$ punctures at 
+$0,q,1,\infty$, with Verma modules placed at the punctures.
+Then there exists a family of conformal blocks
+$\Psi_p \in \Conf(C_q, \Vir^c)$ \fixme{...}
+for which we have a factorization formula similar to
+\eqref{eq:factorization-free-boson}:\footnote{This is not the most common way of writing the factorization formula, but it can be found e.g. in \cite{Jackson:2014nla}.}
+\begin{equation}
+  \DIP{1} = \int_{p \in \bbR} (\rho(p) \, \de p) \, \abs{\IP{1}_{\Psi_p}}^2
+\end{equation}
+where we have the ``Plancherel measure''
+\begin{equation}
+  \rho(p) = 4 \sinh(2 \pi b p) \sinh(2 \pi b^{-1} p) \, ,
+\end{equation}
+and similar formulas for correlation functions.
+\fixme{try to be more explicit, write DOZZ etc, understand better the issues about absorbing structure constant}
+
+
+\subsection{Tau functions}
 
 Let $\vertex$ be the Virasoro algebra with central charge $c=1$, $\vertex = \Vir_{c=1}$.
 Then $\Conf(C, \vertex)$ is a module over a commutative algebra $\cA$, the algebra of
@@ -633,8 +1018,8 @@ Then $\Conf(C, \vertex)$ is a module over a commutative algebra $\cA$, the algeb
 The joint eigenvectors of $\cA$ are particularly interesting.
 
 For instance, let $C_q$ be $\bbC\bbP^1$ with $4$ punctures
-placed at points $(0,1,\infty,q)$. At each puncture we place a simple module for $\Vir_{c=1}$
-(a ``Verma module'').
+placed at points $(z_1, z_2, z_3, z_4) = (0,1,\infty,q)$. At $z_i$ we place a simple module for $\Vir_{c=1}$:
+a Verma module with highest weight $h_i$.
 Then consider a 1-parameter family of conformal blocks $\Psi(q) \in \Conf(C_q, \Vir_{c=1})$
 which are parallel, $\nabla_{\partial_q} \Psi(q) = 0$. 
 Suppose moreover that $\Psi(q)$ is a joint eigenvector of $\cA$ for some $q$;
@@ -652,6 +1037,54 @@ This means it is a solution of an interesting differential equation \fixme{...}
 
 \subsubsection{The AGT correspondence} \fixme{...}
 
+The AGT correspondence gives a very different interpretation of
+the conformal blocks which showed up in Liouville theory.
+We describe it in the concrete case of the 4-punctured
+sphere $C_q$ which appeared above. Then
+\begin{equation}
+  \IP{1}_{\Psi_a} = Z_\Nek(a,q,m,\eps_1,\eps_2)
+\end{equation}
+The right side is the \ti{Nekrasov instanton partition function}
+for $\cN=2$ supersymmetric Yang-Mills theory, with
+gauge group $G = \SU(2)$, and matter content given by
+$4$ copies of the fundamental representation:
+\begin{equation}
+  Z_\Nek = Z_{\oneloop} Z_\inst
+\end{equation}
+Here $Z_{\oneloop}$ is a $q$-independent function
+\begin{equation}
+Z_{\oneloop}
+= \exp \Big(
+\gamma_{{\eps_1},{\eps_2}}(2a;\Lambda)+\gamma_{{\eps_1},{\eps_2}}(-2a;\Lambda)
++\sum_{f=1}^4 \gamma_{{\eps_1},{\eps_2}}(a+m_f;\Lambda)+\gamma_{{\eps_1},{\eps_2}}(-a+m_f;\Lambda) \Big) \, ,
+\end{equation}
+in terms of a special function $\gamma_{\eps_1,\eps_2}(x;\Lambda)$
+defined in \fixme{...},
+and $Z_{\inst}$ is an explicit series in powers of $q$,
+whose coefficients are rational functions of 
+$a, \eps_1, \eps_2, m_f$. The surprising thing is that the
+series $Z_{\inst}$ also arises in a totally different way,
+as a generating series of integrals over the moduli space of
+$\SU(2)$-instantons in $\bbR^4$.
+
+The dictionary is
+\begin{equation}
+b = \frac{\eps_1}{\eps_2}
+\end{equation}
+
+
+
+\fixme{give explicit formula}
+
+
+\subsubsection{Random matrix models} \fixme{...}
+
+Various random matrix models are also related to conformal blocks.
+Here we just discuss the simplest case.
+We consider the Hermitian $N \times N$ 
+$1$-matrix model: this means 
+
+
 \subsubsection{Quantum groups} \fixme{...}
 
 \subsubsection{Algebraic geometry} \fixme{...}
@@ -660,8 +1093,12 @@ This means it is a solution of an interesting differential equation \fixme{...}
 
 \subsubsection{Quantization of Teichm\"uller space} \fixme{...}
 
-\subsubsection{Random matrix models} \fixme{...}
+\subsubsection{Abelianization} \fixme{...}
 
+
+\section{Definition of conformal blocks}
+
+\fixme{...}
 
 
 \section{The free scalar field CFT}
@@ -969,11 +1406,36 @@ this says (in correlation functions) that around $z_1 = z_2$ we have
 
 
 
-\subsection{The zeta-regularized determinant}
 
-One expects that
+\appendix
+
+
+% \section{Vertex algebras} \label{sec:vertex-algebras}
+
+% Definition (vertex algebra).  Here \vertex is a complex vector space.
+
+% We informally defined vertex algebras in \fixme{...} above.
+% To formalize things, we will have a vector space $\vertex$ of
+% defects, and then for $\psi, \chi \in \vertex$
+% we will introduce a symbol ``$Y(\psi,z) \chi$'' which should be understood to mean ``the power series expansion 
+% of $\psi(z) \chi(0)$ around $z = 0$.''
+% Each term in this expansion will be an element in $\vertex$.
+% Then we make a lot of computations involving formal Laurent series in many variables,
+% but always with the idea that they secretly represent the expansions of actual objects
+% which are analytic away from diagonals.
+% In that situation what you expect is that there are two different expansions, one in the region
+% $\abs{z} > \abs{w}$, another in the region $\abs{w} > \abs{z}$.
+% So the symbol I wrote $\psi(z) \phi(w) \chi$ will get represented by \ti{two} different things in this 
+% formalization.
+% But they are closely related: they are $Y(\psi,z) Y(\phi,w) \chi$ and $Y(\phi, w) Y(\psi,z) \chi$.
+
+
+
+\section{The zeta-regularized determinant} \label{sec:zeta-determinant}
+
+In the theory of the free boson one expects that
 \begin{equation}
-  \IP{1} = 1 / \sqrt{\det{}' \Delta}
+  \IP{1} = \sqrt{A} / \sqrt{\det{}' \Delta}
 \end{equation}
 Since $\Delta$ acts on an infinite-dimensional space we need to explain what we mean by
 its determinant.
@@ -1004,43 +1466,18 @@ Now, for $\Re(s) > 1$ we have an integral representation
   \zeta_\Delta(s) = \frac{1}{\Gamma(s)} \int_0^\infty \frac{\de t}{t} t^s \Tr{}' \e^{-t \Delta}
 \end{equation}
 
-
-
 With the analytic continuation computed, we finally have
 \begin{equation}
 \det{}'\Delta = \exp\big(-\zeta'_{\Delta}(0)\big)
 \end{equation}
 
-For example, if $C$ is a surface of genus $1$, one has \fixme{fix area-dependent factor}
-\begin{equation}
-  \det{}'\Delta = (\im \tau) \abs{\eta(\tau)}^4
-\end{equation}
-where
-\begin{equation}
-  \eta(\tau) = q^{1/24} \prod_{n=1}^\infty (1 - q^n), \qquad q = e^{2 \pi \I \tau}
-\end{equation}
 
-This zeta-regularization might seem ad hoc.
-A more physical method of regularization is as follows.
-We use the \ti{formal} identity
-\begin{equation}
-\log \det A = -\int_0^\infty \frac{\de t}{t} \Tr(\e^{-t A})
-\end{equation}
-This identity is always nonsense, because of a 
-divergence near $t = 0$. However it is true ``up to 
-an infinite constant,'' in the sense that for $a$, $b$ positive
-\begin{equation}
-  \log a - \log b = -\int_0^\infty \frac{\de t}{t} (\e^{-t a} - \e^{-t b})
-\end{equation}
 
-Then we get a regularized determinant
-\begin{equation}
-   \log \det{}' \Delta = - \int_0^\infty \frac{\de t}{t} \int_C \widetilde K_t(x)
-\end{equation}
-\fixme{explain its relation to the zeta-regularized one}
 
-The factorization of this determinant is proved in
-\cite{McIntyreTakhtajan2006}.
+\printbibliography
+
+\end{document}
+
 
 
 
@@ -1084,67 +1521,6 @@ where $\{\cdot,\cdot\}$ denotes the Schwarzian derivative:
 $\{f(z),z\} = \frac{f'''(z)}{f'(z)} - \frac32 \left( \frac{f''(z)}{f'(z)} \right)^2$.
 
 
-\appendix
-
-
-\section{Vertex algebras}
-
-% Definition (vertex algebra).  Here \vertex is a complex vector space.
-
-We informally defined vertex algebras in \fixme{...} above.
-To formalize things,
-we introduce a symbol ``$Y(\psi,z)$'' which should be understood to mean ``the power series expansion 
-of $\psi(z)$ around $z = 0$.''
-Then we make a lot of computations involving formal Laurent series in many variables,
-but always with the idea that they secretly represent the expansions of actual objects
-which are analytic away from diagonals.
-In that situation what you expect is that there are two different expansions, one in the region
-$\abs{z} > \abs{w}$, another in the region $\abs{w} > \abs{z}$.
-So the symbol I wrote $\psi(z) \phi(w)$ will get represented by \ti{two} different things in this 
-formalization.
-But they are closely related: they are $Y(\psi,z) Y(\phi,w)$ and $Y(\phi, w) Y(\psi,z)$.
-
-A \emph{vertex algebra} is a quadruple \((\vertex, Y, \mathbf{1}, T)\) where
-\(\vertex\) is a (complex) vector space, \(\bid \in \vertex\),
-\(T\in \mathrm{End}(\vertex)\),
-and
-\begin{equation}
-Y(\,\cdot\,,z): \vertex \to \mathrm{End}(\vertex)[[z,z^{-1}]],\qquad
-a \mapsto Y(a,z) = \sum_{n\in \mathbb{Z}} a_{(n)} z^{-n-1},
-\end{equation}
-is a linear map, such that for all $a, b \in \vertex$
-
-\begin{enumerate}
-
-\item For each \(a,b\) we have \(a_{(n)}b=0\) for all \(n\gg 0\).
-
-\item  
-$Y(\mathbf{1},z) = \bid_{\vertex}$,
-
-\item
-$Y(a,z)\mathbf{1}\in a+z\,\vertex[[z]]$,
-
-\item
-$[T,\,Y(a,z)] = \partial_z\, Y(a,z)$,
-
-\item
-For all \(a,b\in\vertex\),
-\begin{align}
-&z_0^{-1}\delta\!\left(\frac{z_1-z_2}{z_0}\right)Y(a,z_1)Y(b,z_2)
-- z_0^{-1}\delta\!\left(\frac{z_2-z_1}{-z_0}\right)Y(b,z_2)Y(a,z_1) \\
-&\qquad =
-z_2^{-1}\delta\!\left(\frac{z_1-z_0}{z_2}\right)Y\!\big(Y(a,z_0)b,\,z_2\big),
-\end{align}
-as an identity in \(\mathrm{End}(\vertex)\big[\!\big[z_0^{\pm1},z_1^{\pm1},z_2^{\pm1}\big]\!\big]\),
-where \(\delta(w)=\sum_{n\in\mathbb{Z}} w^n\) is the formal delta function.
-
-
-\end{enumerate}
-
-\printbibliography
-
-\end{document}
-
 
 
 
@@ -1171,7 +1547,6 @@ where \(\delta(w)=\sum_{n\in\mathbb{Z}} w^n\) is the formal delta function.
 
 
 
-Motivation of "conformal block" from the point of view of free boson?
 For the 0-point function we know the holomorphic factorization is not quite complete until we expand in conformal blocks
 For the 1-point function? Should be zero after averaging
 For the 2-point function? e.g. <J Jbar> in genus 1? It's constant I think, something like 1/(im \tau); can calculate it directly using the Green's function, or indirectly using the conformal blocks; the answers are the same
@@ -1183,3 +1558,40 @@ so normalized is (im \tau)^{-1}]
 
 To compute JJ OPE:
 free field 
+
+
+
+
+
+For example, if $C$ is a surface of genus $1$, one has \fixme{fix area-dependent factor}
+\begin{equation}
+  \det{}'\Delta = (\im \tau) \abs{\eta(\tau)}^4
+\end{equation}
+where
+\begin{equation}
+  \eta(\tau) = q^{1/24} \prod_{n=1}^\infty (1 - q^n), \qquad q = e^{2 \pi \I \tau}
+\end{equation}
+
+This zeta-regularization might seem ad hoc.
+A more physical method of regularization is as follows.
+We use the \ti{formal} identity
+\begin{equation}
+\log \det A = -\int_0^\infty \frac{\de t}{t} \Tr(\e^{-t A})
+\end{equation}
+This identity is always nonsense, because of a 
+divergence near $t = 0$. However it is true ``up to 
+an infinite constant,'' in the sense that for $a$, $b$ positive
+\begin{equation}
+  \log a - \log b = -\int_0^\infty \frac{\de t}{t} (\e^{-t a} - \e^{-t b})
+\end{equation}
+
+Then we get a regularized determinant
+\begin{equation}
+   \log \det{}' \Delta = - \int_0^\infty \frac{\de t}{t} \int_C \widetilde K_t(x)
+\end{equation}
+\fixme{explain its relation to the zeta-regularized one}
+
+The factorization of this determinant is proved in
+\cite{McIntyreTakhtajan2006}.
+
+
