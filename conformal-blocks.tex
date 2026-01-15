@@ -494,10 +494,10 @@ One useful special case is that $\vertex$ is a module over itself
 in that case we just write $Y(a,z)$ for $Y^\vertex(a,z)$,
 and $a_{(n)}$ for $a^\vertex_{(n)}$.
 
-Usually we consider
-\ti{ordinary $\vertex$-modules}, which means that \eqref{eq:y-series} is a Laurent series,
+Usually we consider $\vertex$-modules for which 
+\eqref{eq:y-series} is a Laurent series,
 i.e. $a^\vrep_{(n)} \chi = 0$ for $n \gg 0$, i.e. $Y^\vrep(a,z) \chi$ is formally meromorphic in $z$. In particular, we require
-that $\vertex$ itself is an ordinary $\vertex$-module.
+that $\vertex$ itself has this property.
 
 When we have $a, b \in \vertex$ we also want to consider
 a combined object $a(z) b(w)$. This 
@@ -606,6 +606,33 @@ This is a useful way of thinking about vertex algebras
 concretely, and particularly their ``local'' behavior: 
 it is determined by the corresponding Lie algebra of modes.
 
+\begin{defn}[Module for a vertex algebra]
+A \ti{$\vertex$-module} is a vector space $\vrep$
+and an operation
+\begin{equation}
+  Y^\vrep: \vertex \to \End \vrep[[z^{\pm 1}]]
+\end{equation}
+such that
+\begin{enumerate}
+
+\item 
+  $Y^\vrep(\bid, z) = \bid_\vrep$ \, ,
+
+\item $[T, Y^\vrep(a, z)] = \partial_z Y^\vrep(a,z)$ \, ,
+
+\item For all $a,b \in \vertex$ and $\chi \in \vrep$
+there exists $F(z,w) \in \vrep[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
+$Y(a,z) Y(b,w) \chi$ and 
+$Y(b,w) Y(a,z) \chi$ are the
+formal Laurent expansion of $F(z,w)$ in the regions
+$\abs{w} < \abs{z}$ and $\abs{z} < \abs{w}$
+respectively.
+\end{enumerate}
+
+\end{defn}
+
+
+
 % \begin{exercise} Prove that
 % \begin{equation} \label{eq:symmetry-mode-products}
 % a_{(n)}b = -\sum_{j\ge 0} (-1)^{n+j}\,\frac{\partial^{\,j}}{j!}\,\bigl(b_{(n+j)}a\bigr)
@@ -642,6 +669,9 @@ it is determined by the corresponding Lie algebra of modes.
 % associative in a precise sense
 % (which amounts to some complicated constraints on the products $(a,b) \mapsto a_{(n)} b$).
 % The official definition is in \autoref{sec:vertex-algebras}.
+
+
+\subsection{Universal enveloping vertex algebras}
 
 Many of the vertex algebras we consider are of a simple sort:
 they are \ti{universal enveloping vertex algebras},
@@ -709,31 +739,6 @@ from \eqref{eq:virasoro-ope} and \eqref{eq:mode-algebra}.
 
 % We always consider vertex algebras $\vertex$ which are \ti{conformal}, meaning they contain a copy of $\Vir^{c}$ for some $c$.
 
-
-\begin{defn}[Module for a vertex algebra]
-A \ti{$\vertex$-module} is a vector space $\vrep$
-and an operation
-\begin{equation}
-  Y^\vrep: \vertex \to \End \vrep[[z^{\pm 1}]]
-\end{equation}
-such that
-\begin{enumerate}
-
-\item 
-  $Y^\vrep(\bid, z) = \bid_\vrep$ \, ,
-
-\item $[T, Y^\vrep(a, z)] = \partial_z Y^\vrep(a,z)$ \, ,
-
-\item For all $a,b \in \vertex$ and $\chi \in \vrep$
-there exists $F(z,w) \in \vrep[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
-$Y(a,z) Y(b,w) \chi$ and 
-$Y(b,w) Y(a,z) \chi$ are the
-formal Laurent expansion of $F(z,w)$ in the regions
-$\abs{w} < \abs{z}$ and $\abs{z} < \abs{w}$
-respectively.
-\end{enumerate}
-
-\end{defn}
 
 
 \subsection{Riemann surfaces}
@@ -1175,7 +1180,7 @@ This means it is a solution of an interesting differential equation \fixme{...}
 
 
 
-\subsubsection{The AGT correspondence} \fixme{...}
+\subsection{The AGT correspondence} \fixme{...}
 
 The AGT correspondence gives a very different interpretation of
 the conformal blocks which showed up in Liouville theory.
@@ -1219,15 +1224,12 @@ b = \frac{\eps_1}{\eps_2}
 
 \subsubsection{Random matrix models} \fixme{...}
 
-Various random matrix models are also related to conformal blocks.
-Here we just discuss the simplest case.
-We consider the Hermitian $N \times N$ 
-$1$-matrix model: this means 
-
+% Various random matrix models are also related to conformal blocks.
+% Here we just discuss the simplest case.
+% We consider the Hermitian $N \times N$ 
+% $1$-matrix model: this means 
 
 \subsubsection{Quantum groups} \fixme{...}
-
-\subsubsection{Algebraic geometry} \fixme{...}
 
 \subsubsection{Geometric Langlands} \fixme{...}
 
@@ -1236,9 +1238,9 @@ $1$-matrix model: this means
 \subsubsection{Abelianization} \fixme{...}
 
 
-\section{Definition of conformal blocks}
+% \section{Definition of conformal blocks}
 
-\fixme{...}
+% \fixme{...}
 
 
 \section{The free scalar field CFT}
@@ -1428,14 +1430,14 @@ and
 \end{equation}
 where $M$ is symmetric. Then we have
 \begin{equation} \label{eq:gaussian-det}
-  \IP{1} = \int_{\cF} \de \vec{x} \, \e^{-\half x^i M_{ij} x^j} = \frac{(2\pi)^{N/2}}{\sqrt{\det M}}.
+  \DIP{1} = \int_{\cF} \de \vec{x} \, \e^{-\half x^i M_{ij} x^j} = \frac{(2\pi)^{N/2}}{\sqrt{\det M}}.
 \end{equation}
 
 \begin{exercise}
-Prove that $\IP{x^{i_1} \cdots x^{i_k}} = 0$ whenever $k$ is odd,
+Prove that $\DIP{x^{i_1} \cdots x^{i_k}} = 0$ whenever $k$ is odd,
 and compute directly 
 \begin{equation}
-\frac{\IP{x^i x^j}}{\IP{1}} = (M^{-1})^{ij} \, .  
+\frac{\DIP{x^i x^j}}{\IP{1}} = (M^{-1})^{ij} \, .  
 \end{equation}
 \end{exercise}
 
@@ -1450,7 +1452,7 @@ Suppose $C$ is compact connected.
 
 We formally would have
 \begin{equation}
-  \IP{1} = \frac{1}{\sqrt{\det \Delta'}}
+  \DIP{1} = \frac{1}{\sqrt{\det \Delta'}}
 \end{equation}
 where $\Delta'$ is the Laplacian acting on $\cF$
 (recall this is the space of functions with integral zero;
@@ -1472,7 +1474,7 @@ We postpone dealing with the UV divergence for now, by considering
 cancel out. For instance,
 let us consider the 2-point correlation function
 \begin{equation}
-  \frac{\IP{J(z) J(w)}}{\IP{1}}
+  \frac{\DIP{J(z) J(w)}}{\DIP{1}}
 \end{equation}
 According to our rules in \fixme{...} this should be given 
 by \fixme{...}
@@ -1483,11 +1485,11 @@ by \fixme{...}
 The energy-momentum tensor determines the variation of 
 correlation functions. In particular we expect formally
 \begin{equation}
-  \IP{T_{ij}(x)} = \frac{2}{\sqrt{\det g}} \frac{\delta}{\delta g^{ij}(x)} \IP{1} \, .
+  \DIP{T_{ij}(x)} = \frac{2}{\sqrt{\det g}} \frac{\delta}{\delta g^{ij}(x)} \DIP{1} \, .
 \end{equation}
 We use this condition in its logarithmic form
 \begin{equation}
-  \frac{\IP{T_{ij}(x)}}{\IP{1}} = \frac{2}{\sqrt{\det g}} \frac{\delta}{\delta g^{ij}(x)} \log \IP{1}
+  \frac{\DIP{T_{ij}(x)}}{\IP{1}} = \frac{2}{\sqrt{\det g}} \frac{\delta}{\delta g^{ij}(x)} \log \IP{1}
 \end{equation}
 \fixme{...}
 
@@ -1530,7 +1532,7 @@ also holds in correlation functions. (You can prove it formally by integration b
 So in particular we expect $\bar\partial J = 0$, $\partial \bJ = 0$ to hold in correlation 
 functions. Thus, for instance, we can compute correlation functions
 \begin{equation}
-  \IP{J(z_1) \cdots J(z_k) \bJ(w_1) \cdots \bJ(w_l)}
+  \DIP{J(z_1) \cdots J(z_k) \bJ(w_1) \cdots \bJ(w_l)}
 \end{equation}
 and they should be holomorphic 1-forms in all of the variables $z_i$,
 antiholomorphic 1-forms in all of the variables $w_i$.
@@ -1543,7 +1545,7 @@ this says (in correlation functions) that around $z_1 = z_2$ we have
   J(z_1) J(z_2) = \frac{1}{(z_1 - z_2)^2} + \regular
 \end{equation}
 \fixme{give path integral derivation}
-
+\fixme{this is the OPE of Heisenberg VOA}
 
 
 
