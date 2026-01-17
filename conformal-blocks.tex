@@ -811,31 +811,31 @@ Kac-Moody algebras}
 Now we are ready to ``put $\vertex$ on the Riemann surface $C$.''
 The way this is done for a general $\vertex$ takes a while
 to appreciate. To get some examples in our hand quickly, 
-let me specialize to the case of affine Kac-Moody algebras.
+let me specialize to the case of affine Kac-Moody algebras,
+and further to the case of a curve $C$ with no marked points.
 
 Before defining conformal blocks we consider correlation functions.
-I think that these are actually the more important objects.
+I think that these are actually the more important objects (and in good
+cases they are the same thing as conformal blocks).
 
-\begin{defn}[Chiral correlation system]
-Suppose given a Riemann surface $C$, with $n \ge 0$ marked
-points $p_i$ and $\vertex$-modules $\vrep_i$, with fixed local
-coordinate $z_i$ around each $p_i$.
+\begin{defn}[Chiral correlation system for $V^k(\fg)$, without marked points]
+Suppose given a Riemann surface $C$.
 A \ti{chiral correlation system} for $V^k(\fg)$
 on $C$ is a rule that assigns an element
 \begin{equation}
-  \bigg\langle \prod_{j=1}^m J^{X_j}(q_j) \prod_{i=1}^n \chi_i(p_i) \bigg\rangle \in \bigotimes_{j=1}^m T^*_{q_j} C  
+  \bigg\langle \prod_{j=1}^m J^{X_j}(q_j) \bigg\rangle \in \bigotimes_{j=1}^m T^*_{q_j} C  
 \end{equation}
-for every $m \ge 0$, $X_j \in \fg$, $q_j \in C$, $\chi_i \in \vrep_i$,
+for every $m \ge 0$, $q_j \in C$,
 which:
 \begin{itemize}
   \item is linear in each $X_i$ and in each $\chi_j$,
   \item is symmetric under the interchange of the $J^{X_i}(q_i)$,
-  \item is holomorphic in the $q_i$, away from
-  loci where some $q_i = q_j$ or some $q_j = p_i$,
-  \item has Laurent expansion around $q_j = p_i$ given by
-\begin{equation}
-  \IP{J^X(q) \chi(p) \cdots} = \sum_{n \in \bbZ} z^{-n-1} \IP{(J^X_{(n)} \chi)(p) \cdots} \, ,
-\end{equation}
+  \item is meromorphic in the $q_i$, and holomorphic away from
+  loci where some $q_i = q_j$,
+%   \item has Laurent expansion around $q_j = p_i$ given by
+% \begin{equation}
+%   \IP{J^X(q) \chi(p) \cdots} = \sum_{n \in \bbZ} z^{-n-1} \IP{(J^X_{(n)} \chi)(p) \cdots} \, ,
+% \end{equation}
   \item satisfies the relations \eqref{eq:kac-moody-ope} around $q_i = q_j$, i.e.
   the polar part of
 $\IP{J^X(q) J^Y(q') \cdots}$ around $q=q'$ is 
@@ -846,19 +846,18 @@ $\IP{J^X(q) J^Y(q') \cdots}$ around $q=q'$ is
 
 \end{defn}
 
-As we defined it, this is a highly complicated and structured object. We will see shortly 
-that some of the structure is redundant: the whole correlation
-system is determined by a relatively small subset of the
-correlation functions.
-But in the applications of the theory it is important to have
-all the correlation functions available.
+% As we defined it, this is a highly complicated and structured object. We will see shortly 
+% that some of the structure is redundant: the whole correlation
+% system is determined by a relatively small subset of the
+% correlation functions.
+% But in the applications of the theory it is important to have
+% all the correlation functions available.
 
 \begin{example}[Chiral correlation systems for the Heisenberg vertex algebra on the sphere]
 
 Here is a baby example.
 
-Suppose $\vertex = \Heis$ and $C = \bbC \bbP^1$,
-without any punctures. 
+Suppose $\vertex = \Heis = V^1(\fgl_1)$, and $C = \bbC \bbP^1$. 
 Then we can construct a chiral correlation system as follows.
 Let $\sigma$ denote a division of $\{1, \dots, k\}$ into 
 2-element subsets $(\sigma_{i1}, \sigma_{i2})$ with $i = 1, \dots, \frac{k}{2}$. Then we can determine a chiral correlation system by
@@ -888,99 +887,8 @@ is a multiple of the given one.
 \end{example}
 
 
-\subsection{Conformal blocks for affine Kac-Moody algebras}
-
-Continue with the setup of the last section.
-Given a chiral correlation system we could consider just the 
-sector with $m=0$, i.e. the quantities
-\begin{equation}
-  \IP{\prod_i \chi_i(p_i)}
-\end{equation}
-which give a map
-\begin{equation}
-  \bigotimes_i \vrep_i \to \bbC \, .
-\end{equation}
-Now suppose $C$ is compact. In that case
-this map is not arbitrary: it obeys some constraints,
-coming from the existence of the meromorphic 1-forms
-\begin{equation}
- \eta = \IP{J^X(\cdot) \prod_i \chi_i(p_i)} \, .
-\end{equation}
-To formulate the constraints,
-let $f$ be any global section of $\cO(*p)$, i.e. 
-any meromorphic function on $C$, holomorphic away from 
-the $p_i$. Then $f \eta$ is a meromorphic $1$-form
-on $C$, and thus
-\begin{equation}
-  \sum_{i=1}^n \Res_{p_i} (f \eta) = 0 \, .
-\end{equation}
-So what are these residues?
-Laurent expand near each $p_i$ as
-\begin{equation}
-  f = \sum_{n \in \bbZ} f_{i,n}\, z_i^{n}
-\end{equation}
-Then, a short computation gives that
-\begin{equation}
-  \Res_{p_j} f \eta = \sum_{n \in \bbZ} \IP{\left( \prod_{i \neq j} \chi_i(p_i)  \right) f_{j,n} J^X_n \chi_j(p_j)}
-\end{equation}
-(note only finitely many terms are nonzero).
-
-This motivates the following.
-For $X\in\fg$ define a formal infinite sum
-\begin{equation}
-  X(f)_i = \sum_{n \in \bbZ} f_{i,n}\, J^{X}_{n} ,
-\end{equation}
-and let $X(f) \in \End(\bigotimes_i \vrep_i)$ be\footnote{The operator $X(f)_i$ depends on the local coordinate $z_i$ we chose; different choices differ by conjugation by an operator in
-$\End(\vrep_i)$, 
-built by exponentiating a Virasoro action. Thus in the end
-the spaces $\Coinv(C,\vertex)$ for different choices of local 
-coordinate are canonically isomorphic. \fixme{watch out for choice of log in defining $\lambda^{L_0}$}}\footnote{For any vector $v \in \vrep_i$ we always have $J^X_n v = 0$ for large enough $n$, so $X(f)_i v$ is well defined.}
-\begin{equation}
-  X(f) = \sum_{i=1}^n \, 
-  \bid\otimes\cdots\otimes X(f)_i \otimes\cdots\otimes \bid \, .
-\end{equation}
-
-\begin{defn}[Kac-Moody vertex algebra coinvariants on a Riemann surface]
-The space of coinvariants is
-\begin{equation}
-  \Coinv(C, \vertex)
-  = \Bigl(\bigotimes_{i=1}^n \vrep_i\Bigr)\Big/\Big\langle
-  X(f)\,v \ \Big|\ X\in\fg,\ f\in H^0(\cO(*p)),\
-  v\in\bigotimes_i \vrep_i
-  \Big\rangle
-\end{equation}
-\end{defn}
-
-\begin{defn}[Conformal block for Kac-Moody vertex algebra]
-\begin{equation}
-  \Conf(C, \vertex) = \Coinv(C, \vertex)^* \, .
-\end{equation}
-In other words, a conformal block is a map
-$\bigotimes_i \vrep_i \to \bbC$ which annihilates all
-elements of the form $X(f) v$.
-\end{defn}
-
-What we just explained is:
-
-\begin{prop}[Chiral correlation systems give conformal blocks]
-Given a chiral correlation system for $\vertex = V^k(\fg)$,
-the map
-\begin{equation}
-  \bigotimes_i \vrep_i \to \bbC \, .
-\end{equation}
-given by
-\begin{equation}
-  \bigotimes_i \chi_i(p_i) \mapsto  \IP{\prod_i \chi_i(p_i)}
-\end{equation}
-is a conformal block.
-\end{prop}
-
-The converse is also true \fixme{...}
-
 
 \subsection{Invariant spaces}
-
-Here is a concrete example.
 
 Suppose $\vertex = V^k(\fg)$, for any $k \in \bbC$.
 Then for each finite-dimensional representation $R$ of $\fg$,
@@ -1010,11 +918,9 @@ structure in representation theory this way.
 
 \subsection{Connections}
 
-Now let's go back to general $\vertex$ for a little while.
-
-But suppose that $\vertex$ is \ti{conformal}, i.e. it 
-contains a copy of $\Vir^c$. This is true for $V^k(\fg)$ 
-as long as $k \neq -h^\vee$).
+Suppose that $\vertex$ is \ti{conformal}, i.e. it 
+contains a copy of $\Vir^c$. For instance, this is 
+true for $V^k(\fg)$ as long as $k \neq -h^\vee$.
 
 Then we can consider varying the base curve $C$, and the spaces $\Conf(C, \vertex)$
 will turn out to be the fibers of a twisted $D$-module $\Conf(\cdot, \vertex)$ over some moduli space $\cM$ of curves.
@@ -1586,6 +1492,32 @@ this says (in correlation functions) that around $z_1 = z_2$ we have
 \appendix
 
 
+\section{Conventions on Lie algebras}
+
+For a simple Lie algebra $\fg$,
+there is a canonical invariant bilinear form
+$\kappa$. We normalize it so that the long roots of $\fg$
+have length $2$.
+
+The quadratic Casimiar operator is defined by 
+\begin{equation}
+  C_2 = \sum_i X_i X_i
+\end{equation}
+where $(X_i)$ is an orthonormal basis of $\fg$.
+
+The dual Coxeter number $h^\vee$ is defined by the property that
+$C_2$ acts in the adjoint representation by the scalar $2 h^\vee$.
+
+When $\fg = \fsl(n)$, the normalized form is
+\begin{equation}
+  \kappa(X,Y) = \Tr (XY)
+\end{equation}
+and
+\begin{equation}
+  h^\vee = n \, .
+\end{equation}
+
+
 % \section{Vertex algebras} \label{sec:vertex-algebras}
 
 % Definition (vertex algebra).  Here \vertex is a complex vector space.
@@ -1608,7 +1540,7 @@ this says (in correlation functions) that around $z_1 = z_2$ we have
 
 
 \section{The zeta-regularized determinant} \label{sec:zeta-determinant}
-
+ 
 In the theory of the free boson one expects that
 \begin{equation}
   \IP{1} = \sqrt{A} / \sqrt{\det{}' \Delta}
@@ -1770,4 +1702,99 @@ Then we get a regularized determinant
 The factorization of this determinant is proved in
 \cite{McIntyreTakhtajan2006}.
 
+
+
+
+
+
+
+
+\subsection{Conformal blocks for affine Kac-Moody algebras}
+
+Continue with the setup of the last section.
+Given a chiral correlation system we could consider just the 
+sector with $m=0$, i.e. the quantities
+\begin{equation}
+  \IP{\prod_i \chi_i(p_i)}
+\end{equation}
+which give a map
+\begin{equation}
+  \bigotimes_i \vrep_i \to \bbC \, .
+\end{equation}
+Now suppose $C$ is compact. In that case
+this map is not arbitrary: it obeys some constraints,
+coming from the existence of the meromorphic 1-forms
+\begin{equation}
+ \eta = \IP{J^X(\cdot) \prod_i \chi_i(p_i)} \, .
+\end{equation}
+To formulate the constraints,
+let $f$ be any global section of $\cO(*p)$, i.e. 
+any meromorphic function on $C$, holomorphic away from 
+the $p_i$. Then $f \eta$ is a meromorphic $1$-form
+on $C$, and thus
+\begin{equation}
+  \sum_{i=1}^n \Res_{p_i} (f \eta) = 0 \, .
+\end{equation}
+So what are these residues?
+Laurent expand near each $p_i$ as
+\begin{equation}
+  f = \sum_{n \in \bbZ} f_{i,n}\, z_i^{n}
+\end{equation}
+Then, a short computation gives that
+\begin{equation}
+  \Res_{p_j} f \eta = \sum_{n \in \bbZ} \IP{\left( \prod_{i \neq j} \chi_i(p_i)  \right) f_{j,n} J^X_n \chi_j(p_j)}
+\end{equation}
+(note only finitely many terms are nonzero).
+
+This motivates the following.
+For $X\in\fg$ define a formal infinite sum
+\begin{equation}
+  X(f)_i = \sum_{n \in \bbZ} f_{i,n}\, J^{X}_{n} ,
+\end{equation}
+and let $X(f) \in \End(\bigotimes_i \vrep_i)$ be\footnote{The operator $X(f)_i$ depends on the local coordinate $z_i$ we chose; different choices differ by conjugation by an operator in
+$\End(\vrep_i)$, 
+built by exponentiating a Virasoro action. Thus in the end
+the spaces $\Coinv(C,\vertex)$ for different choices of local 
+coordinate are canonically isomorphic. \fixme{watch out for choice of log in defining $\lambda^{L_0}$}}\footnote{For any vector $v \in \vrep_i$ we always have $J^X_n v = 0$ for large enough $n$, so $X(f)_i v$ is well defined.}
+\begin{equation}
+  X(f) = \sum_{i=1}^n \, 
+  \bid\otimes\cdots\otimes X(f)_i \otimes\cdots\otimes \bid \, .
+\end{equation}
+
+\begin{defn}[Kac-Moody vertex algebra coinvariants on a Riemann surface]
+The space of coinvariants is
+\begin{equation}
+  \Coinv(C, \vertex)
+  = \Bigl(\bigotimes_{i=1}^n \vrep_i\Bigr)\Big/\Big\langle
+  X(f)\,v \ \Big|\ X\in\fg,\ f\in H^0(\cO(*p)),\
+  v\in\bigotimes_i \vrep_i
+  \Big\rangle
+\end{equation}
+\end{defn}
+
+\begin{defn}[Conformal block for Kac-Moody vertex algebra]
+\begin{equation}
+  \Conf(C, \vertex) = \Coinv(C, \vertex)^* \, .
+\end{equation}
+In other words, a conformal block is a map
+$\bigotimes_i \vrep_i \to \bbC$ which annihilates all
+elements of the form $X(f) v$.
+\end{defn}
+
+What we just explained is:
+
+\begin{prop}[Chiral correlation systems give conformal blocks]
+Given a chiral correlation system for $\vertex = V^k(\fg)$,
+the map
+\begin{equation}
+  \bigotimes_i \vrep_i \to \bbC \, .
+\end{equation}
+given by
+\begin{equation}
+  \bigotimes_i \chi_i(p_i) \mapsto  \IP{\prod_i \chi_i(p_i)}
+\end{equation}
+is a conformal block.
+\end{prop}
+
+The converse is also true \fixme{...}
 
