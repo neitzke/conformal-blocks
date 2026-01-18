@@ -12,7 +12,8 @@
 \usepackage{xcolor}
 \usepackage{verbatim}
 \usepackage[letterpaper,margin=1in,headheight=15pt]{geometry}
-\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{calc}
 \usepackage{booktabs}
 \usepackage{framed}
 \usepackage{float}
@@ -484,7 +485,7 @@ We don't expect that $Y^\vrep(a,z)$ exists at $z = 0$; our motivation is
 from local defects in quantum field theory, and often there are
 singularities when two defects are placed at the same point.
 But still we can expand in a series around $z = 0$.
-Thus for $\chi \in \vrep$ we weill have
+Thus for $\chi \in \vrep$ we will have
 \begin{equation} \label{eq:y-series}
   Y^\vrep(a,z) \chi = \sum_{n \in \bbZ} z^{-n-1} a^\vrep_{(n)} \chi
 \end{equation}
@@ -614,22 +615,22 @@ A \ti{$\vertex$-module} is a vector space $\vrep$
 and an operation
 \begin{equation}
 Y^\vrep(\,\cdot\,,z): \vertex \to \mathrm{End}(\vrep)[[z,z^{-1}]],\qquad
-Y(a,z) = \sum_{n\in \mathbb{Z}} a^\vrep_{(n)} z^{-n-1},
+Y^\vrep(a,z) = \sum_{n\in \mathbb{Z}} a^\vrep_{(n)} z^{-n-1},
 \end{equation}
 such that
 \begin{enumerate}
 
-\item For each \(a \in \vertex \), \( \chi \in \vrep \) we have \(a_{(n)}\chi=0\) for all \(n\gg 0\) \, ,
+\item For each \(a \in \vertex \), \( \chi \in \vrep \) we have \(a^\vrep_{(n)}\chi=0\) for all \(n\gg 0\) \, ,
 
 \item 
-  $Y^\vrep(\bid, z) = \bid_\vrep$ \, ,
+  $Y^\vrep(\vac, z) = \bid_\vrep$ \, ,
 
-\item $[T, Y^\vrep(a, z)] = \partial_z Y^\vrep(a,z)$ \, ,
+\item $Y^\vrep(T a, z) = \partial_z Y^\vrep(a,z)$ \, ,
 
 \item For all $a,b \in \vertex$ and $\chi \in \vrep$
 there exists $F(z,w) \in \vrep[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
-$Y(a,z) Y(b,w) \chi$ and 
-$Y(b,w) Y(a,z) \chi$ are the
+$Y^\vrep(a,z) Y^\vrep(b,w) \chi$ and 
+$Y^\vrep(b,w) Y^\vrep(a,z) \chi$ are the
 formal Laurent expansion of $F(z,w)$ in the regions
 $\abs{w} < \abs{z}$ and $\abs{z} < \abs{w}$
 respectively.
@@ -892,7 +893,7 @@ arbitrary allowed insertion in a correlation function; e.g. here $\cdots$ stands
 an expression of the form $\prod_{i=1}^{m-2} J^{X_i}(q_i)$; in any equation where $\cdots$ appears
 multiple times, the understanding is that it stands for the same expression each time.} around $q=q'$ is 
 \begin{equation} \label{eq:affine-km-chiral-singularity-condition}
-  \IP{J^X(q) J^Y(q') \cdots} = \frac{k \kappa(X,Y) \IP{\cdots} \de z(q) \de z(q')}{(z(q)-z(q'))^2} + \frac{\IP{J^{[X,Y]}(q) \cdots} \de z(q')}{z(q)-z(q')} + \regular \, .
+  \IP{J^X(q) J^Y(q') \cdots} = \frac{k \kappa(X,Y) \IP{\cdots} \de z(q) \de z(q')}{(z(q)-z(q'))^2} + \frac{\IP{J^{[X,Y]}(q') \cdots} \de z(q)}{z(q)-z(q')} + \regular \, .
 \end{equation}
 \end{itemize}
 
@@ -922,7 +923,7 @@ Then we can construct a chiral correlation system as follows.
 Let $\sigma$ denote a division of $\{1, \dots, k\}$ into 
 2-element subsets $(\sigma_{i1}, \sigma_{i2})$ with $i = 1, \dots, \frac{k}{2}$. Then we can determine a chiral correlation system by
 \begin{equation}
-  \IP{J(z_1) \cdots J(z_k)} = \sum_\sigma \prod_{i=1}^k \frac{\de z_{\sigma_{i1}} \de z_{\sigma_{i2}}}{(z_{\sigma_{i1}} - z_{\sigma_{i2}})^2}
+  \IP{J(z_1) \cdots J(z_k)} = \sum_\sigma \prod_{i=1}^{\frac{k}{2}} \frac{\de z_{\sigma_{i1}} \de z_{\sigma_{i2}}}{(z_{\sigma_{i1}} - z_{\sigma_{i2}})^2}
 \end{equation}
 so e.g.
 \begin{align}
@@ -933,24 +934,195 @@ so e.g.
  \IP{J(z_1) J(z_2) J(z_3) J(z_4)} &= \left( \frac{1}{(z_1 - z_2)^2 (z_3 - z_4)^2} + \frac{1}{(z_1 - z_3)^2 (z_2 - z_4)^2} + \frac{1}{(z_1 - z_4)^2 (z_2 - z_3)^2}  \right)  \de z_1 \de z_2 \de z_3 \de z_4, 
 \end{align}
 We can make a diagrammatic representation of this answer as follows.
+Let
+\[
+B(z,w) = \frac{\de z\,\de w}{(z-w)^2}.
+\]
+Then
+\[
+\langle J(z_1)\cdots J(z_k)\rangle
+=
+\sum_{\Gamma} \prod_{\{i,j\}\in E(\Gamma)} B(z_i,z_j),
+\]
+where the sum is over Feynman diagrams 
+$\Gamma$ whose vertices are $\{1,\dots,k\}$ and whose edges form a
+\emph{perfect matching} (i.e.\ every vertex has valence $1$).
+Here are the three diagrams which contribute when $k=4$.
 
+\begin{center}
+\begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+\tikzset{
+  v/.style={circle, fill, inner sep=1.2pt},
+  lab/.style={inner sep=1pt},
+  bub/.style={circle, draw, inner sep=1.5pt}
+}
 
-\fixme{...}
+% --- pairing (12)(34) ---
+\begin{scope}[xshift=0cm]
+  \node[v,label=below:$1$] (a1) at (0,0) {};
+  \node[v,label=below:$2$] (a2) at (1,0) {};
+  \node[v,label=above:$3$] (a3) at (0,1) {};
+  \node[v,label=above:$4$] (a4) at (1,1) {};
+  \draw (a1)--(a2); \draw (a3)--(a4);
+  \node[lab] at (0.5,-1) {$(12)(34)$};
+\end{scope}
+
+% --- pairing (13)(24) ---
+\begin{scope}[xshift=3.4cm]
+  \node[v,label=below:$1$] (b1) at (0,0) {};
+  \node[v,label=below:$2$] (b2) at (1,0) {};
+  \node[v,label=above:$3$] (b3) at (0,1) {};
+  \node[v,label=above:$4$] (b4) at (1,1) {};
+  \draw (b1)--(b3); \draw (b2)--(b4);
+  \node[lab] at (0.5,-1) {$(13)(24)$};
+\end{scope}
+
+% --- pairing (14)(23) ---
+\begin{scope}[xshift=6.8cm]
+  \node[v,label=below:$1$] (c1) at (0,0) {};
+  \node[v,label=below:$2$] (c2) at (1,0) {};
+  \node[v,label=above:$3$] (c3) at (0,1) {};
+  \node[v,label=above:$4$] (c4) at (1,1) {};
+  \draw (c1)--(c4); \draw (c2)--(c3);
+  \node[lab] at (0.5,-1) {$(14)(23)$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
 \end{example}
 
+\begin{exercise} Prove that this rule indeed defines
+a chiral correlation system.
+\end{exercise}
+
 \begin{exercise} Prove that every 
-chiral correlation system for this $(C,\vertex)$
+chiral correlation system
 is a scalar multiple of the one we just described. Thus, the space of chiral correlation systems
 for this $(C,\vertex)$ is $1$-dimensional.
 \end{exercise}
 
 \begin{example}[Chiral correlation systems for the Heisenberg vertex algebra on the torus]
-\fixme{...}
+Take $C = \bbC / (\bbZ \oplus \tau \bbZ)$ and $\vertex=\Heis$. We can construct a chiral 
+correlation system depending on a parameter $a \in \bbC$ as follows.
+Let $\wp_\tau(z)$ be the Weierstrass function: this is a meromorphic function obeying
+\begin{equation}
+  \wp_\tau(z + 1) = \wp_\tau(z), \qquad \wp_\tau(z + \tau) = \wp_\tau(z), \qquad \wp(z) = \wp(-z) \, .
+\end{equation}
+$\wp_\tau$ descends to a function on $C$, with a single pole at $z = 0$, with Laurent expansion
+\begin{equation}
+  \wp_\tau(z) = \frac{1}{z^2} + \regular \, .
+\end{equation}
+Let
+\[
+B(z,w) = \wp_\tau(z-w) \, \de z\,\de w \, , \qquad \eta(z) = a \, \de z \, .
+\]
+Then
+\[
+\langle J(z_1)\cdots J(z_k)\rangle
+=
+\sum_{\Gamma} \prod_{\{i,j\}\in E(\Gamma)} B(z_i,z_j) \prod_{i \in V_0(\Gamma)} \eta(z_i),
+\]
+where the sum is over Feynman diagrams 
+$\Gamma$ whose vertices are $\{1,\dots,k\}$, with every vertex either $0$-valent or $1$-valent. $V_0(\Gamma)$ is the set of 
+$0$-valent vertices.
+
+For example,
+\begin{align}
+\IP{J(z)} &= a \, \de z , \\
+ \IP{J(z_1) J(z_2) J(z_3)} &= (a \wp(z_1-z_2) + a \wp(z_1-z_3) + a \wp(z_2-z_3) + a^3) \, \de z_1 \de z_2 \de z_3 \, .
+\end{align}
 \end{example}
 
+\begin{exercise} Prove that this rule indeed defines
+a chiral correlation system.
+\end{exercise}
 
-\begin{example}[Chiral correlation systems for an affine Kac-Moody algebra on the sphere]
-\fixme{...}
+\begin{exercise} Prove that 
+the chiral correlation systems we just described, 
+for different values of $a \in \bbC$,
+are all linearly independent. Thus in this case the space of 
+chiral correlation systems is infinite-dimensional.
+\end{exercise}
+
+\begin{example}[Chiral correlation systems for an affine vertex algebra on the sphere]
+
+Here is a construction of chiral correlation functions. \fixme{check}
+Define
+\[
+W(i_1, \dots, i_m) =\
+\frac{k \, \kappa(X_1,\ad_{X_2}\ad_{X_3}\cdots \ad_{X_{m-1}}(X_m))}{(z_{i_1}-z_{i_2})(z_{i_2}-z_{i_3})\cdots(z_{i_m}-z_{i_1})} \, \de z_{i_1} \cdots \de z_{i_m} \, .
+\]
+Then the correlator is a sum over decompositions
+of $\{1, \dots, n\}$ into disjoint cycles with 
+length $m \ge 2$:
+\[
+\Big\langle \prod_{r=1}^n J^{X_r}(z_r)\Big\rangle
+\;=\;
+\sum_{\{1,\dots,n\} = C_1\sqcup\cdots\sqcup C_s}
+\ \prod_{\alpha=1}^s \left( \frac{1}{2 \abs{C_\alpha}} \sum_{\text{orderings }\mathbf{i}\text{ of }C_\alpha} W(\mathbf{i}) \right) \, .
+\]
+For example,
+\begin{equation}
+  \IP{J^{X_1}(z_1) J^{X_2}(z_2) J^{X_3}(z_3)} = \frac{k \, \kappa(X_1, [X_2,X_3])}{(z_1 - z_2)(z_2 - z_3)(z_3 - z_1)} \de z_1 \de z_2 \de z_3 \, .
+\end{equation}
+
+% The factor $\frac{1}{|C_\alpha|}$ is exactly the symmetry factor: a polygon with $|C_\alpha|$ labeled vertices
+% has $|C_\alpha|$ equivalent choices of starting point.
+
+
+% A diagram $D$ is a disjoint union of connected components. 
+% Each component $C$ has two sink vertices $p(C)$, $q(C)$ 
+% and some number
+% of arrows $i \to p(C)$ or $i \to q(C)$, and one double line
+% connecting $p(C)$ to $q(C)$. On the vertex $p(C)$ we have an element
+% $X_{p(C)}^\eff = [X_{i_1}, [X_{i_2}, [\cdots, [X_{i_k}, X_{p(C)}]]]] \in \fg$ where
+% $i_1, \dots, i_k$ are the vertices with arrows pointing to $p(C)$.
+% The weight of the diagram is
+% \[
+% \mathrm{wt}(D)\ =\ 
+% \left(\prod_{i\to j\ \text{in}\ D}\frac{1}{z_i-z_j}\right)
+% \left(\prod_{\text{components }C}\frac{k\,\kappa(X_{p(C)}^{\mathrm{eff}},\,X_{q(C)}^{\mathrm{eff}})}{(z_{p(C)}-z_{q(C)})^2}\right),
+% \]
+% and the correlator is the sum over all such diagrams: \fixme{check}
+% \begin{equation}
+% \big\langle J_{X_1}(z_1)\cdots J_{X_n}(z_n)\big\rangle
+% \ =\ \sum_{D}\ \mathrm{wt}(D).
+% \tag{$\dagger$}
+% \end{equation}
+
+% Here is a sample diagram for $k=7$:
+% \begin{center}
+% \begin{tikzpicture}[baseline=(current bounding box.center), every node/.style={font=\small}]
+% \tikzset{
+%   ext/.style={circle, fill, inner sep=1.2pt},
+%   fuse/.style={->},
+%   metr/.style={double, double distance=0.9pt}
+% }
+
+% % external points
+% \node[ext,label=below:$1$] (1) at (0,0) {};
+% \node[ext,label=below:$2$] (2) at (1.2,0) {};
+% \node[ext,label=below:$3$] (3) at (2.4,0) {};
+% \node[ext,label=below:$4$] (4) at (3.6,0) {};
+% \node[ext,label=below:$5$] (5) at (4.8,0) {};
+
+% % sinks
+% \node[ext,label=above:$6$] (6) at (1.2,1.6) {};
+% \node[ext,label=above:$7$] (7) at (3.6,1.6) {};
+
+% % fusion edges (examples)
+% \draw[fuse] (1)--(6);
+% \draw[fuse] (2)--(6);
+% \draw[fuse] (3)--(7);
+% \draw[fuse] (4)--(7);
+% \draw[fuse] (5)--(7);
+
+% % final metric contraction
+% \draw[metr] (6)--(7);
+
+% \end{tikzpicture}
+% \end{center}
+
 \end{example}
 
 
@@ -1009,7 +1181,7 @@ In fact you get a little more, if $\vertex$ is sufficiently nice, e.g. \ti{stron
 To get an example of a strongly rational vertex algebra
 consider $V^k(\fg)$; it is simple for generic $k$, meaning
 that as a module over itself it contains no proper submodule; 
-for $k \in \bbZ_+$ it is not simple\footnote{A simple example: in $V^k(\fsl_2)$ the element $E_{-1}^k \bid$ generates a proper
+for $k \in \bbZ_+$ it is not simple\footnote{A simple example: in $V^k(\fsl_2)$ the element $E_{-1}^{k+1} \vac$ generates a proper
 submodule.} 
 but it has a simple quotient $L_k(\fg)$, and $L_k(\fg)$ is strongly rational. Similarly $\Vir^c$ has strongly rational quotients
 for special values of $c$.
@@ -1569,7 +1741,7 @@ there is a canonical invariant bilinear form
 $\kappa$. We normalize it so that the long roots of $\fg$
 have length $2$.
 
-The quadratic Casimiar operator is defined by 
+The quadratic Casimir operator is defined by 
 \begin{equation}
   C_2 = \sum_i X_i X_i
 \end{equation}
