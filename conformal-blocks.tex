@@ -546,16 +546,14 @@ is a linear map, such that:
 
 \begin{enumerate}
 
-\item For each \(a, b \in \vertex \) we have \(a_{(n)}b=0\) for all \(n\gg 0\) \, ,
-
 \item  
 $Y(\vac,z) = \bid_{\vertex}$ \, ,
 
 \item
-$Y(a,z) \vac \in a + z\,\vertex[[z]]$ \, ,
+$Y(a,z) \vac \in \vertex[[z]]$ and $Y(a,0) \vac = a$ (i.e. $a_{(n)} \vac = 0$ for $n \ge 0$ and $a_{(-1)} \vac = a$) ,
 
 \item
-$[T,\,Y(a,z)] = \partial_z\, Y(a,z)$ \, ,
+$[T,\,Y(a,z)] = \partial_z\, Y(a,z)$ and $T \vac = 0$ ,
 
 \item For all $a,b,c \in \vertex$
 there exists $F(z,w) \in \vertex[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
@@ -567,11 +565,26 @@ respectively.
 Or, equivalently: there exists $N$ such that $(z-w)^N Y(a,z) Y(b,w) c = (z-w)^N Y(b,w) Y(a,z)  c$.
 \end{enumerate}
 
+We will always consider $\bbN$-graded vertex algebras,
+$\vertex = \bigoplus_{n \in \bbN} \vertex_n$, where
+each $\vertex_n$ is finite-dimensional, $\vac \in \vertex_0$,
+$T$ has degree $1$,
+and $a_{(n)}$ has degree $\abs{a}-n-1$.
+
 \end{defn}
 
-Property (5) is sometimes called the ``locality'' axiom: it 
+Some remarks:
+\begin{itemize}
+\item Property (5) is sometimes called the ``locality'' axiom: it 
 expresses the idea that singularities in $a(z) b(w)$ occur only
 at $z=w$, not anywhere else.
+
+\item Note that the grading implies that for each \(a, b \in \vertex \) we have \(a_{(n)}b=0\) for all \(n\gg 0\), i.e. 
+$Y(a,z) b$ is a Laurent series in $z$.
+
+\item The interpretation of the grading is that it measures
+the \ti{scaling dimension} of the objects. We will explain
+this more below.
 
 % \begin{exercise}
 % For all \(a,b\in\vertex\), prove that
@@ -585,9 +598,10 @@ at $z=w$, not anywhere else.
 % where \(\delta(w)=\sum_{n\in\mathbb{Z}} w^n\) is the formal delta function.
 % \end{exercise}
 
-As you can perhaps see, a vertex algebra is a complicated object.
+\item As you can perhaps see, a vertex algebra is a complicated object.
 They would be a little painful to construct by hand. We will describe an
 existence theorem below, which suffices for all our purposes.
+\end{itemize}
 
 % The next few exercises develop some useful facts; I think you can
 % find them solved in \cite{FrenkelBenZvi2004VertexAlgebrasCurves}
@@ -599,9 +613,9 @@ in \cite{FrenkelBenZvi2004VertexAlgebrasCurves} chapter 3.
 
 \begin{thm}[Associativity of vertex algebras] \label{thm:vertex-algebra-associativity} For any $a,b \in \vertex$,
 \begin{equation}
-Y(a,z) Y(b,w) = Y(Y(a,z-w)b,w) = \sum_{n \ge 0} (z-w)^{-n-1} Y(a_{(n)} b, w) \, .  
+Y(a,z) Y(b,w) = Y(Y(a,z-w)b,w) = \sum_{n \in \bbZ} (z-w)^{-n-1} Y(a_{(n)} b, w) \, .  
 \end{equation}
-This is an equality in $\bbC[[z,w]]$, where 
+This is an equality in $\End \vertex[[z^{\pm 1},w^{\pm 1}]]$, where 
 on the right side we mean the expansion in the region $\abs{z} > \abs{w}$.
 \end{thm}
 
@@ -638,6 +652,10 @@ a big power $(u-w)^N (u-z)^N$, then the commutation is
 allowed using axiom (5), and then set $u = 0$ and divide
 out the harmless $w^N z^N$.
 
+\begin{exercise}
+Work out the above proof sketch carefully.
+\end{exercise}
+
 
 
 % Its proof follows a chain of lemmas:
@@ -666,6 +684,8 @@ a Lie subalgebra of $\End(\vertex)$, with
 [a_{(m)},\,b_{(n)}]
 = \sum_{j\ge 0} \binom{m}{j}\,\bigl(a_{(j)}b\bigr)_{(m+n-j)} \, .
 \end{equation}
+(Here we define the binomial coefficients
+by the usual formula, even when $m < 0$.)
 % (Hint: represent the modes of $a$ and $b$ as contour integrals
 % around $z=0$. Then calculate by residues at $z=w$. 
 % Start with the simplest case where the only
@@ -681,12 +701,34 @@ is as follows. Imagine that instead of formal series we
 were working with actual analytic objects in the complex plane.
 Then we could write 
 \begin{align}
-a_{(m)} b_{(n)} \chi - b_{(n)} a_{(m)} \chi &= - \frac{1}{4 \pi^2} \left[  \oint_{\abs{z}=1} \oint_{\abs{w} = 1-\eps} - \oint_{\abs{z}=1} \oint_{\abs{w} = 1+\eps} \right]z^m w^n \, F(z,w) \, \de z \de w \\
-&= - \frac{1}{4 \pi^2} \left[  \oint_{\abs{z}=1} \oint_{\abs{w-z} = \eps} \right]z^m w^n \, F(z,w) \, \de z \de w \\
-&= - \frac{1}{4 \pi^2} \left[  \oint_{\abs{z}=1} z^m \oint_{\abs{w-z} = \eps} \right] w^n \, F(z,w) \, \de z \de w
+a_{(m)} b_{(n)} c - b_{(n)} a_{(m)} c &= - \frac{1}{4 \pi^2} \left[  \oint_{\abs{z}=1} \oint_{\abs{w} = 1-\eps} - \oint_{\abs{z}=1} \oint_{\abs{w} = 1+\eps} \right]z^m w^n \, F(z,w) \, \de z \de w \\
+&= - \frac{1}{4 \pi^2}  \oint_{\abs{z}=1} \oint_{\abs{w-z} = \eps} z^m w^n \, F(z,w) \, \de z \de w \\
+&= - \frac{1}{4 \pi^2}  \oint_{\abs{z}=1} z^m \de z  \left[\oint_{\abs{w-z} = \eps} w^n \, F(z,w) \, \de w \right] 
 \end{align}
-Now, the polar part of $F(z,w)$ is determined by
-\autoref{thm:vertex-algebra-associativity}. \fixme{...}
+Now, the polar part of $F(z,w)$ at $z=w$ is determined by
+\autoref{thm:vertex-algebra-associativity}: it gives
+$F(z,w) = \sum_{j \in \bbZ} (z-w)^{-j-1} Y(a_{(j)}b,w) c$.
+Using this
+we have
+\begin{align}
+  \frac{1}{2 \pi \I} \oint_{\abs{w-z} = \eps} w^n \, F(z,w) \, \de w &= \sum_{j \ge 0} \frac{1}{2 \pi \I} \oint_{\abs{w-z} = \eps} w^n (z-w)^{-j-1} Y(a_{(j)}b,w) c \\
+  &= \sum_{j \ge 0} \frac{1}{2 \pi \I} \oint_{\abs{w-z} = \eps} w^n (z-w)^{-j-1} \sum_{\ell \in \bbZ} w^{-\ell-1} (a_{(j)}b)_{(\ell)} c \\
+  &= \sum_{j \ge 0}  \sum_{\ell \in \bbZ} \frac{1}{2 \pi \I} \oint_{\abs{w-z} = \eps} w^{n-\ell-1} (z-w)^{-j-1} (a_{(j)}b)_{(\ell)} c \\
+  &= \sum_{j \ge 0}  \sum_{\ell \in \bbZ} \frac{1}{2 \pi \I} \oint_{\abs{t} = \eps} (z-t)^{n-\ell-1} t^{-j-1} (a_{(j)}b)_{(\ell)} c \\
+  &= \sum_{j \ge 0}  \sum_{\ell \in \bbZ} \sum_{i \ge 0} \frac{1}{2 \pi \I} \oint_{\abs{t} = \eps} (-1)^i \binom{n-\ell-1}{i} z^{n-\ell-1-i} t^{i-j-1} (a_{(j)}b)_{(\ell)} c
+\end{align}
+
+% \begin{align}
+%   &= - \frac{1}{4 \pi^2} \left[  \oint_{\abs{z}=1} z^m \oint_{\abs{w-z} = \eps} \right] w^n \, \sum_{j \ge 0} (z-w)^{-j-1} Y(a_{(j)}b, w) c \, \de z \, \de w \\
+%   &= - \sum_{j \ge 0}  \frac{1}{4 \pi^2} \left[  \oint_{\abs{z}=1} z^m \oint_{\abs{w-z} = \eps} \right] w^n \, (z-w)^{-j-1} Y(a_{(j)}b, w) c \, \de z \, \de w
+% \end{align}
+The contour-integral over $t$ sets $i=j$. Inserting this in 
+the full integral above, the outer integral over $z$ sets $\ell = m+n-j$. Using $(-1)^j \binom{j-m-1}{j} = \binom{m}{j}$ this gives the desired formula \eqref{eq:mode-algebra}.
+The actual proof in the world of power series, which 
+I won't try to give here, is a sort of 
+formal analog of this argument.
+
+Finally we briefly discuss modules:
 
 \begin{defn}[Module for a vertex algebra]
 A \ti{$\vertex$-module} is a vector space $\vrep$
@@ -1151,6 +1193,10 @@ and
   \left( \left( \frac{k \, \kappa(X_1, [X_2, [X_3,X_4]])}{(z_1 - z_2)(z_2 - z_3)(z_3 - z_4)(z_4 - z_1)} + \cdots \right) + \left(  \frac{k^2 \, \kappa(X_1,X_2) \kappa(X_3,X_4)}{(z_1 - z_2)^2 (z_3 - z_4)^2} + \cdots \right) \right) \de z_1 \de z_2 \de z_3 \de z_4 
 \end{multline}
 where each $\cdots$ is a sum over two similar terms.
+
+\fixme{Now explain how a chiral correlation system gives a 
+functional on a tensor product of copies of $\vertex$}
+
 
 
 % The factor $\frac{1}{|C_\alpha|}$ is exactly the symmetry factor: a polygon with $|C_\alpha|$ labeled vertices
