@@ -173,6 +173,7 @@
 \declaretheorem[name=Example,sibling=thm,style=green]{example}
 \declaretheorem[name=Exercise,numberwithin=section,style=noitaldarkbrown]{exercise}
 % \declaretheorem[name=Proof,style=proofstyle,numbered=no]{pf}
+\declaretheorem[name=Solution,numbered=no,style=noitaldarkbrown]{solution}
 
 \numberwithin{equation}{section}
 
@@ -470,40 +471,44 @@ A standard reference is
 \cite{kac1998vertex}; our philosophy is close in spirit to
 \cite{FrenkelBenZvi2004VertexAlgebrasCurves}.
 
-A vertex algebra is a vector space $\vertex$ 
-with additional structure.
-We think of $a \in \vertex$ as objects which can be inserted at a point in the complex plane, giving an object $a(z)$ which varies analytically with 
-$z$. 
+Recall that an algebra is a vector space $\cA$ with some additional
+structure: a linear map $\cA \to \End \cA$, obeying some conditions.
 
-$\vertex$ can act on a \ti{$\vertex$-module}: this means a vector space $\vrep$,
-which again can be inserted at any point of the complex plane.
-Let us put it at $z = 0$.
+Similarly a vertex algebra is a vector space $\vertex$ with additional structure.
+We think of $a \in \vertex$ as objects which can be inserted at a point in the complex plane, giving an object $a(z)$ which varies analytically with $z$. But moreover we can insert multiple objects
+at multiple points of the plane.
+When we insert $a(z)$ and $b(0)$, and bring $z$ close to 
+$0$, we think of the composite as being another 
+element of $\vertex$ (or more precisely some completion of
+$\vertex$, associated to a small disc around $\vertex$).
+
 Then for any $a \in \vertex$, 
-$a(z)$ should provide an endomorphism $Y^\vrep(a,z)$ of $\vrep$,
+$a(z)$ should provide an endomorphism $Y(a,z) \in \End \vertex$,
 depending analytically on $z$.
-We don't expect that $Y^\vrep(a,z)$ exists at $z = 0$; our motivation is
+We don't expect that $Y(a,z)$ exists at $z = 0$; our motivation is
 from local defects in quantum field theory, and often there are
 singularities when two defects are placed at the same point.
-But still we can expand in a series around $z = 0$.
-Thus for $\chi \in \vrep$ we will have
+But still we should be able to expand in a series around $z = 0$.
+So, for $b \in \vertex$ we will have an expansion
 \begin{equation} \label{eq:y-series}
-  Y^\vrep(a,z) \chi = \sum_{n \in \bbZ} z^{-n-1} a^\vrep_{(n)} \chi
+  Y(a,z) b = \sum_{n \in \bbZ} z^{-n-1} a_{(n)} \chi
 \end{equation}
-where each $a^\vrep_{(n)} \in \End \vrep$. 
-One useful special case is that $\vertex$ is a module over itself
-(``vacuum module''):
-in that case we just write $Y(a,z)$ for $Y^\vertex(a,z)$,
-and $a_{(n)}$ for $a^\vertex_{(n)}$.
+where each $a_{(n)} \in \End \vertex$. We require
+that this expansion is meromorphic as opposed to an essential
+singularity: i.e. $a_{(n)} b = 0$ for $n \gg 0$.
+% One useful special case is that $\vertex$ is a module over itself
+% (``vacuum module''):
+% in that case we just write $Y(a,z)$ for $Y^\vertex(a,z)$,
+% and $a_{(n)}$ for $a^\vertex_{(n)}$.
 
-Usually we consider $\vertex$-modules for which 
-\eqref{eq:y-series} is a Laurent series,
-i.e. $a^\vrep_{(n)} \chi = 0$ for $n \gg 0$, i.e. $Y^\vrep(a,z) \chi$ is formally meromorphic in $z$. In particular, we require
-that $\vertex$ itself has this property.
+% Usually we consider $\vertex$-modules for which 
+% \eqref{eq:y-series} is a Laurent series,
+% i.e. $a^\vrep_{(n)} \chi = 0$ for $n \gg 0$, i.e. $Y^\vrep(a,z) \chi$ is formally meromorphic in $z$. In particular, we require
+% that $\vertex$ itself has this property.
 
-When we have $a, b \in \vertex$ we also want to consider
-a combined object $a(z) b(w)$. This 
-object should again provide an endomorphism
-of $\vrep$, depending
+When we have $a, b, c \in \vertex$ we also can consider
+the combined object $a(z) b(w) c(0)$. This 
+object should again lie in $\vertex$, depending
 analytically on $z$ and $w$ away from $z = 0$ or $w = 0$, 
 except that it can also have a pole at $z = w$.
 This means that it may have different Laurent expansions
@@ -512,8 +517,14 @@ $\abs{w} < \abs{z}$ or $\abs{w} > \abs{z}$.\footnote{Recall the example
 \begin{equation}
  f(z,w) = \frac{1}{z-w} = \begin{cases} z^{-1} \sum_{n \ge 0} (w/z)^n & \text{ for } \abs{w} < \abs{z}, \\ -w^{-1} \sum_{n \ge 0} (z/w)^n & \text{ for } \abs{w} > \abs{z}. \end{cases}
 \end{equation}
+These two Laurent expansions are different but related.
+Both of them give $1$ if you multiply them by $z-w$.
+Thus their difference, in $\bbC[[z^{\pm 1}, w^{\pm 1}]]$, 
+is annihilated by multiplication by $z-w$.
+This is an algebraic version of saying that they are
+Laurent expansions of the same function.
 }
-We interpret these two expansions as $Y^\vrep(a,z) Y^\vrep(b,w) \chi$ and $Y^\vrep(b,w) Y^\vrep(a,z) \chi$ respectively.\footnote{
+We interpret these two expansions as $Y(a,z) Y(b,w) c$ and $Y(b,w) Y(a,z) c$ respectively.\footnote{
 The idea is that the operator closer to $0$ acts first,
 and then the operator farther from $0$ acts on the 
 resulting object. We won't attempt to formalize this statement
@@ -521,7 +532,7 @@ precisely now; for physicists it is an instance of \ti{radial quantization}; it 
 
 Now we can make the definition:
 
-\begin{defn}[Vertex algebra]
+\begin{defn}[Vertex algebra] \label{def:vertex-algebra}
 
 A \emph{vertex algebra} is a quadruple \((\vertex, \vac, T, Y)\) where
 \(\vertex\) is a vector space, \(\vac \in \vertex \),
@@ -546,17 +557,21 @@ $Y(a,z) \vac \in a + z\,\vertex[[z]]$ \, ,
 \item
 $[T,\,Y(a,z)] = \partial_z\, Y(a,z)$ \, ,
 
-\item For all $a,b,\chi \in \vertex$
+\item For all $a,b,c \in \vertex$
 there exists $F(z,w) \in \vertex[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
-$Y(a,z) Y(b,w) \chi$ and 
-$Y(b,w) Y(a,z) \chi$ are the
+$Y(a,z) Y(b,w) c$ and 
+$Y(b,w) Y(a,z) c$ are the
 formal Laurent expansion of $F(z,w)$ in the regions
 $\abs{w} < \abs{z}$ and $\abs{z} < \abs{w}$
 respectively.
-
+Or, equivalently: there exists $N$ such that $(z-w)^N Y(a,z) Y(b,w) c = (z-w)^N Y(b,w) Y(a,z)  c$.
 \end{enumerate}
 
 \end{defn}
+
+Property (5) is sometimes called the ``locality'' axiom: it 
+expresses the idea that singularities in $a(z) b(w)$ occur only
+at $z=w$, not anywhere else.
 
 % \begin{exercise}
 % For all \(a,b\in\vertex\), prove that
@@ -570,30 +585,80 @@ respectively.
 % where \(\delta(w)=\sum_{n\in\mathbb{Z}} w^n\) is the formal delta function.
 % \end{exercise}
 
-As you can perhaps see, a vertex algebra is a complicated object,
-and a little painful to construct by hand. We will describe an
+As you can perhaps see, a vertex algebra is a complicated object.
+They would be a little painful to construct by hand. We will describe an
 existence theorem below, which suffices for all our purposes.
 
-The next few exercises develop some useful facts; I think you can
-find them solved in \cite{FrenkelBenZvi2004VertexAlgebrasCurves}
-Section 3.2.
+% The next few exercises develop some useful facts; I think you can
+% find them solved in \cite{FrenkelBenZvi2004VertexAlgebrasCurves}
+% Section 3.2.
 
-\begin{exercise}
-Prove the translation property
+
+Here are two key facts. Proper proofs can be found e.g.
+in \cite{FrenkelBenZvi2004VertexAlgebrasCurves} chapter 3.
+
+\begin{thm}[Associativity of vertex algebras] \label{thm:vertex-algebra-associativity} For any $a,b \in \vertex$,
 \begin{equation}
-   \e^{w T} Y(a, z) \e^{-w T} = Y(a, z+w) \, .
+Y(a,z) Y(b,w) = Y(Y(a,z-w)b,w) = \sum_{n \ge 0} (z-w)^{-n-1} Y(a_{(n)} b, w) \, .  
 \end{equation}
-\end{exercise}
+This is an equality in $\bbC[[z,w]]$, where 
+on the right side we mean the expansion in the region $\abs{z} > \abs{w}$.
+\end{thm}
 
-\begin{exercise}
-Prove the skew-symmetry property
+\autoref{thm:vertex-algebra-associativity} expresses the idea that
+``$a(z) b(w) c(0)$'' should stand for some 
+well-defined analytic object
+which we can expand either in the region $\abs{z} > \abs{w} > 0$
+or in the region $\abs{w} > \abs{z-w} > 0$.
+
+Here is a proof sketch. 
+First you show using (2)-(4) that
 \begin{equation}
-  Y(a,z) b = \e^{z T} Y(b, -z) a
+  Y(a,z) Y(b,w) \vac = Y(Y(a,z-w) b, w) \vac
 \end{equation}
-\end{exercise}
+(You use the integrated form of (4), namely 
+$\e^{z T} Y(a,w) \e^{-z T} = Y(a,z+w)$, and combining
+that with (3), $\e^{z T} b = Y(b,z) \vac$.)
+You want to derive the same thing with $\vac$ replaced
+by any other vector, i.e. you want to insert a third
+object at $0$. So act on both sides with $Y(c, u)$ on the left: this amounts to inserting that third object at large $\abs{u}$.
+You get
+\begin{equation}
+  Y(c,u) Y(a,z) Y(b,w) \vac = Y(c,u) Y(Y(a,z-w) b, w) \vac \, .
+\end{equation}
+Then you want to move the $Y(c,u)$ to the right
+and substitute $u=0$. 
+You expect this should work, because of analytic 
+continuation: the identity is true at large $\abs{u}$, and $u$ 
+can avoid $z$ and $w$ on its path to $u=0$, 
+so there should be no problem.
+The way you realize this idea using \autoref{def:vertex-algebra}
+is that you multiply both sides by
+a big power $(u-w)^N (u-z)^N$, then the commutation is 
+allowed using axiom (5), and then set $u = 0$ and divide
+out the harmless $w^N z^N$.
 
-\begin{exercise}
-Prove that the modes of $\vertex$ form a Lie subalgebra of $\End(\vertex)$, with
+
+
+% Its proof follows a chain of lemmas:
+% \begin{exercise}
+% Prove the translation property
+% \begin{equation}
+%    \e^{w T} Y(a, z) \e^{-w T} = Y(a, z+w) \, .
+% \end{equation}
+% \end{exercise}
+
+% \begin{exercise}
+% Prove the skew-symmetry property
+% \begin{equation}
+%   Y(a,z) b = \e^{z T} Y(b, -z) a
+% \end{equation}
+% \end{exercise}
+
+
+\begin{thm}[Mode algebra of a vertex algebra] \label{thm:vertex-algebra-modes} The modes $a_{(n)} \in \End \vertex$ 
+for all $a \in \vertex$ span 
+a Lie subalgebra of $\End(\vertex)$, with
 % determined by the singularity in the 
 % products $a(z) b(w)$ at $z=w$, i.e. determined by the
 % $a_{(n)} b$ for $n \ge 0$:
@@ -605,10 +670,23 @@ Prove that the modes of $\vertex$ form a Lie subalgebra of $\End(\vertex)$, with
 % around $z=0$. Then calculate by residues at $z=w$. 
 % Start with the simplest case where the only
 % nonzero term is $j=0$.)
-\end{exercise}
-This is a useful way of thinking about vertex algebras
+\end{thm}
+\autoref{thm:vertex-algebra-modes} 
+gives a useful way of thinking about vertex algebras
 concretely, and particularly their ``local'' behavior: 
 it is determined by the corresponding Lie algebra of modes.
+
+One way to think about \autoref{thm:vertex-algebra-modes}
+is as follows. Imagine that instead of formal series we
+were working with actual analytic objects in the complex plane.
+Then we could write 
+\begin{align}
+a_{(m)} b_{(n)} \chi - b_{(n)} a_{(m)} \chi &= - \frac{1}{4 \pi^2} \left[  \oint_{\abs{z}=1} \oint_{\abs{w} = 1-\eps} - \oint_{\abs{z}=1} \oint_{\abs{w} = 1+\eps} \right]z^m w^n \, F(z,w) \, \de z \de w \\
+&= - \frac{1}{4 \pi^2} \left[  \oint_{\abs{z}=1} \oint_{\abs{w-z} = \eps} \right]z^m w^n \, F(z,w) \, \de z \de w \\
+&= - \frac{1}{4 \pi^2} \left[  \oint_{\abs{z}=1} z^m \oint_{\abs{w-z} = \eps} \right] w^n \, F(z,w) \, \de z \de w
+\end{align}
+Now, the polar part of $F(z,w)$ is determined by
+\autoref{thm:vertex-algebra-associativity}. \fixme{...}
 
 \begin{defn}[Module for a vertex algebra]
 A \ti{$\vertex$-module} is a vector space $\vrep$
@@ -825,6 +903,8 @@ U(\mathfrak L_{<0}) \xrightarrow{\ \sim\ } U(R),\qquad u\mapsto u\,\vac.
 \end{prop}
 
 
+
+
 \subsection{Riemann surfaces}
 
 The second main datum of the course is a \ti{Riemann surface} $C$, 
@@ -856,7 +936,7 @@ We often drop the data of the marked points and the representations from the not
 
 
 \subsection{Chiral correlation functions for affine
-Kac-Moody algebras}
+vertex algebras}
 
 Now we are ready to ``put $\vertex$ on the Riemann surface $C$.''
 The way this is done for a general $\vertex$ takes a while
@@ -1046,7 +1126,7 @@ chiral correlation systems is infinite-dimensional.
 
 \begin{example}[Chiral correlation systems for an affine vertex algebra on the sphere]
 
-Here is a construction of chiral correlation functions. \fixme{check}
+Here is a construction of chiral correlation functions. \fixme{check factors, signs}
 Define
 \[
 W(i_1, \dots, i_m) =\
@@ -1059,12 +1139,19 @@ length $m \ge 2$:
 \Big\langle \prod_{r=1}^n J^{X_r}(z_r)\Big\rangle
 \;=\;
 \sum_{\{1,\dots,n\} = C_1\sqcup\cdots\sqcup C_s}
-\ \prod_{\alpha=1}^s \left( \frac{1}{2 \abs{C_\alpha}} \sum_{\text{orderings }\mathbf{i}\text{ of }C_\alpha} W(\mathbf{i}) \right) \, .
+\ \prod_{\alpha=1}^s \left( \frac{1}{\abs{C_\alpha}} \sum_{\text{orderings }\mathbf{i}\text{ of }C_\alpha} W(\mathbf{i}) \right) \, .
 \]
 For example,
 \begin{equation}
-  \IP{J^{X_1}(z_1) J^{X_2}(z_2) J^{X_3}(z_3)} = \frac{k \, \kappa(X_1, [X_2,X_3])}{(z_1 - z_2)(z_2 - z_3)(z_3 - z_1)} \de z_1 \de z_2 \de z_3 \, .
+  \IP{J^{X_1}(z_1) J^{X_2}(z_2) J^{X_3}(z_3)} = \frac{k \, \kappa(X_1, [X_2,X_3])}{(z_1 - z_2)(z_2 - z_3)(z_3 - z_1)} \de z_1 \de z_2 \de z_3 \, 
 \end{equation}
+and
+\begin{multline}
+  \IP{J^{X_1}(z_1) J^{X_2}(z_2) J^{X_3}(z_3) J^{X_4}(z_4)} = \\ 
+  \left( \left( \frac{k \, \kappa(X_1, [X_2, [X_3,X_4]])}{(z_1 - z_2)(z_2 - z_3)(z_3 - z_4)(z_4 - z_1)} + \cdots \right) + \left(  \frac{k^2 \, \kappa(X_1,X_2) \kappa(X_3,X_4)}{(z_1 - z_2)^2 (z_3 - z_4)^2} + \cdots \right) \right) \de z_1 \de z_2 \de z_3 \de z_4 
+\end{multline}
+where each $\cdots$ is a sum over two similar terms.
+
 
 % The factor $\frac{1}{|C_\alpha|}$ is exactly the symmetry factor: a polygon with $|C_\alpha|$ labeled vertices
 % has $|C_\alpha|$ equivalent choices of starting point.
@@ -1124,6 +1211,11 @@ For example,
 % \end{center}
 
 \end{example}
+
+
+\subsection{Conformal blocks for affine vertex algebras}
+
+
 
 
 \section{Coming attractions}
