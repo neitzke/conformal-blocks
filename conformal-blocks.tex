@@ -260,6 +260,8 @@
 
 \newcommand{\regular}{{\mathrm{reg}}}
 
+\newcommand{\nop}[1]{{:}\, #1 {:} }
+
 \newcommand{\half}{\ensuremath{\frac{1}{2}}}
 \newcommand{\qtr}{\ensuremath{\frac{1}{4}}}
 \newcommand{\bq}{{\mathbf q}}
@@ -369,6 +371,7 @@
 \DeclareMathOperator{\Bd}{Bd}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ind}{Ind}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Sym}{Sym}
 \DeclareMathOperator{\Lie}{Lie}
@@ -491,7 +494,7 @@ singularities when two defects are placed at the same point.
 But still we should be able to expand in a series around $z = 0$.
 So, for $b \in \vertex$ we will have an expansion
 \begin{equation} \label{eq:y-series}
-  Y(a,z) b = \sum_{n \in \bbZ} z^{-n-1} a_{(n)} \chi
+  Y(a,z) b = \sum_{n \in \bbZ} z^{-n-1} a_{(n)} b
 \end{equation}
 where each $a_{(n)} \in \End \vertex$. We require
 that this expansion is meromorphic as opposed to an essential
@@ -577,7 +580,7 @@ Some remarks:
 \begin{itemize}
 \item Property (5) is sometimes called the ``locality'' axiom: it 
 expresses the idea that singularities in $a(z) b(w)$ occur only
-at $z=w$, not anywhere else.
+at $z=w$, not anywhere else. We also say: $Y(a,z)$ and $Y(b,w)$ are local with respect to one another.
 
 \item Note that the grading implies that for each \(a, b \in \vertex \) we have \(a_{(n)}b=0\) for all \(n\gg 0\), i.e. 
 $Y(a,z) b$ is a Laurent series in $z$.
@@ -676,7 +679,7 @@ Work out the above proof sketch carefully.
 
 \begin{thm}[Mode algebra of a vertex algebra] \label{thm:vertex-algebra-modes} The modes $a_{(n)} \in \End \vertex$ 
 for all $a \in \vertex$ span 
-a Lie subalgebra of $\End(\vertex)$, with
+a Lie subalgebra $\Lie(\vertex)$ of $\End(\vertex)$, with
 % determined by the singularity in the 
 % products $a(z) b(w)$ at $z=w$, i.e. determined by the
 % $a_{(n)} b$ for $n \ge 0$:
@@ -727,37 +730,6 @@ the full integral above, the outer integral over $z$ sets $\ell = m+n-j$. Using 
 The actual proof in the world of power series, which 
 I won't try to give here, is a sort of 
 formal analog of this argument.
-
-Finally we briefly discuss modules:
-
-\begin{defn}[Module for a vertex algebra]
-A \ti{$\vertex$-module} is a vector space $\vrep$
-and an operation
-\begin{equation}
-Y^\vrep(\,\cdot\,,z): \vertex \to \mathrm{End}(\vrep)[[z,z^{-1}]],\qquad
-Y^\vrep(a,z) = \sum_{n\in \mathbb{Z}} a^\vrep_{(n)} z^{-n-1},
-\end{equation}
-such that
-\begin{enumerate}
-
-\item For each \(a \in \vertex \), \( \chi \in \vrep \) we have \(a^\vrep_{(n)}\chi=0\) for all \(n\gg 0\) \, ,
-
-\item 
-  $Y^\vrep(\vac, z) = \bid_\vrep$ \, ,
-
-\item $Y^\vrep(T a, z) = \partial_z Y^\vrep(a,z)$ \, ,
-
-\item For all $a,b \in \vertex$ and $\chi \in \vrep$
-there exists $F(z,w) \in \vrep[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
-$Y^\vrep(a,z) Y^\vrep(b,w) \chi$ and 
-$Y^\vrep(b,w) Y^\vrep(a,z) \chi$ are the
-formal Laurent expansion of $F(z,w)$ in the regions
-$\abs{w} < \abs{z}$ and $\abs{z} < \abs{w}$
-respectively.
-\end{enumerate}
-
-\end{defn}
-
 
 
 % \begin{exercise} Prove that
@@ -954,7 +926,7 @@ U(\mathfrak L_{<0}) \xrightarrow{\ \sim\ } U(R),\qquad u\mapsto u\,\vac.
 Suppose $\vertex = \Heis$. The above theorem says that $\vertex_n$ has a basis indexed by
 unordered partitions of $n$, e.g. $\vertex_4$ is spanned by
 the two vectors
-$J_{-1}^4 \vac$, $J_{-2}^2 \vac$, $J_{-3} J_{-1} \vac$, $J_{-4} \vac$.
+$J_{-1}^4 \vac$, $J_{-2}^2 \vac$, $J_{-3} J_{(-1)} \vac$, $J_{-4} \vac$.
 \end{example}
 
 \begin{example}
@@ -964,9 +936,72 @@ $\vertex_2$ by $J^X_{-1} J^Y_{-1} \vac$ and $J^X_{-2} \vac$,
 and so on.
 Each level $\vertex_n$ is a representation of $\fg$, through the
 action of the ``zero modes'' $J^X_0$.
-$\vertex_0 \simeq \triv$, $\vertex_1 \simeq \fg$, $\vertex_2 \simeq \fg \oplus \Sym^2(\fg)$, and so on. 
+$\vertex_0 \simeq \triv$, $\vertex_1 \simeq \fg$, $\vertex_2 \simeq \fg \oplus \Sym^2 \fg$, and so on. 
 \end{example}
 
+A useful way to think about this answer, at least informally (for $\vertex = \Heis$): we started out with a single object $J$,
+which we thought of as a ``thing which can be inserted at a point $z \in \bbC$''. Then we asked, what are the 
+things which appear in the Laurent expansion when we bring two $J$'s close together, and then iterate?
+These other things can still be inserted at a point, while still behaving meromorphically with respect to $J$.
+The answer includes $J$ but also many other things, all constructed by taking derivatives of $J$, or taking 
+contour integrals of one object around another, and iterating. A basis for them is provided by iterated circular 
+contour-integrals 
+\begin{equation}
+  \oint \cdots \oint z_1^{n_1} \cdots z_k^{n_k} J(z_1) \cdots J(z_k) \, .
+\end{equation}
+It's similar for the other universal enveloping vertex algebras.
+
+
+\subsection{Some vertex operators}
+
+It is interesting to ask what are the vertex
+operators $Y(a,z)$ associated to general elements $a \in \vertex$.
+We know that
+\begin{equation}
+  Y(J, z) =
+  Y(J_{(-1)} \vac, z) = \sum_n J_{(n)} z^{-n-1} \, .
+\end{equation}
+What about $Y(J_{(-m)} \vac, z)$?
+To calculate this it is useful to know the following:
+\begin{prop} \label{prop:goddard-uniqueness}
+If $\phi(z) \in \End(\vertex)[[z]]$, and $\phi(0) \vac = a$,
+and $\phi(z)$ is local with respect to all $Y(b,w)$,
+then $\phi(z) = Y(a,z)$.
+\end{prop}
+
+Using this we can prove
+\begin{equation}
+  Y(J_{(-m)} \vac, z) = \frac{\partial_z^{m-1}}{(m-1)!} Y(J_{(-1)} \vac, z) 
+\end{equation}
+since the RHS indeed has both of the necessary properties.
+
+Now what about something like $Y(J_{(-1)} J_{(-1)} \vac, z)$?
+Here we will be informal: a full proof seems to require some
+machinery. But the main idea is like this.
+$Y(J_{(-1)} J_{(-1)} \vac, z)$ should 
+be a local field which creates the state
+$J_{(-1)} J_{(-1)} \vac$ at $z$, i.e. it should be
+$\frac{1}{2 \pi \I} \oint_{z} (w-z)^{-1} J(w) J(z) \de w$.
+We want the mode expansion of this object around $z = 0$.
+For this we rewrite $\oint_z$
+as a difference of two circles around $0$, one with $\abs{w} > \abs{z}$ and one with $\abs{w} < \abs{z}$. After this
+we can expand in modes, with (after some
+calculation) the result:
+\begin{exercise}
+Show that this computation gives
+$(J_{(-1)} J_{(-1)} \vac)_{(n)} = \sum_{k+\ell = n-1} \nop{J_{(k)} J_{(\ell)}}$, where we defined the \ti{normal ordered product}
+\begin{equation}
+  \nop{a_{(k)} b_{(\ell)}} = \begin{cases} a_{(k)} b_{(\ell)} & \text{ if } k < 0, \\ b_{(\ell)} a_{(k)} & \text{ if } k \ge 0 \end{cases} 
+\end{equation}
+
+\end{exercise}
+
+Here is another useful way to think about this object:
+\begin{equation}
+  \frac{1}{2 \pi \I} \oint_w (z-w)^{-1} J(z) J(w) \, \de z = \frac{1}{2 \pi \I} \oint_w (z-w)^{-1} \left( J(z) J(w) - \frac{1}{(z-w)^2} \right) \, \de z = \lim_{z \to w} \left( J(z) J(w) - \frac{1}{(z-w)^2} \right) \, .
+\end{equation}
+So $(J_{(-1)} J_{(-1)} \vac)(w)$ can be obtained by starting
+with $J(z) J(w)$, deleting ``by hand'' the singular term $\frac{1}{(z-w)^2}$, and taking $z \to w$.
 
 
 \subsection{Riemann surfaces}
@@ -1012,7 +1047,7 @@ Before defining conformal blocks we consider correlation functions.
 I think that these are actually the more important objects (and in good
 cases they are the same thing as conformal blocks).
 
-\begin{defn}[Chiral correlation system for $V^k(\fg)$, without marked points]
+\begin{defn}[Chiral correlation system for $V^k(\fg)$, without marked points] \label{defn:chiral-correlation-affine-no-marked}
 Suppose given a Riemann surface $C$.
 A \ti{chiral correlation system} for $V^k(\fg)$
 on $C$ is a rule that assigns an element
@@ -1216,10 +1251,6 @@ and
 \end{multline}
 where each $\cdots$ is a sum over two similar terms.
 
-\fixme{Now explain how a chiral correlation system gives a 
-functional on a tensor product of copies of $\vertex$}
-
-
 
 % The factor $\frac{1}{|C_\alpha|}$ is exactly the symmetry factor: a polygon with $|C_\alpha|$ labeled vertices
 % has $|C_\alpha|$ equivalent choices of starting point.
@@ -1281,8 +1312,317 @@ functional on a tensor product of copies of $\vertex$}
 \end{example}
 
 
-\subsection{Conformal blocks for affine vertex algebras}
 
+\subsection{Including marked points}
+
+Suppose we have a chiral correlation system for $V^k(\fg)$
+as above.
+Choose points $p_1, \dots, p_n \in C$ and 
+fix a local coordinate $z_i$ centered
+at each $p_i$.
+Then we can upgrade the correlation functions to permit
+arbitrary insertions of elements of $\vertex$, instead of just
+$J^X$: i.e. we can consider objects
+\begin{equation}
+  \IP{ \prod_{r=1}^k J^{X_r}(q_r) \prod_{i=1}^n \cdot(p_i) } :  \left(  \bigotimes_{i=1}^n  \vertex \right) \to \left(  \otimes_{i=1}^k T^*_{q_i} C \right)
+\end{equation}
+determined by two conditions:
+\begin{enumerate}
+  \item Insertions of $\vac$ can be erased, i.e.
+\begin{equation}
+  \IP{ \prod_{r=1}^k J^{X_r}(q_r) \prod_{i=1}^n \cdot(p_i) } (\vac, a_2, \dots, a_n) = \IP{ \prod_{r=1}^k J^{X_r}(q_r) \prod_{i=2}^n \cdot(p_i) } (a_2, \dots, a_n)
+\end{equation}
+
+  \item 
+  The Laurent expansion around $q = p$ is determined by the action
+  of $J^X$ on $\vertex$, 
+  \begin{equation}
+    \IP{ \cdots J^X(q) a(p) } = \sum_n z(q)^{-n-1} \IP{\cdots (J^X_{(n)} a)(p) }
+  \end{equation}
+\end{enumerate}
+
+  By contour-integration this formula determines the terms on the RHS. So this gives a way of inductively constructing up these
+  correlation functions starting from the chiral correlation system.
+  There are two extreme cases:
+  \begin{itemize}
+   \item $n=0$ recovers the original chiral correlation system;
+  \item  $k=0$ gives a map $\left( \otimes_{i=1}^n \vertex  \right) \to \bbC$. That data-type doesn't involve the Riemann surface $C$, but $C$ still enters implicitly, through constraints which this linear map obeys.
+\end{itemize}
+
+\begin{example}
+Take $C = \bbC\bbP^1$. Use the standard
+coordinates $z$ and $w = 1/z$, and choose the marked points
+to be $z = 0$ and $w = 0$, i.e. north and south pole.
+Then the chiral correlation system we discussed above 
+gives a map 
+$\Phi: \vertex \otimes \vertex \to \bbC$. What is that map?
+First, we have $\Phi(\vac, \vac) = \IP{1} = 1$.
+Then, by contour-deformation we have\footnote{The minus sign here could be confusing if you try to look things up elsewhere:
+many authors consider the ``Shopavalov form'' 
+$\Phi_S$ on $\vertex$, which is slightly different.
+With respect to $\Phi_S$ the adjoint of $J^X_{(n)}$ is $J^{\omega(X)}_{(-n)}$, where $\omega$ is an anti-involution of $\fg$. The two are related by
+$\Phi_S(a,b) = \Phi(a,\omega b)$, where $\omega$ now is the 
+corresponding involution of $\vertex$, which is
+self-adjoint for $\Phi$.}
+\begin{equation}
+\Phi(J^X_{(n)} a, b) = \oint_{z=0} z^n \IP{b(\infty) J^X(z) a(0)} = - \oint_{w=0} w^{-n} \IP{b(\infty) J^X(w) a(0)} = - \Phi(a, J^X_{(-n)} b).
+\end{equation}
+(Or equivalently, the sum of residues of the global meromorphic $1$-form $\IP{z^n b(\infty) J^X(z) a(0)}$ vanishes.)
+
+These two facts are enough to iteratively determine $\Phi$.
+For example, on the grade-$1$ subspace:
+\begin{equation}
+  \Phi(J^X_{(-1)} \vac, J^Y_{-1} \vac) = -\Phi(\vac, J^X_{1} J^Y_{-1} \vac) = -\Phi(\vac, k \kappa (X,Y) \vac) = -k \kappa(X,Y) \, .
+\end{equation}
+% $\Phi$ is a symmetric bilinear form on $\vertex$.
+
+Given $\Phi$ we could actually reconstruct the 
+whole chiral correlation system, by summing up Laurent
+series. (So this gives an alternate way of computing
+the chiral correlation system on $\bbC \bbP^1$, 
+and seeing that it is unique up to scale.)
+
+Now we could also insert a third marked point, at
+$z$. Then the chiral correlation function
+gives $\Phi_{3,z}: \vertex \otimes \vertex \otimes \vertex \to \bbC$.
+Its Laurent expansion in $z$ is
+$\Phi_{3,z}(a,b,c) = \Phi(a, Y(b,z) c)$.
+In this sense $\Phi_3$ is closely related to the
+vertex algebra operation. We would be tempted to say they
+are equivalent, if $\Phi$ is nondegenerate.
+
+This raises the interesting question of whether $\Phi$
+is actually nondegenerate or not. It is ``easy'' to show
+that the graded components of $\vertex$ are orthogonal
+under $\Phi$. Also for $\fg = \fgl_1$ (Heisenberg)
+the partition basis is an orthogonal basis.
+
+How about $\fg = \fsl_2$? Here we can fix a PBW basis 
+and compute the 
+determinant $\Delta_n$ of the matrix of $\Phi$ at each grade $n$.
+At the first few orders the result is:
+\begin{equation}
+  \Delta_1 \propto k^3, \quad \Delta_2 \propto k^9(k-1)^5(k+2), \quad \Delta_3 \propto k^{22}(k-1)^{15}(k-2)^7(k+2)^4(3k+4)^3, ...
+\end{equation}
+So there are some special values of $k$ where $\Phi$ 
+is degenerate: in these formulas we see already that this
+happens at
+$k = 1, 2, -2, -\frac34$.
+The general answer is that $\Phi$ is degenerate iff
+$k = -2 + p/q$ for some $p \ge 2$, $q > 0$ (in particular,
+this happens if $k \in \bbZ_{\ge 0}$.)
+
+If $\Phi$ is degenerate, then we are in an 
+interesting situation: it means there are some elements
+of $\vertex$ which ``behave like zero'' in all correlation
+functions on $\bbC \bbP^1$. Then these elements 
+form an ideal $I$ in $\vertex$ (meaning $I$ is stable
+under all $Y(a,z)$), and we can form a quotient $\vertex/I$, 
+which is still a vertex algebra.
+
+Complete formulas for these determinants are given in
+\fixme{Kac-Kazhdan}.
+
+\end{example}
+
+
+Next we want to upgrade all this again to include modules.
+
+\begin{defn}[Module for a vertex algebra]
+A \ti{$\vertex$-module} is a vector space $\vrep$
+and an operation
+\begin{equation}
+Y^\vrep(\,\cdot\,,z): \vertex \to \mathrm{End}(\vrep)[[z,z^{-1}]],\qquad
+Y^\vrep(a,z) = \sum_{n\in \mathbb{Z}} a^\vrep_{(n)} z^{-n-1},
+\end{equation}
+such that
+\begin{enumerate}
+
+\item For each \(a \in \vertex \), \( \chi \in \vrep \) we have \(a^\vrep_{(n)}\chi=0\) for all \(n\gg 0\) \, ,
+
+\item 
+  $Y^\vrep(\vac, z) = \bid_\vrep$ \, ,
+
+\item $Y^\vrep(T a, z) = \partial_z Y^\vrep(a,z)$ \, ,
+
+\item For all $a,b \in \vertex$ and $\chi \in \vrep$
+there exists $F(z,w) \in \vrep[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
+$Y^\vrep(a,z) Y^\vrep(b,w) \chi$ and 
+$Y^\vrep(b,w) Y^\vrep(a,z) \chi$ are the
+formal Laurent expansion of $F(z,w)$ in the regions
+$\abs{w} < \abs{z}$ and $\abs{z} < \abs{w}$
+respectively.
+\end{enumerate}
+
+\end{defn}
+
+\begin{example}
+Here is an important class of representations of 
+$\vertex = V^k(\fg)$. Fix a $\fg$-module $M$. Then let
+$\Lie(\vertex)_{\ge 0}$ act on $M$ as follows:
+the zero modes act through the $\fg$-action on $M$,
+and the positive modes act as zero.
+Then let 
+$\vrep = \Ind^{\Lie(\vertex)}_{\Lie(\vertex)_{\ge 0}} M$.
+As a vector space $\vrep$ is freely generated 
+from $M$ by action of the $J^X_{(n)}$ with $n < 0$.
+\end{example}
+
+Now suppose we have
+$\vertex$-modules $\vrep_i$ and insert them at 
+marked points $p_i \in C$, still with a local coordinate
+system $z_i$ fixed around each $p_i$. Then:
+
+\begin{defn}
+A chiral correlation system for $V^k(\fg)$ on $C$ is
+a system of ``functions''
+\begin{equation}
+  \IP{ \prod_{r=1}^k J^{X_r}(q_r) \prod_{i=1}^n \cdot(p_i) } :  \left(  \bigotimes_{i=1}^n  \vrep_i \right) \to \left(  \otimes_{i=1}^k T^*_{q_i} C \right)
+\end{equation}
+obeying all the conditions in \autoref{defn:chiral-correlation-affine-no-marked}, plus
+a Laurent-expansion condition as $q_i \to p_j$,
+\begin{equation}
+    \IP{ \cdots J^X(q) \chi(p) } = \sum_{n \in \bbZ} z(q)^{-n-1} \IP{\cdots (J^{X,\vrep}_{(n)} \chi)(p) }
+\end{equation}
+\end{defn}
+
+Note that in contrast to the case before, here 
+having chiral correlation
+system without marked points does \ti{not} 
+automatically construct for us
+a chiral correlation system with marked points.
+
+\begin{example}
+Suppose again that $C = \bbC \bbP^1$ and we insert $\vertex$-modules $\vrep$, $\vrep'$ at $0$ and $\infty$, with local 
+coordinates as before.
+
+Then, by the same method as before, 
+a chiral correlation system on $C$ gives in particular 
+a pairing $\Phi: \vrep \otimes \vrep' \to \bbC$
+obeying again the condition
+$\Phi(J^X_{(n)} \chi, \psi) = - \Phi(\chi, J^X_{(-n)} \psi)$.
+
+Such a pairing might or might not exist, depending on
+what $\vrep$ and $\vrep'$ are.
+For instance, suppose $\vrep = \vrep(M)$ and $\vrep' = \vrep(M')$.
+Then we can restrict attention to the zero-grade parts 
+$M$, $M'$, which are closed under the action of the zero-modes $J^X_{(0)}$.
+The invariance condition 
+$\Phi(J^X_{(0)} \chi, \psi) = - \Phi(\chi, J^X_{(0)} \psi)$
+just says that $\Phi$ gives a $\fg$-invariant pairing $M \otimes M' \to \bbC$.
+Moreover, similarly to the case we discussed above, the full $\Phi$ is determined (and not overdetermined)
+by its restriction to $M \otimes M'$.
+
+The conclusion is that chiral correlation systems on $C$ correspond to invariant pairings $M \otimes M' \to \bbC$.
+\end{example}
+
+\begin{example}
+Now suppose that again that $C = \bbC \bbP^1$ and we insert arbitrary $\vertex$-modules $\vrep_i$ at marked points $p_i$,
+with arbitrary local coordinates $z_i$.
+
+If we have a chiral correlation system, then as before, we get a map
+$\Phi: \prod_{i=1}^n \vrep_i \to \bbC$, and we also have
+the 1-form $\IP{J(z) \prod_{i=1}^n \chi_i(p_i)}$. This 1-form is meromorphic, with singularities only at the $p_i$,
+so the sum of its residues must be zero. That gives the condition
+\begin{equation}
+  \sum_{i=1}^n \Phi(\chi_1, \dots, J^{X,\vrep_i}_{(0)} \chi_i, \dots, \chi_n) = 0 \, .
+\end{equation}
+
+
+\end{example}
+
+\fixme{discuss how the different functionals are related: action of the group of formal changes of coordinates}
+
+\fixme{this group is actually generated by the action of
+Virasoro element: i.e. $\delta_v = [v_n L_n, \cdot]$
+where $L_n$ is the expansion of some field}
+
+
+To formulate the constraints,
+let $f$ be any global section of $\cO(*p)$, i.e. 
+any meromorphic function on $C$, holomorphic away from 
+the $p_i$. Then $f \eta$ is a meromorphic $1$-form
+on $C$, and thus
+\begin{equation}
+  \sum_{i=1}^n \Res_{p_i} (f \eta) = 0 \, .
+\end{equation}
+So what are these residues?
+Laurent expand near each $p_i$ as
+\begin{equation}
+  f = \sum_{n \in \bbZ} f_{i,n}\, z_i^{n}
+\end{equation}
+Then, a short computation gives that
+\begin{equation}
+  \Res_{p_j} f \eta = \sum_{n \in \bbZ} \IP{\left( \prod_{i \neq j} \chi_i(p_i)  \right) f_{j,n} J^X_n \chi_j(p_j)}
+\end{equation}
+(note only finitely many terms are nonzero).
+
+This motivates the following.
+For $X\in\fg$ define a formal infinite sum
+\begin{equation}
+  X(f)_i = \sum_{n \in \bbZ} f_{i,n}\, J^{X}_{n} ,
+\end{equation}
+and let $X(f) \in \End(\bigotimes_i \vrep_i)$ be\footnote{The operator $X(f)_i$ depends on the local coordinate $z_i$ we chose; different choices differ by conjugation by an operator in
+$\End(\vrep_i)$, 
+built by exponentiating a Virasoro action. Thus in the end
+the spaces $\Coinv(C,\vertex)$ for different choices of local 
+coordinate are canonically isomorphic. \fixme{watch out for choice of log in defining $\lambda^{L_0}$}}\footnote{For any vector $v \in \vrep_i$ we always have $J^X_n v = 0$ for large enough $n$, so $X(f)_i v$ is well defined.}
+\begin{equation}
+  X(f) = \sum_{i=1}^n \, 
+  \bid\otimes\cdots\otimes X(f)_i \otimes\cdots\otimes \bid \, .
+\end{equation}
+
+\begin{defn}[Kac-Moody vertex algebra coinvariants on a Riemann surface]
+The space of coinvariants is
+\begin{equation}
+  \Coinv(C, \vertex)
+  = \Bigl(\bigotimes_{i=1}^n \vrep_i\Bigr)\Big/\Big\langle
+  X(f)\,v \ \Big|\ X\in\fg,\ f\in H^0(\cO(*p)),\
+  v\in\bigotimes_i \vrep_i
+  \Big\rangle
+\end{equation}
+\end{defn}
+
+\begin{defn}[Conformal block for Kac-Moody vertex algebra]
+\begin{equation}
+  \Conf(C, \vertex) = \Coinv(C, \vertex)^* \, .
+\end{equation}
+In other words, a conformal block is a map
+$\bigotimes_i \vrep_i \to \bbC$ which annihilates all
+elements of the form $X(f) v$.
+\end{defn}
+
+What we just explained is:
+
+\begin{prop}[Chiral correlation systems give conformal blocks]
+Given a chiral correlation system for $\vertex = V^k(\fg)$,
+the map
+\begin{equation}
+  \bigotimes_i \vrep_i \to \bbC \, .
+\end{equation}
+given by
+\begin{equation}
+  \bigotimes_i \chi_i(p_i) \mapsto  \IP{\prod_i \chi_i(p_i)}
+\end{equation}
+is a conformal block.
+\end{prop}
+
+The converse is also true \fixme{...}
+
+
+
+\subsection{Changes of coordinate}
+
+% There were some \ti{ad hoc} features in our definition 
+% of chiral correlation functions for affine vertex algebras.
+
+% First, we only considered the objects $J^X(z)$ instead of
+% all of the fields of $\vertex$.
+
+% Second, we somehow decided that the objects $J^X(z)$
+% should be $1$-forms on $C$.
+
+% To get rid of these problems we need a new ingredient:
 
 
 
