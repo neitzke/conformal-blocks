@@ -876,7 +876,7 @@ Note that the zero modes $J^X_{(0)}$ have
 \begin{equation}
   [J^X_{(0)}, J^Y_{(0)}] = J^{[X,Y]}_{(0)}
 \end{equation}
-so they form a copy of $\fg$ inside the mode algebra.
+so they form a copy of $\fg$ inside $\Lie(\vertex)$.
 Also note the Heisenberg vertex algebra is a special case, where $\fg = \fgl_1$ with a single generator $X$,
 $\kappa(X,X) = 1$ and $k=1$.
 
@@ -901,7 +901,7 @@ In all these examples $\vertex = U(R)$ where
 $R / (\bbC \cdot \bid)$ is free over $\bbC[\partial]$.
 In this situation we have a PBW-type basis:
 
-\begin{prop}[PBW basis for universal vertex algebra]
+\begin{prop}[PBW basis for universal enveloping vertex algebra]
 Let $R$ be a Lie conformal algebra with a subalgebra $T$ annihilated by $\partial$,
 such that $R/T$ is free as a $\bbC[\partial]$-module. Then fix an
 ordered $\bbC[\partial]$-basis $(a^i)_{i\in I}$ of $R/T$.
@@ -1356,11 +1356,14 @@ to be $z = 0$ and $w = 0$, i.e. north and south pole.
 Then the chiral correlation system we discussed above 
 gives a map 
 $\Phi: \vertex \otimes \vertex \to \bbC$. What is that map?
-First, we have $\Phi(\vac, \vac) = \IP{1} = 1$.
-Then, by contour-deformation we have\footnote{The minus sign here could be confusing if you try to look things up elsewhere:
-many authors consider the ``Shopavalov form'' 
+First, we have 
+\begin{equation}
+ \Phi(\vac, \vac) = \IP{1} = 1 \, . 
+\end{equation}
+Second, by contour-deformation we have\footnote{Many authors consider the ``Shapovalov form'' 
 $\Phi_S$ on $\vertex$, which is slightly different.
-With respect to $\Phi_S$ the adjoint of $J^X_{(n)}$ is $J^{\omega(X)}_{(-n)}$, where $\omega$ is an anti-involution of $\fg$. The two are related by
+With respect to $\Phi_S$ the adjoint of $J^X_{(n)}$ is $J^{\omega(X)}_{(-n)}$, where $\omega$ is an anti-involution of $\fg$ (note this anti-involution is not $\fg$-invariant, so it could not have arisen from our construction, which so far
+has been fully $\fg$-invariant). The two are related by
 $\Phi_S(a,b) = \Phi(a,\omega b)$, where $\omega$ now is the 
 corresponding involution of $\vertex$, which is
 self-adjoint for $\Phi$.}
@@ -1378,7 +1381,11 @@ For example, on the grade-$1$ subspace:
 
 Given $\Phi$ we could actually reconstruct the 
 whole chiral correlation system, by summing up Laurent
-series. (So this gives an alternate way of computing
+series, e.g.
+\begin{equation}
+  \IP{J^X(z) J^Y(w)} = \sum_{n,m \in \bbZ} z^{-n-1} w^{-m-1} \Phi(\vac, J^X_{(n)} J^Y_{(m)} \vac) \text{ for } \abs{z} > \abs{w} \, . 
+\end{equation}
+(So this gives an alternate way of computing
 the chiral correlation system on $\bbC \bbP^1$, 
 and seeing that it is unique up to scale.)
 
