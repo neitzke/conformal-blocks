@@ -458,13 +458,13 @@ Please send corrections/improvements to
 
 \section{Introduction}
 
-\subsection{Preface}
-
 The course is about a subject which started in physics of
 2-dimensional systems (partly string theory, but not only 
 string theory). It has turned out to have a lot of applications,
 in diverse areas.
 \fixme{...}
+
+\section{Basic data}
 
 \subsection{Vertex algebras and modules}
 
@@ -483,7 +483,7 @@ at multiple points of the plane.
 When we insert $a(z)$ and $b(0)$, and bring $z$ close to 
 $0$, we think of the composite as being another 
 element of $\vertex$ (or more precisely some completion of
-$\vertex$, associated to a small disc around $\vertex$).
+$\vertex$, associated to a small disc around $0$).
 
 Then for any $a \in \vertex$, 
 $a(z)$ should provide an endomorphism $Y(a,z) \in \End \vertex$,
@@ -578,7 +578,7 @@ and $a_{(n)}$ has degree $\abs{a}-n-1$.
 
 Some remarks:
 \begin{itemize}
-\item Property (5) is sometimes called the ``locality'' axiom: it 
+\item Property (4) is sometimes called the ``locality'' axiom: it 
 expresses the idea that singularities in $a(z) b(w)$ occur only
 at $z=w$, not anywhere else. We also say: $Y(a,z)$ and $Y(b,w)$ are local with respect to one another.
 
@@ -886,10 +886,15 @@ $\kappa(X,X) = 1$ and $k=1$.
 \end{equation}
 i.e. $[T_\lambda T] = \lambda^3 \frac{c}{12} \bid + (2 \lambda + \partial) T$.
 The corresponding mode Lie algebra is
-\begin{equation} \label{eq:virasoro-mode-algebra}
-[L_{(m)},L_{(n)}]
-=(m-n)\,L_{(m+n-1)}+\frac{c}{12}\,m(m-1)(m-2)\,\delta_{m+n,2} \bid \, .
+\begin{equation}
+[T_{(m)},T_{(n)}]
+=(m-n)\,T_{(m+n-1)}+\frac{c}{12}\,m(m-1)(m-2)\,\delta_{m+n,2} \bid \, ,
 \end{equation}
+or after defining $L_m = T_{(m+1)}$ to match the usual convention,
+\begin{equation}  \label{eq:virasoro-mode-algebra}
+  [L_m, L_n] = (m-n) L_{m+n} + \frac{c}{12}\,(m+1)(m)(m-1)\,\delta_{m+n,0} \bid \, ,
+\end{equation}
+
 \end{enumerate}
 
 \begin{exercise}
@@ -925,8 +930,8 @@ U(\mathfrak L_{<0}) \xrightarrow{\ \sim\ } U(R),\qquad u\mapsto u\,\vac.
 \begin{example}
 Suppose $\vertex = \Heis$. The above theorem says that $\vertex_n$ has a basis indexed by
 unordered partitions of $n$, e.g. $\vertex_4$ is spanned by
-the two vectors
-$J_{-1}^4 \vac$, $J_{-2}^2 \vac$, $J_{-3} J_{(-1)} \vac$, $J_{-4} \vac$.
+the vectors
+$J_{(-1)}^4 \vac$, $J_{(-2)} J_{(-1)}^2 \vac$, $J_{(-2)}^2 \vac$, $J_{(-3)} J_{(-1)} \vac$, $J_{(-4)} \vac$.
 \end{example}
 
 \begin{example}
@@ -1034,18 +1039,21 @@ We often drop the data of the marked points and the representations from the not
 % but not give a fully general definition yet.
 
 
-\subsection{Chiral correlation functions for affine
+
+\section{Chiral correlation functions for affine
 vertex algebras}
 
 Now we are ready to ``put $\vertex$ on the Riemann surface $C$.''
 The way this is done for a general $\vertex$ takes a while
 to appreciate. To get some examples in our hand quickly, 
-let me specialize to the case of affine Kac-Moody algebras,
+let me specialize to the case of affine vertex algebras,
 and further to the case of a curve $C$ with no marked points.
 
 Before defining conformal blocks we consider correlation functions.
 I think that these are actually the more important objects (and in good
 cases they are the same thing as conformal blocks).
+
+\subsection{Chiral correlation functions without marked points}
 
 \begin{defn}[Chiral correlation system for $V^k(\fg)$, without marked points] \label{defn:chiral-correlation-affine-no-marked}
 Suppose given a Riemann surface $C$.
@@ -1413,19 +1421,19 @@ At the first few orders the result is:
 \end{equation}
 So there are some special values of $k$ where $\Phi$ 
 is degenerate: in these formulas we see already that this
-happens at
-$k = 1, 2, -2, -\frac34$.
-The general answer is that $\Phi$ is degenerate iff
-$k = -2 + p/q$ for some $p \ge 2$, $q > 0$ (in particular,
-this happens if $k \in \bbZ_{\ge 0}$.)
+happens at $k = 1, 2, -2, -\frac34$.
+The complete answer is that $\Phi$ is degenerate iff
+$k = -2 + p/q$ for some $p \ge 2$, $q > 0$, and $(p,q) = 1$. 
+(So in particular, $\Phi$ is degenerate if $k \in \bbZ_{\ge 0}$.)
 
 If $\Phi$ is degenerate, then we are in an 
 interesting situation: it means there are some elements
 of $\vertex$ which ``behave like zero'' in all correlation
 functions on $\bbC \bbP^1$. Then these elements 
 form an ideal $I$ in $\vertex$ (meaning $I$ is stable
-under all $Y(a,z)$), and we can form a quotient $\vertex/I$, 
-which is still a vertex algebra.
+under all $Y(a,z)$), in fact the maximal ideal (radical). 
+Then we can form a quotient $L_k(\fg) = \vertex/I$, 
+which is a simple vertex algebra.
 
 Complete formulas for these determinants are given in
 \fixme{Kac-Kazhdan}.
@@ -1481,20 +1489,20 @@ marked points $p_i \in C$, still with a local coordinate
 system $z_i$ fixed around each $p_i$. Then:
 
 \begin{defn}
-A chiral correlation system for $V^k(\fg)$ on $C$ is
-a system of ``functions''
+A chiral correlation system for $V^k(\fg)$ on $C$ (where $C$ now includes the marked points $p_i$, local coordinates
+$z_i$ and modules $\vrep_i$) is a system of ``functions''
 \begin{equation}
   \IP{ \prod_{r=1}^k J^{X_r}(q_r) \prod_{i=1}^n \cdot(p_i) } :  \left(  \bigotimes_{i=1}^n  \vrep_i \right) \to \left(  \otimes_{i=1}^k T^*_{q_i} C \right)
 \end{equation}
 obeying all the conditions in \autoref{defn:chiral-correlation-affine-no-marked}, plus
 a Laurent-expansion condition as $q_i \to p_j$,
 \begin{equation}
-    \IP{ \cdots J^X(q) \chi(p) } = \sum_{n \in \bbZ} z(q)^{-n-1} \IP{\cdots (J^{X,\vrep}_{(n)} \chi)(p) }
+    \IP{ \cdots J^X(q) \chi(p) } = \sum_{n \in \bbZ} z(q)^{-n-1} \IP{\cdots (J^{X,\vrep}_{(n)} \chi)(p) } \, .
 \end{equation}
 \end{defn}
 
-Note that in contrast to the case before, here 
-having chiral correlation
+Note that, in contrast to the case where all $\vrep_i = \vertex$, 
+here having chiral correlation
 system without marked points does \ti{not} 
 automatically construct for us
 a chiral correlation system with marked points.
@@ -1531,97 +1539,145 @@ Now suppose that again that $C = \bbC \bbP^1$ and we insert arbitrary $\vertex$-
 with arbitrary local coordinates $z_i$.
 
 If we have a chiral correlation system, then as before, we get a map
-$\Phi: \prod_{i=1}^n \vrep_i \to \bbC$, and we also have
-the 1-form $\IP{J(z) \prod_{i=1}^n \chi_i(p_i)}$. This 1-form is meromorphic, with singularities only at the $p_i$,
-so the sum of its residues must be zero. That gives the condition
 \begin{equation}
+ \Phi: \bigotimes_{i=1}^n \vrep_i \to \bbC \, . 
+\end{equation}
+
+This map is subject to many conditions. To get the simplest of these conditions we consider
+the 1-form $\eta(z) = \IP{J^X(z) \prod_{i=1}^n \chi_i(p_i)}$. This 1-form is meromorphic, with singularities only at the $p_i$,
+on the compact Riemann surface $C$, so the sum of its residues must be zero. That gives the condition
+\begin{equation} \label{eq:coinvariant-condition-zero-modes}
   \sum_{i=1}^n \Phi(\chi_1, \dots, J^{X,\vrep_i}_{(0)} \chi_i, \dots, \chi_n) = 0 \, .
 \end{equation}
-\fixme{...}
-
-\end{example}
-
-\fixme{discuss how the different functionals are related: action of the group of formal changes of coordinates}
-
-\fixme{this group is actually generated by the action of
-Virasoro element: i.e. $\delta_v = [v_n L_n, \cdot]$
-where $L_n$ is the expansion of some field}
-
-
-To formulate the constraints,
-let $f$ be any global section of $\cO(*p)$, i.e. 
-any meromorphic function on $C$, holomorphic away from 
-the $p_i$. Then $f \eta$ is a meromorphic $1$-form
-on $C$, and thus
+More generally we can consider the 1-form $f(z) \eta(z)$, where $f$ is any meromorphic function on $C$ which is holomorphic
+away from the $p_i$. Then we get a more general condition
 \begin{equation}
   \sum_{i=1}^n \Res_{p_i} (f \eta) = 0 \, .
 \end{equation}
-So what are these residues?
-Laurent expand near each $p_i$ as
+So what are these residues? Laurent expand near each $p_i$ as
 \begin{equation}
-  f = \sum_{n \in \bbZ} f_{i,n}\, z_i^{n}
+  f = \sum_{m \in \bbZ} f_{i,m}\, z_i^{m} \, .
 \end{equation}
-Then, a short computation gives that
+Then the condition is
+\begin{equation} \label{eq:coinvariant-condition-concrete}
+  \sum_{i=1}^n \sum_{m \in \bbZ} f_{i,m} \Phi(\chi_1, \dots, J^{X,\vrep_i}_{(m)} \chi_i, \dots, \chi_n) = 0 \, .
+\end{equation}
+Conversely, given $\Phi$ which obeys \eqref{eq:coinvariant-condition-concrete} for every $f$, we can build a chiral correlation system.
+(This is a nontrivial claim: it says that the Laurent series we build out of $\Phi$ actually converge! \fixme{...})
+Another way to phrase this condition: there is a linear subspace $S \subset W = \otimes_i \vrep_i$ 
+consisting of vectors of the form 
 \begin{equation}
-  \Res_{p_j} f \eta = \sum_{n \in \bbZ} \IP{\left( \prod_{i \neq j} \chi_i(p_i)  \right) f_{j,n} J^X_n \chi_j(p_j)}
+  \sum_{i=1}^n \sum_{m \in \bbZ} \chi_1 \otimes \cdots \otimes (f_{i,m} J^{X,\vrep_i}_{(m)}) \chi_i \otimes \cdots \otimes \chi_n
 \end{equation}
-(note only finitely many terms are nonzero).
+and $\Phi$ must annihilate $S$.
 
-This motivates the following.
-For $X\in\fg$ define a formal infinite sum
+Now how big is $S$?
+First note that for any $i$ and any $m < 0$, the function $f(z) = (z - z_i)^m$
+has $f_{i,m} = 1$ and all other $f_{j,m} = 0$ for $m<0$.
+It follows that $S \oplus W_0 = W$. Next note that any element in $S \cap W_0$ must
+come from a constant function $f$ (since these are the only functions on $\bbC \bbP^1$ which has
+$f_{i,m} = 0$ for all $m < 0$).
+It follows that any $\Phi_0: W_0 \to \bbC$ which obeys the condition
+\eqref{eq:coinvariant-condition-zero-modes} has a unique extension to
+$\Phi: W \to \bbC$ obeying \eqref{eq:coinvariant-condition-concrete}.
+Said otherwise, the space of chiral correlation systems on $C$ is
 \begin{equation}
-  X(f)_i = \sum_{n \in \bbZ} f_{i,n}\, J^{X}_{n} ,
-\end{equation}
-and let $X(f) \in \End(\bigotimes_i \vrep_i)$ be\footnote{The operator $X(f)_i$ depends on the local coordinate $z_i$ we chose; different choices differ by conjugation by an operator in
-$\End(\vrep_i)$, 
-built by exponentiating a Virasoro action. Thus in the end
-the spaces $\Coinv(C,\vertex)$ for different choices of local 
-coordinate are canonically isomorphic. \fixme{watch out for choice of log in defining $\lambda^{L_0}$}}\footnote{For any vector $v \in \vrep_i$ we always have $J^X_n v = 0$ for large enough $n$, so $X(f)_i v$ is well defined.}
-\begin{equation}
-  X(f) = \sum_{i=1}^n \, 
-  \bid\otimes\cdots\otimes X(f)_i \otimes\cdots\otimes \bid \, .
+  \Hom_\fg(\bigotimes_{i=1}^n M_i, \triv) \, .
 \end{equation}
 
-\begin{defn}[Kac-Moody vertex algebra coinvariants on a Riemann surface]
-The space of coinvariants is
-\begin{equation}
-  \Coinv(C, \vertex)
-  = \Bigl(\bigotimes_{i=1}^n \vrep_i\Bigr)\Big/\Big\langle
-  X(f)\,v \ \Big|\ X\in\fg,\ f\in H^0(\cO(*p)),\
-  v\in\bigotimes_i \vrep_i
-  \Big\rangle
-\end{equation}
-\end{defn}
+\end{example}
 
-\begin{defn}[Conformal block for Kac-Moody vertex algebra]
-\begin{equation}
-  \Conf(C, \vertex) = \Coinv(C, \vertex)^* \, .
-\end{equation}
-In other words, a conformal block is a map
-$\bigotimes_i \vrep_i \to \bbC$ which annihilates all
-elements of the form $X(f) v$.
-\end{defn}
 
-What we just explained is:
 
-\begin{prop}[Chiral correlation systems give conformal blocks]
-Given a chiral correlation system for $\vertex = V^k(\fg)$,
-the map
-\begin{equation}
-  \bigotimes_i \vrep_i \to \bbC \, .
+\subsection{Changes of coordinate, by hand}
+
+Given a chiral correlation system and \ti{any} choice of marked points with local coordinate systems,
+we found a corresponding functional $\Phi: \otimes_i \vertex \to \bbC$. Now we can ask: what is the relation
+between these functionals for different choices of marked points and coordinates?
+We already know the answer, in a sense: we built into our definition of chiral correlation systems
+that the $J^X$ are global 1-forms; and all the other elements of $\vertex$
+are built out of $J^X$; so their transformation laws are all in principle determined. 
+But let us try to spell this out a bit more.
+
+Let $\cG$ denote the group of changes of coordinates on the formal disc.
+The elements of $\cG$ are formal power series $a_1 z + a_2 z^2 + \cdots$ with $a_1 \neq 0$,
+which multiply by formal composition.
+Then there is an action of $\cG$ on $\vertex$, and (we will see) 
+the different functionals $\Phi$ differ by precomposition with this action.
+
+To describe this action it is enough to give its infinitesimal version, i.e.
+we consider the Lie algebra $\fG$ of vector fields on the formal disc which
+vanish at the origin.
+If $\ell_n$ denotes the vector field $z^{n+1} \partial_z$ then we have for all $n, m \ge 0$
+the \ti{Witt algebra}
+\begin{equation} \label{eq:witt-algebra}
+  [\ell_n, \ell_m] = (m-n) \ell_{n+m} \, .
 \end{equation}
-given by
+To figure out what action we should write, take
 \begin{equation}
-  \bigotimes_i \chi_i(p_i) \mapsto  \IP{\prod_i \chi_i(p_i)}
+  J^X_{(m)} = \oint z^m J^X(z)  
 \end{equation}
-is a conformal block.
+and then consider the effect of $z^{n+1} \partial_z$: it acts only on the explicit factor $z^m$,
+giving
+\begin{equation}
+  [\ell_n, J^X_{(m)}] = \oint z^{n+1} \partial_z z^m J^X(z) = m J^X_{(m+n)} \, . 
+\end{equation}
+Combining this with $\ell_n \vac = 0$ determines an action of $\fG$ on $\vertex$.
+It follows directly from our construction that 
+the correlation functions are compatible with this action.
+\fixme{write a proposition here}
+
+% This action is by infinitesimal automorphisms of $\vertex$, in the sense that
+% \begin{equation}
+%   [\ell_n, Y(a,z)] = Y(\ell_n a, z)
+% \end{equation}
+
+
+\subsection{Changes of coordinate, by Virasoro}
+
+Now we specialize very slightly to the case $k \neq - h^\vee$.
+In this case there is another point of view on the action of changes of coordinate.
+The idea is to 
+find a copy of $\fG$ inside $\vertex$, and then use the general fact that 
+$\vertex$ acts on itself. For this consider $\omega \in \vertex$ defined by
+\begin{equation}
+  \omega = \frac{1}{2(k + h^\vee)} \sum_i J^{X^i}_{(-1)} J^{X_i}_{(-1)} \vac
+\end{equation}
+where $X^i$, $X_i$ are dual bases of $\fg$ with respect to $\kappa$,
+and we recall the dual Coxeter number $h^\vee$ from \fixme{...}
+The key fact about $\omega$ is:
+\begin{prop} The $\lambda$-bracket of $\omega$ with itself and with $J^X$ are
+\begin{equation}
+[\omega_\lambda \omega] = \frac{c}{12} \lambda^3 \bid + (2 \lambda + \partial) \omega  , \qquad [\omega_\lambda J^X] = (\partial + \lambda) J^X \, .
+\end{equation}
+with
+\begin{equation}
+  c = \frac{k \dim \fg}{k + h^\vee}
+\end{equation}
 \end{prop}
+This implies that if we write
+\begin{equation}
+  Y(\omega,z) = \sum L_n z^{-n-2}
+\end{equation}
+(note the shifted index: $L_n = \omega_{(n+1)}$)
+then we have
+\begin{equation}
+  [L_n, L_m] = (m-n) L_{m+n} + \frac{c}{12}\,(m+1)(m)(m-1)\,\delta_{m+n,0} \bid \, ,
+\end{equation}
+which is the Virasoro Lie algebra. Note that if we just look at the modes with $n \ge 0$
+they give \eqref{eq:witt-algebra}.
+Thus this is a second way of getting an action of the Witt algebra on $\vertex$.
+Fortunately it actually coincides with the first way.
 
-The converse is also true \fixme{...}
+% \fixme{discuss how the different functionals are related: action of the group of formal changes of coordinates}
+
+% \fixme{this group is actually generated by the action of
+% Virasoro element: i.e. $\delta_v = [v_n L_n, \cdot]$
+% where $L_n$ is the expansion of some field}
 
 
 
-\subsection{Changes of coordinate}
+
 
 % There were some \ti{ad hoc} features in our definition 
 % of chiral correlation functions for affine vertex algebras.
@@ -1640,32 +1696,32 @@ The converse is also true \fixme{...}
 
 Here we discuss some things as a teaser --- we haven't yet given all the necessary definitions.
 
-\subsection{Invariant spaces}
+% \subsection{Invariant spaces}
 
-Suppose $\vertex = V^k(\fg)$, for any $k \in \bbC$.
-Then for each finite-dimensional representation $R$ of $\fg$,
-there is a corresponding infinite-dimensional representation $M(R)$ of $V^k(\fg)$.
+% Suppose $\vertex = V^k(\fg)$, for any $k \in \bbC$.
+% Then for each finite-dimensional representation $R$ of $\fg$,
+% there is a corresponding infinite-dimensional representation $M(R)$ of $V^k(\fg)$.
 
-Now take $C = \bbC\bbP^1$, with marked points $z_1, \dots, z_n$, carrying representations
-$M(R_1), \dots, M(R_n)$. 
-Then one has\footnote{The isomorphism we get here depends on $z_1 ,\dots, z_n$;
-we'll see this from another point of view momentarily. It also depends on $k$.} \footnote{Proof idea: we can find a function $f$ realizing any polar parts; use their $X(f)$ to kill all the 
-descendants, leaving
-only the $R_\lambda$; what remains is the action of $X(1)$
-on $\bigotimes_i R_i$.}
+% Now take $C = \bbC\bbP^1$, with marked points $z_1, \dots, z_n$, carrying representations
+% $M(R_1), \dots, M(R_n)$. 
+% Then one has\footnote{The isomorphism we get here depends on $z_1 ,\dots, z_n$;
+% we'll see this from another point of view momentarily. It also depends on $k$.} \footnote{Proof idea: we can find a function $f$ realizing any polar parts; use their $X(f)$ to kill all the 
+% descendants, leaving
+% only the $R_\lambda$; what remains is the action of $X(1)$
+% on $\bigotimes_i R_i$.}
 
-\begin{prop}[Conformal blocks for \tops{$V^k(\fg)$}{Vk(g)} give tensor product invariants]
-\begin{equation}
-\Conf(C, \vertex) = \Hom(\bigotimes_i R_i, \triv).
-\end{equation}
-\end{prop}
+% \begin{prop}[Conformal blocks for \tops{$V^k(\fg)$}{Vk(g)} give tensor product invariants]
+% \begin{equation}
+% \Conf(C, \vertex) = \Hom(\bigotimes_i R_i, \triv).
+% \end{equation}
+% \end{prop}
 
-With 3 punctures this is equivalent to the tensor product multiplicity spaces, i.e.
-\begin{equation}
-\Conf(C, \vertex) = \Hom(R_1 \otimes R_2, R_3^*).
-\end{equation}
-But $\Conf(C,\vertex)$ has lots of extra structures, so we get some new
-structure in representation theory this way.
+% With 3 punctures this is equivalent to the tensor product multiplicity spaces, i.e.
+% \begin{equation}
+% \Conf(C, \vertex) = \Hom(R_1 \otimes R_2, R_3^*).
+% \end{equation}
+% But $\Conf(C,\vertex)$ has lots of extra structures, so we get some new
+% structure in representation theory this way.
 
 
 \subsection{Connections}
@@ -2549,4 +2605,68 @@ is a conformal block.
 \end{prop}
 
 The converse is also true \fixme{...}
+
+
+
+
+
+
+
+
+
+
+\subsection{Additional material}
+
+This motivates the following.
+For $X\in\fg$ define a formal infinite sum
+\begin{equation}
+  X(f)_i = \sum_{n \in \bbZ} f_{i,n}\, J^{X}_{n} ,
+\end{equation}
+and let $X(f) \in \End(\bigotimes_i \vrep_i)$ be\footnote{The operator $X(f)_i$ depends on the local coordinate $z_i$ we chose; different choices differ by conjugation by an operator in
+$\End(\vrep_i)$, 
+built by exponentiating a Virasoro action. Thus in the end
+the spaces $\Coinv(C,\vertex)$ for different choices of local 
+coordinate are canonically isomorphic. \fixme{watch out for choice of log in defining $\lambda^{L_0}$}}\footnote{For any vector $v \in \vrep_i$ we always have $J^X_n v = 0$ for large enough $n$, so $X(f)_i v$ is well defined.}
+\begin{equation}
+  X(f) = \sum_{i=1}^n \, 
+  \bid\otimes\cdots\otimes X(f)_i \otimes\cdots\otimes \bid \, .
+\end{equation}
+
+\begin{defn}[Kac-Moody vertex algebra coinvariants on a Riemann surface]
+The space of coinvariants is
+\begin{equation}
+  \Coinv(C, \vertex)
+  = \Bigl(\bigotimes_{i=1}^n \vrep_i\Bigr)\Big/\Big\langle
+  X(f)\,v \ \Big|\ X\in\fg,\ f\in H^0(\cO(*p)),\
+  v\in\bigotimes_i \vrep_i
+  \Big\rangle
+\end{equation}
+\end{defn}
+
+\begin{defn}[Conformal block for Kac-Moody vertex algebra]
+\begin{equation}
+  \Conf(C, \vertex) = \Coinv(C, \vertex)^* \, .
+\end{equation}
+In other words, a conformal block is a map
+$\bigotimes_i \vrep_i \to \bbC$ which annihilates all
+elements of the form $X(f) v$.
+\end{defn}
+
+What we just explained is:
+
+\begin{prop}[Chiral correlation systems give conformal blocks]
+Given a chiral correlation system for $\vertex = V^k(\fg)$,
+the map
+\begin{equation}
+  \bigotimes_i \vrep_i \to \bbC \, .
+\end{equation}
+given by
+\begin{equation}
+  \bigotimes_i \chi_i(p_i) \mapsto  \IP{\prod_i \chi_i(p_i)}
+\end{equation}
+is a conformal block.
+\end{prop}
+
+The converse is also true \fixme{...}
+
 
