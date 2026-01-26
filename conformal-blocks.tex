@@ -981,32 +981,39 @@ Using this we can prove
 since the RHS indeed has both of the necessary properties.
 
 Now what about something like $Y(J_{(-1)} J_{(-1)} \vac, z)$?
-Here we will be informal: a full proof seems to require some
-machinery. But the main idea is like this.
 $Y(J_{(-1)} J_{(-1)} \vac, z)$ should 
 be a local field which creates the state
 $J_{(-1)} J_{(-1)} \vac$ at $z$, i.e. it should be
 $\frac{1}{2 \pi \I} \oint_{z} (w-z)^{-1} J(w) J(z) \de w$.
+This is an instance of a regularized product between two fields,
+sometimes called \ti{normal ordered product}:
+\begin{defn}[Normally ordered product]
+For $a, b \in \vertex$ we define
+\begin{equation}
+  \nop{a b} = a_{(-1)} b \in \vertex \, .
+\end{equation}
+\end{defn}
+
+We can also write it in another way which avoids the contour integral:
+\begin{multline}
+ \nop{J J}(z) = \frac{1}{2 \pi \I} \oint_w (z-w)^{-1} J(z) J(w) \, \de z \\ = \frac{1}{2 \pi \I} \oint_w (z-w)^{-1} \left( J(z) J(w) - \frac{\bid}{(z-w)^2} \right) \, \de z = \lim_{w \to z} \left( J(z) J(w) - \frac{\bid}{(z-w)^2} \right) \, .
+\end{multline}
+So $\nop{JJ}(z)$ can be obtained by starting
+with $J(w) J(z)$, deleting ``by hand'' the singular term $\frac{\bid}{(z-w)^2}$, and taking $w \to z$.
+
 We want the mode expansion of this object around $z = 0$.
-For this we rewrite $\oint_z$
+For this we rewrite $\oint_w$
 as a difference of two circles around $0$, one with $\abs{w} > \abs{z}$ and one with $\abs{w} < \abs{z}$. After this
 we can expand in modes, with (after some
 calculation) the result:
 \begin{exercise}
 Show that this computation gives
-$(J_{(-1)} J_{(-1)} \vac)_{(n)} = \sum_{k+\ell = n-1} \nop{J_{(k)} J_{(\ell)}}$, where we defined the \ti{normal ordered product}
+$(J_{(-1)} J_{(-1)} \vac)_{(n)} = \sum_{k+\ell = n-1} \nop{J_{(k)} J_{(\ell)}}$, where we defined the normal ordered product of modes by
 \begin{equation}
   \nop{a_{(k)} b_{(\ell)}} = \begin{cases} a_{(k)} b_{(\ell)} & \text{ if } k < 0, \\ b_{(\ell)} a_{(k)} & \text{ if } k \ge 0 \end{cases} 
 \end{equation}
 
 \end{exercise}
-
-Here is another useful way to think about this object:
-\begin{equation}
-  \frac{1}{2 \pi \I} \oint_w (z-w)^{-1} J(z) J(w) \, \de z = \frac{1}{2 \pi \I} \oint_w (z-w)^{-1} \left( J(z) J(w) - \frac{1}{(z-w)^2} \right) \, \de z = \lim_{z \to w} \left( J(z) J(w) - \frac{1}{(z-w)^2} \right) \, .
-\end{equation}
-So $(J_{(-1)} J_{(-1)} \vac)(w)$ can be obtained by starting
-with $J(z) J(w)$, deleting ``by hand'' the singular term $\frac{1}{(z-w)^2}$, and taking $z \to w$.
 
 
 \subsection{Riemann surfaces}
@@ -1473,9 +1480,9 @@ respectively.
 
 \end{defn}
 
-\begin{example}
-Here is an important class of representations of 
-$\vertex = V^k(\fg)$. Fix a $\fg$-module $M$. Then let
+\begin{example}[Parabolic Verma modules]
+Here is an important class of modules for
+$\vertex = V^k(\fg)$. Fix a $\fg$-module $M$. Let
 $\Lie(\vertex)_{\ge 0}$ act on $M$ as follows:
 the zero modes act through the $\fg$-action on $M$,
 and the positive modes act as zero.
@@ -1483,6 +1490,17 @@ Then let
 $\vrep = \Ind^{\Lie(\vertex)}_{\Lie(\vertex)_{\ge 0}} M$.
 As a vector space $\vrep$ is freely generated 
 from $M$ by action of the $J^X_{(n)}$ with $n < 0$.
+
+The case $M = \triv$ gives $\vrep = \vertex$ (called the \ti{vacuum module}.)
+\end{example}
+
+\begin{example}[Irregular modules]
+There is another interesting class.
+Fix an element $u \in \fg^*$.
+Then let $\Lie(\vertex)_{\ge 1}$ act on $\bbC$
+as follows: the modes $J^X_{(1)}$ act by $u(X)$,
+all higher modes $J^X_{(n)}$ act by $0$.
+Then let $\vrep = \Ind^{\Lie(\vertex)}_{\Lie(\vertex)_{\ge 1}} \bbC$.
 \end{example}
 
 Now suppose we have
@@ -1521,7 +1539,7 @@ $\Phi(J^X_{(n)} \chi, \psi) = - \Phi(\chi, J^X_{(-n)} \psi)$.
 
 Such a pairing might or might not exist, depending on
 what $\vrep$ and $\vrep'$ are.
-For instance, suppose $\vrep = \vrep(M)$ and $\vrep' = \vrep(M')$.
+For instance, suppose $\vrep = \Ind^{\Lie(\vertex)}_{\Lie(\vertex)_{\ge 0}} M$ and $\vrep' = \Ind^{\Lie(\vertex)}_{\Lie(\vertex)_{\ge 0}} M'$.
 Then we can restrict attention to the zero-grade parts 
 $M$, $M'$, which are closed under the action of the zero-modes $J^X_{(0)}$.
 The invariance condition 
@@ -1573,7 +1591,8 @@ consisting of vectors of the form
 \end{equation}
 and $\Phi$ must annihilate $S$.
 
-Now how big is $S$?
+Now how big is $S$? Let's consider the case 
+where $\vrep_i = \Ind^{\Lie(\vertex)}_{\Lie(\vertex)_{\ge 0}} M_i$.
 First note that for any $i$ and any $m < 0$, the function $f(z) = (z - z_i)^m$
 has $f_{i,m} = 1$ and all other $f_{j,m} = 0$ for $m<0$.
 It follows that $S \oplus W_0 = W$. Next note that any element in $S \cap W_0$ must
@@ -1626,8 +1645,33 @@ giving
 \end{equation}
 Combining this with $\ell_n \vac = 0$ determines an action of $\fG$ on $\vertex$.
 It follows directly from our construction that 
-the correlation functions are compatible with this action.
-\fixme{write a proposition here}
+the correlation functions are compatible with this action:
+\begin{prop}
+Fix a chiral correlation system on a marked curve $C$.
+For any choice of local coordinates $z_i$ at the marked points $p_i$, let
+\[
+\Phi_{(z_i)} : \bigotimes_{i=1}^n \vertex \to \bbC
+\]
+be the functional obtained from the correlation system by expanding each insertion in the chosen
+local coordinate.
+Let $g_i \in \cG$ be formal changes of coordinate and write $\rho(g_i)\in \End(\vertex)$ for the induced
+action of $\cG$ on $\vertex$ constructed above. If we replace the local coordinate $z_i$ by
+\[
+\tilde z_i = g_i(z_i)\qquad (i=1,\dots,n),
+\]
+then the corresponding functional satisfies
+\[
+\Phi_{(\tilde z_i)}
+= \Phi_{(z_i)} \circ \bigl(\rho(g_1)\otimes\cdots\otimes \rho(g_n)\bigr),
+\]
+i.e.
+\[
+\Phi_{(\tilde z_i)}(v_1\otimes\cdots\otimes v_n)
+=
+\Phi_{(z_i)}\bigl(\rho(g_1)v_1\otimes\cdots\otimes \rho(g_n)v_n\bigr).
+\]
+Equivalently, the assignment $(z_i)\mapsto \Phi_{(z_i)}$ is $\cG^n$-equivariant.
+\end{prop}
 
 % This action is by infinitesimal automorphisms of $\vertex$, in the sense that
 % \begin{equation}
@@ -1657,6 +1701,16 @@ with
   c = \frac{k \dim \fg}{k + h^\vee}
 \end{equation}
 \end{prop}
+One can prove this by repeated use of the ``noncommutative Wick formula'' which reads
+\begin{equation}
+  [a\,_\lambda\,\nop{bc}] = \nop{(a\,_\lambda\,b) c} + \nop{b (a\,_\lambda\,c)} + \int_0^\lambda [[a_\mu b]_{\lambda - \mu} c]
+\end{equation}
+where the normal ordered product in $\vertex$ is
+\begin{equation}
+  \nop{a b} = a_{(-1)} b \, .
+\end{equation}
+
+
 This implies that if we write
 \begin{equation}
   Y(\omega,z) = \sum L_n z^{-n-2}
