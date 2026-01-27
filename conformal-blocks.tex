@@ -1788,27 +1788,53 @@ with
   c = \frac{k \dim \fg}{k + h^\vee} \, .
 \end{equation}
 \end{prop}
-One can prove this by repeated use of the ``noncommutative Wick formula''
+In principle one could prove this directly by hand, carefully manipulating the singular parts of the OPEs to figure
+out what singularity we get when we bring $\omega(z)$ close to $\omega(w)$.
+But it seems a bit hairy to do so. It might be better to introduce the ``noncommutative Wick formula,''
+\begin{lem}
 \begin{equation}
 \lb{a}{\lambda}{\nop{bc}} = \nop{\lb{a}{\lambda}{b} c} + \nop{b \lb{a}{\lambda}{c}} + \int_0^\lambda \lb{\lb{a}{\mu}{b}}{\lambda - \mu}{c} \, \de \mu \, .
 \end{equation}
+\end{lem}
+This lemma is an efficient way of keeping track of the various singular terms which appear when we bring
+composite objects together.
+To get an idea of the proof of the lemma we can use successive contour-integration:
+indeed the left side could be written as \fixme{make figure with contours}
+\begin{equation}
+  \oint \oint \de z \, \de w \, a(z) b(w) c(0) \frac{\e^{\lambda z}}{w} 
+\end{equation}
+while the first two terms on the right side are of the shape
+\begin{equation}
+  \oint \oint \de z \, \de w \, a(z) b(w) c(0) \frac{\e^{\lambda (z-w)}}{w}, \qquad  \oint \oint \de z \, \de w \, a(z) b(w) c(0) \frac{\e^{\lambda z}}{w}
+\end{equation}
+By contour-deformation the left side turns into the sum of those two, \ti{up to} an error term
+\begin{equation}
+  \oint \oint \de z \, \de w \, a(z) b(w) c(0) \frac{\e^{\lambda z} - \e^{\lambda (z-w)}}{w}
+\end{equation}
+Note the function here is regular at $z=w$, and we can expand it:
+\begin{equation}
+  \frac{\e^{\lambda z} - \e^{\lambda (z-w)}}{w} = \int_0^\lambda \e^{\mu(z-w)} \e^{(\lambda-\mu) z} \, \de \mu
+\end{equation}
+and now contour-integrating this gives the result we want. \fixme{check}
 
-But let us do part of it here ``by hand''.
-For notational convenience write $X$ for $J^X$,
-and pick a $\kappa$-orthogonal basis $(X^i)$ for $\fg$.
-Let $\varphi(z) = \sum_i \nop{X^i X^i}(z)$
-and WLOG take $Y = X^j$.
-Then look at $\varphi(z) Y(w) = \sum_i \nop{X^i(z) X^i(z)} X^j(w)$ as $z \to w$.
-When $X^i(z)$ approaches $X^j(w)$ we get a leading singularity
-$k \delta^{ij} (z-w)^{-2} + [X^i, X^j](w) (z-w)^{-1}$.
-All this is multiplied by $X^i(z)$ to give
-\begin{equation}
- k X^j(z) (z-w)^{-2} + [X^i, X^j](w) X^i(z) (z-w)^{-1} 
-\end{equation}
-and then expanding around $z=w$ it becomes
-\begin{equation}
- k X^j(w) (z-w)^{-2} +  k \partial X^j(w) (z-w)^{-1} + [X^i, [X^i, X^j]](w) (z-w)^{-2} +   \fixme{...}
-\end{equation}
+
+
+% But let us do part of it here ``by hand''.
+% For notational convenience write $X$ for $J^X$,
+% and pick a $\kappa$-orthogonal basis $(X^i)$ for $\fg$.
+% Let $\varphi(z) = \sum_i \nop{X^i X^i}(z)$
+% and WLOG take $Y = X^j$.
+% Then look at $\varphi(z) Y(w) = \sum_i \nop{X^i(z) X^i(z)} X^j(w)$ as $z \to w$.
+% When $X^i(z)$ approaches $X^j(w)$ we get a leading singularity
+% $k \delta^{ij} (z-w)^{-2} + [X^i, X^j](w) (z-w)^{-1}$.
+% All this is multiplied by $X^i(z)$ to give
+% \begin{equation}
+%  k X^j(z) (z-w)^{-2} + [X^i, X^j](w) X^i(z) (z-w)^{-1} 
+% \end{equation}
+% and then expanding around $z=w$ it becomes
+% \begin{equation}
+%  k X^j(w) (z-w)^{-2} +  k \partial X^j(w) (z-w)^{-1} + [X^i, [X^i, X^j]](w) (z-w)^{-2} +   \fixme{...}
+% \end{equation}
 
 
 % where the normal ordered product in $\vertex$ is
