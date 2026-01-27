@@ -260,7 +260,19 @@
 
 \newcommand{\regular}{{\mathrm{reg}}}
 
-\newcommand{\nop}[1]{{:}\, #1 {:} }
+\makeatletter
+\DeclareRobustCommand{\nop}[1]{\mathpalette\nop@{#1}}
+\newcommand{\nop@}[2]{%
+  \mathinner{%
+    \mkern0.4mu:\mkern0.4mu #2 \mkern0.4mu:\mkern0.4mu%
+  }%
+}
+\makeatletter
+
+% lambda-bracket
+\newcommand{\lb}[3]{\left[#1_{\mkern2mu #2 \mkern2mu} #3\right]}
+
+% \newcommand{\nop}[1]{{:}\, #1 {:} }
 
 \newcommand{\half}{\ensuremath{\frac{1}{2}}}
 \newcommand{\qtr}{\ensuremath{\frac{1}{4}}}
@@ -793,7 +805,7 @@ i.e. give products $a_{(n)} b$ for $n \ge 0$: this is the analogue of
 giving a Lie bracket. We organize them into
 the \ti{$\lambda$-bracket} defined by
 \begin{equation}
-  [a_\lambda b](w) = \Res_{z=w} \e^{\lambda(z-w)} a(z) b(w) = \sum_{j \ge 0} \frac{\lambda^j}{j!} a_{(j)} b \, .
+  \lb{a}{\lambda}{b}(w) = \Res_{z=w} \e^{\lambda(z-w)} a(z) b(w) = \sum_{j \ge 0} \frac{\lambda^j}{j!} a_{(j)} b \, .
 \end{equation}
 This amounts to the following structure:
 
@@ -801,16 +813,16 @@ This amounts to the following structure:
 A \ti{Lie conformal algebra} is a $\bbC[\partial]$-module $R$
 with a $\lambda$-bracket
 \begin{equation}
-  [\cdot_\lambda\cdot]: R \otimes R \to R[\lambda] \, ,
+  \lb{\cdot}{\lambda}{\cdot}: R \otimes R \to R[\lambda] \, ,
 \end{equation}
 expanded as
 \begin{equation}
-  [a_\lambda b] = \sum_{j \ge 0} \frac{\lambda^j}{j!} a_{(j)} b \, ,
+  \lb{a}{\lambda}{b} = \sum_{j \ge 0} \frac{\lambda^j}{j!} a_{(j)} b \, ,
 \end{equation}
 such that
 \begin{gather}
-  [\partial a_\lambda b] = -\lambda[a_\lambda b], \quad [a_\lambda \partial b] = (\lambda + \partial)[a_\lambda b], \quad [a_\lambda b] = -[b_{-\lambda-\partial} a] \, , \\
-  [a_\lambda[b_\mu c]] - [b_\mu[a_\lambda c]] = [[a_\lambda b]_{\lambda+\mu} c] \, .
+  \lb{\partial a}{\lambda}{b} = -\lambda \lb{a}{\lambda}{b}, \quad \lb{a}{\lambda}{\partial b} = (\lambda + \partial)\lb{a}{\lambda}{b}, \quad \lb{a}{\lambda}{b} = -\lb{b}{-\lambda-\partial}{a} \, , \\
+  \lb{a}{\lambda}{\lb{b}{\mu}{c}} - \lb{b}{\mu}{\lb{a}{\lambda}{c}} = \lb{\lb{a}{\lambda}{b}}{\lambda+\mu}{c} \, .
 \end{gather}
 \end{defn}
 
@@ -843,7 +855,7 @@ The $J$-$J$ operator product is
 \begin{equation}
  J(z) J(w) = \frac{1}{(z-w)^2} + \regular
 \end{equation}
-i.e. $[J_\lambda J] = \lambda \bid$, while $\bid$ is central.
+i.e. $\lb{J}{\lambda}{J} = \lambda \bid$, while $\bid$ is central.
 % i.e. the only nonzero product is $J_{(1)} J = \bid$.
 The mode algebra is spanned by $J_{(n)}$ $(n \in \bbZ)$ and $\bid = \bid_{(-1)}$, with
 \begin{equation}
@@ -867,7 +879,7 @@ with operator products of the form
 \begin{equation} \label{eq:kac-moody-ope}
   J^X(z) J^Y(w) = \frac{k \kappa(X,Y)}{(z-w)^2} + \frac{J^{[X,Y]}(w)}{z-w} + \regular
 \end{equation}
-i.e. $[J^X\,\!_\lambda J^Y] = \lambda k \kappa(X,Y) \bid + J^{[X,Y]}$.
+i.e. $\lb{J^X}{\lambda}{J^Y} = \lambda k \kappa(X,Y) \bid + J^{[X,Y]}$.
 The corresponding mode algebra is
 \begin{equation}
 [J^X_{(m)},J^Y_{(n)}] = J^{[X,Y]}_{(m+n)} + m k \kappa(X,Y) \delta_{m+n,0} \bid \, .
@@ -884,7 +896,7 @@ $\kappa(X,X) = 1$ and $k=1$.
 \begin{equation} \label{eq:virasoro-ope}
   T(z) T(w) = \frac{\frac{c}{2}}{(z-w)^4} + \frac{2 T(w)}{(z-w)^2} + \frac{\partial T(w)}{z-w} + \regular
 \end{equation}
-i.e. $[T_\lambda T] = \lambda^3 \frac{c}{12} \bid + (2 \lambda + \partial) T$.
+i.e. $\lb{T}{\lambda}{T} = \lambda^3 \frac{c}{12} \bid + (2 \lambda + \partial) T$.
 The corresponding mode Lie algebra is
 \begin{equation}
 [T_{(m)},T_{(n)}]
@@ -1629,10 +1641,10 @@ the different functionals $\Phi$ differ by precomposition with this action.
 To describe this action it is enough to give its infinitesimal version, i.e.
 we consider the Lie algebra $\fG$ of vector fields on the formal disc which
 vanish at the origin.
-If $\ell_n$ denotes the vector field $z^{n+1} \partial_z$ then we have for all $n, m \ge 0$
+If $\ell_n$ denotes the vector field $- z^{n+1} \partial_z$ then we have for all $n, m \ge 0$
 the \ti{Witt algebra}
 \begin{equation} \label{eq:witt-algebra}
-  [\ell_n, \ell_m] = (m-n) \ell_{n+m} \, .
+  [\ell_n, \ell_m] = (n-m) \ell_{n+m} \, .
 \end{equation}
 To figure out what action we should write, take
 \begin{equation}
@@ -1640,8 +1652,8 @@ To figure out what action we should write, take
 \end{equation}
 and then consider the effect of $z^{n+1} \partial_z$: it acts only on the explicit factor $z^m$,
 giving
-\begin{equation}
-  [\ell_n, J^X_{(m)}] = \oint z^{n+1} \partial_z z^m J^X(z) = m J^X_{(m+n)} \, . 
+\begin{equation} \label{eq:witt-action-on-affine}
+  [\ell_n, J^X_{(m)}] = -\oint z^{n+1} \partial_z z^m J^X(z) = -m J^X_{(m+n)} \, . 
 \end{equation}
 Combining this with $\ell_n \vac = 0$ determines an action of $\fG$ on $\vertex$.
 It follows directly from our construction that 
@@ -1690,28 +1702,28 @@ $\vertex$ acts on itself. For this consider $\omega \in \vertex$ defined by
   \omega = \frac{1}{2(k + h^\vee)} \sum_i J^{X^i}_{(-1)} J^{X_i}_{(-1)} \vac
 \end{equation}
 where $X^i$, $X_i$ are dual bases of $\fg$ with respect to $\kappa$,
-and we recall the dual Coxeter number $h^\vee$ from \fixme{...}
+and $h^\vee$ is the dual Coxeter number of $\fg$ (see \autoref{sec:lie-conventions}).
 The key fact about $\omega$ is:
 \begin{prop} The $\lambda$-bracket of $\omega$ with itself and with $J^X$ are
-\begin{equation}
-[\omega_\lambda \omega] = \frac{c}{12} \lambda^3 \bid + (2 \lambda + \partial) \omega  , \qquad [\omega_\lambda J^X] = (\partial + \lambda) J^X \, .
+\begin{equation} \label{eq:omega-lambda-bracket}
+\lb{\omega}{\lambda}{\omega} = \frac{c}{12} \lambda^3 \bid + (2 \lambda + \partial) \omega  , \qquad \lb{\omega}{\lambda}{J^X} = (\partial + \lambda) J^X \, .
 \end{equation}
 with
 \begin{equation}
-  c = \frac{k \dim \fg}{k + h^\vee}
+  c = \frac{k \dim \fg}{k + h^\vee} \, .
 \end{equation}
 \end{prop}
-One can prove this by repeated use of the ``noncommutative Wick formula'' which reads
+One can prove this by repeated use of the ``noncommutative Wick formula''
 \begin{equation}
-  [a\,_\lambda\,\nop{bc}] = \nop{(a\,_\lambda\,b) c} + \nop{b (a\,_\lambda\,c)} + \int_0^\lambda [[a_\mu b]_{\lambda - \mu} c]
+\lb{a}{\lambda}{\nop{bc}} = \nop{\lb{a}{\lambda}{b} c} + \nop{b \lb{a}{\lambda}{c}} + \int_0^\lambda \lb{\lb{a}{\mu}{b}}{\lambda - \mu}{c} \, \de \mu \, .
 \end{equation}
-where the normal ordered product in $\vertex$ is
-\begin{equation}
-  \nop{a b} = a_{(-1)} b \, .
-\end{equation}
+% where the normal ordered product in $\vertex$ is
+% \begin{equation}
+%   \nop{a b} = a_{(-1)} b \, .
+% \end{equation}
 
-
-This implies that if we write
+Note that \eqref{eq:omega-lambda-bracket} is the $\lambda$-bracket of the Virasoro algebra.
+It implies that if we write
 \begin{equation}
   Y(\omega,z) = \sum L_n z^{-n-2}
 \end{equation}
@@ -1720,10 +1732,31 @@ then we have
 \begin{equation}
   [L_n, L_m] = (m-n) L_{m+n} + \frac{c}{12}\,(m+1)(m)(m-1)\,\delta_{m+n,0} \bid \, ,
 \end{equation}
-which is the Virasoro Lie algebra. Note that if we just look at the modes with $n \ge 0$
-they give \eqref{eq:witt-algebra}.
+which is the Virasoro Lie algebra.
+(It also implies that there is a homomorphism of vertex algebras, $\Vir^c \to V^k(\fg)$.)
+\eqref{eq:omega-lambda-bracket} also implies
+\begin{equation} \label{eq:virasoro-affine-bracket}
+  [L_n, J^X_m] = -m J^X_{m+n} \, .
+\end{equation}
+
+\begin{example} If $\fg = \fsl_2$ then $h^\vee = 2$, so $c = \frac{3k}{k+2}$.
+\end{example}
+
+\begin{example} If $\fg = \fgl_1$ then $h^\vee = 0$, so $c = 1$, independent of $k$.
+\end{example}
+
+Now if we consider only the modes $L_n$ with $n \ge 0$, the central charge $c$ does not appear, and
+we just see the Witt algebra \eqref{eq:witt-algebra}.
 Thus this is a second way of getting an action of the Witt algebra on $\vertex$.
-Fortunately it actually coincides with the first way.
+Fortunately it actually coincides with the first way, because the brackets \eqref{eq:virasoro-affine-bracket}
+agree with \eqref{eq:witt-action-on-affine}.
+
+Moreover, once we realize the action of the Witt algebra ``internally'' via the element $\omega \in \vertex$,
+we get an extra bonus: it acts not only on $\vertex$ but on all $\vertex$-modules $\vrep$. Thus we can try
+to use it to make a coordinate-independent version of our definition of chiral correlation systems.
+\fixme{...}
+
+
 
 % \fixme{discuss how the different functionals are related: action of the group of formal changes of coordinates}
 
@@ -2356,7 +2389,7 @@ this says (in correlation functions) that around $z_1 = z_2$ we have
 \appendix
 
 
-\section{Conventions on Lie algebras}
+\section{Conventions on Lie algebras} \label{sec:lie-conventions}
 
 For a simple Lie algebra $\fg$,
 there is a canonical invariant bilinear form
