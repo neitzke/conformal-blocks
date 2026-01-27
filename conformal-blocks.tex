@@ -801,14 +801,17 @@ $U(\fg)$ is typically much bigger than $\fg$.
 To define universal enveloping vertex algebras one does similarly.
 We first fix a finite-dimensional vector space $R$, with the idea that
 each $a \in R$ will give some $a(z)$.
-Then we give the singular part of the expansion $a(z) b(w)$, 
+Then we give the singular part of the expansion $Y(a,z) Y(b,w)$, 
 i.e. give products $a_{(n)} b$ for $n \ge 0$: this is the analogue of
 giving a Lie bracket. We organize them into
 the \ti{$\lambda$-bracket} defined by
 \begin{equation}
-  \lb{a}{\lambda}{b}(w) = \Res_{z=w} \e^{\lambda(z-w)} a(z) b(w) = \sum_{j \ge 0} \frac{\lambda^j}{j!} a_{(j)} b \, .
+  \lb{a}{\lambda}{b}(w) = \sum_{j \ge 0} \frac{\lambda^j}{j!} a_{(j)} b = \Res_{z = w} \e^{\lambda(z-w)} Y(a,z) Y(b,w) \, .
 \end{equation}
-This amounts to the following structure:
+(Here the residue should be understood using \autoref{thm:vertex-algebra-associativity}, 
+since $Y(a,z) Y(b,w)$ is defined in the region $\abs{z} > \abs{w}$.)
+
+Giving this bracket amounts to the following structure:
 
 \begin{defn}[Lie conformal algebra]
 A \ti{Lie conformal algebra} is a $\bbC[\partial]$-module $R$
@@ -1040,14 +1043,15 @@ Using \autoref{thm:vertex-algebra-associativity} the singular part of $Y(a,z) Y(
   \sum_{n \ge 0} (z-w)^{-n-1} Y(a_{(n)} b, w)
 \end{equation}
 Now recall that $[Y(a,z), Y(b,w)]$ is the \ti{difference} between the two ways of expanding that
-sum. The expansion in $\abs{z} > \abs{w}$ involves only negative powers of $z$,
+sum. Moreover, the two expansions are easy to distinguish: the 
+expansion in $\abs{z} > \abs{w}$ involves only negative powers of $z$,
 while the one in $\abs{z} < \abs{w}$ involves only nonnegative powers.
 It follows that $[Y(a,z)_\ge,Y(b,w)]$ is the expansion in the region $\abs{z} > \abs{w}$.
 In other words, subtracting the singular terms amounts to taking
 \begin{equation}
-  Y(\nop{ab}, w) = Y(a,z) Y(b,w) - [Y(a,z)_\ge,Y(b,w)] \vert_{z=w}
+  Y(\nop{ab}, w) = \left( Y(a,z) Y(b,w) - [Y(a,z)_\ge,Y(b,w)] \right) \vert_{z=w}
 \end{equation}
-which gives the desired formula.
+which is the desired formula.
 
 
 % The formula looks a little unsymmetrical, splitting into $<$ and $\ge$: 
@@ -1566,7 +1570,7 @@ $\vertex$-modules $\vrep_i$ and insert them at
 marked points $p_i \in C$, still with a local coordinate
 system $z_i$ fixed around each $p_i$. Then:
 
-\begin{defn}
+\begin{defn}[Chiral correlation system]
 A chiral correlation system for $V^k(\fg)$ on $C$ (where $C$ now includes the marked points $p_i$, local coordinates
 $z_i$ and modules $\vrep_i$) is a system of ``functions''
 \begin{equation}
@@ -1673,12 +1677,28 @@ Said otherwise, the space of chiral correlation systems on $C$ is
 \end{example}
 
 
+Our last discussion motivates the following:
+
+\begin{defn}[Conformal block]
+Suppose $C$ is a Riemann surface with marked points $p_i$, local coordinates $z_i$, and $V^k(\fg)$-modules $\vrep_i$.
+A \ti{conformal block} for $V^k(\fg)$ on $C$ is a linear map $\Phi: \bigotimes_i \vrep_i \to \bbC$ which annihilates
+all vectors of the form
+\begin{equation}
+  \sum_{i=1}^n \sum_{m \in \bbZ} \chi_1 \otimes \cdots \otimes (f_{i,m} J^{X,\vrep_i}_{(m)}) \chi_i \otimes \cdots \otimes \chi_n \, .
+\end{equation}
+\end{defn}
+
+\begin{prop} Fix $C$ with markings as above.
+The space of conformal blocks for $V^k(\fg)$ on $C$ is canonically isomorphic to the space of chiral correlation systems
+for $V^k(\fg)$ on $C$.
+\end{prop}
+
 
 \subsection{Changes of coordinate, by hand}
 
-Given a chiral correlation system and \ti{any} choice of marked points with local coordinate systems,
-we found a corresponding functional $\Phi: \otimes_i \vertex \to \bbC$. Now we can ask: what is the relation
-between these functionals for different choices of marked points and coordinates?
+Given a chiral correlation system for $V^k(\fg)$ and \ti{any} choice of marked points with local coordinate systems,
+we found a corresponding conformal block $\Phi: \otimes_i \vertex \to \bbC$. Now we can ask: what is the relation
+between these blocks for different choices of marked points and coordinates?
 We already know the answer, in a sense: we built into our definition of chiral correlation systems
 that the $J^X$ are global 1-forms; and all the other elements of $\vertex$
 are built out of $J^X$; so their transformation laws are all in principle determined. 
@@ -1695,8 +1715,8 @@ which is compatible with the vertex algebra structure in the sense that
 % and (we will see) 
 % the different functionals $\Phi$ differ by precomposition with this action.
 
-To describe this action it is enough to give its infinitesimal version, i.e.
-we consider the Lie algebra $\fG$ of vector fields on the formal disc which
+We start with the infinitesimal version, i.e.
+consider the Lie algebra $\fG$ of vector fields on the formal disc which
 vanish at the origin.
 If $\ell_n$ denotes the vector field $- z^{n+1} \partial_z$ then we have for all $n, m \ge 0$
 the \ti{Witt algebra}
@@ -1713,21 +1733,20 @@ giving
   [\ell_n, J^X_{(m)}] = -\oint z^{n+1} \partial_z z^m J^X(z) = -m J^X_{(m+n)} \, . 
 \end{equation}
 Combining this with $\ell_n \vac = 0$ determines an action of $\fG$ on $\vertex$.
-It follows directly from our construction that 
+It follows directly from our iterated contour-integral construction that 
 the correlation functions are compatible with this action:
 \begin{prop}
-Fix a chiral correlation system on a marked curve $C$.
-For any choice of local coordinates $z_i$ at the marked points $p_i$, let
+Fix a chiral correlation system on a curve $C$.
+For any choice of local coordinates $z_i$ at marked points $p_i$, let
 \[
 \Phi_{(z_i)} : \bigotimes_{i=1}^n \vertex \to \bbC
 \]
-be the functional obtained from the correlation system by expanding each insertion in the chosen
-local coordinate.
-If we replace the local coordinate $z_i$ by
+be the conformal block obtained from the correlation system.
+If we replace the local coordinates $z_i$ by
 \[
 \tilde z_i = g_i(z_i)\qquad (i=1,\dots,n),
 \]
-then the corresponding functional is given by
+then the corresponding block is given by
 \[
 \Phi_{(\tilde z_i)}
 = \Phi_{(z_i)} \circ \bigl(\rho(g_1)\otimes\cdots\otimes \rho(g_n)\bigr) \, .
@@ -1773,12 +1792,31 @@ One can prove this by repeated use of the ``noncommutative Wick formula''
 \begin{equation}
 \lb{a}{\lambda}{\nop{bc}} = \nop{\lb{a}{\lambda}{b} c} + \nop{b \lb{a}{\lambda}{c}} + \int_0^\lambda \lb{\lb{a}{\mu}{b}}{\lambda - \mu}{c} \, \de \mu \, .
 \end{equation}
+
+But let us do part of it here ``by hand''.
+For notational convenience write $X$ for $J^X$,
+and pick a $\kappa$-orthogonal basis $(X^i)$ for $\fg$.
+Let $\varphi(z) = \sum_i \nop{X^i X^i}(z)$
+and WLOG take $Y = X^j$.
+Then look at $\varphi(z) Y(w) = \sum_i \nop{X^i(z) X^i(z)} X^j(w)$ as $z \to w$.
+When $X^i(z)$ approaches $X^j(w)$ we get a leading singularity
+$k \delta^{ij} (z-w)^{-2} + [X^i, X^j](w) (z-w)^{-1}$.
+All this is multiplied by $X^i(z)$ to give
+\begin{equation}
+ k X^j(z) (z-w)^{-2} + [X^i, X^j](w) X^i(z) (z-w)^{-1} 
+\end{equation}
+and then expanding around $z=w$ it becomes
+\begin{equation}
+ k X^j(w) (z-w)^{-2} +  k \partial X^j(w) (z-w)^{-1} + [X^i, [X^i, X^j]](w) (z-w)^{-2} +   \fixme{...}
+\end{equation}
+
+
 % where the normal ordered product in $\vertex$ is
 % \begin{equation}
 %   \nop{a b} = a_{(-1)} b \, .
 % \end{equation}
 
-Note that \eqref{eq:omega-lambda-bracket} is the $\lambda$-bracket of the generator of the 
+Now, note that \eqref{eq:omega-lambda-bracket} is the $\lambda$-bracket of the generator of the 
 Virasoro algebra. It implies that there is a homomorphism of vertex algebras, $\Vir^c \to V^k(\fg)$.
 Also if we write
 \begin{equation}
@@ -1815,10 +1853,27 @@ Whether we can really do it depends on $\vrep$.
 The best possible situation arises if $\vrep = \oplus_{n \ge n_0} \vrep_n$, graded by the eigenvalue of $L_0$,
 with all eigenvalues integers and bounded below. In that case $\fG_+$ acts locally nilpotently and $\fG_0$
 acts diagonally respecting the relation $\exp(2 \pi \I L_0) = 1$, 
-so both indeed integrate to $\cG$.
+so both indeed integrate to $\rho: \cG \to \End \vrep$.
+The next best situation arises if the eigenvalues are not necessarily integers. Then at least $\fG_+$ integrates
+to $\rho: \cG_+ \to \End \vrep$.
 
-\begin{prop} Suppose $\vrep$ is a $\vertex$-module, for which the induced $\fG$-action integrates to $\cG$.
-In this case, \fixme{...}
+We have:
+\begin{prop} Assume $k \neq h^\vee$. Suppose $\vrep_i$ are $\vertex$-modules, for which the induced $\fG$-action integrates to $\cG$.
+Suppose $C$ is a Riemann surface with marked points $p_i$ and local coordinates $z_i$, and
+\begin{equation}
+  \Phi: \bigotimes_{i=1}^n \vrep_i \to \bbC
+\end{equation}
+is a conformal block.
+If we define
+\[
+\tilde z_i = g_i(z_i)\qquad (i=1,\dots,n),
+\]
+then
+\[
+\Phi_{(\tilde z_i)}
+= \Phi_{(z_i)} \circ \bigl(\rho(g_1)\otimes\cdots\otimes \rho(g_n)\bigr) \, .
+\]
+is also a conformal block, now with the local coordinates $\tilde z_i$.
 \end{prop}
 
 
