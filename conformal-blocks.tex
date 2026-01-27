@@ -629,10 +629,10 @@ in \cite{FrenkelBenZvi2004VertexAlgebrasCurves} chapter 3.
 
 \begin{thm}[Associativity of vertex algebras] \label{thm:vertex-algebra-associativity} For any $a,b \in \vertex$,
 \begin{equation}
-Y(a,z) Y(b,w) = Y(Y(a,z-w)b,w) = \sum_{n \in \bbZ} (z-w)^{-n-1} Y(a_{(n)} b, w) \, .  
+Y(a,z) Y(b,w) = Y(Y(a,z-w)b,w) = \sum_{n \in \bbZ} (z-w)^{-n-1} Y(a_{(n)} b, w) \, \in \End \vertex[[z^{\pm 1},w^{\pm 1}]] ,  
 \end{equation}
-This is an equality in $\End \vertex[[z^{\pm 1},w^{\pm 1}]]$, where 
-on the right side we mean the expansion in the region $\abs{z} > \abs{w}$.
+where in the middle and
+on the right we mean the expansion in the region $\abs{z} > \abs{w}$.
 \end{thm}
 
 \autoref{thm:vertex-algebra-associativity} expresses the idea that
@@ -967,7 +967,8 @@ contour-integrals
 \begin{equation}
   \oint \cdots \oint z_1^{n_1} \cdots z_k^{n_k} J(z_1) \cdots J(z_k) \, .
 \end{equation}
-It's similar for the other universal enveloping vertex algebras.
+It's similar for the other universal enveloping vertex algebras: we can think of them as spanned by iterated
+contour-integrals of a set of generating fields.
 
 
 \subsection{Some vertex operators}
@@ -979,19 +980,16 @@ We know that
   Y(J, z) =
   Y(J_{(-1)} \vac, z) = \sum_n J_{(n)} z^{-n-1} \, .
 \end{equation}
-What about $Y(J_{(-m)} \vac, z)$?
-To calculate this it is useful to know the following:
-\begin{prop} \label{prop:goddard-uniqueness}
-If $\phi(z) \in \End(\vertex)[[z]]$, and $\phi(0) \vac = a$,
-and $\phi(z)$ is local with respect to all $Y(b,w)$,
-then $\phi(z) = Y(a,z)$.
-\end{prop}
-
-Using this we can prove
+Using the translation axiom we can similarly get
 \begin{equation}
   Y(J_{(-m)} \vac, z) = \frac{\partial_z^{m-1}}{(m-1)!} Y(J_{(-1)} \vac, z) 
 \end{equation}
-since the RHS indeed has both of the necessary properties.
+
+% \begin{prop} \label{prop:goddard-uniqueness}
+% If $\phi(z) \in \End(\vertex)[[z]]$, and $\phi(0) \vac = a$,
+% and $\phi(z)$ is local with respect to all $Y(b,w)$,
+% then $\phi(z) = Y(a,z)$.
+% \end{prop}
 
 Now what about something like $Y(J_{(-1)} J_{(-1)} \vac, z)$?
 $Y(J_{(-1)} J_{(-1)} \vac, z)$ should 
@@ -999,7 +997,7 @@ be a local field which creates the state
 $J_{(-1)} J_{(-1)} \vac$ at $z$, i.e. it should be
 $\frac{1}{2 \pi \I} \oint_{z} (w-z)^{-1} J(w) J(z) \de w$.
 This is an instance of a regularized product between two fields,
-sometimes called \ti{normal ordered product}:
+called \ti{normal ordered product}:
 \begin{defn}[Normally ordered product]
 For $a, b \in \vertex$ we define
 \begin{equation}
@@ -1007,26 +1005,73 @@ For $a, b \in \vertex$ we define
 \end{equation}
 \end{defn}
 
-We can also write it in another way which avoids the contour integral:
+We can also write it in another way:
 \begin{multline}
  \nop{J J}(z) = \frac{1}{2 \pi \I} \oint_w (z-w)^{-1} J(z) J(w) \, \de z \\ = \frac{1}{2 \pi \I} \oint_w (z-w)^{-1} \left( J(z) J(w) - \frac{\bid}{(z-w)^2} \right) \, \de z = \lim_{w \to z} \left( J(z) J(w) - \frac{\bid}{(z-w)^2} \right) \, .
 \end{multline}
 So $\nop{JJ}(z)$ can be obtained by starting
 with $J(w) J(z)$, deleting ``by hand'' the singular term $\frac{\bid}{(z-w)^2}$, and taking $w \to z$.
 
-We want the mode expansion of this object around $z = 0$.
-For this we rewrite $\oint_w$
-as a difference of two circles around $0$, one with $\abs{w} > \abs{z}$ and one with $\abs{w} < \abs{z}$. After this
-we can expand in modes, with (after some
-calculation) the result:
-\begin{exercise}
-Show that this computation gives
-$(J_{(-1)} J_{(-1)} \vac)_{(n)} = \sum_{k+\ell = n-1} \nop{J_{(k)} J_{(\ell)}}$, where we defined the normal ordered product of modes by
-\begin{equation}
-  \nop{a_{(k)} b_{(\ell)}} = \begin{cases} a_{(k)} b_{(\ell)} & \text{ if } k < 0, \\ b_{(\ell)} a_{(k)} & \text{ if } k \ge 0 \end{cases} 
-\end{equation}
+Here is the reason why it is called ``normal ordering'':
+\begin{prop}
+Define $Y(a,z)_< = \sum_{n < 0} a_{(n)} z^{-n-1}$ and $Y(a,z)_\ge = \sum_{n \ge 0} a_{(n)} z^{-n-1}$.
+Then
+ \begin{equation}
+   Y(\nop{ab}, z) = Y(a,z)_< Y(b,z) + Y(b,z) Y(a,z)_\ge
+ \end{equation}
+ In terms of modes,
+ \begin{equation}
+   \nop{ab}_{(n)} = \sum_{k+\ell = n-1} \begin{cases} a_{(k)} b_{(\ell)} & \text{ if } k < 0, \\ b_{(\ell)} a_{(k)} & \text{ if } k \ge 0 \end{cases} 
+ \end{equation}
+\end{prop}
 
-\end{exercise}
+So, for instance, 
+\begin{equation}
+\nop{JJ}_{(-1)} = J_{(-1)} J_{(-1)} + 2 J_{(-2)} J_{(0)} + 2 J_{(-3)} J_{(1)} + \cdots 
+\end{equation}
+Note that this sum actually makes sense in $\End \vertex$, because $J_{(n)} a = 0$ for $n \gg 0$.
+
+The analytic explanation of this formula goes as follows.
+As we just discussed we expect to obtain $\nop{ab}(w)$ by expanding $a(z) b(w)$ in $(z-w)$ at fixed $w$,
+subtracting all the singular terms, and then setting $z-w = 0$.
+Let's see how this works out in Laurent expansions, choosing the region $\abs{z} > \abs{w}$.
+Using \autoref{thm:vertex-algebra-associativity} the singular part of $Y(a,z) Y(b,w)$ is the $\abs{z} > \abs{w}$ expansion of
+\begin{equation}
+  \sum_{n \ge 0} (z-w)^{-n-1} Y(a_{(n)} b, w)
+\end{equation}
+Now recall that $[Y(a,z), Y(b,w)]$ is the \ti{difference} between the two ways of expanding that
+sum. The expansion in $\abs{z} > \abs{w}$ involves only negative powers of $z$,
+while the one in $\abs{z} < \abs{w}$ involves only nonnegative powers.
+It follows that $[Y(a,z)_\ge,Y(b,w)]$ is the expansion in the region $\abs{z} > \abs{w}$.
+In other words, subtracting the singular terms amounts to taking
+\begin{equation}
+  Y(\nop{ab}, w) = Y(a,z) Y(b,w) - [Y(a,z)_\ge,Y(b,w)] \vert_{z=w}
+\end{equation}
+which gives the desired formula.
+
+
+% The formula looks a little unsymmetrical, splitting into $<$ and $\ge$: 
+% that's because we have chosen to look at expansions around $z=0$ and not $z=\infty$.
+% The division is into the polar part at $z=0$ and the rest.
+
+% We want the mode expansion of this object around $z = 0$.
+% For this we rewrite $\oint_w$
+% as a difference of two circles around $0$, one with $\abs{w} > \abs{z}$ and one with $\abs{w} < \abs{z}$. After this
+% we can expand in modes, with (after some
+% calculation) the result:
+
+% \begin{prop}
+
+% \end{prop}
+
+% \begin{exercise}
+% Show that this computation gives
+% $(J_{(-1)} J_{(-1)} \vac)_{(n)} = \sum_{k+\ell = n-1} \nop{J_{(k)} J_{(\ell)}}$, where we defined the normal ordered product of modes by
+% \begin{equation}
+%   \nop{a_{(k)} b_{(\ell)}} = \begin{cases} a_{(k)} b_{(\ell)} & \text{ if } k < 0, \\ b_{(\ell)} a_{(k)} & \text{ if } k \ge 0 \end{cases} 
+% \end{equation}
+
+% \end{exercise}
 
 
 \subsection{Riemann surfaces}
@@ -1602,7 +1647,8 @@ Then the condition is
 \end{equation}
 Conversely, given $\Phi$ which obeys \eqref{eq:coinvariant-condition-concrete} for every $f$, we can build a chiral correlation system.
 (This is a nontrivial claim: it says that the Laurent series we build out of $\Phi$ actually converge! \fixme{...})
-Another way to phrase this condition: there is a linear subspace $S \subset W = \otimes_i \vrep_i$ 
+Another way to phrase the condition \eqref{eq:coinvariant-condition-concrete}: 
+there is a linear subspace $S \subset W = \otimes_i \vrep_i$ 
 consisting of vectors of the form 
 \begin{equation}
   \sum_{i=1}^n \sum_{m \in \bbZ} \chi_1 \otimes \cdots \otimes (f_{i,m} J^{X,\vrep_i}_{(m)}) \chi_i \otimes \cdots \otimes \chi_n
@@ -1681,18 +1727,18 @@ If we replace the local coordinate $z_i$ by
 \[
 \tilde z_i = g_i(z_i)\qquad (i=1,\dots,n),
 \]
-then the corresponding functional satisfies
+then the corresponding functional is given by
 \[
 \Phi_{(\tilde z_i)}
-= \Phi_{(z_i)} \circ \bigl(\rho(g_1)\otimes\cdots\otimes \rho(g_n)\bigr),
+= \Phi_{(z_i)} \circ \bigl(\rho(g_1)\otimes\cdots\otimes \rho(g_n)\bigr) \, .
 \]
-i.e.
-\[
-\Phi_{(\tilde z_i)}(v_1\otimes\cdots\otimes v_n)
-=
-\Phi_{(z_i)}\bigl(\rho(g_1)v_1\otimes\cdots\otimes \rho(g_n)v_n\bigr).
-\]
-Equivalently, the assignment $(z_i)\mapsto \Phi_{(z_i)}$ is $\cG^n$-equivariant.
+% i.e.
+% \[
+% \Phi_{(\tilde z_i)}(v_1\otimes\cdots\otimes v_n)
+% =
+% \Phi_{(z_i)}\bigl(\rho(g_1)v_1\otimes\cdots\otimes \rho(g_n)v_n\bigr).
+% \]
+% Equivalently, the assignment $(z_i)\mapsto \Phi_{(z_i)}$ is $\cG^n$-equivariant.
 \end{prop}
 
 % This action is by infinitesimal automorphisms of $\vertex$, in the sense that
