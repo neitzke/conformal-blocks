@@ -208,6 +208,7 @@
 \newcommand{\cD}{\ensuremath{\mathcal D}}
 \newcommand{\cW}{\ensuremath{\mathcal W}}
 \newcommand{\cG}{\ensuremath{\mathcal G}}
+\newcommand{\tcG}{\ensuremath{\widetilde{\mathcal G}}}
 \newcommand{\cB}{\ensuremath{\mathcal B}}
 \newcommand{\cL}{\ensuremath{\mathcal L}}
 \newcommand{\cS}{\ensuremath{\mathcal S}}
@@ -1492,7 +1493,7 @@ respectively.
 
 \end{defn}
 
-\begin{example}[Parabolic Verma modules]
+\begin{example}[Parabolic Verma modules] \label{exa:parabolic-verma-module}
 Here is an important class of modules for
 $\vertex = V^k(\fg)$. Fix a $\fg$-module $M$. Let
 $\Lie(\vertex)_{\ge 0}$ act on $M$ as follows:
@@ -1506,7 +1507,7 @@ from $M$ by action of the $J^X_{(n)}$ with $n < 0$.
 The case $M = \triv$ gives $\vrep = \vertex$ (called the \ti{vacuum module}.)
 \end{example}
 
-\begin{example}[Irregular modules]
+\begin{example}[Irregular modules] \label{exa:irregular-module}
 There is another interesting class.
 Fix an element $u \in \fg^*$.
 Then let $\Lie(\vertex)_{\ge 1}$ act on $\bbC$
@@ -1548,10 +1549,11 @@ a chiral correlation system on $C$ gives in particular
 a pairing $\Phi: \vrep \otimes \vrep' \to \bbC$
 obeying again the condition
 $\Phi(J^X_{(n)} \chi, \psi) = - \Phi(\chi, J^X_{(-n)} \psi)$.
-
 Such a pairing might or might not exist, depending on
 what $\vrep$ and $\vrep'$ are.
-For instance, suppose $\vrep = \Ind^{\Lie(\vertex)}_{\Lie(\vertex)_{\ge 0}} M$ and $\vrep' = \Ind^{\Lie(\vertex)}_{\Lie(\vertex)_{\ge 0}} M'$.
+
+For instance, suppose $\vrep = \Ind^{\Lie(\vertex)}_{\Lie(\vertex)_{\ge 0}} M$ as in 
+\autoref{exa:parabolic-verma-module}, and similarly $\vrep'$.
 Then we can restrict attention to the zero-grade parts 
 $M$, $M'$, which are closed under the action of the zero-modes $J^X_{(0)}$.
 The invariance condition 
@@ -1560,10 +1562,14 @@ just says that $\Phi$ gives a $\fg$-invariant pairing $M \otimes M' \to \bbC$.
 Moreover, similarly to the case we discussed above, the full $\Phi$ is determined (and not overdetermined)
 by its restriction to $M \otimes M'$, and once we have $\Phi$ we can sum Laurent series to build
 a chiral correlation system.
-
 The conclusion is that chiral correlation systems on $C$ correspond to $\fg$-invariant pairings $M \otimes M' \to \bbC$.
 In particular, if $M$ and $M'$ are irreducible, then the space of chiral correlation systems has dimension $1$ if
 $M' \simeq M^*$, and dimension $0$ otherwise.
+
+Another interesting example: suppose $\vrep = \Ind^{\Lie(\vertex)}_{\Lie(\vertex)_{\ge 0}} M$ as above, but
+$\vrep'$ is an irregular module as in \autoref{exa:irregular-module}. In this case \fixme{...}
+The conclusion is that the space of chiral correlation systems is isomorphic to $M^*$.
+
 \end{example}
 
 \begin{example}
@@ -1634,9 +1640,14 @@ But let us try to spell this out a bit more.
 
 Let $\cG$ denote the group of changes of coordinates on the formal disc.
 The elements of $\cG$ are formal power series $a_1 z + a_2 z^2 + \cdots$ with $a_1 \neq 0$,
-which multiply by formal composition.
-Then there is an action of $\cG$ on $\vertex$, and (we will see) 
-the different functionals $\Phi$ differ by precomposition with this action.
+which multiply by formal composition. Then there is an action $\rho: \cG \to \End \vertex$, 
+which is compatible with the vertex algebra structure in the sense that
+\begin{equation}
+  \rho(g) Y(a,z) \rho(g)^{-1} = Y(\rho(g) a, g(z)) \, .
+\end{equation}
+
+% and (we will see) 
+% the different functionals $\Phi$ differ by precomposition with this action.
 
 To describe this action it is enough to give its infinitesimal version, i.e.
 we consider the Lie algebra $\fG$ of vector fields on the formal disc which
@@ -1666,8 +1677,7 @@ For any choice of local coordinates $z_i$ at the marked points $p_i$, let
 \]
 be the functional obtained from the correlation system by expanding each insertion in the chosen
 local coordinate.
-Let $g_i \in \cG$ be formal changes of coordinate and write $\rho(g_i)\in \End(\vertex)$ for the induced
-action of $\cG$ on $\vertex$ constructed above. If we replace the local coordinate $z_i$ by
+If we replace the local coordinate $z_i$ by
 \[
 \tilde z_i = g_i(z_i)\qquad (i=1,\dots,n),
 \]
@@ -1722,8 +1732,9 @@ One can prove this by repeated use of the ``noncommutative Wick formula''
 %   \nop{a b} = a_{(-1)} b \, .
 % \end{equation}
 
-Note that \eqref{eq:omega-lambda-bracket} is the $\lambda$-bracket of the Virasoro algebra.
-It implies that if we write
+Note that \eqref{eq:omega-lambda-bracket} is the $\lambda$-bracket of the generator of the 
+Virasoro algebra. It implies that there is a homomorphism of vertex algebras, $\Vir^c \to V^k(\fg)$.
+Also if we write
 \begin{equation}
   Y(\omega,z) = \sum L_n z^{-n-2}
 \end{equation}
@@ -1733,7 +1744,6 @@ then we have
   [L_n, L_m] = (m-n) L_{m+n} + \frac{c}{12}\,(m+1)(m)(m-1)\,\delta_{m+n,0} \bid \, ,
 \end{equation}
 which is the Virasoro Lie algebra.
-(It also implies that there is a homomorphism of vertex algebras, $\Vir^c \to V^k(\fg)$.)
 \eqref{eq:omega-lambda-bracket} also implies
 \begin{equation} \label{eq:virasoro-affine-bracket}
   [L_n, J^X_m] = -m J^X_{m+n} \, .
@@ -1754,7 +1764,26 @@ agree with \eqref{eq:witt-action-on-affine}.
 Moreover, once we realize the action of the Witt algebra ``internally'' via the element $\omega \in \vertex$,
 we get an extra bonus: it acts not only on $\vertex$ but on all $\vertex$-modules $\vrep$. Thus we can try
 to use it to make a coordinate-independent version of our definition of chiral correlation systems.
-\fixme{...}
+For this we need to integrate from $\fG$ to the group $\cG$ of coordinate changes.
+Whether we can really do it depends on $\vrep$.
+The best possible situation arises if $\vrep = \oplus_{n \ge n_0} \vrep_n$, graded by the eigenvalue of $L_0$,
+with all eigenvalues integers and bounded below. In that case $\fG_+$ acts locally nilpotently and $\fG_0$
+acts diagonally respecting the relation $\exp(2 \pi \I L_0) = 1$, 
+so both indeed integrate to $\cG$.
+
+\begin{prop} Suppose $\vrep$ is a $\vertex$-module, for which the induced $\fG$-action integrates to $\cG$.
+In this case, \fixme{...}
+\end{prop}
+
+
+% This \ti{almost} works, but for one subtlety: in the group $\cG$ we have the relation $\exp(2 \pi \I L_0) = 1$,
+% which need not hold in a general $\vrep$-module. Thus the action of $\fG$ on $\vrep$ need not integrate
+% to $\cG$. Still we can consider the subgroup $\cG_1 \subset \cG$, consisting of 
+
+
+% Rather it will integrate to a $\bbZ$-covering $\tcG$ of $\cG$, consisting of power series
+% $a_1 z + a_2 z^2 + \cdots$ equipped with a choice of $\log a_1$.
+
 
 
 
