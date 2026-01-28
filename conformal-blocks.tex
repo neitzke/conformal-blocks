@@ -980,12 +980,15 @@ It is interesting to ask what are the vertex
 operators $Y(a,z)$ associated to general elements $a \in \vertex$.
 We know that
 \begin{equation}
-  Y(J, z) =
-  Y(J_{(-1)} \vac, z) = \sum_n J_{(n)} z^{-n-1} \, .
+  Y(J_{(-1)} \vac, z) = Y(J, z) = \sum_n J_{(n)} z^{-n-1} \, .
 \end{equation}
 Using the translation axiom we can similarly get
 \begin{equation}
-  Y(J_{(-m)} \vac, z) = \frac{\partial_z^{m-1}}{(m-1)!} Y(J_{(-1)} \vac, z) 
+  Y(J_{(-m)} \vac, z) = \frac{\partial_z^{m-1}}{(m-1)!} Y(J, z) 
+\end{equation}
+and more generally
+\begin{equation}
+  Y(a_{(-m)} \vac, z) = \frac{\partial_z^{m-1}}{(m-1)!} Y(a, z)
 \end{equation}
 
 % \begin{prop} \label{prop:goddard-uniqueness}
@@ -1053,6 +1056,15 @@ In other words, subtracting the singular terms amounts to taking
 \end{equation}
 which is the desired formula.
 
+Once we know this formula we can use it iteratively to determine all other vertex
+operators. For instance:
+\begin{exercise}
+Calculate the mode expansion of $Y(J_{(-1)} J_{(-1)} J_{(-1)} \vac, z)$.
+\end{exercise}
+
+\begin{exercise}
+Calculate the mode expansion of $Y(J_{(-2)} J_{(-1)} \vac, z)$.
+\end{exercise}
 
 % The formula looks a little unsymmetrical, splitting into $<$ and $\ge$: 
 % that's because we have chosen to look at expansions around $z=0$ and not $z=\infty$.
@@ -1328,6 +1340,15 @@ and
 \end{multline}
 where each $\cdots$ is a sum over two similar terms.
 
+\begin{exercise} Prove that this rule indeed defines
+a chiral correlation system.
+\end{exercise}
+
+\begin{exercise} Prove that every 
+chiral correlation system
+is a scalar multiple of the one we just described. Thus, the space of chiral correlation systems
+for this $(C,\vertex)$ is $1$-dimensional.
+\end{exercise}
 
 % The factor $\frac{1}{|C_\alpha|}$ is exactly the symmetry factor: a polygon with $|C_\alpha|$ labeled vertices
 % has $|C_\alpha|$ equivalent choices of starting point.
