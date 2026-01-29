@@ -1781,10 +1781,10 @@ which is compatible with the vertex algebra structure in the sense that
 % the different functionals $\Phi$ differ by precomposition with this action.
 
 We start with the infinitesimal version, i.e.
-consider the Lie algebra $\fG$ of vector fields on the formal disc which
+consider the \ti{Witt algebra}, the 
+Lie algebra $\fG$ of vector fields on the formal disc which
 vanish at the origin.
 If $\ell_n$ denotes the vector field $- z^{n+1} \partial_z$ then we have for all $n, m \ge 0$
-the \ti{Witt algebra}
 \begin{equation} \label{eq:witt-algebra}
   [\ell_n, \ell_m] = (n-m) \ell_{n+m} \, .
 \end{equation}
@@ -1860,7 +1860,7 @@ formal local coordinate systems around $z$, and
 (In particular we can apply this when $\vrep = \vertex$.)
 Upon choosing a local coordinate system around $z$ we obtain
 an identification of vector spaces $\vrep_z \simeq \vrep$.
-The spaces $F_z$ form a vector bundle 
+The spaces $\vertex_z$ form a vector bundle 
 over $C$, which has infinite rank but is filtered by 
 finite-dimensional pieces (note that the action of $\cG$ on
 $\vrep$ does not preserve the graded components $\vrep_n$ 
@@ -1922,7 +1922,7 @@ out what singularity we get when we bring $\omega(z)$ close to $\omega(w)$.
 But it seems a bit hairy to do so. It might be better to introduce the ``noncommutative Wick formula,''
 \begin{lem}[Noncommutative Wick formula]
 \begin{equation} \label{eq:nc-wick}
-\lb{a}{\lambda}{\nop{bc}} = \nop{\lb{a}{\lambda}{b} c} + \nop{b \lb{a}{\lambda}{c}} + \int_0^\lambda \lb{\lb{a}{\mu}{b}}{\lambda - \mu}{c} \, \de \mu \, .
+\lb{a}{\lambda}{\nop{bc}} = \nop{\lb{a}{\lambda}{b} c} + \nop{b \lb{a}{\lambda}{c}} + \int_0^\lambda \lb{\lb{a}{\lambda}{b}}{\mu}{c} \, \de \mu \, .
 \end{equation}
 \end{lem}
 This lemma is an efficient way of keeping track of the various singular terms which appear when we bring
@@ -1947,12 +1947,12 @@ Note the function here is regular at $z=w$, and we can expand it:
 \end{equation}
 The last step is to recognize
 \begin{equation}
-  \oint \oint \de z \, \de w \, a(z) b(w) c(0) \e^{\mu(z-w)} \e^{(\lambda-\mu) z} = \lb{\lb{a}{\mu}{b}}{\lambda - \mu}{c} \, .
+  \oint \oint \de z \, \de w \, a(z) b(w) c(0) \e^{\mu(z-w)} \e^{(\lambda-\mu) z} = \lb{\lb{a}{\lambda}{b}}{\mu}{c} \, .
 \end{equation}
 
 Now to prove \eqref{eq:omega-lambda-bracket} we work in a $\kappa$-orthonormal basis,
 use $J^i$ for $J^{X^i}$, and $[X^i,X^j] = f^{ijk} X^k$, and
-sum over repeated indices. Then
+sum over repeated indices. Then \fixme{fix}
 \begin{equation}
   \lb{J^i}{\lambda}{\nop{J^j J^j}} = \nop{\lb{J^i}{\lambda}{J^j}J^j} + \nop{J^j\lb{J^i}{\lambda}{J^j}} + \int_0^\lambda \lb{\lb{J^i}{\mu}{J^j}}{\lambda-\mu}{J^j} \, \de \mu
 \end{equation}
