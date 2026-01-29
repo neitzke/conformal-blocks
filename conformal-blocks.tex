@@ -1749,6 +1749,8 @@ for $V^k(\fg)$ on $C$ to the space of conformal blocks. This map is injective if
 one marked point.
 \end{prop}
 
+For a completely arbitrary conformal block it is not clear that summing up the formal Laurent series will give 
+an actual function.
 As a piece of personal philosophy: the \ti{most intersting} conformal blocks are the ones which actually come
 from chiral correlation systems.
 
@@ -1921,6 +1923,28 @@ Note the function here is regular at $z=w$, and we can expand it:
 \end{equation}
 and now contour-integrating this gives the result we want. \fixme{check}
 
+Now to prove \fixme{...} we work in a $\kappa$-orthonormal basis,
+use $J^i$ for $J^{X^i}$, and $[X^i,X^j] = f^{ij}_k X^k$, and
+sum over repeated indices. Then
+\begin{equation}
+  \lb{J^i}{\lambda}{\nop{J^j J^j}} = \nop{\lb{J^i}{\lambda}{J^j}J^j} + \nop{J^j\lb{J^i}{\lambda}{J^j}} + \int_0^\lambda \lb{\lb{J^i}{\mu}{J^j}}{\lambda-\mu}{J^j} \, \de \mu
+\end{equation}
+and recalling $\lb{J^k}{\lambda}{J^\ell} = \lambda k \delta^{k \ell} \bid + f^{k\ell}_m J^m$ this is
+\begin{equation}
+  = \nop{(\lambda k \delta^{ij} \bid + f^{ij}_m J^m) J^j} + \nop{J^j(\lambda k \delta^{ij} \bid + f^{ij}_m J^m)} + \int_0^\lambda \lb{(\mu k \delta^{ij} \bid + f^{ij}_m J^m)}{\lambda-\mu}{J^j} \, \de \mu
+\end{equation}
+which simplifies to
+\begin{equation}
+  = 2 \lambda k J^i + f^{ij}_m (\nop{J^m J^j} + \nop{J^j J^m}) + f^{ij}_m \int_0^\lambda (\lambda-\mu) k \delta^{mj} \bid + f^{mj}_\ell J^\ell \, \de \mu
+\end{equation}
+Now using the asymmetry of $f^{ij}_m$ in all pairs of indices, and $f^{ij}_m f^{mj}_\ell = -2 h^\vee \delta^i_\ell$, this simplifies to
+\begin{equation}
+ \lb{J^i}{\lambda}{\nop{J^j J^j}} = 2 (k - h^\vee) \lambda J^i
+\end{equation}
+which is equivalent to
+\begin{equation}
+ \lb{J^i}{\lambda}{\nop{J^j J^j}} = 2 (k - h^\vee) (\lambda+\partial) J^i
+\end{equation}
 
 
 % But let us do part of it here ``by hand''.
