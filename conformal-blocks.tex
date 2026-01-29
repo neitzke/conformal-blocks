@@ -1740,11 +1740,14 @@ all vectors of the form
 \end{equation}
 \end{defn}
 
-\begin{prop}[Conformal blocks vs. chiral correlation systems] Fix compact connected $C$ 
+\begin{prop}[Conformal blocks vs. chiral correlation systems] Fix $C$ 
 with markings as above. By Fourier expansion we obtain a linear map from the space of chiral correlation systems
-for $V^k(\fg)$ on $C$ to the space of conformal blocks. This map is injective as long as we have at least
+for $V^k(\fg)$ on $C$ to the space of conformal blocks. This map is injective if $C$ is connected and has at least
 one marked point.
 \end{prop}
+
+As a piece of personal philosophy: the \ti{most intersting} conformal blocks are the ones which actually come
+from chiral correlation systems.
 
 
 \subsection{Changes of coordinate, by hand}
@@ -1838,9 +1841,23 @@ then
 is also a conformal block, now with the local coordinates $\tilde z_i$.
 \end{prop}
 
-\fixme{discuss case of $\cG_+$ instead of $\cG$}
+Here is another way to package this.
+\begin{defn} For $z \in C$ and $\vrep$ a $\vertex$-module with compatible $\cG$-action, let $F_z$ be the space of
+formal local coordinate systems around $z$, and
+\begin{equation}
+\vrep_z = \vrep \times_{\cG} F_z \, .
+\end{equation}
+\end{defn}
+In particular we can apply this when $\vrep = \vertex$.
 
-\fixme{discuss ``local'' version of $\vertex$, $\vrep$}
+Using this we can finally define chiral correlation systems and conformal blocks for any vertex algebra
+with a compatible $\cG$-action. \fixme{...}
+
+There is also a variant of all the above where we consider only an action of the subgroup $\fG_+$,
+consisting of power series with $a_1 = 1$, i.e. $z + a_2 z^2 + a_3 z^3 + \cdots$
+In this case we cannot completely eliminate the coordinate dependence, but we can reduce it to a dependence
+on a choice of tangent vector at the marked point.
+
 
 
 % This action is by infinitesimal automorphisms of $\vertex$, in the sense that
