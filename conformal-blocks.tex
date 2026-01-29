@@ -2647,12 +2647,29 @@ have length $2$.
 
 The quadratic Casimir operator is defined by 
 \begin{equation}
-  C_2 = \sum_i X_i X_i
+  C_2 = \sum_i X^i X^i
 \end{equation}
-where $(X_i)$ is an orthonormal basis of $\fg$.
+where $(X^i)$ is an orthonormal basis of $\fg$.
+In this basis we write 
+\begin{equation}
+  [X^i, X^j] = f^{ijk} X^k
+\end{equation}
+and the structure constant $f^{ijk}$ is antisymmetric in all exchanges of indices.
 
 The dual Coxeter number $h^\vee$ is defined by the property that
 $C_2$ acts in the adjoint representation by the scalar $2 h^\vee$.
+i.e. for any $Y \in \fg$
+\begin{equation}
+  \sum_{i=1}^{\dim \fg} [X^i, [X^i, Y]] = 2 h^\vee Y \, .
+\end{equation}
+Taking $Y = X^j$ and summing repeated indices this is also
+\begin{equation}
+  [X^i, f^{ijk} X^k] = f^{ik\ell} f^{ijk} X^\ell = 2 h^\vee X^j
+\end{equation}
+i.e.
+\begin{equation} \label{eq:f-coxeter}
+  f^{ik\ell} f^{ijk} = 2 h^\vee \delta^{j \ell}
+\end{equation}
 
 When $\fg = \fsl(n)$, the normalized form is
 \begin{equation}
