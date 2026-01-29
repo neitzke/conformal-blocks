@@ -1536,12 +1536,13 @@ Complete formulas for the determinants $\Delta_n$ are given in
 \begin{exercise} Prove that the radical of $\Phi$ is the unique maximal ideal in $\vertex$.
 \end{exercise}
 
-\begin{exercise} Because $\Delta_2 = 0$ at $k = 1$, the ideal $I$ must have a nontrivial grade $2$ subspace.
+\begin{exercise} Take $\fg = \fsl_2$ with the usual basis $(E, F, H)$. 
+Because $\Delta_2 = 0$ at $k = 1$, the ideal $I$ must have a nontrivial grade $2$ subspace.
 Prove that this is indeed so, by showing that the vector $J^E_{(-1) J^E_{(-1)}} \vac$ generates 
 a nontrivial ideal. (Hint: show that all operators $J^X_{(n)}$ for $n > 0$ annihilate this vector.)
 \end{exercise}
 
-\begin{exercise} Similarly to the previous exercise, find a vector at grade $2$ which generates a nontrivial ideal at $k = -2$.
+\begin{exercise} Again take $\fg = \fsl_2$. Similarly to the previous exercise, find a vector at grade $2$ which generates a nontrivial ideal at $k = -2$.
 \end{exercise}
 
 \begin{exercise} Calculate the determinant $\Delta_2$ by hand. (This seems tedious, but maybe fun to do once?)
@@ -1812,7 +1813,12 @@ then the corresponding block is given by
 % Equivalently, the assignment $(z_i)\mapsto \Phi_{(z_i)}$ is $\cG^n$-equivariant.
 \end{prop}
 
-\fixme{explain compatibility}
+In a similar fashion we can define compatibility for a $\cG$-action on a $\vrep$-module:
+this means we require
+$\rho^\vrep: \cG \to \End \vrep$ with
+\begin{equation}
+  \rho^\vrep(g) Y^\vrep(a,z) \rho^\vrep(g)^{-1} = Y^\vrep(\rho(g) a, g(z)) \, .
+\end{equation}
 
 \begin{prop} Suppose $\vrep_i$ are $\vertex$-modules, with a compatible $\cG$-action.
 Suppose $C$ is a Riemann surface with marked points $p_i$ and local coordinates $z_i$, and
@@ -1869,7 +1875,7 @@ In principle one could prove this directly by hand, carefully manipulating the s
 out what singularity we get when we bring $\omega(z)$ close to $\omega(w)$.
 But it seems a bit hairy to do so. It might be better to introduce the ``noncommutative Wick formula,''
 \begin{lem}[Noncommutative Wick formula]
-\begin{equation}
+\begin{equation} \label{eq:nc-wick}
 \lb{a}{\lambda}{\nop{bc}} = \nop{\lb{a}{\lambda}{b} c} + \nop{b \lb{a}{\lambda}{c}} + \int_0^\lambda \lb{\lb{a}{\mu}{b}}{\lambda - \mu}{c} \, \de \mu \, .
 \end{equation}
 \end{lem}
@@ -1877,7 +1883,7 @@ This lemma is an efficient way of keeping track of the various singular terms wh
 composite objects together.
 To get an idea of the proof of the lemma we can use successive contour-integration: indeed the two operations
 $\nop{ab}$ and $\lb{a}{\lambda}{b}$ are both contour-integrals.
-The left side can be written as \fixme{make figure with contours}
+The left side of \eqref{eq:nc-wick} can be written as \fixme{make figure with contours}
 \begin{equation}
   \oint \oint \de z \, \de w \, a(z) b(w) c(0) \frac{\e^{\lambda z}}{w} 
 \end{equation}
