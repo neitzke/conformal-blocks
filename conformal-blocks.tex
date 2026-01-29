@@ -716,11 +716,11 @@ it is determined by the corresponding Lie algebra of modes.
 One way to think about \autoref{thm:vertex-algebra-modes}
 is as follows. Imagine that instead of formal series we
 were working with actual analytic objects in the complex plane.
-Then we could write 
+Then we could write\footnote{We adopt the convention that $\oint$ always includes a factor $\frac{1}{2 \pi \I}$.}
 \begin{align}
-a_{(m)} b_{(n)} c - b_{(n)} a_{(m)} c &= - \frac{1}{4 \pi^2} \left[  \oint_{\abs{z}=1} \oint_{\abs{w} = 1-\eps} - \oint_{\abs{z}=1} \oint_{\abs{w} = 1+\eps} \right]z^m w^n \, F(z,w) \, \de z \de w \\
-&= - \frac{1}{4 \pi^2}  \oint_{\abs{z}=1} \oint_{\abs{w-z} = \eps} z^m w^n \, F(z,w) \, \de z \de w \\
-&= - \frac{1}{4 \pi^2}  \oint_{\abs{z}=1} z^m \de z  \left[\oint_{\abs{w-z} = \eps} w^n \, F(z,w) \, \de w \right] 
+a_{(m)} b_{(n)} c - b_{(n)} a_{(m)} c &= \left[  \oint_{\abs{z}=1} \oint_{\abs{w} = 1-\eps} - \oint_{\abs{z}=1} \oint_{\abs{w} = 1+\eps} \right]z^m w^n \, F(z,w) \, \de z \de w \\
+&=  \oint_{\abs{z}=1} \oint_{\abs{w-z} = \eps} z^m w^n \, F(z,w) \, \de z \de w \\
+&=  \oint_{\abs{z}=1} z^m \de z  \left[\oint_{\abs{w-z} = \eps} w^n \, F(z,w) \, \de w \right] 
 \end{align}
 Now, the polar part of $F(z,w)$ at $z=w$ is determined by
 \autoref{thm:vertex-algebra-associativity}: it gives
@@ -728,11 +728,11 @@ $F(z,w) = \sum_{j \in \bbZ} (z-w)^{-j-1} Y(a_{(j)}b,w) c$.
 Using this
 we have
 \begin{align}
-  \frac{1}{2 \pi \I} \oint_{\abs{w-z} = \eps} w^n \, F(z,w) \, \de w &= \sum_{j \ge 0} \frac{1}{2 \pi \I} \oint_{\abs{w-z} = \eps} w^n (z-w)^{-j-1} Y(a_{(j)}b,w) c \\
-  &= \sum_{j \ge 0} \frac{1}{2 \pi \I} \oint_{\abs{w-z} = \eps} w^n (z-w)^{-j-1} \sum_{\ell \in \bbZ} w^{-\ell-1} (a_{(j)}b)_{(\ell)} c \\
-  &= \sum_{j \ge 0}  \sum_{\ell \in \bbZ} \frac{1}{2 \pi \I} \oint_{\abs{w-z} = \eps} w^{n-\ell-1} (z-w)^{-j-1} (a_{(j)}b)_{(\ell)} c \\
-  &= \sum_{j \ge 0}  \sum_{\ell \in \bbZ} \frac{1}{2 \pi \I} \oint_{\abs{t} = \eps} (z-t)^{n-\ell-1} t^{-j-1} (a_{(j)}b)_{(\ell)} c \\
-  &= \sum_{j \ge 0}  \sum_{\ell \in \bbZ} \sum_{i \ge 0} \frac{1}{2 \pi \I} \oint_{\abs{t} = \eps} (-1)^i \binom{n-\ell-1}{i} z^{n-\ell-1-i} t^{i-j-1} (a_{(j)}b)_{(\ell)} c
+  \oint_{\abs{w-z} = \eps} w^n \, F(z,w) \, \de w &= \sum_{j \ge 0} \oint_{\abs{w-z} = \eps} w^n (z-w)^{-j-1} Y(a_{(j)}b,w) c \\
+  &= \sum_{j \ge 0} \oint_{\abs{w-z} = \eps} w^n (z-w)^{-j-1} \sum_{\ell \in \bbZ} w^{-\ell-1} (a_{(j)}b)_{(\ell)} c \\
+  &= \sum_{j \ge 0}  \sum_{\ell \in \bbZ} \oint_{\abs{w-z} = \eps} w^{n-\ell-1} (z-w)^{-j-1} (a_{(j)}b)_{(\ell)} c \\
+  &= \sum_{j \ge 0}  \sum_{\ell \in \bbZ} \oint_{\abs{t} = \eps} (z-t)^{n-\ell-1} t^{-j-1} (a_{(j)}b)_{(\ell)} c \\
+  &= \sum_{j \ge 0}  \sum_{\ell \in \bbZ} \sum_{i \ge 0} \oint_{\abs{t} = \eps} (-1)^i \binom{n-\ell-1}{i} z^{n-\ell-1-i} t^{i-j-1} (a_{(j)}b)_{(\ell)} c
 \end{align}
 
 % \begin{align}
@@ -916,7 +916,7 @@ or after defining $L_m = T_{(m+1)}$ to match the usual convention,
 
 \begin{exercise}
 Derive the Lie algebra \eqref{eq:virasoro-mode-algebra}
-from \eqref{eq:virasoro-ope} and \eqref{eq:mode-algebra}.
+from the given $\lb{T}{\lambda}{T}$ and \eqref{eq:mode-algebra}.
 \end{exercise}
 
 In all these examples $\vertex = U(R)$ where
@@ -1002,7 +1002,7 @@ Now what about something like $Y(J_{(-1)} J_{(-1)} \vac, z)$?
 $Y(J_{(-1)} J_{(-1)} \vac, z)$ should 
 be a local field which creates the state
 $J_{(-1)} J_{(-1)} \vac$ at $z$, i.e. it should be
-$\frac{1}{2 \pi \I} \oint_{z} (w-z)^{-1} J(w) J(z) \de w$.
+$\oint_{z} (w-z)^{-1} J(w) J(z) \de w$.
 This is an instance of a regularized product between two fields,
 called \ti{normal ordered product}:
 \begin{defn}[Normally ordered product]
@@ -1014,7 +1014,7 @@ For $a, b \in \vertex$ we define
 
 We can also write it in another way:
 \begin{multline}
- \nop{J J}(z) = \frac{1}{2 \pi \I} \oint_w (z-w)^{-1} J(z) J(w) \, \de z \\ = \frac{1}{2 \pi \I} \oint_w (z-w)^{-1} \left( J(z) J(w) - \frac{\bid}{(z-w)^2} \right) \, \de z = \lim_{w \to z} \left( J(z) J(w) - \frac{\bid}{(z-w)^2} \right) \, .
+ \nop{J J}(z) = \oint_w (z-w)^{-1} J(z) J(w) \, \de z \\ = \oint_w (z-w)^{-1} \left( J(z) J(w) - \frac{\bid}{(z-w)^2} \right) \, \de z = \lim_{w \to z} \left( J(z) J(w) - \frac{\bid}{(z-w)^2} \right) \, .
 \end{multline}
 So $\nop{JJ}(z)$ can be obtained by starting
 with $J(w) J(z)$, deleting ``by hand'' the singular term $\frac{\bid}{(z-w)^2}$, and taking $w \to z$.
@@ -1582,6 +1582,10 @@ respectively.
 \end{enumerate}
 
 \end{defn}
+We usually (but not always!) work with \ti{graded}
+modules, $\vrep = \bigoplus_n \vrep_n$ (warning:
+the grading is not necessarily by integers),
+where again $a_{(n)}$ acts with grade $\abs{a} - n - 1$.
 
 Here is an important class of modules for
 $\vertex = V^k(\fg)$.
@@ -1853,16 +1857,36 @@ formal local coordinate systems around $z$, and
 \vrep_z = \vrep \times_{\cG} F_z \, .
 \end{equation}
 \end{defn}
-In particular we can apply this when $\vrep = \vertex$.
+(In particular we can apply this when $\vrep = \vertex$.)
+Upon choosing a local coordinate system around $z$ we obtain
+an identification of vector spaces $\vrep_z \simeq \vrep$.
+The spaces $F_z$ form a vector bundle 
+over $C$, which has infinite rank but is filtered by 
+finite-dimensional pieces (note that the action of $\cG$ on
+$\vrep$ does not preserve the graded components $\vrep_n$ 
+but does preserve the filtration $\vrep_{\le n}$.)
 
-Using this we can finally define chiral correlation systems and conformal blocks for any vertex algebra
-with a compatible $\cG$-action. \fixme{...}
+Using this we can finally define chiral correlation systems and conformal blocks, now for any vertex algebra
+with a compatible $\cG$-action. 
+There are variants depending on how we treat the coordinate
+systems around the marked points. One that works for 
+the nicest kind of $\vrep$-modules is: 
 
-There is also a variant of all the above where we consider only an action of the subgroup $\fG_+$,
-consisting of power series with $a_1 = 1$, i.e. $z + a_2 z^2 + a_3 z^3 + \cdots$
-In this case we cannot completely eliminate the coordinate dependence, but we can reduce it to a dependence
+\begin{defn}[Chiral correlation systems for a vertex algebra with $\cG$-action]
+Suppose $\vertex$ is a vertex algebra with a compatible $\cG$-action, and $C$ is a Riemann surface, with marked points $p_i$
+around the marked points, and $\vertex$-modules $\vrep_i$
+with compatible $\cG$-actions. 
+Then a \ti{chiral correlation system} is a collection
+\begin{equation}
+  \IP{ \prod_{i=1}^n a_i(q_i) \prod_{i=1}^k \chi_i(p_i) } \in \bbC
+\end{equation}
+where each $a_i \in \vertex_{q_i}$, $\chi_i \in \vrep_{p_i}$,
+obeying \fixme{the same conditions as usual, singularity when $q \to p$}.
+\end{defn}
+
+There is also a variant of the above where we consider only an action of the subgroup $\fG_+$,
+consisting of power series with $a_1 = 1$, i.e. $z + a_2 z^2 + a_3 z^3 + \cdots$ In this case we cannot completely eliminate the coordinate dependence, but we can reduce it to a dependence
 on a choice of tangent vector at the marked point.
-
 
 
 % This action is by infinitesimal automorphisms of $\vertex$, in the sense that
@@ -1921,31 +1945,43 @@ Note the function here is regular at $z=w$, and we can expand it:
 \begin{equation}
   \frac{\e^{\lambda z} - \e^{\lambda (z-w)}}{w} = \int_0^\lambda \e^{\mu(z-w)} \e^{(\lambda-\mu) z} \, \de \mu
 \end{equation}
-and now contour-integrating this gives the result we want. \fixme{check}
+The last step is to recognize
+\begin{equation}
+  \oint \oint \de z \, \de w \, a(z) b(w) c(0) \e^{\mu(z-w)} \e^{(\lambda-\mu) z} = \lb{\lb{a}{\mu}{b}}{\lambda - \mu}{c} \, .
+\end{equation}
 
-Now to prove \fixme{...} we work in a $\kappa$-orthonormal basis,
-use $J^i$ for $J^{X^i}$, and $[X^i,X^j] = f^{ij}_k X^k$, and
+Now to prove \eqref{eq:omega-lambda-bracket} we work in a $\kappa$-orthonormal basis,
+use $J^i$ for $J^{X^i}$, and $[X^i,X^j] = f^{ijk} X^k$, and
 sum over repeated indices. Then
 \begin{equation}
   \lb{J^i}{\lambda}{\nop{J^j J^j}} = \nop{\lb{J^i}{\lambda}{J^j}J^j} + \nop{J^j\lb{J^i}{\lambda}{J^j}} + \int_0^\lambda \lb{\lb{J^i}{\mu}{J^j}}{\lambda-\mu}{J^j} \, \de \mu
 \end{equation}
-and recalling $\lb{J^k}{\lambda}{J^\ell} = \lambda k \delta^{k \ell} \bid + f^{k\ell}_m J^m$ this is
+and recalling $\lb{J^k}{\lambda}{J^\ell} = \lambda k \delta^{k \ell} \bid + f^{k\ell m} J^m$ this is
 \begin{equation}
-  = \nop{(\lambda k \delta^{ij} \bid + f^{ij}_m J^m) J^j} + \nop{J^j(\lambda k \delta^{ij} \bid + f^{ij}_m J^m)} + \int_0^\lambda \lb{(\mu k \delta^{ij} \bid + f^{ij}_m J^m)}{\lambda-\mu}{J^j} \, \de \mu
+  = \nop{(\lambda k \delta^{ij} \bid + f^{ijm} J^m) J^j} + \nop{J^j(\lambda k \delta^{ij} \bid + f^{ijm} J^m)} + \int_0^\lambda \lb{(\mu k \delta^{ij} \bid + f^{ijm} J^m)}{\lambda-\mu}{J^j} \, \de \mu
 \end{equation}
 which simplifies to
 \begin{equation}
-  = 2 \lambda k J^i + f^{ij}_m (\nop{J^m J^j} + \nop{J^j J^m}) + f^{ij}_m \int_0^\lambda (\lambda-\mu) k \delta^{mj} \bid + f^{mj}_\ell J^\ell \, \de \mu
+  = 2 \lambda k J^i + f^{ijm} (\nop{J^m J^j} + \nop{J^j J^m}) + f^{ijm} \int_0^\lambda (\lambda-\mu) k \delta^{mj} \bid + f^{mj\ell} J^\ell \, \de \mu
 \end{equation}
-Now using the asymmetry of $f^{ij}_m$ in all pairs of indices, and $f^{ij}_m f^{mj}_\ell = -2 h^\vee \delta^i_\ell$, this simplifies to
+Now using the asymmetry of $f^{ijm}$ and $f^{ijm} f^{mj\ell} = 2 h^\vee \delta^i_\ell$ (see \autoref{eq:f-coxeter}), 
+this simplifies to
 \begin{equation}
- \lb{J^i}{\lambda}{\nop{J^j J^j}} = 2 (k - h^\vee) \lambda J^i
+ \lb{J^i}{\lambda}{\nop{J^j J^j}} = 2 (k + h^\vee) \lambda J^i
 \end{equation}
-which is equivalent to
+and using the skew-symmetry property of $\lambda$-brackets this is also
 \begin{equation}
- \lb{J^i}{\lambda}{\nop{J^j J^j}} = 2 (k - h^\vee) (\lambda+\partial) J^i
+ \lb{\nop{J^j J^j}}{\lambda}{J^i} = 2 (k + h^\vee) (\lambda+\partial) J^i \, .
 \end{equation}
-
+Then dividing out the factor $2 (k + h^\vee)$ we get the second
+equation in \eqref{eq:omega-lambda-bracket}.
+Next we want to compute $\lb{\omega}{\lambda}{\omega}$;
+for that we use \eqref{eq:nc-wick} again to 
+reduce $\lb{\nop{J^i J^i}}{\lambda}{\nop{J^j J^j}}$ to things
+we have already computed.
+\begin{exercise}
+Finish the proof of \eqref{eq:omega-lambda-bracket}.
+\end{exercise}
 
 % But let us do part of it here ``by hand''.
 % For notational convenience write $X$ for $J^X$,
