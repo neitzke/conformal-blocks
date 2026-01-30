@@ -1744,8 +1744,9 @@ Suppose $C$ is a Riemann surface with marked points $p_i$, local coordinates $z_
 A \ti{conformal block} for $V^k(\fg)$ on $C$ is a linear map $\Phi: \bigotimes_i \vrep_i \to \bbC$ which annihilates
 all vectors of the form
 \begin{equation}
-  \sum_{i=1}^n \sum_{m \in \bbZ} \chi_1 \otimes \cdots \otimes (f_{i,m} J^{X,\vrep_i}_{(m)}) \chi_i \otimes \cdots \otimes \chi_n \, .
+  \sum_{i=1}^n \sum_{m \in \bbZ} \chi_1 \otimes \cdots \otimes (f_{i,m} J^{X,\vrep_i}_{(m)}) \chi_i \otimes \cdots \otimes \chi_n
 \end{equation}
+where $f$ is any global meromorphic function on $C$, with poles only at $p_i$.
 \end{defn}
 
 \begin{prop}[Conformal blocks vs. chiral correlation systems] Fix $C$ 
@@ -1851,7 +1852,14 @@ then
 is also a conformal block, now with the local coordinates $\tilde z_i$.
 \end{prop}
 
-Here is another way to package this.
+
+\subsection{Chiral correlation systems and conformal blocks for vertex algebras with \tops{$\cG$}{G}-action}
+
+Using this we can finally define chiral correlation systems and conformal blocks, now for any vertex algebra
+with a compatible $\cG$-action, instead of just $\vertex = V^k(\fg)$.  
+There are variants depending on how we treat the coordinate
+systems around the marked points.
+
 \begin{defn} For $z \in C$ and $\vrep$ a $\vertex$-module with compatible $\cG$-action, let $F_z$ be the set of
 formal local coordinate systems around $z$, and
 \begin{equation}
@@ -1861,22 +1869,17 @@ formal local coordinate systems around $z$, and
 (In particular we can apply this when $\vrep = \vertex$.)
 Upon choosing a local coordinate system around $z$ we obtain
 an identification of vector spaces $\vrep_z \simeq \vrep$.
-The spaces $\vertex_z$ form a vector bundle 
-over $C$, which has infinite rank but is filtered by 
-finite-dimensional pieces (note that the action of $\cG$ on
+The spaces $\vrep_z$ are fibers of a vector bundle 
+over $C$. This vector bundle has infinite rank, but if $\vrep$ is graded, 
+then at least it is filtered by 
+finite-dimensional bundles (note that the action of $\cG$ on
 $\vrep$ does not preserve the graded components $\vrep_n$ 
 but does preserve the filtration $\vrep_{\le n}$.)
 
+The space $\vrep_z$ can be identified with $\vrep$, but not canonically: one gets an identification only
+after choosing a local coordinate system around $z$.
 
-\subsection{Chiral correlation systems and conformal blocks for vertex algebras with \tops{$\cG$}{G}-action}
-
-Using this we can finally define chiral correlation systems and conformal blocks, now for any vertex algebra
-with a compatible $\cG$-action.  
-There are variants depending on how we treat the coordinate
-systems around the marked points. One that works for 
-the nicest kind of $\vrep$-modules is: 
-
-\begin{defn}[Chiral correlation systems for a vertex algebra with $\cG$-action]
+\begin{defn}[Chiral correlation systems for a vertex algebra and modules with $\cG$-action]
 Suppose $\vertex$ is a vertex algebra with a compatible $\cG$-action, and $C$ is a Riemann surface, with marked points $p_i$
 around the marked points, and $\vertex$-modules $\vrep_i$
 with compatible $\cG$-actions. 
@@ -1888,14 +1891,22 @@ where each $a_i \in \vertex_{q_i}$, $\chi_i \in \vrep_{p_i}$,
 obeying \fixme{the same conditions as usual, singularity when $q \to p$}.
 \end{defn}
 
-There is also a variant of the above where we consider only an action of the subgroup $\fG_+$,
+\begin{defn}[Conformal blocks for a vertex algebra and modules with $\cG$-action]
+Suppose $\vertex$ is a vertex algebra with $\cG$-action.
+Suppose $C$ is a Riemann surface with marked points $p_i$, and $\vertex$-modules $\vrep_i$ with compatible $\cG$-action.
+A \ti{conformal block} for $\vertex$ on $C$ is a linear map $\Phi: \bigotimes_i \vrep_i \to \bbC$ which annihilates
+all vectors of the form
+\begin{equation}
+  \sum_{i=1}^n \sum_{m \in \bbZ} \chi_1 \otimes \cdots \otimes (a_{i,m})_{(m)} \chi_i \otimes \cdots \otimes \chi_n
+\end{equation}
+Here $a$ denotes any global meromorphic section of the vertex algebra bundle over $C$, with poles only at $p_i$,
+whose local expansion around $p_i$ is $\sum_{m \in \bbZ} a_{i,m} z^{m}$, with each $a_{i,m} \in \vertex$.
+\end{defn}
+
+There is also a variant of all the above where we consider only an action of the subgroup $\fG_+$,
 consisting of power series with $a_1 = 1$, i.e. $z + a_2 z^2 + a_3 z^3 + \cdots$ In this case we cannot completely eliminate the coordinate dependence, but we can reduce it to a dependence
 on a choice of tangent vector at the marked point.
 
-\begin{defn}[Conformal blocks for a vertex algebra and modules with $\cG$-action]
-\end{defn}
-
-\fixme{...}
 
 % This action is by infinitesimal automorphisms of $\vertex$, in the sense that
 % \begin{equation}
@@ -1905,8 +1916,8 @@ on a choice of tangent vector at the marked point.
 
 \subsection{Changes of coordinate, by Virasoro}
 
-Now we specialize very slightly to the case $k \neq - h^\vee$.
-In this case there is another point of view on the action of changes of coordinate.
+Now let us reconsider the $\cG$-action on $V^k(\fg)$ from a different point of view.
+We specialize very slightly to the case $k \neq - h^\vee$.
 The idea is to 
 find a copy of $\fG$ inside $\vertex$, and then use the general fact that 
 $\vertex$ acts on itself. For this consider $\omega \in \vertex$ defined by
@@ -1927,7 +1938,7 @@ with
 \end{prop}
 In principle one could prove this directly by hand, carefully manipulating the singular parts of the OPEs to figure
 out what singularity we get when we bring $\omega(z)$ close to $\omega(w)$.
-But it seems a bit hairy to do so. It might be better to introduce the ``noncommutative Wick formula,''
+But it seems a bit hairy to do so. It might be better to introduce the ``noncommutative Wick formula''\footnote{I had trouble chasing down a good reference for this formula; \cite{kac1998vertex} seems to give a version for the mode expansions; \cite{DeSoleKac2006FiniteVsAffineW} gives the formula as we wrote it here. Warning: \cite{Arakawa2016IntroductionWAlgebras} has a slightly different formula, hopefully a typo there.}
 \begin{lem}[Noncommutative Wick formula]
 \begin{equation} \label{eq:nc-wick}
 \lb{a}{\lambda}{\nop{bc}} = \nop{\lb{a}{\lambda}{b} c} + \nop{b \lb{a}{\lambda}{c}} + \int_0^\lambda \lb{\lb{a}{\lambda}{b}}{\mu}{c} \, \de \mu \, .
@@ -1943,24 +1954,24 @@ The left side of \eqref{eq:nc-wick} can be written as \fixme{make figure with co
 \end{equation}
 By deformation of the $z$ contour this turns into
 \begin{equation}
-  \oint_x \frac{\de w}{w-x} \left(  \oint_x \de z \, \e^{\lambda (z-x)} a(z) b(w) \right) c(x) + \oint_x \frac{\de w}{w-x} \left(  \oint_w \de z \, \e^{\lambda (z-x)} a(z) b(w) \right) c(x)
+  \oint_x \frac{\de w}{w-x} \left(  \oint_w \de z \, \e^{\lambda (z-x)} a(z) b(w) \right) c(x) + \oint_x \frac{\de w}{w-x} \left(  \oint_x \de z \, \e^{\lambda (z-x)} a(z) b(w) \right) c(x)  \, .
 \end{equation}
-Now the first term is $\nop{b \lb{a}{\lambda}{c}}$, while the second term differs from
+The second term is $\nop{b \lb{a}{\lambda}{c}}$, while the first differs from
 $\nop{\lb{a}{\lambda}{b} c}$ by the error term
 \begin{equation} \label{eq:nc-wick-error-term}
-  \oint_x \frac{\de w}{w-x} \left(  \oint_w \de z \, [\e^{\lambda (z-x)}-\e^{\lambda (z-w)}] a(z) b(w) \right) c(x)
+  \oint_x \frac{\de w}{w-x} \left(  \oint_w \de z \, [\e^{\lambda (z-x)}-\e^{\lambda (z-w)}] a(z) b(w) \right) c(x) \, .
 \end{equation}
 We can re-expand the function appearing here as
 \begin{equation}
-\frac{\e^{\lambda(z-x)} - \e^{\lambda(z-w)}}{w-x} = \e^{\lambda(z-w)} \int_0^\lambda \e^{\mu(w-x)} \de \mu
+\frac{\e^{\lambda(z-x)} - \e^{\lambda(z-w)}}{w-x} = \e^{\lambda(z-w)} \int_0^\lambda \de \mu \, \e^{\mu(w-x)}
 \end{equation}
 and thus recognize the error term \eqref{eq:nc-wick-error-term} as
 \begin{equation}
- \int_0^\mu \de \mu \left[ \oint_x \de w \, \e^{\mu(w-x)} \left( \oint_w \de z \, \e^{\lambda(z-w)} a(z) b(w) \right) c(x) \right]
+ \int_0^\lambda \de \mu \left[ \oint_x \de w \, \e^{\mu(w-x)} \left( \oint_w \de z \, \e^{\lambda(z-w)} a(z) b(w) \right) c(x) \right]
 \end{equation}
 which is
 \begin{equation}
-  \int_0^\mu \de \mu \, \lb{\lb{a}{\lambda}{b}}{\mu}{c} \, \de \mu 
+  \int_0^\lambda \de \mu \, \lb{\lb{a}{\lambda}{b}}{\mu}{c}
 \end{equation}
 as desired.
 
@@ -1982,19 +1993,19 @@ as desired.
 %   \oint \oint \de z \, \de w \, a(z) b(w) c(0) \e^{\mu(z-w)} \e^{(\lambda-\mu) z} = \lb{\lb{a}{\lambda}{b}}{\mu}{c} \, .
 % \end{equation}
 
-Now to prove \eqref{eq:omega-lambda-bracket} we work in a $\kappa$-orthonormal basis,
-use $J^i$ for $J^{X^i}$, and $[X^i,X^j] = f^{ijk} X^k$, and
-sum over repeated indices. Then \fixme{fix}
+Now to prove \eqref{eq:omega-lambda-bracket} we work in a $\kappa$-orthonormal basis $(X^i)$ for $\fg$,
+use $J^i$ for $J^{X^i}$, and write $[X^i,X^j] = f^{ijk} X^k$, with the convention that we always
+sum over repeated indices. Then \eqref{eq:nc-wick} gives
 \begin{equation}
-  \lb{J^i}{\lambda}{\nop{J^j J^j}} = \nop{\lb{J^i}{\lambda}{J^j}J^j} + \nop{J^j\lb{J^i}{\lambda}{J^j}} + \int_0^\lambda \lb{\lb{J^i}{\lambda}{J^j}}{\mu}{J^j} \, \de \mu
+  \lb{J^i}{\lambda}{\nop{J^j J^j}} = \nop{\lb{J^i}{\lambda}{J^j}J^j} + \nop{J^j\lb{J^i}{\lambda}{J^j}} + \int_0^\lambda \lb{\lb{J^i}{\lambda}{J^j}}{\mu}{J^j} \, \de \mu \, ,
 \end{equation}
 and recalling $\lb{J^k}{\lambda}{J^\ell} = \lambda k \delta^{k \ell} \bid + f^{k\ell m} J^m$ this is
 \begin{equation}
-  = \nop{(\lambda k \delta^{ij} \bid + f^{ijm} J^m) J^j} + \nop{J^j(\lambda k \delta^{ij} \bid + f^{ijm} J^m)} + \int_0^\lambda \lb{(\lambda k \delta^{ij} \bid + f^{ijm} J^m)}{\mu}{J^j} \, \de \mu
+  = \nop{(\lambda k \delta^{ij} \bid + f^{ijm} J^m) J^j} + \nop{J^j(\lambda k \delta^{ij} \bid + f^{ijm} J^m)} + \int_0^\lambda \lb{(\lambda k \delta^{ij} \bid + f^{ijm} J^m)}{\mu}{J^j} \, \de \mu \, ,
 \end{equation}
 which simplifies to
 \begin{equation}
-  = 2 \lambda k J^i + f^{ijm} (\nop{J^m J^j} + \nop{J^j J^m}) + f^{ijm} \int_0^\lambda \mu k \delta^{mj} \bid + f^{mj\ell} J^\ell \, \de \mu
+  = 2 \lambda k J^i + f^{ijm} (\nop{J^m J^j} + \nop{J^j J^m}) + f^{ijm} \int_0^\lambda \mu k \delta^{mj} \bid + f^{mj\ell} J^\ell \, \de \mu \, .
 \end{equation}
 Now using the asymmetry of $f^{ijm}$ and $f^{ijm} f^{mj\ell} = 2 h^\vee \delta^i_\ell$ (see \autoref{eq:f-coxeter}), 
 this simplifies to
@@ -2038,7 +2049,8 @@ Finish the proof of \eqref{eq:omega-lambda-bracket}.
 %   \nop{a b} = a_{(-1)} b \, .
 % \end{equation}
 
-Now, note that \eqref{eq:omega-lambda-bracket} is the $\lambda$-bracket of the generator of the 
+The equations \eqref{eq:omega-lambda-bracket} are extremely important.
+The first equation in \eqref{eq:omega-lambda-bracket} is the $\lambda$-bracket of the generator of the 
 Virasoro algebra. It implies that there is a homomorphism of vertex algebras, $\Vir^c \to V^k(\fg)$.
 Also if we write
 \begin{equation}
@@ -2047,7 +2059,7 @@ Also if we write
 (note the shifted index: $L_n = \omega_{(n+1)}$)
 then we have
 \begin{equation}
-  [L_n, L_m] = (m-n) L_{m+n} + \frac{c}{12}\,(m+1)(m)(m-1)\,\delta_{m+n,0} \bid \, ,
+  [L_m, L_n] = (m-n) L_{m+n} + \frac{c}{12}\,(m+1)(m)(m-1)\,\delta_{m+n,0} \bid \, ,
 \end{equation}
 which is the Virasoro Lie algebra.
 \eqref{eq:omega-lambda-bracket} also implies
@@ -2075,8 +2087,36 @@ The best possible situation arises if $\vrep = \oplus_{n \ge n_0} \vrep_n$, grad
 with all eigenvalues integers and bounded below. In that case $\fG_+$ acts locally nilpotently\footnote{\ti{Locally nilpotently} means that for every $v \in \fG_+$ and $\chi \in \vrep$ there exists $N$ such that $v^N \chi = 0$.} and $\fG_0$
 acts diagonally respecting the relation $\exp(2 \pi \I L_0) = 1$, 
 so both indeed integrate to $\rho: \cG \to \End \vrep$.
-The next best situation arises if the eigenvalues are not necessarily integers. Then at least $\fG_+$ integrates
+The next best situation arises if $\vrep$ is still graded by $L_0$ but 
+the eigenvalues are not necessarily integers. Then at least $\fG_+$ integrates
 to $\rho: \cG_+ \to \End \vrep$.
+
+An element $\chi \in \vrep$ which is annihilated by all positive modes $L_n$, and obeys $L_0 \chi = h \chi$,
+is called a \ti{primary field} of \ti{conformal weight} $h$. 
+For example, the elements $J^X \in \vertex$ are primary fields of conformal weight $1$.
+The transformation law of primary fields 
+under changes of coordinate is relatively simple: if $g = a_1 z + a_2 z^2 + \cdots$ then
+$\rho(g) \chi = (a_1)^h \chi$ (note this is well defined only when $h \in \bbZ$, as we discussed in the last
+paragraph; we can try to make sense
+of it for other $h$, but we will need some extra structure, e.g. a spin structure for $h = \frac12$). 
+Said otherwise, $\chi$ ``transforms as an $h$-differential.''
+So if $h=1$ then $\chi$ transforms as a $1$-form (we have already used this 
+for $\chi = J^X$), if $h=2$ then $\chi$ transforms as a quadratic differential, and so on.
+
+One other interesting case is the Virasoro field $\omega = L_{-2} \vac$ 
+itself. This one has $L_0 \omega = 2 \omega$, so you might think it would transform as a 
+quadratic differential, but it is not primary for $c \neq 0$: 
+indeed $L_2 \omega = [L_2, L_{-2}] \vac = \frac{c}{2} \vac$.
+Thus its transformation law is more interesting: under a finite change of coordinates $g(z)$ we have
+\begin{equation} \label{eq:stress-tensor-transformation}
+  \rho(g) \omega = (\de g/\de z)^2 \omega + \frac{c}{12} \{g,z\} \bid
+\end{equation}
+where $\{\cdot,\cdot\}$ denotes the Schwarzian derivative:
+$\{g(z),z\} = \frac{g'''(z)}{g'(z)} - \frac32 \left( \frac{g''(z)}{g'(z)} \right)^2$.
+
+\begin{exercise}
+Prove \eqref{eq:stress-tensor-transformation}, by (in an appropriate sense) integrating the Virasoro algebra.
+\end{exercise}
 
 
 \subsection{Moving the marked points}
