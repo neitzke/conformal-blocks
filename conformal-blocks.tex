@@ -187,6 +187,8 @@
 \newcommand{\fp}{{\mathfrak p}}
 \newcommand{\fk}{{\mathfrak k}}
 \newcommand{\fg}{{\mathfrak g}}
+\newcommand{\fl}{{\mathfrak l}}
+\newcommand{\fc}{{\mathfrak c}}
 \newcommand{\fh}{{\mathfrak h}}
 \newcommand{\fn}{{\mathfrak n}}
 \newcommand{\fq}{{\mathfrak q}}
@@ -199,6 +201,7 @@
 
 \newcommand{\hfsl}{{\widehat\fsl}}
 \newcommand{\hfg}{{\widehat\fg}}
+\newcommand{\hfc}{{\widehat\fc}}
 
 \newcommand{\hC}{{\widehat C}}
 \newcommand{\hS}{{\widehat S}}
@@ -1604,8 +1607,8 @@ as usual.)
 \begin{example}[Parabolic Verma modules] \label{exa:parabolic-verma-module}
 Fix a $\fg$-module $M$. Let
 $\hfg_{\ge 0}$ act on $M$ as follows:
-the zero modes act through the $\fg$-action on $M$,
-and the positive modes act as zero.
+the modes $X_{(0)}$ act through the $\fg$-action on $M$,
+and the positive modes $X_{(n)}$ act by $0$.
 Then let 
 $\vrep = \Ind^{\hfg}_{\hfg_{\ge 0}} M$.\footnote{Recall the definition: for any $\fh \subset \fg$ (or more generally
 any map of Lie algebras $\fh \to \fg$), and any $\fh$-module $M$, we get a $\fg$-module $\Ind_\fh^\fg M = U(\fg) \otimes_{U(\fh)} M$.}
@@ -1620,9 +1623,23 @@ Then let $\hfg_{\ge 1}$ act on $\bbC$
 as follows: the modes $X_{(1)}$ act by $u(X)$,
 all higher modes $X_{(n)}$ act by $0$.
 Then let $\vrep = \Ind^{\hfg}_{\hfg_{\ge 1}} \bbC$.
-
 This one is a little more exotic than the previous: in particular it is not graded,
 because it contains a vector $\vacu$ with $X_{(1)} \vacu = u(X) \vacu$.
+\end{example}
+
+\begin{example}[Hybrid modules]
+Again fix an element $u \in \fg^*$, let $\fc = Z(u)$ (the centralizer),
+and choose a $\fc$-module $M$.
+Then consider the subalgebra $\hfg_{\ge 1} + \hfc_{\ge 0}$.
+This subalgebra acts on $M$ as follows:
+the modes $X_{(0)}$ for $X \in \fc$ act through the $\fc$-action on $M$,
+the modes $X_{(1)}$ act by $u(X) \bid_M$,
+all higher modes $X_{(n)}$ act by $0$.
+(To check this is actually a Lie algebra action, we need to use the fact that $[\fg,\fc] \subset \ker u$.)
+Then let $\vrep = \Ind^{\hfg}_{\hfg_{\ge 1} + \hfc_{\ge 0}} M$.
+This specializes to the previous two cases, upon choosing $u = 0$ or $M = \triv$.
+(Note that if $u$ is a regular element then $\fc = 0$, so this generalization is not interesting in that case:
+we only get interesting hybrid modules when $0 \subsetneqq Z(u) \subsetneqq \fg$.)
 \end{example}
 
 Now suppose we have
@@ -1757,7 +1774,7 @@ one marked point.
 
 For a completely arbitrary conformal block it is not clear that summing up the formal Laurent series will give 
 an actual function.
-As a piece of personal philosophy: the \ti{most intersting} conformal blocks are the ones which actually come
+As a piece of personal philosophy: the \ti{most interesting} conformal blocks are the ones which actually come
 from chiral correlation systems.
 
 
@@ -1802,7 +1819,7 @@ giving
 Combining this with $\ell_n \vac = 0$ determines an action of $\fG$ on $\vertex$.
 It follows directly from our iterated contour-integral construction that 
 the conformal blocks we construct are compatible with this action:
-\begin{prop}[Coordinate covariance of conformal blocks]
+\begin{prop}[Coordinate covariance of conformal blocks, with the vacuum module]
 Fix a chiral correlation system on a curve $C$.
 For any choice of local coordinates $z_i$ at marked points $p_i$, let
 \[
@@ -1834,7 +1851,8 @@ $\rho^\vrep: \cG \to \End \vrep$ with
   \rho^\vrep(g) Y^\vrep(a,z) \rho^\vrep(g)^{-1} = Y^\vrep(\rho(g) a, g(z)) \, .
 \end{equation}
 
-\begin{prop} Suppose $\vrep_i$ are $\vertex$-modules, with a compatible $\cG$-action.
+\begin{prop}[Coordinate covariance of conformal blocks, with more general modules] 
+Suppose $\vrep_i$ are $\vertex$-modules, with a compatible $\cG$-action.
 Suppose $C$ is a Riemann surface with marked points $p_i$ and local coordinates $z_i$, and
 \begin{equation}
   \Phi: \bigotimes_{i=1}^n \vrep_i \to \bbC
@@ -1860,7 +1878,7 @@ with a compatible $\cG$-action, instead of just $\vertex = V^k(\fg)$.
 There are variants depending on how we treat the coordinate
 systems around the marked points.
 
-\begin{defn} For $z \in C$ and $\vrep$ a $\vertex$-module with compatible $\cG$-action, let $F_z$ be the set of
+\begin{defn}[Vector bundles associated to $\vertex$-modules] For $z \in C$ and $\vrep$ a $\vertex$-module with compatible $\cG$-action, let $F_z$ be the set of
 formal local coordinate systems around $z$, and
 \begin{equation}
 \vrep_z = \vrep \times_{\cG} F_z \, .
