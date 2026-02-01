@@ -984,15 +984,11 @@ It is interesting to ask what are the vertex
 operators $Y(a,z)$ associated to general elements $a \in \vertex$.
 We know that
 \begin{equation}
-  Y(J_{(-1)} \vac, z) = Y(J, z) = \sum_n J_{(n)} z^{-n-1} \, .
+  Y(a_{(-1)} \vac, z) = Y(a, z) = \sum_n a_{(n)} z^{-n-1} \, .
 \end{equation}
 Using the translation axiom we can similarly get
 \begin{equation}
-  Y(J_{(-m)} \vac, z) = \frac{\partial_z^{m-1}}{(m-1)!} Y(J, z) 
-\end{equation}
-and more generally
-\begin{equation}
-  Y(a_{(-m)} \vac, z) = \frac{\partial_z^{m-1}}{(m-1)!} Y(a, z)
+  Y(a_{(-m)} \vac, z) = \frac{\partial_z^{m-1}}{(m-1)!} Y(a, z) \, .
 \end{equation}
 
 % \begin{prop} \label{prop:goddard-uniqueness}
@@ -1549,6 +1545,12 @@ a nontrivial ideal. (Hint: show that all operators $J^X_{(n)}$ for $n > 0$ annih
 \begin{exercise} Calculate the determinant $\Delta_2$. (This seems tedious, but maybe fun to do once?)
 \end{exercise}
 
+\begin{exercise} Suppose given any unpunctured curve $C$ and any chiral correlation system for $V^k(\fg)$.
+Then fix a point $p \in C$ and a coordinate system $z$ around $p$,
+and consider the corresponding $1$-point correlation function $\Phi: \vertex \to \bbC$.
+Letting $p$ vary this gives a function $\Phi_z: \vertex \to \bbC$.
+Prove that $\partial_z \Phi_z(a) = \Phi_z(T a)$.
+\end{exercise}
 
 
 \subsection{Including other modules}
@@ -2137,7 +2139,29 @@ Prove \eqref{eq:stress-tensor-transformation}, by (in an appropriate sense) inte
 
 \subsection{Moving the marked points}
 
-\fixme{...}
+So far we have only used the $L_n$ with $n \ge 0$. Another 
+important feature is that $L_{-1}$ acting on $\vertex$ 
+generates translations:
+\begin{equation}
+  L_{-1} = T \, .
+\end{equation}
+(To prove this it's enough to use the fact $[L_{-1}, J^X_{(m)}] = -m J^X_{(m-1)}$.)
+This means in particular that chiral correlation functions obey the relation
+\begin{equation}
+  \partial_z \IP{ a(z) \cdots } = \IP{ (L_{-1} a)(z) \cdots }
+\end{equation}
+
+What is more interesting is that we can do the same thing with $\vertex$-modules inserted, i.e.
+for $\chi \in \vrep$ we can have the equation
+\begin{equation}
+  \partial_z \IP{ \chi(z) \cdots } = \IP{ (L_{-1} \chi)(z) \cdots }
+\end{equation}
+We would like to understand this as the equation obeyed by parallel sections of some $D$-module
+
+
+\subsection{Variations of the curve}
+
+
 
 
 \subsection{The center at the critical level}
