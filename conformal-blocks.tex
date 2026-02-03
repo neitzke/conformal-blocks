@@ -1603,8 +1603,8 @@ have to be brief.
 Here is an important class of modules for
 $\vertex = V^k(\fg)$.
 \begin{prop}
-Suppose $\vrep$ is a $\hfg$-module 
-such that $\bid \in \hat\fg$ acts as the identity
+Suppose $\vrep$ is a \ti{smooth} $\hfg$-module: this means 
+$\bid \in \hat\fg$ acts as the identity
 and, for all $\chi$, $J^X_{(n)} \chi = 0$ for $n \gg 0$.
 Then, $\vrep$ is also a $\vertex$-module.
 \end{prop}
@@ -1893,10 +1893,10 @@ formal local coordinate systems around $p$, and
 \end{equation}
 \end{defn}
 (In particular we can apply this when $\vrep = \vertex$.)
-The spaces $\vrep_p$ are fibers of a vector bundle 
-over $C$. This vector bundle has infinite rank, but if $\vrep$ is graded, 
-then at least it is filtered by holomorphic 
-finite-rank bundles (note that the action of $\cG$ on
+If $\vrep$ is graded, then
+the spaces $\vrep_p$ are fibers of an ind-vector bundle 
+over $C$: roughly this means a vector bundle of infinite rank, 
+filtered by holomorphic finite-rank bundles (note that the action of $\cG$ on
 $\vrep$ does not preserve the graded components $\vrep_n$ 
 but does preserve the filtration $\vrep_{\le n}$.)
 
@@ -1930,9 +1930,13 @@ Define the subspace
  K(C) = \left\{  \sum_{i=1}^n \sum_{m \in \bbZ} \chi_1 \otimes \cdots \otimes (a_{i,m})_{(m)} \chi_i \otimes \cdots \otimes \chi_n \mid  a \in \vertex(C) \right\} \subset \bigotimes_i (\vrep_i)_{p_i}
 \end{equation}
 where we use the local coordinate $z_i$ to identify $\vrep_i$ with $(\vrep_i)_{p_i}$.
+Let
+\begin{equation}
+  \Coinv(C) = \left( \bigotimes_i (\vrep_i)_{p_i} \right) / K(C) \, .
+\end{equation}
 Then a \ti{conformal block} for $\vertex$ on $C$ is a linear map 
-\begin{equation} 
- \Phi: \left( \bigotimes_i (\vrep_i)_{p_i} \right) / K(C) \to \bbC \, . 
+\begin{equation}
+ \Phi: \Coinv(C) \to \bbC \, . 
 \end{equation}
 \end{defn}
 
@@ -2193,18 +2197,15 @@ To formulate this precisely we work in the language of conformal blocks rather t
 systems. Fix a base curve $C$ with punctures and modules, 
 and let one puncture $p$ vary while the others $p_i$ are held fixed. 
 Then the spaces $\vrep_p \otimes \bigotimes_i (\vrep_i)_{p_i}$
-are the fibers of a vector bundle $\cB$ over $C$,
-with subbundle $\cB_K$ given by the spaces $K(C_p)$ from \eqref{eq:K-subspace}.
-Both of these bundles are again filtered by finite rank bundles.
+are the fibers of an ind-vector bundle $\cB$ over $C$,
+with a subsheaf $\cB_K$ given by the spaces $K(C_p)$ from \eqref{eq:K-subspace}.
 
 Now, first suppose we fix a local coordinate $z$ around $p$.
 Then:
 \begin{prop}
-The operator $\partial_z + L_{-1}$ gives a $D$-module structure
-in the quotient $\cB / \cB_K$. (Here $L_{-1}$ acts in the tensor factor $\vrep_p$ of $\cB$.)
+If $s$ is a section of $\cB_K$, then $(\partial_z + L_{-1}) s$ is also a section of $\cB_K$.
+(Here $L_{-1}$ acts in the tensor factor $\vrep_p$ of $\cB$.)
 \end{prop}
-This amounts to saying that, if
-$s$ is a section of $\cB_K$, then $(\partial_z + L_{-1}) s$ is also a section of $\cB_K$.
 \begin{example}
 Suppose $\vertex = \Heis$ and
 $C = \bbC \bbP^1$ with marked points at $w,\infty$.
@@ -2217,9 +2218,83 @@ and using $[L_{-1}, J_1] = -J_0$ we see that
   (\partial_w + (L_{-1} \otimes 1)) \left( (J_1 + w J_0) \chi_1 \otimes \chi_2 + \chi_1 \otimes J_{-1} \chi_2 \right) = \\
   (J_1 + w J_0) L_{-1} \chi_1 \otimes \chi_2 + L_{-1} \chi_1 \otimes J_{-1} \chi_2 \ \in \ \cB_K
 \end{multline}
+\end{example}
+Thus it is sensible to ask for a family $\Phi_z$ of conformal blocks obeying
+% \begin{equation} 
+%   (\partial_z \Phi_z)(\chi(z), \cdots) = -\Phi_z(L_{-1} \chi(z), \cdots)
+% \end{equation}
+% or equivalently
+\begin{equation} \label{eq:flat-conformal-blocks}
+  \partial_z (\Phi_z(\chi(z), \cdots)) = \Phi_z((\partial_z + L_{-1}) \chi(z), \cdots)
+\end{equation}
+One would like to say that \eqref{eq:flat-conformal-blocks} 
+describes the covariantly constant sections of a connection in the space of conformal blocks.
+One has to be a little cautious about what this means, because the space of conformal blocks as we defined it
+(pointwise dual of coinvariants) does not necessarily form a bundle over $C$.
+But at least we can speak meaningfully about the solutions of \eqref{eq:flat-conformal-blocks}.
+It could be formalized in the language of $\cD$-modules:
+the operator $\partial_z + L_{-1}$ makes $\cB$ and $\cB_K$ into $\cD$-modules,
+and the sheaf of solutions $\Phi$ of \eqref{eq:flat-conformal-blocks} is
+$\Hom_{\cD}(\cB / \cB_K, \cO)$.
 
+Note \eqref{eq:flat-conformal-blocks} is equivalent to
+\begin{equation}
+  \partial_z \Phi_z(\chi, \cdots) - \Phi_z(L_{-1} \chi, \cdots) = 0
+\end{equation}
+which might be written more briefly as $(\partial_z - L_{-1}) \Phi_z = 0$.
+So there is a tricky minus sign here, depending whether we look at the
+connection on coinvariants or on conformal blocks.
+
+\begin{example}
+Suppose $\vertex = V^k(\fg)$.
+We take $C = \bbC \bbP^1$, with marked points at $z_1$, $z_2$, and $\infty$.
+At $z_1$ and $z_2$ we insert parabolic Verma modules $\vrep(M_1)$ and $\vrep(M_2)$
+while at $\infty$ we insert the irregular module $\vrep(u=0)$.
+The subspace $M_1 \otimes M_2 \otimes \bbC \vac_u \subset \vrep(M_1) \otimes \vrep(M_2) \otimes \vrep(u=0)$ 
+represents $\Coinv(C)$ for every $z_1$, $z_2$.
+Now to write the operator $L^{(1)}_{-1}$ concretely we use
+the fact
+\begin{equation}
+  L_{-1} = \frac{1}{k + h^\vee} (J^i_{-1} J^i_0 + J^i_{-2} J^i_1 + \cdots)
+\end{equation}
+All positive modes annihilate $M_1$, so we only have to deal with $J^i_{-1} J^i_0$.
+Now consider the function $f = \frac{1}{z-z_1}$. 
+We use its expansions around $z_1, z_2, \infty$ to see
+it generates the operator
+\begin{equation}
+  J^i_{-1} \otimes \bid \otimes \bid + \sum_{n \ge 0} \frac{\bid \otimes J^i_{n} \otimes \bid}{(z_1 - z_2)^{n+1}} + \sum_{n \ge 0} z_1^n (\bid \otimes \bid \otimes J^i_{n+1})
+\end{equation}
+Acting on $M_1 \otimes M_2 \otimes \bbC \vac_u$
+this reduces to
+\begin{equation}
+  J^i_{-1} \otimes \bid \otimes \bid + \frac{\bid \otimes J^i_{0} \otimes \bid}{z_1 - z_2}
+\end{equation}
+Thus the image of this operator lies in $K(C)$,
+so modulo $K(C)$
+we can replace the action of $J_{-1}$ at $z_1$
+with the action of $J_0$ at $z_2$. This gives
+\begin{equation}
+  L^{(1)}_{-1} = - \frac{1}{k + h^\vee} \sum_{i=1}^{\dim \fg} \frac{J^i_0 \otimes J^i_0 \otimes \bid}{z_1 - z_2}
+\end{equation}
+\fixme{... also the $n$-point version}
+
+Altogether then, we have a PDE in the bundle $\Coinv(C) \simeq \bigotimes_i V_i$
+over $\Conf_n(\bbC)$, given by the operators
+\begin{equation}
+  \partial_{z_i} - \frac{1}{k + h^\vee} \sum_{j \neq i} \frac{T_{ij}}{z_i - z_j}
+\end{equation}
+where $T_{ij} = \sum_{a=1}^{\dim \fg} X^a_i \otimes X^a_j$, and $X^a_i$ means $X^a$ acting in the $i$-th factor
+of the tensor product.
+
+Now we can consider the behavior of this connection, for small values of 
 
 \end{example}
+
+
+
+
+
+
 
 
 \subsection{Variations of the curve}
