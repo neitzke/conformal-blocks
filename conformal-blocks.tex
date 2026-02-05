@@ -1638,7 +1638,7 @@ because it contains a vector $\vacu$ with $X_{(1)} \vacu = u(X) \vacu$.
 \begin{example}[Hybrid modules]
 Again fix an element $u \in \fg^*$, let $\fc = Z(u)$ (the centralizer),
 and choose a $\fc$-module $M$.
-Then consider the subalgebra $\hfg_{\ge 1} + \hfc_{\ge 0}$.
+Then consider the subalgebra $\hfg_{\ge 1} \oplus \hfc_{0}$.
 This subalgebra acts on $M$ as follows:
 the modes $X_{(0)}$ for $X \in \fc$ act through the $\fc$-action on $M$,
 the modes $X_{(1)}$ act by $u(X) \bid_M$,
@@ -1737,18 +1737,18 @@ Then the condition is
 Conversely, given $\Phi$ which obeys \eqref{eq:coinvariant-condition-concrete} for every $f$, we can build a chiral correlation system.
 (This is a nontrivial claim: it says that the Laurent series we build out of $\Phi$ actually converge! \fixme{...})
 Another way to phrase the condition \eqref{eq:coinvariant-condition-concrete}: 
-there is a linear subspace $S \subset W = \otimes_i \vrep_i$ 
+there is a linear subspace $K \subset W = \otimes_i \vrep_i$ 
 consisting of vectors of the form 
 \begin{equation}
   \sum_{i=1}^n \sum_{m \in \bbZ} \chi_1 \otimes \cdots \otimes (f_{i,m} J^{X,\vrep_i}_{(m)}) \chi_i \otimes \cdots \otimes \chi_n
 \end{equation}
-and $\Phi$ must annihilate $S$.
+and $\Phi$ must annihilate $K$.
 
-Now how big is $S$? Let's consider the case 
+Now how big is $K$? Let's consider the case 
 where $\vrep_i = \Ind^{\hfg}_{\hfg_{\ge 0}} M_i$.
 First note that for any $i$ and any $m < 0$, the function $f(z) = (z - z_i)^m$
 has $f_{i,m} = 1$ and all other $f_{j,m} = 0$ for $m<0$.
-It follows that $S \oplus W_0 = W$. Next note that any element in $S \cap W_0$ must
+It follows that $K \oplus W_0 = W$. Next note that any element in $S \cap W_0$ must
 come from a constant function $f$ (since these are the only functions on $\bbC \bbP^1$ which has
 $f_{i,m} = 0$ for all $m < 0$).
 It follows that any $\Phi_0: W_0 \to \bbC$ which obeys the condition
@@ -1756,7 +1756,7 @@ It follows that any $\Phi_0: W_0 \to \bbC$ which obeys the condition
 $\Phi: W \to \bbC$ obeying \eqref{eq:coinvariant-condition-concrete}.
 Said otherwise, the space of chiral correlation systems on $C$ is
 \begin{equation}
-  \Hom_\fg(\bigotimes_{i=1}^n M_i, \triv) \, .
+  \Hom^\fg(\bigotimes_{i=1}^n M_i, \triv) \, .
 \end{equation}
 
 \end{example}
@@ -2385,15 +2385,18 @@ or vice versa. Prove that these operators obey the ``Hecke relation'' \fixme{che
 What is the analogous relation if we take $\fg = \fsl_N$?
 \end{exercise}
 
+
 \subsection{Link invariants}
 
 So far we have been working with the vertex algebra $\vertex^k(\fg)$ at generic $k$.
-\fixme{...}
+Now let us instead take $k \in \bbN$ and 
+consider the simple quotient $\vertex = L_k(\fg)$.
+In this case some things become simpler.
 
 
 \subsection{Variations of the curve}
 
-\fixme{...}
+\fixme{write the formula for }
 
 
 
