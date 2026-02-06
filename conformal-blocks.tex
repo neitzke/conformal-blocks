@@ -2298,17 +2298,18 @@ so modulo $K(C)$
 we can replace the action of $J_{-1}$ at $z_1$
 with the action of $J_0$ at $z_2$. This gives
 \begin{equation}
-  L^{(1)}_{-1} = - \frac{1}{k + h^\vee} \sum_{i=1}^{\dim \fg} \frac{J^a_0 \otimes J^a_0 \otimes \bid}{z_1 - z_2}
+  L^{(1)}_{-1} = - \frac{1}{k + h^\vee} \sum_{a=1}^{\dim \fg} \frac{J^a_0 \otimes J^a_0 \otimes \bid}{z_1 - z_2}
 \end{equation}
-\fixme{... also the $n$-point version}
-
+Very similarly, if we have $n$ marked points in the plane, the action of $L_{-1}$ in the $i$-th factor is
+\begin{equation}
+  L^{(i)}_{-1} = - \frac{1}{k + h^\vee} \sum_{j \neq i} \sum_{a=1}^{\dim \fg} \frac{(J^a_0)^{(i)} (J^a_0)^{(j)}}{z_i - z_j}
+\end{equation}
 Altogether then, we have a PDE in the bundle $\Coinv(C) \simeq \bigotimes_i V_i$
 over $\Conf_n(\bbC)$, given by the operators
 \begin{equation} \label{eq:kz-kohno}
   \partial_{z_i} - \frac{1}{k + h^\vee} \sum_{j \neq i} \frac{T_{ij}}{z_i - z_j}
 \end{equation}
-where $T_{ij} = \sum_{a=1}^{\dim \fg} X^a_i X^a_j$, and $X^a_i$ means $X^a$ acting in the $i$-th factor
-of the tensor product.
+where $T_{ij} = \sum_{a=1}^{\dim \fg} (X^a)^{(i)} (X^a)^{(j)}$.
 
 The monodromy of this PDE gives an action of the pure braid group $P_n = \pi_1(\Conf_n(\bbC))$ 
 on $\bigotimes_i V_i$. What is this action concretely?
@@ -2348,8 +2349,7 @@ Given this $R$-matrix and representations $V_1, \dots, V_n$ of $\fg$,
 one can construct a representation of the pure braid group $P_n$ on $\bigotimes_i V_i$.
 Then we have:
 \begin{thm}[Drinfeld-Kohno]
-For generic $k$,
-the braid group representation on $\otimes_i V_i$ coming from monodromy of coinvariants for $V^k(\fg)$
+For generic $k$, the representation of $P_n$ on $\otimes_{i=1}^n V_i$ coming from monodromy of coinvariants for $V^k(\fg)$
 is equivalent to the one coming from $U_q(\fg)$, with the relation $q = \exp( \frac{\pi \I}{k + h^\vee} )$.
 \end{thm}
 
