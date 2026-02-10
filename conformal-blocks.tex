@@ -408,6 +408,8 @@
 \DeclareMathOperator{\Path}{Path}
 \DeclareMathOperator{\LPath}{LPath}
 \DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\coev}{coev}
 
 \newcommand{\insfig}[3]{
 
@@ -2269,6 +2271,9 @@ which might be written more briefly as $(\partial_z - L_{-1}) \Phi_z = 0$.
 So there is a tricky minus sign here, depending whether we look at the
 connection on coinvariants or on conformal blocks.
 
+In favorable situations, where $\cB / \cB_K$ is actually a vector bundle of finite rank,
+we could hope for more: then a $\cD$-module structure means a flat connection.
+
 \begin{example}
 Suppose $\vertex = V^k(\fg)$.
 We take $C = \bbC \bbP^1$, with marked points at $z_1$, $z_2$, and $\infty$.
@@ -2391,22 +2396,69 @@ What is the analogous relation if we take $\fg = \fsl_N$?
 \end{exercise}
 
 
-\subsection{Fusion and unfusion}
+\subsection{Nice categories of modules}
 
 So far we have been working with the vertex algebra $\vertex^k(\fg)$ at generic $k$.
 Now let us instead take $k \in \bbN$ and 
 consider the simple quotient $\vertex = L_k(\fg)$.
 In this case some things become simpler.
 In particular, the category of modules becomes simpler.
-Say an \ti{ordinary module} is a module for which 
+
+\begin{defn}
+An \ti{ordinary $\vertex$-module} is a $\vertex$-module for which 
 $L_0$ acts diagonalizably, with eigenvalues bounded below, and
 finite-dimensional eigenspaces.
-Then, 
+\end{defn}
+
+Let $\cC$ be the category of ordinary modules for $L_k(\fg)$.
+
+
+\subsubsection{Duals}
+
+\begin{defn}[Dual module]
+Say $\vertex$ is a conformal vertex algebra, and let $\vrep$ be an ordinary $\vertex$-module.
+Then let $\vrep^* = \bigoplus \vrep_n^*$ be the graded dual space,\footnote{Some authors would call this $\vrep'$ and reserve $\vrep^*$ for the vector space dual without regard for grading.} 
+and define $Y^{\vrep^*}(a,z) \in \End \vrep^*[[z]]$ by
+\begin{equation} \label{eq:dual-vertex-operator}
+  (Y^{\vrep^*}(a,z) \alpha)  \cdot  \chi = \alpha \cdot (Y^\vrep(\e^{z L_1} (-z^{-2})^{L_0} a, z^{-1}) \chi) \, .
+\end{equation}
+\end{defn}
+The motivation of this definition is:
+\begin{exercise}
+Prove that the pairing between $\vrep$ and $\vrep^*$ is a
+conformal block on $\bbC\bbP^1$ with $\vrep$ inserted at $0$ and $\vrep^*$ inserted at $\infty$.
+\end{exercise}
+
+\begin{exercise}
+Prove that $(\vrep^*)^* = \vrep$.
+\end{exercise}
+
+\begin{example}
+If $\vertex = V^k(\fg)$ then \eqref{eq:dual-vertex-operator} becomes
+\begin{equation}
+  (Y^{\vrep^*}(J^X,z) \alpha) \cdot \chi = \alpha \cdot (Y^\vrep(- z^{-2} J^X, z^{-1}) \chi)
+\end{equation}
+so
+\begin{equation}
+  J^X_n \alpha \cdot \chi + \alpha \cdot J^X_{-n} \chi = 0 \, .
+\end{equation}
+
+Consider the involution $\lambda \mapsto \lambda^* = -w_0(\lambda)$, where $w_0$ is the longest
+element in the Weyl group $W(\fg)$. (For $\fg = \fsl_2$ we just have $\lambda^* = \lambda$.)
+Let $L_\lambda$ be the finite-dimensional $\fg$-module with highest weight $\lambda$. Then $L_{\lambda^*}$
+is the dual of $L_{\lambda}$. Similarly, the dual of $\vrep(L_\lambda)$ is $\vrep(L_{\lambda^*})$.
+\end{example}
+
+
+\subsubsection{Semisimplicity}
 \begin{prop}[Nice properties of ordinary modules for $L_k(\fg)$] For $k \in \bbN$, every ordinary module for $L_k(\fg)$ is a finite direct sum of simple ones.
 The simple ones are irreducible quotients of parabolic Verma modules, with highest weights
 $\lambda$ subject to the condition $\kappa^{-1}(\lambda, \theta^\vee) \le k$, where $\theta^\vee$
 is the highest coroot of $\fg$. Call these simple modules $\vrep(\lambda)$.
 \end{prop}
+
+In particular: $\cC$ is a $\bbC$-linear semisimple abelian category,
+with finitely many simple objects.
 
 \begin{example}
 If $\fg = \fsl_2$ the root lattice is spanned by a single root $\alpha$, with $\kappa^{-1}(\alpha,\alpha) = 2$.
@@ -2416,28 +2468,84 @@ A dominant weight $\lambda = n \omega$ thus has $\kappa^{-1}(\lambda, \theta^\ve
 So the condition $\kappa^{-1}(\lambda, \theta^\vee) \le k$ restricts us to the $k+1$ possible highest weights $\lambda \in \{0, \omega, \dots, k \omega\}$.
 \end{example}
 
-There is an involution on these weights, given by $\lambda \mapsto \lambda^* = -w_0(\lambda)$, where $w_0$ is the longest
-element in the Weyl group $W(\fg)$. For $\fg = \fsl_2$ we just have $\lambda^* = \lambda$.
-Now, let's consider conformal blocks
-with the modules $\vrep(\lambda)$ and $\vrep(\lambda^*)$ inserted at two nearby points $z$, $w$.
-Now suppose we use the connection on conformal blocks to move the point $w$, and ask what happens 
-when we take $w \to z$. The answer \fixme{exercise!} 
-is that, for $\chi_1 \in \vrep(\lambda)_h$ and $\chi_2 \in \vrep(\lambda^*)_h$,
-(with $h$ the minimal $L_0$-eigenvalue \fixme{...}),
-the correlation functions diverge like 
+\subsubsection{Tensor}
+$\cC$ is also a \ti{tensor category}: this means that for modules $X$, $Y$ we have
+a ``product'' module $X \boxtimes Y$.
+In fact, we more naturally have a family of modules $X \boxtimes_{P(z)} Y$ parameterized by $z \in \bbC$
+and then we define $X \boxtimes Y$ by setting (arbitrarily) $z = 1$.
+We should emphasize that $X \boxtimes Y$ is not $X \otimes Y$ as a vector space
+(but its completion $\overline{X \boxtimes Y}$ does receive a map from $X \otimes Y$.)
+
+The module $\vrep_1 \boxtimes_{P(z)} \vrep_2$ is characterized by a universal property.
+First, let's say $W$ is a $P(z)$-product between $\vrep_1$ and $\vrep_2$ if there is
+a \ti{$P(z)$-intertwining map} $F: \vrep_1 \otimes \vrep_2 \to \overline{W}$ obeying \fixme{...}
+Then $\vrep_1 \boxtimes_{P(z)} \vrep_2$ is a $P(z)$-product between $\vrep_1$ and $\vrep_2$, and for any other
+product $W$, there is a unique morphism $\vrep_1 \boxtimes_{P(z)} \vrep_2 \to W$
+in the appropriate category of $P(z)$-products.
+See \cite{HuangLepowsky1995TensorI} for the definition, \cite{HuangLepowsky1995TensorIII} for the construction.
+
+% It is easier to define the dual module $(X \boxtimes_{P(z)} Y)^*$ first.
+% % So first we need to talk a little about duals.
+% The idea of $(X \boxtimes_{P(z)} Y)^*$ is that it is the universal object which can sit at $\infty$
+% when $X$ is placed at $0$ and $Y$ is placed at $z$. Said otherwise, it is a certain
+% subspace of the vector space dual $(X \otimes Y)^*$, consisting of \fixme{...}
+
+
+\subsubsection{Evaluation}
+
+The standard conformal block on $\bbC \bbP^1$ with $\vrep^*$ at 0, $\vrep$ at $z$, $\vertex$ at $\infty$
+induces a morphism, called \ti{evaluation},
 \begin{equation}
-  \IP{\chi_1(z) \chi_2(w) \cdots} = \frac{1}{(w-z)^{2h}} \IP{\cdots}
+  \ev_\vrep: \vrep^* \boxtimes_{P(z)} \vrep \to \vertex
 \end{equation}
-and the $\IP{\cdots}$ remaining on the right side is a correlation function \ti{without} the insertions at $z$ or $w$.
-We say that ``$\vrep(\lambda)$ and $\vrep(\lambda^*)$ can fuse to the identity.''
-Said otherwise, we get a map \ti{from} conformal blocks with these two representations inserted, \ti{to} conformal blocks
-without them.
 
-What is more surprising is that we can also do the inverse, what we might call \ti{unfusion}, creating
-$\vrep(\lambda)$ and $\vrep(\lambda^*)$ from nothing. For a moment we \ti{assume} this, deferring the construction to
-below.
 
-\fixme{now finish the construction of knot invariants}
+\subsubsection{Coevaluation}
+
+There is also a morphism
+\begin{equation}
+  \coev_\vrep: \vertex \to \vrep \boxtimes_{P(z)} \vrep^*
+\end{equation}
+\fixme{explain plumbing here?}
+
+
+\subsubsection{Categorical dual}
+
+The existence of $\coev$, $\ev$ means that $\vrep^*$ is actually a \ti{left dual} to $\vrep$
+in the categorical sense: to check it one needs to check \ti{zig-zag identities} \fixme{...}
+
+
+\subsubsection{Associator}
+
+Fix $z_1$, $z_2$ with $\abs{z_1} > \abs{z_2} > \abs{z_1 - z_2} > 0$. Then
+we get canonical isomorphisms
+\begin{equation}
+ (\vrep_1 \boxtimes_{P(z_1)} \vrep_2) \boxtimes_{P(z_2)} \vrep_3 \to \vrep_1 \boxtimes_{P(z_1-z_2)} (\vrep_2 \boxtimes_{P(z_2)} \vrep_3) 
+\end{equation}
+
+
+
+
+% Now, let's consider conformal blocks
+% with the modules $\vrep(\lambda)$ and $\vrep(\lambda^*)$ inserted at two nearby points $z$, $w$.
+% Now suppose we use the connection on conformal blocks to move the point $w$, and ask what happens 
+% when we take $w \to z$. The answer \fixme{exercise!} 
+% is that, for $\chi_1 \in \vrep(\lambda)_h$ and $\chi_2 \in \vrep(\lambda^*)_h$,
+% (with $h$ the minimal $L_0$-eigenvalue \fixme{...}),
+% the correlation functions diverge like 
+% \begin{equation}
+%   \IP{\chi_1(z) \chi_2(w) \cdots} = \frac{1}{(w-z)^{2h}} \IP{\cdots}
+% \end{equation}
+% and the $\IP{\cdots}$ remaining on the right side is a correlation function \ti{without} the insertions at $z$ or $w$.
+% We say that ``$\vrep(\lambda)$ and $\vrep(\lambda^*)$ can fuse to the identity.''
+% Said otherwise, we get a map \ti{from} conformal blocks with these two representations inserted, \ti{to} conformal blocks
+% without them.
+
+% What is more surprising is that we can also do the inverse, what we might call \ti{unfusion}, creating
+% $\vrep(\lambda)$ and $\vrep(\lambda^*)$ from nothing. For a moment we \ti{assume} this, deferring the construction to
+% below.
+
+% \fixme{now finish the construction of knot invariants}
 
 \subsection{Plumbing conformal blocks}
 
@@ -2462,36 +2570,7 @@ In the limit as $q \to 0$ the plumbed surface degenerates to develop a node.
 
 Now we claim it's possible to make conformal blocks on the plumbed surface from conformal blocks on the original two,
 as follows. 
-First we introduce the notion of \ti{dual module}:
 
-\begin{defn}[Dual module]
-Say $\vertex$ is a conformal vertex algebra, and let $\vrep$ be an ordinary $\vertex$-module.
-Then let $\vrep^* = \bigoplus \vrep_n^*$ be the graded dual space, and define $Y^{\vrep^*}(a,z) \in \End \vrep^*[[z]]$ by
-\begin{equation} \label{eq:dual-vertex-operator}
-  (Y^{\vrep^*}(a,z) \alpha)  \cdot  \chi = \alpha \cdot (Y^\vrep(\e^{z L_1} (-z^{-2})^{L_0} a, z^{-1}) \chi) \, .
-\end{equation}
-\end{defn}
-The motivation of this definition is:
-\begin{exercise}
-Prove that the pairing between $\vrep$ and $\vrep^*$ is a
-conformal block on $\bbC\bbP^1$ with $\vrep$ inserted at $0$ and $\vrep^*$ inserted at $\infty$.
-\end{exercise}
-
-\begin{example}
-If $\vertex = V^k(\fg)$ then \eqref{eq:dual-vertex-operator} becomes
-\begin{equation}
-  (Y^{\vrep^*}(J^X,z) \alpha) \cdot \chi = \alpha \cdot (Y^\vrep(- z^{-2} J^X, z^{-1}) \chi)
-\end{equation}
-so
-\begin{equation}
-  J^X_n \alpha \cdot \chi + \alpha \cdot J^X_{-n} \chi = 0 \, .
-\end{equation}
-Let $L_\lambda$ be the finite-dimensional $\fg$-module with highest weight $\lambda$. Then
-the dual of $\vrep(L_\lambda)$ is $\vrep(L_{\lambda^*})$.
-
-\end{example}
-
-Now we are ready to build conformal blocks by plumbing.
 Suppose given conformal blocks $\Phi_1$ on $C_1$ and $\Phi_2$ on $C_2$, with $\vertex$ inserted at
 marked points $p_1$, $p_2$, and other insertions $\chi_1$ on $C_1$, $\chi_2$ on $C_2$.
 Then let $h$ be the minimum conformal weight in $\vrep$, and define
