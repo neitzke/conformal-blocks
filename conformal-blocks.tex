@@ -2468,6 +2468,12 @@ conformal block on $\bbC\bbP^1$ with $\vrep$ inserted at $0$ and $\vrep^*$ inser
 \end{exercise}
 
 \begin{exercise}
+Prove more generally that on $\bbC\bbP^1$ with $\vrep_1$ and $\vrep_2$
+inserted the space of conformal blocks is $\Hom(\vrep_1, \vrep_2^*)$
+(where $\Hom$ means the space of morphisms of $\vertex$-modules).
+\end{exercise}
+
+\begin{exercise}
 Prove that $(\vrep^*)^* = \vrep$.
 \end{exercise}
 
@@ -2762,16 +2768,21 @@ If our functional is of the form $\Phi_1(\chi_1, \xi) \Phi_2(\xi', \chi_2)$ then
 correlation functions will make sense (obeying all the usual properties) 
 on $C_1 \cup C_2$ with the punctures $p_1$, $p_2$ deleted.
 More generally the same is true if we take any $\sum_j \Phi_1(\chi_1, \xi_j) \Phi_2(\xi'_j, \chi_2)$.
-Now, what we want to do is to engineer the object $\sum_j \xi_j \otimes \xi'_j$
+Now, what we want to do is to engineer the object $\cI = \sum_j \xi_j \otimes \xi'_j$
 in such a way that the chiral correlation
 functions we obtain on the annuli $A_1$ and $A_2$ are the same, and thus can be glued to give chiral
-correlation functions on $C$. \fixme{....}
+correlation functions on $C$. 
+This will happen if we choose $\cI = \sum_{n \ge h} q^{n} \sum_i \xi_{i,n} \otimes \xi^*_{i,n}$,
+Indeed, suppose we insert $J(z_1)$ on $C_1$.
+\fixme{....}
 
 It is not at all obvious that the sum \eqref{eq:block-gluing} converges, but at least \ti{formally} it gives a conformal block:
 \begin{exercise}
 Assuming that the sum in \eqref{eq:block-gluing} converges, prove that it gives a conformal block on the
 plumbed surface $C$.
 \end{exercise}
+
+Once we have this we can use it to construct the ``coevaluation'' map \fixme{...}
 
 
 \subsection{Variations of the curve}
@@ -2781,7 +2792,7 @@ plumbed surface $C$.
 
 \subsection{The center at the critical level}
 
-\fixme{...}
+\fixme{we get an object $T(z)$ which transforms }
 
 % This \ti{almost} works, but for one subtlety: in the group $\cG$ we have the relation $\exp(2 \pi \I L_0) = 1$,
 % which need not hold in a general $\vrep$-module. Thus the action of $\fG$ on $\vrep$ need not integrate
@@ -3314,7 +3325,7 @@ and compute directly
 \end{equation}
 \end{exercise}
 
-More generally, $2m$-point functions are given by \fixme{...}
+More generally, $2m$-point functions are given by \fixme{sums over Feynman diagrams}
 
 
 \subsection{Correlation functions of currents}
