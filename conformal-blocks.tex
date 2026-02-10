@@ -2460,6 +2460,15 @@ is the highest coroot of $\fg$. Call these simple modules $\vrep(\lambda)$.
 In particular: $\cC$ is a $\bbC$-linear semisimple abelian category,
 with finitely many simple objects.
 
+% The proof of complete reducibility uses the fact that every ordinary module for $L_k(\fg)$ carries 
+% a positive definite Hermitian form.
+
+To explain why we need the condition $\kappa^{-1}(\lambda, \theta^\vee) \le k$ recall that
+$(E_\theta)_{-1}^{k+1} \vac = 0$ in $L_k(\fg)$. Acting on the primary part of $\vrep(\lambda)$,
+the zero mode of $(E_\theta)_{-1}^{k+1} \vac$ acts by $(E_\theta)_{0}^{k+1}$. It follows that
+$(E_\theta)_{0}^{k+1}$ must act by zero on the primary part, and in particular it must 
+annihilate the highest weight vector. That gives the condition.
+
 \begin{example}
 If $\fg = \fsl_2$ the root lattice is spanned by a single root $\alpha$, with $\kappa^{-1}(\alpha,\alpha) = 2$.
 The weight lattice is spanned by $\omega = \frac12 \alpha$.
@@ -2469,20 +2478,53 @@ So the condition $\kappa^{-1}(\lambda, \theta^\vee) \le k$ restricts us to the $
 \end{example}
 
 \subsubsection{Tensor}
-$\cC$ is also a \ti{tensor category}: this means that for modules $X$, $Y$ we have
-a ``product'' module $X \boxtimes Y$.
-In fact, we more naturally have a family of modules $X \boxtimes_{P(z)} Y$ parameterized by $z \in \bbC$
-and then we define $X \boxtimes Y$ by setting (arbitrarily) $z = 1$.
-We should emphasize that $X \boxtimes Y$ is not $X \otimes Y$ as a vector space
-(but its completion $\overline{X \boxtimes Y}$ does receive a map from $X \otimes Y$.)
+$\cC$ is also a \ti{tensor category}: this means that for modules $\vrep_1$, $\vrep_2$ we have
+a ``product'' module $\vrep_1 \boxtimes \vrep_2$.
+In fact, we more naturally have a family of modules $\vrep_1 \boxtimes_{P(z)} \vrep_2$ parameterized by $z \in \bbC$
+and then we define $\vrep_1 \boxtimes \vrep_2$ by setting (arbitrarily) $z = 1$.
+We should emphasize that $\vrep_1 \boxtimes \vrep_2$ is not $\vrep_1 \otimes \vrep_2$ as a vector space
+(but its completion $\overline{\vrep_1 \boxtimes \vrep_2}$ does receive a map from $\vrep_1 \otimes \vrep_2$.)
 
-The module $\vrep_1 \boxtimes_{P(z)} \vrep_2$ is characterized by a universal property.
-First, let's say $W$ is a $P(z)$-product between $\vrep_1$ and $\vrep_2$ if there is
-a \ti{$P(z)$-intertwining map} $F: \vrep_1 \otimes \vrep_2 \to \overline{W}$ obeying \fixme{...}
+The module $\vrep_1 \boxtimes_{P(z)} \vrep_2$ is characterized by a universal property, like the usual tensor
+product of vector spaces.
+First, let's say a $W$ is a $P(z)$-product between $\vrep_1$ and $\vrep_2$ if there is
+a \ti{$P(z)$-intertwining map} $F: \vrep_1 \otimes \vrep_2 \to \overline{W}$,
+meaning a map such that for $\abs{w} > \abs{z}$,
+\begin{equation}
+ F(Y^{\vrep_1}(a,w) \chi_1 \otimes \chi_2 + \chi_1 \otimes Y^{\vrep_2}(a,w-z) \chi_2) = Y^W(a,w) F(\chi_1 \otimes \chi_2) 
+\end{equation}
 Then $\vrep_1 \boxtimes_{P(z)} \vrep_2$ is a $P(z)$-product between $\vrep_1$ and $\vrep_2$, and for any other
 product $W$, there is a unique morphism $\vrep_1 \boxtimes_{P(z)} \vrep_2 \to W$
 in the appropriate category of $P(z)$-products.
-See \cite{HuangLepowsky1995TensorI} for the definition, \cite{HuangLepowsky1995TensorIII} for the construction.
+See \cite{HuangLepowsky1995TensorI} for this definition, \cite{HuangLepowsky1995TensorIII} for the construction
+of the needed $\vrep_1 \boxtimes_{P(z)} \vrep_2$.
+
+Up to isomorphism, $\vrep_1 \boxtimes \vrep_2$ is determined by the \ti{fusion coefficients}:
+let $N_{ij}^k$ be the dimension of the space of conformal blocks on $\bbC \bbP^1$
+with $\vrep_i, \vrep_j, \vrep_k^*$ inserted, then
+$\vrep_i \boxtimes \vrep_j \simeq \bigoplus_k N_{ij}^k \vrep_k$.
+But the more complicated construction above provides also the map
+$\vrep_1 \otimes \vrep_2 \to \overline{\vrep_1 \boxtimes \vrep_2}$ which is important.
+
+\begin{example}
+Suppose $\fg = \fsl_2$ and $k = 3$. Then we have irreps $\vrep_0, \dots, \vrep_3$ corresponding to weights
+ $0, \dots, 3 \omega$, and the fusion product turns out to be a 
+ truncated analog of the ordinary tensor product of $\fsl_2$-modules:
+\begin{equation}
+  M_2 \otimes M_2 \simeq M_0 \oplus M_2 \oplus M_4, \qquad \vrep_2 \boxtimes \vrep_2 \simeq \vrep_0 \oplus \vrep_2
+\end{equation}
+\begin{equation}
+  M_3 \otimes M_3 \simeq M_0 \oplus \cdots \oplus M_6, \qquad \vrep_3 \boxtimes \vrep_3 \simeq \vrep_0
+\end{equation}
+
+How to understand this concretely? Let's consider a conformal block $\Phi$ on $\bbC \bbP^1$
+with modules $\vrep_m$, $\vrep_n$, $\vrep_\ell$ inserted. We already know from our discussion of 
+$\vertex^k(\fg)$-blocks that $\Phi$ is determined by an intertwiner
+$\Phi_0 \in \Hom_\fg(M_m \otimes M_n \otimes M_\ell, \triv)$.
+But we have an additional constraint now because $(E_\theta)_{-1}^{k+1} \vac = 0$.
+
+\end{example}
+
 
 % It is easier to define the dual module $(X \boxtimes_{P(z)} Y)^*$ first.
 % % So first we need to talk a little about duals.
@@ -2493,7 +2535,7 @@ See \cite{HuangLepowsky1995TensorI} for the definition, \cite{HuangLepowsky1995T
 
 \subsubsection{Evaluation}
 
-The standard conformal block on $\bbC \bbP^1$ with $\vrep^*$ at 0, $\vrep$ at $z$, $\vertex$ at $\infty$
+The standard conformal block on $\bbC \bbP^1$ with $\vrep^*$ at 0, $\vrep$ at $z$, $\vertex^*$ at $\infty$
 induces a morphism, called \ti{evaluation},
 \begin{equation}
   \ev_\vrep: \vrep^* \boxtimes_{P(z)} \vrep \to \vertex
@@ -2509,10 +2551,10 @@ There is also a morphism
 \fixme{explain plumbing here?}
 
 
-\subsubsection{Categorical dual}
+% \subsubsection{Categorical dual}
 
-The existence of $\coev$, $\ev$ means that $\vrep^*$ is actually a \ti{left dual} to $\vrep$
-in the categorical sense: to check it one needs to check \ti{zig-zag identities} \fixme{...}
+% The existence of $\coev$, $\ev$ means that $\vrep^*$ is actually a \ti{left dual} to $\vrep$
+% in the categorical sense: to check it one needs to check \ti{zig-zag identities} \fixme{...}
 
 
 \subsubsection{Associator}
@@ -2522,7 +2564,45 @@ we get canonical isomorphisms
 \begin{equation}
  (\vrep_1 \boxtimes_{P(z_1)} \vrep_2) \boxtimes_{P(z_2)} \vrep_3 \to \vrep_1 \boxtimes_{P(z_1-z_2)} (\vrep_2 \boxtimes_{P(z_2)} \vrep_3) 
 \end{equation}
+% This is essentially a formal consequence of the definitions.
 
+
+\subsubsection{Braiding}
+
+There is a \ti{braiding} isomorphism
+\begin{equation}
+  \vrep_1 \boxtimes_{P(z)} \vrep_2 \to \vrep_2 \boxtimes_{P(z)} \vrep_1
+\end{equation}
+It is constructed by using the connection $\partial_z + L_{-1}$
+in both factors.
+
+% as a composite
+% \begin{equation}
+%   \vrep_1 \boxtimes_{P(z)} \vrep_2 \to \vrep_1 \boxtimes_{P(-z)} \vrep_2 \to \vrep_2 \boxtimes_{P(z)} \vrep_1
+% \end{equation}
+% The first step uses the connection $\partial_z + L_{-1}$ to move $\vrep_2$ from $z$ to $-z$ while $\vrep_1$
+% is held fixed.
+
+
+\subsubsection{Twist}
+
+There is an operator
+\begin{equation}
+  \theta_\vrep: \vrep \to \vrep
+\end{equation}
+given by the action of $\exp(2 \pi \I L_0)$.
+It acts by a scalar in each simple module.
+
+
+\subsubsection{Coherence}
+
+There are many coherence relations between these various structures.
+
+
+
+\subsubsection{Nondegeneracy}
+
+\fixme{...}
 
 
 
@@ -3255,8 +3335,9 @@ this says (in correlation functions) that around $z_1 = z_2$ we have
 
 For a simple Lie algebra $\fg$,
 there is a canonical invariant bilinear form
-$\kappa$. We normalize it so that the long roots of $\fg$
-have length $2$.
+$\kappa$ on $\fg$, inducing $\kappa^{-1}$ on $\fg^*$. 
+We normalize it so that the long roots $\alpha$ of $\fg$
+have $\kappa^{-1}(\alpha,\alpha) = 2$.
 
 The quadratic Casimir operator is defined by 
 \begin{equation}
@@ -3284,15 +3365,20 @@ i.e.
   f^{ik\ell} f^{ijk} = 2 h^\vee \delta^{j \ell}
 \end{equation}
 
-When $\fg = \fsl(n)$, the normalized form is
+When $\fg = \fsl(N)$, the normalized form is
 \begin{equation}
   \kappa(X,Y) = \Tr (XY)
 \end{equation}
 and
 \begin{equation}
-  h^\vee = n \, .
+  h^\vee = N \, .
 \end{equation}
 
+We use $\theta \in \fh^*$ to denote the \ti{highest root}: it is the one maximal in the partial order
+(i.e. $\theta + \alpha_i$ is not a root for any simple root $\alpha_i$.)
+For $\fg = \fsl(N)$, $\theta = \alpha_1 + \cdots + \alpha_{N-1}$, with root space spanned by $E_{1N}$.
+The corresponding coroot is $\theta^\vee = \frac{2 \theta^\sharp}{\kappa^{-1}(\theta,\theta)} \in \fh$.
+For $\fg = \fsl(N)$, $\theta^\vee = E_{11} - E_{NN}$.
 
 % \section{Vertex algebras} \label{sec:vertex-algebras}
 
