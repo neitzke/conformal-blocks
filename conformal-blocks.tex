@@ -2413,6 +2413,44 @@ finite-dimensional eigenspaces.
 Let $\cC$ be the category of ordinary modules for $L_k(\fg)$.
 
 
+\subsubsection{Semisimplicity}
+\begin{prop}[Nice properties of ordinary modules for $L_k(\fg)$] For $k \in \bbN$, every ordinary module for $L_k(\fg)$ is a finite direct sum of simple ones.
+The simple ones are irreducible quotients of parabolic Verma modules, with highest weights
+$\lambda$ subject to the condition $\lambda \cdot \theta^\vee \le k$, where $\theta^\vee \in \fh$
+is the highest coroot of $\fg$. Call these simple modules $\vrep(\lambda)$.
+\end{prop}
+
+In particular: $\cC$ is a $\bbC$-linear semisimple abelian category,
+with finitely many simple objects.
+
+% The proof of complete reducibility uses the fact that every ordinary module for $L_k(\fg)$ carries 
+% a positive definite Hermitian form.
+
+Concretely the condition $\lambda \cdot \theta^\vee \le k$ says that all the eigenvalues of $\theta^\vee \in \fh$
+acting on $M_\lambda$ are $\le k$.
+To explain why we need this condition, recall that
+$(E_{-\theta})_{-1}^{k+1} \vac = 0$ in $L_k(\fg)$. Acting on the primary part $M_\lambda \subset \vrep(\lambda)$,
+the zero mode of $(E_{-\theta})_{-1}^{k+1} \vac$ acts by $(E_{-\theta})_{0}^{k+1}$. It follows that
+$(E_{-\theta})_{0}^{k+1}$ must act by zero on $M_\lambda$. 
+But now consider the $\fsl_2$ spanned by
+\begin{equation}
+  E = E_\theta, \quad F = E_{-\theta}, \quad H = [E_\theta, E_{-\theta}] = \theta^\vee
+\end{equation}
+(For $\fg = \fsl_N$ we would have $E_{\theta} = E_{1N}$ and $E_{-\theta} = E_{N1}$, i.e., 
+the $\fsl_2$ we are talking about is just sitting at the outermost corners of our $\fsl_N$ matrices.)
+Then the largest $H$-eigenvalue occurring in $M_\lambda$ is $\lambda \cdot \theta^\vee$,
+and using $\fsl_2$ representation theory we get that
+$F^{k+1} = 0$ on $M_\lambda$ iff $\lambda \cdot \theta^\vee \le k$.
+
+\begin{example}
+If $\fg = \fsl_2$ the root lattice is spanned by a single root $\alpha$, with $\kappa^{-1}(\alpha,\alpha) = 2$.
+The coroot $\theta^\vee = \alpha^\vee = H$ has $\theta^\vee \cdot \alpha = 2$.
+The weight lattice is spanned by $\omega = \frac12 \alpha$.
+A dominant weight $\lambda = n \omega$ thus has $\lambda \cdot \theta^\vee = n$.
+So the condition $\lambda \cdot \theta^\vee \le k$ restricts us to the $k+1$ possible highest weights $\lambda \in \{0, \omega, \dots, k \omega\}$.
+\end{example}
+
+
 \subsubsection{Duals}
 
 \begin{defn}[Dual module]
@@ -2450,81 +2488,119 @@ is the dual of $L_{\lambda}$. Similarly, the dual of $\vrep(L_\lambda)$ is $\vre
 \end{example}
 
 
-\subsubsection{Semisimplicity}
-\begin{prop}[Nice properties of ordinary modules for $L_k(\fg)$] For $k \in \bbN$, every ordinary module for $L_k(\fg)$ is a finite direct sum of simple ones.
-The simple ones are irreducible quotients of parabolic Verma modules, with highest weights
-$\lambda$ subject to the condition $\kappa^{-1}(\lambda, \theta^\vee) \le k$, where $\theta^\vee$
-is the highest coroot of $\fg$. Call these simple modules $\vrep(\lambda)$.
+\subsubsection{Tensor}
+
+What happens when we have two $\vertex$-modules and ``bring them close together''?
+To start thinking about this:
+
+\begin{example}
+Suppose $\fg = \fsl_2$.
+Then we have irreps $\vrep_n$ corresponding to weights $n \omega$.
+Consider a conformal block $\Phi$ on $\bbC \bbP^1$
+with modules $\vrep_a$, $\vrep_b$, $\vrep_c$ inserted. We already know from our discussion of 
+$\vertex^k(\fg)$-blocks that $\Phi$ is determined by an intertwiner
+$\Phi_0 \in \Hom_\fg(M_a \otimes M_b \otimes M_c, \triv)$.
+Recalling that $M_n = M_n^*$ such an intertwiner exists 
+whenever $M_c$ appears in $M_a \otimes M_b$, i.e. whenever $a+b+c \in 2\bbZ$ and 
+$\abs{a-b} \le c \le \abs{a+b}$.
+But since we consider $L_k(\fg)$ instead of $V^k(\fg)$
+we have an additional constraint now, because $(E_\theta)_{-1}^{k+1} \vac = 0$. 
+This constraint turns out to impose the condition that $a + b + c \le 2k$.
+\fixme{work out how!}
+\end{example}
+
+This answer is a little weird: it seems to mean that if we bring $\vrep_a$ close to $\vrep_b$ the answer
+cannot be dictated by $M_a \otimes M_b$. If there is any notion of tensor product of the
+$\vrep_n$ it must be something different.
+
+We could try to define tensor products by the \ti{fusion coefficients}:
+let $N_{ij}^k$ be the dimension of the space of conformal blocks on $\bbC \bbP^1$
+with $\vrep_i, \vrep_j, \vrep_k^*$ inserted, then define
+$\vrep_i \boxtimes \vrep_j = \bigoplus_k N_{ij}^k \vrep_k$.
+
+\begin{example}
+Suppose $\fg = \fsl_2$ and $k=3$.
+Then we have irreps $\vrep_0, \dots, \vrep_3$ and for instance
+\begin{equation}
+  M_2 \otimes M_2 \simeq M_0 \oplus M_2 \oplus M_4, \qquad \vrep_2 \boxtimes \vrep_2 = \vrep_0 \oplus \vrep_2
+\end{equation}
+\begin{equation}
+  M_3 \otimes M_3 \simeq M_0 \oplus \cdots \oplus M_6, \qquad \vrep_3 \boxtimes \vrep_3 = \vrep_0
+\end{equation}
+\end{example}
+
+% But the more complicated construction above provides also the map
+% $\vrep_1 \otimes \vrep_2 \to \overline{\vrep_1 \boxtimes \vrep_2}$ which is important.
+This won't have the properties we usually want.
+For example, it isn't associative in any reasonable way,
+i.e. we don't have any canonical isomorphism
+$(\vrep_i \boxtimes \vrep_j) \boxtimes \vrep_k \simeq \vrep_i \boxtimes (\vrep_j \boxtimes \vrep_k)$.
+(It is true that the two sides decompose isomorphically into simple objects, but we don't have
+a map between them.) It is not even functorial in any obvious way, i.e. we don't know how to take tensor
+products of general representations, only ones which come to us already as direct sums of $\vrep_i$.
+
+Nevertheless 
+$\cC$ is a \ti{tensor category}: this means that for modules $\vrep_1$, $\vrep_2$ we do have
+a product module $\vrep_1 \boxtimes \vrep_2$, and this product module indeed has
+\begin{equation}
+  \vrep_i \boxtimes \vrep_j \simeq \bigoplus_k N_{ij}^k \vrep_k \, .
+\end{equation}
+In fact, we have a family of modules $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ 
+parameterized by $z_1, z_2 \in \bbC^2 \setminus \{z_1 = z_2\}$
+and then we define $\vrep_1 \boxtimes \vrep_2$ by fixing (arbitrarily) $z_1 = 0$, $z_2 = 1$.
+We should emphasize that $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ is not $\vrep_1 \otimes \vrep_2$ as a vector space
+(but its completion $\overline{\vrep_1 \boxtimes_{z_1,z_2} \vrep_2}$ 
+does receive a map from $\vrep_1 \otimes \vrep_2$.)
+
+The module $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ is characterized by a universal property, like the usual tensor
+product of vector spaces.
+\begin{defn} Given $\vertex$-modules $\vrep_1$, $\vrep_2$, $W$, a \ti{$(z_1,z_2)$-intertwining map}\footnote{Here $\overline{W}$ means the completion of $W$ with respect to the grading, i.e. $\overline{W} = \prod_n W_n$.}
+\begin{equation}
+ F: \vrep_1 \otimes \vrep_2 \to \overline{W}
+\end{equation}
+is a linear map such that 
+\begin{equation}
+  F(Y^{\vrep_1}(a,w-z_1) \chi_1 \otimes \chi_2), \quad F(\chi_1 \otimes Y^{\vrep_2}(a,w-z_2) \chi_2), \quad Y^W(a,w) F(\chi_1 \otimes \chi_2)
+\end{equation}
+are (formally) all expansions of the same analytic function of $w$, in appropriate regions: 
+$w$ near $z_1$, $w$ near $z_2$, and $w$ near $\infty$, respectively.
+\end{defn}
+
+The intuition is that when viewed from $\abs{w} > \abs{z_1}, \abs{z_2}$ 
+the insertions $\chi_1(z_1) \chi_2(z_2)$ can be replaced by a single 
+insertion $F(\chi_1 \otimes \chi_2)(0)$.
+
+For orientation, note we do have such a map when $\vrep_1 = \vrep_2 = W = \vertex$, given 
+for $\abs{z_1} > \abs{z_2}$ by $F(a \otimes b) = Y(a, z_1) Y(b, z_2) \vac$; 
+this gives an element in $\overline\vertex$ depending meromorphically
+on $z_1$ and $z_2$.
+The intertwining property for this $F$ says that for $\abs{z_1} > \abs{z_2}$ the three
+formal series in $(w-z_1)$, $(w-z_2)$, $w$ respectively given by
+\begin{equation}
+  Y(Y(c, w-z_1) a, z_1) Y(b,z_2) \vac, \quad  Y(a, z_1) Y(Y(c, w-z_2) b, z_2) \vac, \quad Y(c, w) Y(a, z_1) Y(b, z_2) \vac
+\end{equation}
+are all expansions of a common analytic object, which is indeed true \fixme{...}
+
+% for $\abs{w} > \abs{z_1}$ and $\abs{w} > \abs{z_2}$,
+% \begin{equation}
+%  F(Y^{\vrep_1}(a,w-z_1) \chi_1 \otimes \chi_2 + \chi_1 \otimes Y^{\vrep_2}(a,w-z_2) \chi_2) = Y^W(a,w) F(\chi_1 \otimes \chi_2) 
+% \end{equation}
+Now we can formulate the existence of tensor products:
+
+\begin{prop}
+There is a $\vertex$-module $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$
+with a $(z_1,z_2)$-intertwining map
+\begin{equation}
+ \vrep_1 \otimes \vrep_2 \to \vrep_1 \boxtimes_{z_1,z_2} \vrep_2 
+\end{equation}
+and any other intertwining map factors uniquely through this one.
 \end{prop}
 
-In particular: $\cC$ is a $\bbC$-linear semisimple abelian category,
-with finitely many simple objects.
-
-% The proof of complete reducibility uses the fact that every ordinary module for $L_k(\fg)$ carries 
-% a positive definite Hermitian form.
-
-To explain why we need the condition $\kappa^{-1}(\lambda, \theta^\vee) \le k$ recall that
-$(E_\theta)_{-1}^{k+1} \vac = 0$ in $L_k(\fg)$. Acting on the primary part of $\vrep(\lambda)$,
-the zero mode of $(E_\theta)_{-1}^{k+1} \vac$ acts by $(E_\theta)_{0}^{k+1}$. It follows that
-$(E_\theta)_{0}^{k+1}$ must act by zero on the primary part, and in particular it must 
-annihilate the highest weight vector. That gives the condition.
-
-\begin{example}
-If $\fg = \fsl_2$ the root lattice is spanned by a single root $\alpha$, with $\kappa^{-1}(\alpha,\alpha) = 2$.
-The weight lattice is spanned by $\omega = \frac12 \alpha$.
-$\alpha = \theta^\vee$ in this case.
-A dominant weight $\lambda = n \omega$ thus has $\kappa^{-1}(\lambda, \theta^\vee) = n$.
-So the condition $\kappa^{-1}(\lambda, \theta^\vee) \le k$ restricts us to the $k+1$ possible highest weights $\lambda \in \{0, \omega, \dots, k \omega\}$.
-\end{example}
-
-\subsubsection{Tensor}
-$\cC$ is also a \ti{tensor category}: this means that for modules $\vrep_1$, $\vrep_2$ we have
-a ``product'' module $\vrep_1 \boxtimes \vrep_2$.
-In fact, we more naturally have a family of modules $\vrep_1 \boxtimes_{P(z)} \vrep_2$ parameterized by $z \in \bbC$
-and then we define $\vrep_1 \boxtimes \vrep_2$ by setting (arbitrarily) $z = 1$.
-We should emphasize that $\vrep_1 \boxtimes \vrep_2$ is not $\vrep_1 \otimes \vrep_2$ as a vector space
-(but its completion $\overline{\vrep_1 \boxtimes \vrep_2}$ does receive a map from $\vrep_1 \otimes \vrep_2$.)
-
-The module $\vrep_1 \boxtimes_{P(z)} \vrep_2$ is characterized by a universal property, like the usual tensor
-product of vector spaces.
-First, let's say a $W$ is a $P(z)$-product between $\vrep_1$ and $\vrep_2$ if there is
-a \ti{$P(z)$-intertwining map} $F: \vrep_1 \otimes \vrep_2 \to \overline{W}$,
-meaning a map such that for $\abs{w} > \abs{z}$,
-\begin{equation}
- F(Y^{\vrep_1}(a,w) \chi_1 \otimes \chi_2 + \chi_1 \otimes Y^{\vrep_2}(a,w-z) \chi_2) = Y^W(a,w) F(\chi_1 \otimes \chi_2) 
-\end{equation}
-Then $\vrep_1 \boxtimes_{P(z)} \vrep_2$ is a $P(z)$-product between $\vrep_1$ and $\vrep_2$, and for any other
-product $W$, there is a unique morphism $\vrep_1 \boxtimes_{P(z)} \vrep_2 \to W$
-in the appropriate category of $P(z)$-products.
 See \cite{HuangLepowsky1995TensorI} for this definition, \cite{HuangLepowsky1995TensorIII} for the construction
-of the needed $\vrep_1 \boxtimes_{P(z)} \vrep_2$.
-
-Up to isomorphism, $\vrep_1 \boxtimes \vrep_2$ is determined by the \ti{fusion coefficients}:
-let $N_{ij}^k$ be the dimension of the space of conformal blocks on $\bbC \bbP^1$
-with $\vrep_i, \vrep_j, \vrep_k^*$ inserted, then
-$\vrep_i \boxtimes \vrep_j \simeq \bigoplus_k N_{ij}^k \vrep_k$.
-But the more complicated construction above provides also the map
-$\vrep_1 \otimes \vrep_2 \to \overline{\vrep_1 \boxtimes \vrep_2}$ which is important.
-
-\begin{example}
-Suppose $\fg = \fsl_2$ and $k = 3$. Then we have irreps $\vrep_0, \dots, \vrep_3$ corresponding to weights
- $0, \dots, 3 \omega$, and the fusion product turns out to be a 
- truncated analog of the ordinary tensor product of $\fsl_2$-modules:
-\begin{equation}
-  M_2 \otimes M_2 \simeq M_0 \oplus M_2 \oplus M_4, \qquad \vrep_2 \boxtimes \vrep_2 \simeq \vrep_0 \oplus \vrep_2
-\end{equation}
-\begin{equation}
-  M_3 \otimes M_3 \simeq M_0 \oplus \cdots \oplus M_6, \qquad \vrep_3 \boxtimes \vrep_3 \simeq \vrep_0
-\end{equation}
-
-How to understand this concretely? Let's consider a conformal block $\Phi$ on $\bbC \bbP^1$
-with modules $\vrep_m$, $\vrep_n$, $\vrep_\ell$ inserted. We already know from our discussion of 
-$\vertex^k(\fg)$-blocks that $\Phi$ is determined by an intertwiner
-$\Phi_0 \in \Hom_\fg(M_m \otimes M_n \otimes M_\ell, \triv)$.
-But we have an additional constraint now because $(E_\theta)_{-1}^{k+1} \vac = 0$.
-
-\end{example}
-
+of the needed $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$.
+(The idea is to realize $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ through ``how it behaves in correlation functions''
+i.e. we define an element $\eta \in \vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ as a linear map on a certain space of
+possible insertions at $\infty$ \fixme{...})
 
 % It is easier to define the dual module $(X \boxtimes_{P(z)} Y)^*$ first.
 % % So first we need to talk a little about duals.
@@ -2532,23 +2608,30 @@ But we have an additional constraint now because $(E_\theta)_{-1}^{k+1} \vac = 0
 % when $X$ is placed at $0$ and $Y$ is placed at $z$. Said otherwise, it is a certain
 % subspace of the vector space dual $(X \otimes Y)^*$, consisting of \fixme{...}
 
+\subsubsection{Braiding}
 
-\subsubsection{Evaluation}
+For the usual tensor product of vector spaces we have a canonical isomorphism
+$V_1 \otimes V_2 \simeq V_2 \otimes V_1$, and repeating it twice gives the identity
+on $V_1 \otimes V_2$.
 
-The standard conformal block on $\bbC \bbP^1$ with $\vrep^*$ at 0, $\vrep$ at $z$, $\vertex^*$ at $\infty$
-induces a morphism, called \ti{evaluation},
+Here the situation is different: we don't have any simple reason to expect
+$\vrep_1 \boxtimes_{z_1,z_2} \vrep_2 \simeq \vrep_2 \boxtimes_{z_1,z_2} \vrep_1$.
+What we have instead is
 \begin{equation}
-  \ev_\vrep: \vrep^* \boxtimes_{P(z)} \vrep \to \vertex
+  \vrep_1 \boxtimes_{z_1,z_2} \vrep_2 \simeq \vrep_2 \boxtimes_{z_2,z_1} \vrep_1 \, .
 \end{equation}
-
-
-\subsubsection{Coevaluation}
-
-There is also a morphism
+Still, using the operator $\partial_z + L_{-1}$ we can define isomorphisms
 \begin{equation}
-  \coev_\vrep: \vertex \to \vrep \boxtimes_{P(z)} \vrep^*
+  \vrep_1 \boxtimes_{z_1,z_2} \vrep_2 \to \vrep_1 \boxtimes_{z'_1,z'_2} \vrep_2
 \end{equation}
-\fixme{explain plumbing here?}
+given any path from $(z_1,z_2)$ to $(z'_1, z'_2)$ which avoids the diagonal.
+In particular, this gives two \ti{braiding} isomorphisms (depending which way $z_1$ and $z_2$ exchange),
+\begin{equation}
+  \vrep_1 \boxtimes_{z_1,z_2} \vrep_2 \to \vrep_1 \boxtimes_{z_2,z_1} \vrep_2 \simeq \vrep_2 \boxtimes_{z_1,z_2} \vrep_1
+\end{equation}
+These two braidings are inverse to one another, in the appropriate sense.
+
+
 
 
 % \subsubsection{Categorical dual}
@@ -2559,22 +2642,12 @@ There is also a morphism
 
 \subsubsection{Associator}
 
-Fix $z_1$, $z_2$ with $\abs{z_1} > \abs{z_2} > \abs{z_1 - z_2} > 0$. Then
-we get canonical isomorphisms
+We get canonical isomorphisms
 \begin{equation}
- (\vrep_1 \boxtimes_{P(z_1)} \vrep_2) \boxtimes_{P(z_2)} \vrep_3 \to \vrep_1 \boxtimes_{P(z_1-z_2)} (\vrep_2 \boxtimes_{P(z_2)} \vrep_3) 
+ (\vrep_1 \boxtimes_{z_1,z_2} \vrep_2) \boxtimes_{0,z_3} \vrep_3 \to \vrep_1 \boxtimes_{z_1,0} (\vrep_2 \boxtimes_{z_2,z_3} \vrep_3) 
 \end{equation}
 % This is essentially a formal consequence of the definitions.
 
-
-\subsubsection{Braiding}
-
-There is a \ti{braiding} isomorphism
-\begin{equation}
-  \vrep_1 \boxtimes_{P(z)} \vrep_2 \to \vrep_2 \boxtimes_{P(z)} \vrep_1
-\end{equation}
-It is constructed by using the connection $\partial_z + L_{-1}$
-in both factors.
 
 % as a composite
 % \begin{equation}
@@ -2593,6 +2666,25 @@ There is an operator
 given by the action of $\exp(2 \pi \I L_0)$.
 It acts by a scalar in each simple module.
 
+
+\subsubsection{Evaluation}
+
+Given $\vrep$ we can build a canonical conformal block 
+on $\bbC \bbP^1$ with $\vrep^*$ at $z_1$, $\vrep$ at $z_2$,
+and $\vertex^* = \vertex$ at $\infty$.
+This induces a morphism, called \ti{evaluation},
+\begin{equation}
+  \ev_\vrep: \vrep^* \boxtimes_{z_1,z_2} \vrep \to \vertex
+\end{equation}
+
+
+\subsubsection{Coevaluation}
+
+There is also a morphism
+\begin{equation}
+  \coev_\vrep: \vertex \to \vrep \boxtimes_{z_1,z_2} \vrep^*
+\end{equation}
+\fixme{explain plumbing here or just refer to below?}
 
 \subsubsection{Coherence}
 
@@ -2655,10 +2747,12 @@ Suppose given conformal blocks $\Phi_1$ on $C_1$ and $\Phi_2$ on $C_2$, with $\v
 marked points $p_1$, $p_2$, and other insertions $\chi_1$ on $C_1$, $\chi_2$ on $C_2$.
 Then let $h$ be the minimum conformal weight in $\vrep$, and define
 \begin{equation} \label{eq:block-gluing}
-  \Phi(\chi_1, \chi_2) = \sum_{n \ge h} q^{n-h} \sum_i \Phi_1(\chi_1, \xi_{i,n}) \Phi_2(\xi^*_{i,n}, \chi_2)
+  \Phi(\chi_1, \chi_2) = \sum_{n \ge h} q^{n} \sum_i \Phi_1(\chi_1, \xi_{i,n}) \Phi_2(\xi^*_{i,n}, \chi_2)
 \end{equation}
 where $(\xi_{i,n})$ and $(\xi^*_{i,n})$ are dual bases for $\vrep_n$ and $\vrep^*_n$, with respect to the invariant pairing.
-Note that in the limit $q \to 0$ only the primaries of weight $h$ in $\vrep$ contribute; for finite $q$ the whole
+Note that in the limit $q \to 0$ the leading term comes from the 
+primaries of weight $h$ in $\vrep$ contribute, and if we rescale by overall $q^{-h}$ then these
+are the only ones that survive the limit; for finite $q$ the whole
 tower of descendants is involved.
 
 Here is the idea of this definition. Suppose we consider a completely arbitrary linear functional of $\chi_1$
@@ -3374,11 +3468,20 @@ and
   h^\vee = N \, .
 \end{equation}
 
+For any root $\alpha \in \fh^*$ the corresponding coroot $\alpha^\vee$ is determined by the condition
+\begin{equation}
+  \alpha^\vee \cdot \lambda = \frac{2 \kappa^{-1}(\lambda,\alpha)}{\kappa^{-1}(\alpha,\alpha)}
+\end{equation}
+i.e.
+\begin{equation}
+  \alpha^\vee = \frac{2 \alpha^\sharp}{\kappa^{-1}(\alpha,\alpha)}
+\end{equation}
+
 We use $\theta \in \fh^*$ to denote the \ti{highest root}: it is the one maximal in the partial order
 (i.e. $\theta + \alpha_i$ is not a root for any simple root $\alpha_i$.)
 For $\fg = \fsl(N)$, $\theta = \alpha_1 + \cdots + \alpha_{N-1}$, with root space spanned by $E_{1N}$.
-The corresponding coroot is $\theta^\vee = \frac{2 \theta^\sharp}{\kappa^{-1}(\theta,\theta)} \in \fh$.
-For $\fg = \fsl(N)$, $\theta^\vee = E_{11} - E_{NN}$.
+The corresponding coroot is $\theta^\vee = E_{11} - E_{NN} = [E_{1N}, E_{N1}]$.
+
 
 % \section{Vertex algebras} \label{sec:vertex-algebras}
 
