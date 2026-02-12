@@ -2400,6 +2400,7 @@ or vice versa. Prove that these operators obey the ``Hecke relation'' \fixme{che
 What is the analogous relation if we take $\fg = \fsl_N$?
 \end{exercise}
 
+Let's discuss monodromy 
 
 
 \subsection{Duals}
@@ -2655,9 +2656,8 @@ This constraint turns out to impose the condition that $a + b + c \le 2k$.
 \fixme{work out how!}
 \end{example}
 
-This answer is a little weird: it seems to mean that if we bring $\vrep(M_a)$ close to $\vrep(M_b)$ the answer
-cannot be $\vrep(M_a \otimes M_b)$.
-Instead, we should expect
+This answer is a little weird.
+We expect
 \begin{equation}
   \cS_i \boxtimes \cS_j \simeq \bigoplus_k N_{ij}^k \cS_k
 \end{equation}
@@ -2665,6 +2665,8 @@ where the \ti{fusion coefficient}
 $N_{ij}^k$ is 
 the dimension of the space of conformal blocks on $\bbC \bbP^1$
 with $\cS_i, \cS_j, \cS_k^*$ inserted.
+But this means in particular that $\vrep(M_a) \boxtimes \vrep(M_b)$
+cannot be $\vrep(M_a \otimes M_b)$.
 \begin{example}
 Suppose $\fg = \fsl_2$ and $k=3$.
 Then we have simple modules $\cS_0, \dots, \cS_3$ and for instance this rule would say
@@ -2747,16 +2749,30 @@ in the sense that $F(\chi_1, \chi_2) \cdot \eta = \Phi(\chi_1, \chi_2, \eta)$.
 Now we can formulate the existence of tensor products, for
 finite enough vertex algebras:
 
-\begin{defn}[Rational vertex algebra]
-We say $\vertex$ is \ti{rational} if
-there are finitely many simple modules,
-each module is a direct sum of simple modules,
-and all $N_{ij}^k$ are finite.
+\begin{defn}[Rational and strongly rational vertex algebras] \ 
+\begin{itemize}
+\item We say $\vertex$ is \ti{rational} if
+there are finitely many simple ordinary modules,
+each ordinary module is a direct sum of simple modules,
+and all $N_{ij}^k$ are finite.\footnote{Warning: there seem to be slight variants of this definition in the literature.}
+
+\item Define the \ti{$C_2$ subspace} of $\vertex$ by
+\begin{equation}
+  C_2(\vertex) = \{ a_{(-2)} b \mid a, b \in \vertex \} \, .
+\end{equation}
+We say $\vertex$ is \ti{strongly rational} if $\vertex$ is rational,
+$V \simeq V^*$, and $\dim \vertex / C_2(\vertex) < \infty$.\footnote{By the way, the space $\vertex / C_2(\vertex)$ is naturally a Poisson algebra, with product $a_{(-1)} b$ and bracket $a_{(0)} b$. It's an interesting object; its spectrum is called the \ti{associated variety} of $\vertex$. Right now though we are talking about the situation where 
+$\vertex / C_2(\vertex)$ is finite-dimensional, so its
+spectrum is zero-dimensional. In this case $\vertex$ is also called
+\ti{$C_2$-cofinite} or \ti{lisse}.}
+\end{itemize}
 \end{defn}
 
-\begin{prop}
+In particular $\vertex = L_k(\fg)$ is strongly rational, for $k \in \bbN$.
+
+\begin{prop}[Existence of tensor products]
 Suppose $\vertex$ is rational.
-There is a $\vertex$-module $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$
+Then there is a $\vertex$-module $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$
 with a $(z_1,z_2)$-intertwining map
 \begin{equation}
  \vrep_1 \otimes \vrep_2 \to \overline{\vrep_1 \boxtimes_{z_1,z_2} \vrep_2} 
@@ -2826,9 +2842,32 @@ and knowing this map for every $W$ is enough to know $b_{12}^\pm$.
 
 \subsubsection{Associator}
 
-The key fact that we use is \ti{factorization}: every conformal 
-block with 4 modules inserted can be obtained by plumbing
-two blocks with 3 modules inserted.
+The key fact that we use is \ti{factorization}: 
+
+\begin{prop}[Factorization for strongly rational vertex algebras] \label{prop:factorization-strongly-rational}
+Suppose $\vertex$ is strongly rational. Then
+every conformal block on the sphere
+with 4 ordinary modules inserted can be obtained by plumbing
+two blocks with 3 ordinary modules inserted, giving \fixme{draw a picture here}
+\begin{equation} \label{eq:factorization-four-punctures}
+  \Conf(\vrep_1, \vrep_2, \vrep_3, \vrep_4) = \bigoplus_i \Conf(\vrep_1, \vrep_2, \cS_i) \otimes \Conf(\cS^*_i, \vrep_3 \vrep_4) \, .
+\end{equation}
+\end{prop}
+
+This is an important analytic fact.
+As a practical matter, part of what it means is that we can describe the
+behavior of correlation functions when two primary insertions 
+$\vrep_1(z_1)$ and $\vrep_2(z_2)$ are brought close together
+using the $L_{-1}$ action.
+For primary states $\chi_1$ and $\chi_2$, 
+any conformal block in the summand labeled by
+$\cS_i$ in \eqref{eq:factorization-four-punctures} 
+will obey (inside correlation functions)
+\begin{equation}
+  \chi_1(z_1) \chi_2(z_2) = (z_1 - z_2)^{h_3 - h_2 - h_1} \chi_3(z_2)  + \cdots
+\end{equation}
+Conversely, to prove \autoref{prop:factorization-strongly-rational}, the main thing we need to 
+do is to show that \ti{all} conformal blocks have this property.
 
 Using this we can identify the space of 4-point blocks with
 $\vrep_1$, $\vrep_2$, $\vrep_3$, $W$ inserted,
@@ -2920,6 +2959,7 @@ a \ti{premodular tensor category}.
 Given such a category we can define colored link invariants 
 \fixme{...}
 
+\fixme{Reidemeister 1}
 
 \subsection{Chern-Simons theory}
 \fixme{...}
