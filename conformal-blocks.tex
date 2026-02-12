@@ -2866,10 +2866,18 @@ will obey (inside correlation functions)
 \begin{equation}
   \chi_1(z_1) \chi_2(z_2) = (z_1 - z_2)^{h_3 - h_2 - h_1} \chi_3(z_2)  + \cdots
 \end{equation}
-Conversely, to prove \autoref{prop:factorization-strongly-rational}, the main thing we need to 
-do is to show that \ti{all} conformal blocks have this property.
 
-Using this we can identify the space of 4-point blocks with
+Conversely, to prove \autoref{prop:factorization-strongly-rational}, the main thing we need to 
+do is to show that \ti{all} conformal blocks have this kind of
+behavior as $z_1 \to z_2$. I guess the idea should be to \ti{construct}
+some $\vertex$-module directly from the local behavior of the correlation 
+functions in that limit. If you can prove that the resulting module
+is ordinary then you could use the assumed finiteness properties.
+In practical terms, this means we at least need to show that all 
+correlation functions have only power-law singularities as $z_1 \to z_2$,
+in other words, we are dealing with a \ti{regular singular} ODE.
+
+At any rate, once we know \autoref{prop:factorization-strongly-rational} we can identify the space of 4-point blocks with
 $\vrep_1$, $\vrep_2$, $\vrep_3$, $W$ inserted,
 when $z_1$ is close to $z_2$, as
 \begin{equation}
