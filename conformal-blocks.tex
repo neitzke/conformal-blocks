@@ -2761,7 +2761,7 @@ and all $N_{ij}^k$ are finite.\footnote{Warning: there seem to be slight variant
   C_2(\vertex) = \{ a_{(-2)} b \mid a, b \in \vertex \} \, .
 \end{equation}
 We say $\vertex$ is \ti{strongly rational} if $\vertex$ is rational,
-$V \simeq V^*$, and $\dim \vertex / C_2(\vertex) < \infty$.\footnote{By the way, the space $\vertex / C_2(\vertex)$ is naturally a Poisson algebra, with product $a_{(-1)} b$ and bracket $a_{(0)} b$. It's an interesting object; its spectrum is called the \ti{associated variety} of $\vertex$. Right now though we are talking about the situation where 
+$\vertex \simeq \vertex^*$, and $\dim \vertex / C_2(\vertex) < \infty$.\footnote{By the way, the space $\vertex / C_2(\vertex)$ is naturally a Poisson algebra, with product $a_{(-1)} b$ and bracket $a_{(0)} b$. It's an interesting object; its spectrum is called the \ti{associated variety} of $\vertex$. Right now though we are talking about the situation where 
 $\vertex / C_2(\vertex)$ is finite-dimensional, so its
 spectrum is zero-dimensional. In this case $\vertex$ is also called
 \ti{$C_2$-cofinite} or \ti{lisse}.}
@@ -2771,7 +2771,7 @@ spectrum is zero-dimensional. In this case $\vertex$ is also called
 In particular $\vertex = L_k(\fg)$ is strongly rational, for $k \in \bbN$.
 
 \begin{prop}[Existence of tensor products]
-Suppose $\vertex$ is rational.
+Suppose $\vertex$ is rational and $\vrep_1$, $\vrep_2$ are ordinary modules.
 Then there is a $\vertex$-module $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$
 with a $(z_1,z_2)$-intertwining map
 \begin{equation}
@@ -2791,6 +2791,7 @@ One immediate consequence of this universal property is that
 $\Hom(\vrep_1 \boxtimes_{z_1,z_2} \vrep_2, W)$
 can be identified as the space of conformal blocks with insertions
 of $\vrep_1, \vrep_2, W^*$ at $z_1, z_2, \infty$.
+Another is that $\vrep \boxtimes_{z_1,z_2} \vertex \simeq \vrep$ canonically.
 % The second is that in any space of conformal blocks
 % we are allowed canonically to replace a pair of insertions of
 % $\vrep_1$ and $\vrep_2$ at $z_1$ and $z_2$ by a single insertion
@@ -2814,25 +2815,26 @@ What we have instead for free is
 \begin{equation}
   \vrep_1 \boxtimes_{z_1,z_2} \vrep_2 \simeq \vrep_2 \boxtimes_{z_2,z_1} \vrep_1 \, .
 \end{equation}
-Still, using the operator $\partial_z + L_{-1}$ we can define an isomorphism
+Still, for any $W$, using the operator $\partial_z + L_{-1}$ we can define an isomorphism
 \begin{equation}
-  \vrep_1 \boxtimes_{z_1,z_2} \vrep_2 \to \vrep_1 \boxtimes_{z'_1,z'_2} \vrep_2
+  \Hom(\vrep_1 \boxtimes_{z_1,z_2} \vrep_2, W) \to \Hom(\vrep_1 \boxtimes_{z'_1,z'_2} \vrep_2, W)
 \end{equation}
 given any path from $(z_1,z_2)$ to $(z'_1, z'_2)$ which avoids the diagonal.
 
 In particular, this gives two \ti{braiding} isomorphisms (depending which way $z_1$ and $z_2$ exchange),
 \begin{equation}
-  b_{12}^\pm: \vrep_1 \boxtimes_{z_1,z_2} \vrep_2 \to \vrep_1 \boxtimes_{z_2,z_1} \vrep_2 \simeq \vrep_2 \boxtimes_{z_1,z_2} \vrep_1 \, ,
+  b_{12}^\pm(W): \Hom(\vrep_1 \boxtimes_{z_1,z_2} \vrep_2, W) \to \Hom(\vrep_1 \boxtimes_{z_1,z_2} \vrep_2, W) \, ,
 \end{equation}
 obeying $b_{12}^+ b_{21}^- = \bid$.
 
-How to \ti{calculate} these isomorphisms?
-The braiding on conformal blocks gives 
-maps 
+Finally, knowing this map for every $W$ is enough to define 
 \begin{equation}
- \Hom(b_{12}^\pm, W): \Hom(\vrep_1 \boxtimes \vrep_2, W) \to \Hom(\vrep_2 \boxtimes \vrep_1, W)
+ b_{12}^\pm:  \vrep_1 \boxtimes_{z_1,z_2} \vrep_2 \to \vrep_2 \boxtimes_{z_1,z_2} \vrep_1 \, .
 \end{equation}
-and knowing this map for every $W$ is enough to know $b_{12}^\pm$.
+and in particular
+\begin{equation}
+ b_{12}^\pm:  \vrep_1 \boxtimes \vrep_2 \to \vrep_2 \boxtimes \vrep_1 \, .
+\end{equation}
 
 % \subsubsection{Categorical dual}
 
@@ -2840,9 +2842,9 @@ and knowing this map for every $W$ is enough to know $b_{12}^\pm$.
 % in the categorical sense: to check it one needs to check \ti{zig-zag identities} \fixme{...}
 
 
-\subsubsection{Associator}
+\subsubsection{Factorization}
 
-The key fact that we use is \ti{factorization}: 
+Now we need another important analytic fact:
 
 \begin{prop}[Factorization for strongly rational vertex algebras] \label{prop:factorization-strongly-rational}
 Suppose $\vertex$ is strongly rational. Then
@@ -2854,28 +2856,63 @@ two blocks with 3 ordinary modules inserted, giving \fixme{draw a picture here}
 \end{equation}
 \end{prop}
 
-This is an important analytic fact.
-As a practical matter, part of what it means is that we can describe the
+As a practical matter, part of what this means is that we can describe the
 behavior of correlation functions when two primary insertions 
 $\vrep_1(z_1)$ and $\vrep_2(z_2)$ are brought close together
-using the $L_{-1}$ action.
-For primary states $\chi_1$ and $\chi_2$, 
-any conformal block in the summand labeled by
+using the $L_{-1}$ action. We use the following:
+\begin{exercise}
+Let $\vertex$ be any conformal vertex algebra.
+Consider a conformal block on the sphere
+with ordinary module insertions $\vrep_{1,2,3}$ at $0,w,\infty$,
+with primary vectors $\chi_{1,2,3}$ of conformal weights $h_i$.
+Prove that the differential equation
+\begin{equation}
+  \partial_w \IP{\chi_1(0) \chi_2(w) \chi_3(\infty)} = \IP{\chi_1(0) L_{-1} \chi_2(w) \chi_3(\infty)}
+\end{equation}
+implies that 
+\begin{equation}
+  \IP{\chi_1(0) \chi_2(w) \chi_3(\infty)} = \alpha w^{-h_1-h_2+h_3}
+\end{equation}
+for some $\alpha(\chi_1,\chi_2,\chi_3) \in \bbC$. (Hint: use the coinvariant constraints to 
+relate the action of $L_{-1}$ at $w$ to the action of $L_{\ge 0}$
+at all three marked points; then you will get a closed equation for
+$\IP{\chi_1(0) \chi_2(w) \chi_3(\infty)}$, which can be solved directly.)
+\end{exercise}
+
+Plugging this into the plumbing we see that for 
+primary states $\chi_1$ and $\chi_2$, any conformal block in the summand (``channel'') labeled by
 $\cS_i$ in \eqref{eq:factorization-four-punctures} 
 will obey (inside correlation functions)
 \begin{equation}
-  \chi_1(z_1) \chi_2(z_2) = (z_1 - z_2)^{h_3 - h_2 - h_1} \chi_3(z_2)  + \cdots
+  \chi_1(z_1) \chi_2(z_2) = (z_1 - z_2)^{h_i - h_2 - h_1} \chi_i(z_2)  + \cdots
 \end{equation}
+for some primary $\chi_i$ in $\cS_i$,
+and in particular the monodromy when $z_1$ is taken around $z_2$ will be multiplication by
+$\e^{2 \pi \I(h_i - h_2 - h_1)}$.
 
 Conversely, to prove \autoref{prop:factorization-strongly-rational}, the main thing we need to 
 do is to show that \ti{all} conformal blocks have this kind of
-behavior as $z_1 \to z_2$. I guess the idea should be to \ti{construct}
-some $\vertex$-module directly from the local behavior of the correlation 
-functions in that limit. If you can prove that the resulting module
-is ordinary then you could use the assumed finiteness properties.
-In practical terms, this means we at least need to show that all 
-correlation functions have only power-law singularities as $z_1 \to z_2$,
-in other words, we are dealing with a \ti{regular singular} ODE.
+behavior as $z_1 \to z_2$. I think the idea is like this.
+First we show that the connection on conformal blocks is \ti{regular singular},
+in the sense that the correlation functions satisfy a finite-rank system of differential equations 
+which has only first-order poles at the diagonal.
+(We saw this directly for our main example \eqref{eq:kz-kohno}.
+More generally it is true at least if we consider strongly rational vertex algebras
+and insert only ordinary modules.
+Note it is certainly \ti{not} true if we consider an ordinary module approaching an 
+``irregular module'' $\vrep(u)$: then we would get a higher-order pole.)
+It follows then that the correlation functions have at most polynomial growth
+at the diagonal (but they could have logs).
+Next we \ti{construct} some $\vertex$-module directly from the local behavior 
+of the correlation functions at the diagonal. 
+Then we use the assumed finiteness properties to 
+prove that this $\vertex$-module is ordinary, conclude
+it decomposes as a direct sum of ordinary modules, and get the corresponding decomposition 
+for the correlation function.
+This has been carried out in \fixme{...}.
+
+
+\subsubsection{Associator}
 
 At any rate, once we know \autoref{prop:factorization-strongly-rational} we can identify the space of 4-point blocks with
 $\vrep_1$, $\vrep_2$, $\vrep_3$, $W$ inserted,
@@ -2944,6 +2981,12 @@ built by plumbing in a sphere carrying the
 canonical block with insertions $\vrep, \vrep^*, \vertex$.
 
 
+\subsubsection{Double duals}
+
+As we have remarked, we have a canonical isomorphism
+$\vrep^{**} \simeq \vrep$.
+
+
 \subsubsection{Coherence}
 
 There are many coherence relations between these various structures.
@@ -2954,20 +2997,35 @@ tensor products of four objects.
 \item The braiding and associator together obey a hexagon relation.
 \item The twist is compatible with the braiding and associator.
 \item The twist is compatible with evaluation and coevaluation.
-\item The coend and end obey zig-zag (straightening) relations.
+\item The coevaluation and evaluation obey zig-zag (straightening) relations.
 \end{itemize}
-All of them are automatic. \fixme{...}
+All of them are automatic in our setup, but it is interesting to see how they play out.
+For example, we have a chain of maps which:
+\begin{itemize}
+\item starts with a single object $\vrep$; 
+\item creates a pair ($\coev$) to get $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
+\item braids positively to $\vrep \boxtimes (\vrep^* \boxtimes \vrep)$;
+\item associates to $(\vrep \boxtimes \vrep^*) \boxtimes \vrep$;
+\item annihilates a pair ($\ev$) to get $\vrep$ again.
+\end{itemize}
+Now the coherence relation is that this whole operation is equal to the twist $\theta_\vrep$
+(it would be $\theta_\vrep^{-1}$ if we braided negatively).
+The proof uses the fact that the monodromy of $\vrep$ around $\vrep^*$ in a 3-point block with
+$\vrep$, $\vrep$, $\vrep^*$ is given by $\e^{2 \pi \I h_\vrep}$, as we already noted \fixme{...}
 
 
 \subsection{Link invariants}
 
 All of these properties together make $\cC$ into 
-a \ti{premodular tensor category}.
+a \ti{premodular tensor category} or \ti{ribbon fusion category}.
 
-Given such a category we can define colored link invariants 
+Given such a category we can define invariants of colored framed links
 \fixme{...}
 
 \fixme{Reidemeister 1}
+
+
+\subsection{Verlinde line operators}
 
 \subsection{Chern-Simons theory}
 \fixme{...}
