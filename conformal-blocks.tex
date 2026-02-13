@@ -2436,11 +2436,20 @@ This definition looks a little complicated, but it is
 codifying something that was implicit in our definition of
 conformal blocks for a general vertex algebra.
 Indeed, around a point $z \in \bbC^\times$ there are two natural
-pointed coordinate systems: $t(w) = w - z$ and $t'(w) = 1/z - 1/w$.
+pointed coordinate systems: $t(w) = w - z$ and $t'(w) = 1/w - 1/z$.
 The transformation $\e^{z L_1} (-z^{-2})^{L_0}$ appearing in
 \eqref{eq:dual-vertex-operator} is the action of the
 change of coordinates from
-$t$ to $t'$. In the case of $\vertex = V^k(\fg)$ it becomes more familiar:
+$t$ to $t'$.
+Said otherwise, there is a M\"obius transformation $g(z)$
+which is the \ti{pointed} version 
+of the transformation $w \to 1/w$ around $w=z$, 
+and \eqref{eq:dual-vertex-operator} is
+\begin{equation} \label{eq:dual-vertex-operator-abstract}
+  (Y^{\vrep^*}(a,z) \alpha)  \cdot  \chi = \alpha \cdot (Y^\vrep(\rho(g(z)) a, z^{-1}) \chi) \, .
+\end{equation}
+
+In the case of $\vertex = V^k(\fg)$ it becomes more familiar:
 \begin{example}
 If $\vertex = V^k(\fg)$ then \eqref{eq:dual-vertex-operator} implies
 \begin{equation}
@@ -2539,7 +2548,9 @@ is not by integers, discuss coordinate dependence}
 \begin{equation} \label{eq:block-gluing}
   \Phi(\chi_1, \chi_2) = \sum_{n \ge h} q^{n} \sum_i \Phi_1(\chi_1, \xi_{i,n}) \Phi_2(\xi^*_{i,n}, \chi_2)
 \end{equation}
-where $(\xi_{i,n})$ and $(\xi^*_{i,n})$ are dual bases for $\vrep_n$ and $\vrep^*_n$, with respect to the invariant pairing.
+where $(\xi_{i,n})$ and $(\xi^*_{i,n})$ are dual bases for $\vrep_n$ and $\vrep^*_n$, with respect to the invariant pairing.\footnote{Or, without choosing a basis, 
+one could say we insert the operator $q^{L_0}$ into
+the $\vrep \otimes \vrep^*$ slots of $\Phi_1 \otimes \Phi_2$.}
 Note that in the limit $q \to 0$ the leading term comes from the 
 primaries of weight $h$ in $\vrep$ contribute, and if we rescale by overall $q^{-h}$ then these
 are the only ones that survive the limit; for finite $q$ the whole
@@ -2556,9 +2567,31 @@ Now, what we want to do is to engineer the object $\cI = \sum_j \xi_j \otimes \x
 in such a way that the chiral correlation
 functions we obtain on the annuli $A_1$ and $A_2$ are the same, and thus can be glued to give chiral
 correlation functions on $C$. 
-This will happen if we choose $\cI = \sum_{n \ge h} q^{n} \sum_i \xi_{i,n} \otimes \xi^*_{i,n}$,
-Indeed, suppose we insert $J(z_1)$ on $C_1$.
-\fixme{....}
+This will happen if we choose
+\begin{equation}
+  \cI = \sum_{n \ge h} q^{n} \sum_i \xi_{i,n} \otimes \xi^*_{i,n} = \sum_{n \ge h} \sum_i (q^{L_0} \xi_{i,n}) \otimes \xi^*_{i,n} \, .
+\end{equation}
+Indeed, suppose we insert $a(z_1)$ on $C_1$.
+Expanding near $z_1 = 0$ we see that inside the correlation function this replaces $\cI$ by
+\begin{equation} \label{eq:gluing-check-1}
+ \sum_{n,i} (Y^\vrep (a, z_1) q^{L_0} \xi_{i,n}) \otimes \xi^*_{i,n} \, .
+\end{equation}
+On the other hand, if we insert $a(z_2)$ near $z_2 = 0$ on $C_2$ we get
+\begin{equation}
+ \sum_{n,i} q^{L_0} \xi_{i,n} \otimes (Y^{\vrep^*} (a, z_2) \xi^*_{i,n}) \, .
+\end{equation}
+Using \eqref{eq:dual-vertex-operator-abstract}, this is
+\begin{equation}
+\sum_{n,i} q^{L_0} (Y^{\vrep}(\rho(g(z_2)) a, z_2^{-1}) \xi_{i,n}) \otimes \xi^*_{i,n}
+\end{equation}
+with $g(z_2)$ the pointed version of the transformation $z \to 1/z$.
+Commuting the $q^{L_0}$ through we get
+\begin{equation} \label{eq:gluing-check-2}
+\sum_{n,i} (Y^{\vrep}(\rho(g(z_2,q)) a, q z_2^{-1}) q^{L_0} \xi_{i,n}) \otimes \xi^*_{i,n}
+\end{equation}
+where $g(z_2,q)$ is the pointed version of $z \to q/z$.
+Finally, using the coordinate covariance of $Y^\vrep$ and $z_1 = q / z_2$ we see that
+\eqref{eq:gluing-check-1} and \eqref{eq:gluing-check-2} match, as desired.
 
 It is not at all obvious that the sum \eqref{eq:block-gluing} converges, but at least \ti{formally} it gives a conformal block:
 \begin{exercise}
