@@ -477,10 +477,27 @@ Please send corrections/improvements to
 
 \section{Introduction}
 
+\subsection{The plan}
 The course is about a subject which started in physics of
 2-dimensional systems (partly string theory, but not only 
 string theory). It has turned out to have a lot of applications,
 in diverse areas.
+\fixme{...}
+
+
+\subsection{References}
+
+In the main text I include a few references when needed, for things I don't fully explain
+in the text; I didn't try to give correct attributions of the origin of the ideas
+and constructions we discuss, mostly because I am not capable.
+But let me add a few historical references here.
+
+The idea of conformal block grows out of the structure of 2-dimensional conformal field
+theory, which I believe was first clearly elucidated in \cite{BPZ1984}.
+Vertex algebras are an abstraction of the structure of operator products
+in these theories, and in this form were originally defined in \cite{Borcherds1986}.
+The affine and Virasoro vertex algebras, which are basic and important examples for our story,
+were defined in \cite{FrenkelKac1980,FrenkelZhu1992}.
 \fixme{...}
 
 \section{Basic data}
@@ -1324,7 +1341,8 @@ chiral correlation systems is infinite-dimensional.
 
 \begin{example}[Chiral correlation systems for an affine vertex algebra on the sphere]
 
-Here is a construction of chiral correlation functions. \fixme{check factors, signs}
+Here is a construction of chiral correlation functions, originally given in \cite{FrenkelZhu1992}.
+\fixme{check factors, signs}
 Define
 \[
 W(i_1, \dots, i_m) =\
@@ -1335,7 +1353,7 @@ of $\{1, \dots, n\}$ into disjoint cycles with
 length $m \ge 2$:
 \[
 \Big\langle \prod_{r=1}^n J^{X_r}(z_r)\Big\rangle
-\;=\;
+=
 \sum_{\{1,\dots,n\} = C_1\sqcup\cdots\sqcup C_s}
 \ \prod_{\alpha=1}^s \left( \frac{1}{\abs{C_\alpha}} \sum_{\text{orderings }\mathbf{i}\text{ of }C_\alpha} W(\mathbf{i}) \right) \, .
 \]
@@ -2907,7 +2925,7 @@ Next we \ti{construct} some $\vertex$-module directly from the local behavior
 of the correlation functions at the diagonal. 
 Then we use the assumed finiteness properties to 
 prove that this $\vertex$-module is ordinary, conclude
-it decomposes as a direct sum of ordinary modules, and get the corresponding decomposition 
+it decomposes as a direct sum of ordinary modules, and get the corresponding deocomposition 
 for the correlation function.
 This has been carried out in \fixme{...}.
 
