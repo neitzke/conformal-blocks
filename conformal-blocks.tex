@@ -2688,14 +2688,15 @@ dimensions $1, 2, \dots, k+1$.
 \subsubsection{Tensor}
 
 What happens when we have two $\vertex$-modules $\vrep_1$, $\vrep_2$
-and ``bring them close together''?
+and bring them close together?
 
-Optimistically we might hope that
+Optimistically we might hope that there is a notion of tensor product
+of $\vertex$-modules, with
 \begin{equation}
   \cS_i \boxtimes \cS_j \simeq \bigoplus_k N_{ij}^k \cS_k
 \end{equation}
 where the \ti{fusion coefficient}
-$N_{ij}^k$ is 
+$N_{ij}^k \in \bbZ_{\ge 0}$ is 
 the dimension of the space of conformal blocks on $\bbC \bbP^1$
 with $\cS_i, \cS_j, \cS_k^*$ inserted. (Note this dimension is independent
 of \ti{where} the three points are.)
@@ -2729,23 +2730,23 @@ Then we have simple modules $\cS_0, \dots, \cS_3$ and for instance this rule wou
 \end{equation}
 \end{example}
 
-We can still try to define 
-the \ti{fusion semiring} is the set of equivalence-classes of objects 
+We can define the \ti{fusion semiring} as 
+the set of equivalence-classes of objects 
 of $\cC$, with addition given by $\oplus$ and product $\boxtimes$.
 It is commutative and associative (you could check this by hand
 in any particular case, or we will explain it below).
 By formally adjoining negatives 
-of objects (Grothendieck ring) we get an honest ring.
+of objects (Grothendieck ring) we get the \ti{fusion ring}.
 \begin{exercise}
-Suppose $\fg = \fsl_2$ and $k=3$. Check directly that the fusion semiring
+Suppose $\fg = \fsl_2$ and $k=3$. Check directly that the fusion ring
 is associative, and prove that it is isomorphic to $\bbC[x] / (x^4 - 3x^2 + 1)$.
 \end{exercise}
 
 \begin{example}
-More generally, if $\fg = \fsl_2$, the fusion semiring is 
-$\bbC[x] / U_{k+1}(\frac{x}{2})$ where $U_{k+1}$ is a Cheyshev polynomial.
-$U_n$ represents the class of the $(k+1)$-dimensional irreducible
-representation 
+More generally, if $\fg = \fsl_2$, the fusion ring is 
+$\bbZ[x] / U_{k+1}(\frac{x}{2})$ where $U_{k+1}$ is a Chebyshev polynomial.
+(It represents the class of the $(k+1)$-dimensional irreducible
+representation.)
 \end{example}
 
 % But the more complicated construction above provides also the map
