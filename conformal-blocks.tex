@@ -2546,7 +2546,8 @@ where $\sim$ is the relation
 Prove that the plumbed surface 
 $C_q$ does not depend on the choice of the $r_i$,
 and that it depends on the local coordinates only through their $1$-jets at the marked points; rescaling the local coordinate on
-either side rescales $q$.
+either side rescales $q$. Said more abstractly, we use a bilinear pairing $b$ between the tangent spaces at the 
+marked points; then identifying each side locally with its tangent space, the plumbed surface is $b(z_1,z_2) = q$.
 \end{exercise}
 
 In the limit as $q \to 0$ the plumbed surface degenerates to develop a node.
@@ -2557,8 +2558,7 @@ as follows.
 Suppose given conformal blocks $\Phi_1$ on $C_1$ and $\Phi_2$ on $C_2$, with $\vrep$, $\vrep^*$ inserted at
 marked points $p_1$, $p_2$, and possibly 
 other insertions $\chi_1$ on $C_1$, $\chi_2$ on $C_2$.
-Then let $h$ be the minimum conformal weight in $\vrep$, and define \fixme{explain what it means if the grading
-is not by integers, discuss coordinate dependence}
+Then let $h$ be the minimum conformal weight in $\vrep$, and define
 \begin{equation} \label{eq:block-gluing}
   \Phi(\chi_1, \chi_2) = \sum_{n \ge h} q^{n} \sum_i \Phi_1(\chi_1, \xi_{i,n}) \Phi_2(\xi^*_{i,n}, \chi_2)
 \end{equation}
@@ -2637,6 +2637,10 @@ What is the resulting conformal block?
 \fixme{I bet it's the original block on $C_1$ again but we should
 check!}
 \end{exercise}
+
+In all these we have been cavalier about how our construction depends on the initial local coordinates $z_1$, $z_2$ which we choose on 
+the two sides, and also about the multivaluedness of $q^n$ when $n \notin \bbZ$. These two issues are connected. \fixme{...}
+
 
 \subsection{Nice categories of modules}
 
@@ -2941,9 +2945,11 @@ Now we need another important analytic fact:
 Suppose $\vertex$ is strongly rational. Then
 every conformal block on the sphere
 with 4 ordinary modules inserted can be obtained by plumbing
-two blocks with 3 ordinary modules inserted, giving \fixme{draw a picture here}
+two blocks with 3 ordinary modules inserted, giving 
+when $z_1$ is close to $z_2$ and $z_3$ is close to $z_4$
+\fixme{draw a picture here}
 \begin{equation} \label{eq:factorization-four-punctures}
-  \Conf(\vrep_1, \vrep_2, \vrep_3, \vrep_4) = \bigoplus_i \Conf(\vrep_1, \vrep_2, \cS_i) \otimes \Conf(\cS^*_i, \vrep_3 \vrep_4) \, .
+  \Conf(\vrep_1, \vrep_2, \vrep_3, \vrep_4) = \bigoplus_i \Conf(\vrep_1, \vrep_2, \cS_i) \otimes \Conf(\cS^*_i, \vrep_3, \vrep_4) \, .
 \end{equation}
 \end{prop}
 
@@ -3071,8 +3077,19 @@ In particular, this gives \ti{two} morphisms,
   \ev^L_\vrep: \vrep^* \boxtimes \vrep \to \vertex, \qquad   \ev^R_\vrep: \vrep \boxtimes \vrep^* \to \vertex
 \end{equation}
 
-For concrete computations, it seems useful to describe how this morphism behaves in correlation functions.
-\fixme{...} 
+For concrete computations, it seems useful to describe how these morphisms behave in correlation functions.
+Here it is important that $\boxtimes = \boxtimes_{0,1}$. Using the connection on conformal blocks we get
+unambiguous continuation to $z_2 - z_1 \in \bbR_+$.
+In hopefully-understandable notation we get in this domain
+\begin{equation}
+  (\ev^L_\vrep \Phi)(\eta(z_1), \chi(z_2), \cdots) = (\eta \cdot \chi) (z_2-z_1)^{-2h} \Phi(\cdots) 
+\end{equation}
+and
+\begin{equation}
+  (\ev^R_\vrep \Phi)(\chi(z_1), \eta(z_2), \cdots) = (\eta \cdot \chi) (z_2-z_1)^{-2h} \Phi(\cdots) 
+\end{equation}
+Note one is not the analytic continuation of the other: the two would differ by $\exp(\pm 2 \pi \I h)$ depending
+on how we continue.
 
 \subsubsection{Coevaluation}
 
