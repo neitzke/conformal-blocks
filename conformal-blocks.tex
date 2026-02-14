@@ -2418,7 +2418,6 @@ or vice versa. Prove that these operators obey the ``Hecke relation'' \fixme{che
 What is the analogous relation if we take $\fg = \fsl_N$?
 \end{exercise}
 
-Let's discuss monodromy 
 
 
 \subsection{Duals}
@@ -2688,9 +2687,20 @@ dimensions $1, 2, \dots, k+1$.
 
 \subsubsection{Tensor}
 
-What happens when we have two $\vertex$-modules and ``bring them close together''?
-To start thinking about this:
+What happens when we have two $\vertex$-modules $\vrep_1$, $\vrep_2$
+and ``bring them close together''?
 
+Optimistically we might hope that
+\begin{equation}
+  \cS_i \boxtimes \cS_j \simeq \bigoplus_k N_{ij}^k \cS_k
+\end{equation}
+where the \ti{fusion coefficient}
+$N_{ij}^k$ is 
+the dimension of the space of conformal blocks on $\bbC \bbP^1$
+with $\cS_i, \cS_j, \cS_k^*$ inserted. (Note this dimension is independent
+of \ti{where} the three points are.)
+
+To start thinking about this, consider:
 \begin{example}
 Suppose $\fg = \fsl_2$.
 Then we have simple modules $\cS_n$ corresponding to weights $n \omega$.
@@ -2698,26 +2708,19 @@ Consider a conformal block $\Phi$ on $\bbC \bbP^1$
 with modules $\cS_a$, $\cS_b$, $\cS_c$ inserted. We already know from our discussion of 
 $\vertex^k(\fg)$-blocks that $\Phi$ is determined by an intertwiner
 $\Phi_0 \in \Hom_\fg(M_a \otimes M_b \otimes M_c, \triv)$.
-Recalling that $M_n = M_n^*$ such an intertwiner exists 
-whenever $M_c$ appears in $M_a \otimes M_b$, i.e. whenever $a+b+c \in 2\bbZ$ and 
-$\abs{a-b} \le c \le \abs{a+b}$.
+Recalling that $M_n = M_n^*$, such an intertwiner exists 
+whenever $M_c$ appears in $M_a \otimes M_b$, i.e. 
+whenever $a+b+c \in 2\bbZ$ and 
+$\abs{a-b} \le c \le a+b$.
 But since we consider $L_k(\fg)$ instead of $V^k(\fg)$
-we have an additional constraint now, because $(E_\theta)_{-1}^{k+1} \vac = 0$. 
-This constraint turns out to impose the condition that $a + b + c \le 2k$.
+we have an additional constraint now, 
+coming from $(E_\theta)_{-1}^{k+1} \vac = 0$. 
+This constraint turns out to impose the condition that $a + b + c \le 2k$,
+known as the \ti{depth rule}.
 \fixme{work out how!}
 \end{example}
 
-This answer is a little weird.
-We expect
-\begin{equation}
-  \cS_i \boxtimes \cS_j \simeq \bigoplus_k N_{ij}^k \cS_k
-\end{equation}
-where the \ti{fusion coefficient}
-$N_{ij}^k$ is 
-the dimension of the space of conformal blocks on $\bbC \bbP^1$
-with $\cS_i, \cS_j, \cS_k^*$ inserted.
-But this means in particular that $\vrep(M_a) \boxtimes \vrep(M_b)$
-cannot be $\vrep(M_a \otimes M_b)$.
+This answer is a little weird. It means in particular that $\vrep(M_a) \boxtimes \vrep(M_b)$ cannot be $\vrep(M_a \otimes M_b)$.
 \begin{example}
 Suppose $\fg = \fsl_2$ and $k=3$.
 Then we have simple modules $\cS_0, \dots, \cS_3$ and for instance this rule would say
@@ -2726,9 +2729,28 @@ Then we have simple modules $\cS_0, \dots, \cS_3$ and for instance this rule wou
 \end{equation}
 \end{example}
 
+We can still try to define 
+the \ti{fusion semiring} is the set of equivalence-classes of objects 
+of $\cC$, with addition given by $\oplus$ and product $\boxtimes$.
+It is commutative and associative (you could check this by hand
+in any particular case, or we will explain it below).
+By formally adjoining negatives 
+of objects (Grothendieck ring) we get an honest ring.
+\begin{exercise}
+Suppose $\fg = \fsl_2$ and $k=3$. Check directly that the fusion semiring
+is associative, and prove that it is isomorphic to $\bbC[x] / (x^4 - 3x^2 + 1)$.
+\end{exercise}
+
+\begin{example}
+More generally, if $\fg = \fsl_2$, the fusion semiring is 
+$\bbC[x] / U_{k+1}(\frac{x}{2})$ where $U_{k+1}$ is a Cheyshev polynomial.
+$U_n$ represents the class of the $(k+1)$-dimensional irreducible
+representation 
+\end{example}
+
 % But the more complicated construction above provides also the map
 % $\vrep_1 \otimes \vrep_2 \to \overline{\vrep_1 \boxtimes \vrep_2}$ which is important.
-We could try to impose this rule ``by hand'' by just
+We could try to produce a tensor product ``by hand'' by just
 defining $\cS_i \boxtimes \cS_j = \bigoplus_{k} \bbC^{N_{ij}^k} \otimes \cS_k$.
 This won't have the properties we usually want.
 For example, it isn't associative in any reasonable way,
