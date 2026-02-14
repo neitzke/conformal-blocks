@@ -463,7 +463,9 @@ Andrew Neitzke
 {These are notes from a spring 2026
 course at Yale University, in progress.
 \ti{Right now they are basically wreckage, but
-should stabilize over the term.}
+should stabilize over the term.} They probably contain
+a lot of errors; I am learning some of this material 
+alongside the students in the course.
 
 Please send corrections/improvements to
 {\tt\href{mailto:andrew.neitzke@yale.edu}{andrew.neitzke@yale.edu}}.
@@ -487,8 +489,9 @@ in diverse areas.
 
 \subsection{References}
 
-In the main text I include a few references when needed, for things I don't fully explain
-in the text; I didn't try to give correct attributions of the origin of the ideas
+In the main text I include a few references, for things I think need 
+more explanation than I can provide; I didn't try to give correct 
+attributions of the origin of the ideas
 and constructions we discuss, mostly because I am not capable.
 But let me add a few historical references here.
 
@@ -498,6 +501,9 @@ Vertex algebras are an abstraction of the structure of operator products
 in these theories, and in this form were originally defined in \cite{Borcherds1986}.
 The affine and Virasoro vertex algebras, which are basic and important examples for our story,
 were defined in \cite{FrenkelKac1980,FrenkelZhu1992}.
+The structure of modular tensor category arising from conformal field theory 
+was first described (implicitly) in \cite{MooreSeiberg1989ClassicalQuantum},
+and formalized in categorical language in \cite{Turaev1992ModularCategories}.
 \fixme{...}
 
 \section{Basic data}
@@ -616,19 +622,20 @@ then $a_h$ has degree $-h$.
 Some remarks:
 \begin{itemize}
 \item Some authors would allow more general notions of
-vertex algebra, but this is broad enough for our purposes;
+vertex algebra, and would call ours \ti{CFT-type} vertex algebras;
+but this is broad enough for our purposes;
 our goal is mostly to explore the nicest examples.
 
 \item Property (4) is sometimes called the ``locality'' axiom: it 
 expresses the idea that singularities in $a(z) b(w)$ occur only
-at $z=w$, not anywhere else. We also say: $Y(a,z)$ and $Y(b,w)$ are local with respect to one another.
+at $z=w$, not anywhere else. We also say: $Y(a,z)$ and $Y(b,w)$ are \ti{local} with respect to one another.
 
 \item Note that the grading implies that for each \(a, b \in \vertex \) we have \(a_{(n)}b=0\) for all \(n\gg 0\), i.e. 
 $Y(a,z) b$ is a Laurent series in $z$.
 
-\item The interpretation of the grading is that it measures
-the \ti{scaling dimension} of the objects. We will explain
-this more below.
+% \item The interpretation of the grading is that it measures
+% the \ti{scaling dimension} of the objects. We will explain
+% this more below.
 
 % \begin{exercise}
 % For all \(a,b\in\vertex\), prove that
@@ -1093,6 +1100,45 @@ Calculate the mode expansion of $Y(J_{(-1)} J_{(-1)} J_{(-1)} \vac, z)$.
 Calculate the mode expansion of $Y(J_{(-2)} J_{(-1)} \vac, z)$.
 \end{exercise}
 
+
+\subsection{Modules for vertex algebras}
+
+\begin{defn}[Module for a vertex algebra]
+A (weak) \ti{$\vertex$-module} is a vector space $\vrep$
+and an operation
+\begin{equation}
+Y^\vrep(\,\cdot\,,z): \vertex \to \mathrm{End}(\vrep)[[z,z^{-1}]],\qquad
+Y^\vrep(a,z) = \sum_{n\in \mathbb{Z}} a^\vrep_{(n)} z^{-n-1},
+\end{equation}
+such that
+\begin{enumerate}
+
+\item For each \(a \in \vertex \), \( \chi \in \vrep \) we have \(a^\vrep_{(n)}\chi=0\) for all \(n\gg 0\) \, ,
+
+\item 
+  $Y^\vrep(\vac, z) = \bid_\vrep$ \, ,
+
+\item $Y^\vrep(T a, z) = \partial_z Y^\vrep(a,z)$ \, ,
+
+\item For all $a,b \in \vertex$ and $\chi \in \vrep$
+there exists $F(z,w) \in \vrep[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
+$Y^\vrep(a,z) Y^\vrep(b,w) \chi$ and 
+$Y^\vrep(b,w) Y^\vrep(a,z) \chi$ are the
+formal Laurent expansion of $F(z,w)$ in the regions
+$\abs{w} < \abs{z}$ and $\abs{z} < \abs{w}$
+respectively.
+\end{enumerate}
+
+\end{defn}
+
+\begin{defn}[Admissible module]
+A $\vertex$-module $\vrep$ is \ti{admissible} if
+$\vrep = \bigoplus_n \vrep_n$ (warning:
+the grading is not necessarily by integers),
+where $a_{(n)}^\vrep$ acts with degree $(\deg a) - n - 1$.
+\end{defn}
+
+
 % The formula looks a little unsymmetrical, splitting into $<$ and $\ge$: 
 % that's because we have chosen to look at expansions around $z=0$ and not $z=\infty$.
 % The division is into the polar part at $z=0$ and the rest.
@@ -1148,18 +1194,19 @@ We often drop the data of the marked points and the representations from the not
 
 
 
-\section{Chiral correlation functions for affine
-vertex algebras}
+\section{Chiral correlation functions and conformal blocks}
 
 Now we are ready to ``put $\vertex$ on the Riemann surface $C$.''
 The way this is done for a general $\vertex$ takes a while
 to appreciate. To get some examples in our hand quickly, 
-let me specialize to the case of affine vertex algebras,
+we will first specialize to the case of affine vertex algebras,
 and further to the case of a curve $C$ with no marked points.
+Then we will treat more general situations.
 
 Before defining conformal blocks we consider correlation functions.
 I think that these are actually the more important objects (and in good
 cases they are the same thing as conformal blocks).
+
 
 \subsection{Chiral correlation functions without marked points}
 
@@ -1584,42 +1631,7 @@ Prove that $\partial_z \Phi_z(a) = \Phi_z(T a)$.
 \subsection{Including other modules}
 
 Next we want to upgrade all this again to include more general $\vertex$-modules.
-
-\begin{defn}[Module for a vertex algebra]
-A (weak) \ti{$\vertex$-module} is a vector space $\vrep$
-and an operation
-\begin{equation}
-Y^\vrep(\,\cdot\,,z): \vertex \to \mathrm{End}(\vrep)[[z,z^{-1}]],\qquad
-Y^\vrep(a,z) = \sum_{n\in \mathbb{Z}} a^\vrep_{(n)} z^{-n-1},
-\end{equation}
-such that
-\begin{enumerate}
-
-\item For each \(a \in \vertex \), \( \chi \in \vrep \) we have \(a^\vrep_{(n)}\chi=0\) for all \(n\gg 0\) \, ,
-
-\item 
-  $Y^\vrep(\vac, z) = \bid_\vrep$ \, ,
-
-\item $Y^\vrep(T a, z) = \partial_z Y^\vrep(a,z)$ \, ,
-
-\item For all $a,b \in \vertex$ and $\chi \in \vrep$
-there exists $F(z,w) \in \vrep[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]$, such that
-$Y^\vrep(a,z) Y^\vrep(b,w) \chi$ and 
-$Y^\vrep(b,w) Y^\vrep(a,z) \chi$ are the
-formal Laurent expansion of $F(z,w)$ in the regions
-$\abs{w} < \abs{z}$ and $\abs{z} < \abs{w}$
-respectively.
-\end{enumerate}
-
-\end{defn}
-
-\begin{defn}[Admissible module]
-A $\vertex$-module $\vrep$ is \ti{admissible} if
-$\vrep = \bigoplus_n \vrep_n$ (warning:
-the grading is not necessarily by integers),
-where $a_{(n)}^\vrep$ acts with degree $(\deg a) - n - 1$.
-\end{defn}
-
+So let us first quickly discuss some important exampls of modules for $V^k(\fg)$.
 Let $\hfg$ be the Lie algebra generated by all modes $J^X_{(n)}$ (called \ti{affine Kac-Moody algebra}).
 The representation theory of $V^k(\fg)$ is closely relateed to that of $\hfg$.
 For the latter the book \cite{Kac1990InfiniteDimensionalLieAlgebras} is very useful. Here we
@@ -1675,7 +1687,10 @@ This specializes to the previous two cases, upon choosing $u = 0$ or $M = \triv$
 we only get interesting hybrid modules when $0 \subsetneqq Z(u) \subsetneqq \fg$.)
 \end{example}
 
-Now suppose we have
+
+
+
+Suppose we have
 $\vertex$-modules $\vrep_i$ and insert them at 
 marked points $p_i \in C$, still with a local coordinate
 system $z_i$ fixed around each $p_i$. Then:
@@ -2728,6 +2743,8 @@ Then we have simple modules $\cS_0, \dots, \cS_3$ and for instance this rule wou
 \begin{equation}
   \cS_2 \boxtimes \cS_2 \simeq \cS_0 \oplus \cS_2, \qquad \cS_3 \boxtimes \cS_3 \simeq \cS_0 \, .
 \end{equation}
+(Note that in $\cS_3 \boxtimes \cS_3$ the object $\cS_2$ does not appear, even though it would have 
+appeared in the naive tensor product, and it is an allowed object of the category!)
 \end{example}
 
 We can define the \ti{fusion semiring} as 
@@ -2746,7 +2763,9 @@ is associative, and prove that it is isomorphic to $\bbC[x] / (x^4 - 3x^2 + 1)$.
 More generally, if $\fg = \fsl_2$, the fusion ring is 
 $\bbZ[x] / U_{k+1}(\frac{x}{2})$ where $U_{k+1}$ is a Chebyshev polynomial.
 (It represents the class of the $(k+1)$-dimensional irreducible
-representation.)
+representation; so we get the fusion ring by starting with the 
+ring of finite-dimensional $\fsl_2$-modules and then formally
+``setting that representation to zero.'')
 \end{example}
 
 % But the more complicated construction above provides also the map
@@ -2762,7 +2781,7 @@ a map between them.) It is not even functorial in any obvious way, i.e. we don't
 products of general representations, only ones which come to us already as direct sums of the
 simple objects $\cS_i$.
 
-Nevertheless, for any modules $\vrep_1$, $\vrep_2$ we do have a product module 
+Nevertheless, for any modules $\vrep_1$, $\vrep_2$ we \ti{can} define a product module 
 $\vrep_1 \boxtimes \vrep_2$, for which we do have \eqref{eq:boxtimes-coeff}.
 More canonically 
 we have a family of modules $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ 
@@ -2771,6 +2790,8 @@ with the property that
 $\Hom(\vrep_1 \boxtimes_{z_1,z_2} \vrep_2, W)$
 is a space of 3-point conformal blocks with
 $\vrep_1, \vrep_2, W$ at $z_1, z_2, \infty$ respectively.
+The modules $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ are all isomorphic (they have the same decomposition into simple objects), 
+but not canonically so.
 Then we define $\vrep_1 \boxtimes \vrep_2$ by fixing (arbitrarily) $z_1 = 0$, $z_2 = 1$.
 We emphasize that $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ is not $\vrep_1 \otimes \vrep_2$ as a vector space
 (but its completion $\overline{\vrep_1 \boxtimes_{z_1,z_2} \vrep_2}$ 
@@ -2977,7 +2998,7 @@ Next we \ti{construct} some $\vertex$-module directly from the local behavior
 of the correlation functions at the diagonal. 
 Then we use the assumed finiteness properties to 
 prove that this $\vertex$-module is ordinary, conclude
-it decomposes as a direct sum of ordinary modules, and get the corresponding deocomposition 
+it decomposes as a direct sum of ordinary modules, and get the corresponding decomposition 
 for the correlation function.
 This has been carried out in \fixme{...}.
 
@@ -3030,64 +3051,82 @@ given by the action of $\exp(2 \pi \I L_0)$.
 It acts by a scalar in each simple module.
 
 
-\subsubsection{Evaluation}
-
-Given $\vrep$ we can build a canonical conformal block 
-on $\bbC \bbP^1$ with $\vrep^*$ at $z_1$, $\vrep$ at $z_2$,
-and $\vertex^* = \vertex$ at $\infty$.
-This induces a morphism, called \ti{evaluation},
-\begin{equation}
-  \ev_\vrep: \vrep^* \boxtimes_{z_1,z_2} \vrep \to \vertex
-\end{equation}
-
-
-\subsubsection{Coevaluation}
-
-There is also a morphism
-\begin{equation}
-  \coev_\vrep: \vertex \to \vrep \boxtimes_{z_1,z_2} \vrep^*
-\end{equation}
-built by plumbing in a sphere carrying the
-canonical block with insertions $\vrep, \vrep^*, \vertex$.
-
-
 \subsubsection{Double duals}
 
 As we have remarked, we have a canonical isomorphism
 $\vrep^{**} \simeq \vrep$.
 
 
+\subsubsection{Evaluation}
+
+Given $\vrep$ we can build a canonical conformal block 
+on $\bbC \bbP^1$ with $\vrep^*$ at $z_1$, $\vrep$ at $z_2$,
+and $\vertex^* = \vertex$ at $\infty$.
+This induces a morphism
+\begin{equation}
+  \ev_{\vrep,z_1,z_2}: \vrep^* \boxtimes_{z_1,z_2} \vrep \to \vertex
+\end{equation}
+In particular, this gives \ti{two} morphisms,
+\begin{equation}
+  \ev^L_\vrep: \vrep^* \boxtimes \vrep \to \vertex, \qquad   \ev^R_\vrep: \vrep \boxtimes \vrep^* \to \vertex
+\end{equation}
+
+For concrete computations, it seems useful to describe how this morphism behaves in correlation functions.
+\fixme{...} 
+
+\subsubsection{Coevaluation}
+
+There is also a morphism
+\begin{equation}
+  \coev_{\vrep,z_1,z_2}: \vertex \to \vrep \boxtimes_{z_1,z_2} \vrep^*
+\end{equation}
+built by plumbing in a sphere carrying the
+canonical block with insertions $\vrep, \vrep^*, \vertex$.
+Again it gives \ti{two} morphisms,
+\begin{equation}
+  \coev^R_\vrep: \vertex \to \vrep^* \boxtimes \vrep, \qquad \coev^L_\vrep: \vertex \to \vrep \boxtimes \vrep^*
+\end{equation}
+
+
 \subsubsection{Coherence}
 
 There are many coherence relations between these various structures.
 For instance,
-\begin{itemize}
+\begin{enumerate}
 \item The associator obeys a pentagon relation concerning
-tensor products of four objects.
-\item The braiding and associator together obey a hexagon relation.
+tensor products of four objects. (We can understand it as coming from a homotopy between paths in configuration space \fixme{draw figure}.)
+\item The braiding and associator together obey a hexagon relation, which connects braiding across $X \otimes Y$
+with braiding across $X$ and $Y$ separately. (Again it comes from a homotopy between paths \fixme{draw figure}.)
+\item The coevaluation and evaluation obey zig-zag (straightening) relations, connecting $\coev^L$ and $\ev^L$,
+or $\coev^R$ and $\ev^R$.
+\item The twist is compatible with evaluation and coevaluation, in the sense that it connects $\coev^L$ and $\ev^R$, or $\coev^R$ and $\ev^L$.
 \item The twist is compatible with the braiding and associator.
-\item The twist is compatible with evaluation and coevaluation.
-\item The coevaluation and evaluation obey zig-zag (straightening) relations.
-\end{itemize}
+\end{enumerate}
 All of them are automatic in our setup, but it is interesting to see how they play out.
 For example, we have a chain of maps which:
 \begin{itemize}
 \item starts with a single object $\vrep$; 
-\item creates a pair ($\coev$) to get $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
+\item creates a pair ($\coev^L$) to get $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
 \item braids positively to $\vrep \boxtimes (\vrep^* \boxtimes \vrep)$;
 \item associates to $(\vrep \boxtimes \vrep^*) \boxtimes \vrep$;
-\item annihilates a pair ($\ev$) to get $\vrep$ again.
+\item annihilates a pair ($\ev^R$) to get $\vrep$ again.
 \end{itemize}
 Now the coherence relation is that this whole operation is equal to the twist $\theta_\vrep$
-(it would be $\theta_\vrep^{-1}$ if we braided negatively).
-The proof uses the fact that the monodromy of $\vrep$ around $\vrep^*$ in a 3-point block with
-$\vrep$, $\vrep$, $\vrep^*$ is given by $\e^{2 \pi \I h_\vrep}$, as we already noted \fixme{...}
+(it would be $\theta_\vrep^{-1}$ if we braided negatively). \fixme{...}
+% The proof uses the fact that the monodromy of $\vrep$ around $\vrep^*$ in a 3-point block with
+% $\vrep$, $\vrep$, $\vrep^*$ is given by $\e^{2 \pi \I h_\vrep}$, as we already noted.
+% But it is rather subtle 
 
 
-\subsection{Link invariants}
+\subsection{Premodular tensor category}
 
 All of these properties together make $\cC$ into 
 a \ti{premodular tensor category} or \ti{ribbon fusion category}.
+
+One reference that looks nice for these kinds of structures is \cite{Muger2010TensorCategoriesRUMA}.
+
+
+\subsection{Link invariants}
 
 Given such a category we can define invariants of colored framed links
 \fixme{...}
