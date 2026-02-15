@@ -1978,12 +1978,20 @@ over $C$, with poles only at the $p_i$.
 Fix a local coordinate $z_i$ around each $p_i$, and
 for any $a \in \vertex(C)$
 write its local expansion around $p_i$ as $\sum_{m \in \bbZ} a_{i,m} z_i^{m}$, with each $a_{i,m} \in \vertex$.
-Define the subspace
-\begin{equation} \label{eq:K-subspace}
- K(C) = \left\{  \sum_{i=1}^n \sum_{m \in \bbZ} \chi_1 \otimes \cdots \otimes (a_{i,m})_{(m)} \chi_i \otimes \cdots \otimes \chi_n \mid  a \in \vertex(C) \right\} \subset \bigotimes_i (\vrep_i)_{p_i}
+Then, for any $a \in \vertex(C)$, we have the operator
+\begin{equation}
+  o(a) \in \End \bigotimes_i (\vrep_i)_{p_i} 
+\end{equation}
+given by
+\begin{equation}
+  o(a) = \sum_{i=1}^n \sum_{m \in \bbZ} \bid \otimes \cdots \otimes (a_{i,m})_{(m)} \otimes \cdots \otimes \bid
 \end{equation}
 where we use the local coordinate $z_i$ to identify $\vrep_i$ with $(\vrep_i)_{p_i}$.
-Let
+Define the subspace
+\begin{equation} \label{eq:K-subspace}
+ K(C) = \Span \{ \im o(a) \mid  a \in \vertex(C) \}
+\end{equation}
+and
 \begin{equation}
   \Coinv(C) = \left( \bigotimes_i (\vrep_i)_{p_i} \right) / K(C) \, .
 \end{equation}
@@ -2267,50 +2275,67 @@ with a subsheaf $\cB_K$ given by the spaces $K(C_p)$ from \eqref{eq:K-subspace}.
 
 Now, first suppose we fix a local coordinate $z$ around $p$.
 Then:
-\begin{prop}
+\begin{prop} \label{prop:translation-preserves-coinvariants}
 If $s$ is a section of $\cB_K$, then $(\partial_z + L_{-1}) s$ is also a section of $\cB_K$.
 (Here $L_{-1}$ acts in the tensor factor $\vrep_p$ of $\cB$.)
 \end{prop}
+
+Here is the key calculation.
+Given an operator $o(a)$ where $a$ is a section of the vertex algebra bundle, we
+need to determine $\partial_z o(a)$. That amounts to understanding how the local coefficients
+$a_m$ in the expansion of $a$ around $z$ vary as we shift $z$. \fixme{...} This gives
+\begin{equation}
+  [\partial_z + L_{-1}, o(a)] = 0 \, .
+\end{equation}
+
 \begin{example}
 Suppose $\vertex = \Heis$ and
 $C = \bbC \bbP^1$ with marked points at $w,\infty$.
-Then $f = z = (z-w) + w$ gives the element
+Then consider the global section $z J$ of the vertex algebra bundle, with
+(using $z = (z-w) + w = (z^{-1})^{-1}$)
 \begin{equation}
- (J_1 + w J_0) \chi_1 \otimes \chi_2 + \chi_1 \otimes J_{-1} \chi_2 \ \in \ \cB_K
+ o(z J) = (J_1 + w J_0) \otimes \bid + \bid \otimes J_{-1} \, .
 \end{equation}
-and using $[L_{-1}, J_1] = -J_0$ we see that
-\begin{multline}
-  (\partial_w + (L_{-1} \otimes 1)) \left( (J_1 + w J_0) \chi_1 \otimes \chi_2 + \chi_1 \otimes J_{-1} \chi_2 \right) = \\
-  (J_1 + w J_0) L_{-1} \chi_1 \otimes \chi_2 + L_{-1} \chi_1 \otimes J_{-1} \chi_2 \ \in \ \cB_K
-\end{multline}
+Then using $[L_{-1}, J_1] = -J_0$ and $[L_{-1}, J_0] = 0$ we see that
+\begin{equation}
+  [\partial_w + L_{-1} \otimes \bid, o(z J)] = 0 \, .
+\end{equation}
+% \begin{multline}
+% % [\partial_w + L_{-1} \otimes \bid, o(z J)] = 0
+%   (\partial_w + (L_{-1} \otimes 1)) \left( (J_1 + w J_0) \chi_1 \otimes \chi_2 + \chi_1 \otimes J_{-1} \chi_2 \right) = \\
+%   (J_1 + w J_0) L_{-1} \chi_1 \otimes \chi_2 + L_{-1} \chi_1 \otimes J_{-1} \chi_2 \ \in \ \cB_K
+% \end{multline}
 \end{example}
-Thus it is sensible to ask for a family $\Phi_z$ of conformal blocks obeying
-% \begin{equation} 
-%   (\partial_z \Phi_z)(\chi(z), \cdots) = -\Phi_z(L_{-1} \chi(z), \cdots)
-% \end{equation}
-% or equivalently
+
+Because of \autoref{prop:translation-preserves-coinvariants} 
+it is sensible to ask for a family $\Phi_z$ of conformal blocks obeying
 \begin{equation} \label{eq:flat-conformal-blocks}
   \partial_z (\Phi_z(\chi(z), \cdots)) = \Phi_z((\partial_z + L_{-1}) \chi(z), \cdots)
 \end{equation}
-One would like to say that \eqref{eq:flat-conformal-blocks} 
-describes the covariantly constant sections of a connection in the space of conformal blocks.
-One has to be a little cautious about what this means, because the space of conformal blocks as we defined it
-(pointwise dual of coinvariants) does not necessarily form a bundle over $C$.
-But at least we can speak meaningfully about the solutions of \eqref{eq:flat-conformal-blocks}.
+(The point is that, if $\chi(z)$ is a section of $\cB_K$, then the left side is zero for all $z$; so the right 
+side had better also be zero, and it is, thanks to \autoref{prop:translation-preserves-coinvariants}.)
 This can also be written in the language of $\cD$-modules:
 the operator $\partial_z + L_{-1}$ makes $\cB$ and $\cB_K$ into $\cD$-modules,
 and the sheaf of solutions $\Phi$ of \eqref{eq:flat-conformal-blocks} is
 $\Hom_{\cD}(\cB / \cB_K, \cO)$.
 
 Note \eqref{eq:flat-conformal-blocks} is equivalent to
-\begin{equation}
+\begin{equation} \label{eq:connection-conformal-blocks}
   \partial_z \Phi_z(\chi, \cdots) - \Phi_z(L_{-1} \chi, \cdots) = 0
 \end{equation}
 which might be written more briefly as $(\partial_z - L_{-1}) \Phi_z = 0$.
 So there is a tricky minus sign here, depending whether we look at the
 connection on coinvariants or on conformal blocks.
 
-In favorable situations, where $\cB / \cB_K$ is actually a vector bundle of finite rank, a $\cD$-module structure means a flat connection.
+In the form \eqref{eq:connection-conformal-blocks}, our condition looks like it is describing
+covariantly constant sections of a connection in the space of conformal blocks.
+One has to be a little cautious about what this means, because the space of conformal blocks as we defined it
+(pointwise dual of coinvariants) does not necessarily form a bundle over $C$.
+But irrespective of this, at least we can speak meaningfully about the solutions 
+of \eqref{eq:connection-conformal-blocks}.
+In favorable situations, where $\cB / \cB_K$ is actually a vector bundle of finite rank, a $\cD$-module 
+structure really does mean a flat connection, and this is a useful intuitive picture even when it is not
+literally true.
 
 \begin{example}
 Suppose $\vertex = V^k(\fg)$.
@@ -2638,7 +2663,7 @@ What is the resulting conformal block?
 check!}
 \end{exercise}
 
-In all these we have been cavalier about how our construction depends on the initial local coordinates $z_1$, $z_2$ which we choose on 
+In all this we have been cavalier about how our construction depends on the initial local coordinates $z_1$, $z_2$ which we choose on 
 the two sides, and also about the multivaluedness of $q^n$ when $n \notin \bbZ$. These two issues are connected. \fixme{...}
 
 
