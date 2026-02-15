@@ -3248,6 +3248,140 @@ Given such a category we can define invariants of colored framed links
 
 
 
+
+\appendix
+
+
+\section{Conventions on Lie algebras} \label{sec:lie-conventions}
+
+For a simple Lie algebra $\fg$,
+there is a canonical invariant bilinear form
+$\kappa$ on $\fg$, inducing $\kappa^{-1}$ on $\fg^*$. 
+We normalize it so that the long roots $\alpha$ of $\fg$
+have $\kappa^{-1}(\alpha,\alpha) = 2$.
+
+The quadratic Casimir operator is defined by 
+\begin{equation}
+  C_2 = \sum_i X^i X^i
+\end{equation}
+where $(X^i)$ is an orthonormal basis of $\fg$.
+In this basis we write 
+\begin{equation}
+  [X^i, X^j] = f^{ijk} X^k
+\end{equation}
+and the structure constant $f^{ijk}$ is antisymmetric in all exchanges of indices.
+
+The dual Coxeter number $h^\vee$ is defined by the property that
+$C_2$ acts in the adjoint representation by the scalar $2 h^\vee$.
+i.e. for any $Y \in \fg$
+\begin{equation}
+  \sum_{i=1}^{\dim \fg} [X^i, [X^i, Y]] = 2 h^\vee Y \, .
+\end{equation}
+Taking $Y = X^j$ and summing repeated indices this is also
+\begin{equation}
+  [X^i, f^{ijk} X^k] = f^{ik\ell} f^{ijk} X^\ell = 2 h^\vee X^j
+\end{equation}
+i.e.
+\begin{equation} \label{eq:f-coxeter}
+  f^{ik\ell} f^{ijk} = 2 h^\vee \delta^{j \ell}
+\end{equation}
+
+When $\fg = \fsl(N)$, the normalized form is
+\begin{equation}
+  \kappa(X,Y) = \Tr (XY)
+\end{equation}
+and
+\begin{equation}
+  h^\vee = N \, .
+\end{equation}
+
+For any root $\alpha \in \fh^*$ the corresponding coroot $\alpha^\vee$ is determined by the condition
+\begin{equation}
+  \alpha^\vee \cdot \lambda = \frac{2 \kappa^{-1}(\lambda,\alpha)}{\kappa^{-1}(\alpha,\alpha)}
+\end{equation}
+i.e.
+\begin{equation}
+  \alpha^\vee = \frac{2 \alpha^\sharp}{\kappa^{-1}(\alpha,\alpha)}
+\end{equation}
+
+We use $\theta \in \fh^*$ to denote the \ti{highest root}: it is the one maximal in the partial order
+(i.e. $\theta + \alpha_i$ is not a root for any simple root $\alpha_i$.)
+For $\fg = \fsl(N)$, $\theta = \alpha_1 + \cdots + \alpha_{N-1}$, with root space spanned by $E_{1N}$.
+The corresponding coroot is $\theta^\vee = E_{11} - E_{NN} = [E_{1N}, E_{N1}]$.
+
+
+% \section{Vertex algebras} \label{sec:vertex-algebras}
+
+% Definition (vertex algebra).  Here \vertex is a complex vector space.
+
+% We informally defined vertex algebras in \fixme{...} above.
+% To formalize things, we will have a vector space $\vertex$ of
+% defects, and then for $\psi, \chi \in \vertex$
+% we will introduce a symbol ``$Y(\psi,z) \chi$'' which should be understood to mean ``the power series expansion 
+% of $\psi(z) \chi(0)$ around $z = 0$.''
+% Each term in this expansion will be an element in $\vertex$.
+% Then we make a lot of computations involving formal Laurent series in many variables,
+% but always with the idea that they secretly represent the expansions of actual objects
+% which are analytic away from diagonals.
+% In that situation what you expect is that there are two different expansions, one in the region
+% $\abs{z} > \abs{w}$, another in the region $\abs{w} > \abs{z}$.
+% So the symbol I wrote $\psi(z) \phi(w) \chi$ will get represented by \ti{two} different things in this 
+% formalization.
+% But they are closely related: they are $Y(\psi,z) Y(\phi,w) \chi$ and $Y(\phi, w) Y(\psi,z) \chi$.
+
+
+
+\section{The zeta-regularized determinant} \label{sec:zeta-determinant}
+ 
+In the theory of the free boson one expects that
+\begin{equation}
+  \IP{1} = \sqrt{A} / \sqrt{\det{}' \Delta}
+\end{equation}
+Since $\Delta$ acts on an infinite-dimensional space we need to explain what we mean by
+its determinant.
+Precisely we mean the \ti{zeta-regularized} determinant.
+
+Define 
+\begin{equation}
+ \zeta_\Delta(s) = \sum_{k \ge1 }\lambda_k^{-s} 
+\end{equation}
+for
+$\re(s) > 1$, where $0=\lambda_0<\lambda_1\le\lambda_2\le\cdots$ are the eigenvalues of $\Delta$.
+In fact this function admits meromorphic continuation to the full
+$s$-plane. To see this consider the operator $\e^{-t \Delta}$ 
+giving heat flow for time $t$. This is a nice
+integral operator with a smooth kernel $K_t(x,y)$, i.e.
+\begin{equation}
+  \e^{-t \Delta} f = \int_{y \in C} K_t(x,y) f(y) \, .
+\end{equation}
+As $t \to 0$ the kernel $K_t$ 
+concentrates around the diagonal (it converges in some distributional sense to a $\delta$-function). On the diagonal we have\footnote{To understand the leading term $\frac{1}{4 \pi t}$, note the heat kernel on $\bbR^2$ is a Gaussian, $K_t(x,y) = \frac{1}{4 \pi t} \exp\left(- \frac{\abs{x-y}^2}{4t} \right)$.}
+\begin{equation}
+  K_t(x,x) \sim \frac{1}{4 \pi t} \left(1 + \frac{R}{6} t + \cdots\right)
+\end{equation}
+We can subtract these leading divergent terms from $K_t$,
+to get a new kernel $\widetilde K_t(x) = K_t(x,x) - \frac{1}{4 \pi t} - \frac{R}{24 \pi}$.
+Now, for $\re(s) > 1$ we have an integral representation
+\begin{equation}
+  \zeta_\Delta(s) = \frac{1}{\Gamma(s)} \int_0^\infty \frac{\de t}{t} t^s \Tr{}' \e^{-t \Delta}
+\end{equation}
+
+With the analytic continuation computed, we finally have
+\begin{equation}
+\det{}'\Delta = \exp\big(-\zeta'_{\Delta}(0)\big)
+\end{equation}
+
+
+
+
+\printbibliography
+
+\end{document}
+
+
+
+
+
 \section{Coming attractions}
 
 Here we discuss some things as a teaser --- we haven't yet given all the necessary definitions.
@@ -3853,136 +3987,6 @@ this says (in correlation functions) that around $z_1 = z_2$ we have
 
 
 
-\appendix
-
-
-\section{Conventions on Lie algebras} \label{sec:lie-conventions}
-
-For a simple Lie algebra $\fg$,
-there is a canonical invariant bilinear form
-$\kappa$ on $\fg$, inducing $\kappa^{-1}$ on $\fg^*$. 
-We normalize it so that the long roots $\alpha$ of $\fg$
-have $\kappa^{-1}(\alpha,\alpha) = 2$.
-
-The quadratic Casimir operator is defined by 
-\begin{equation}
-  C_2 = \sum_i X^i X^i
-\end{equation}
-where $(X^i)$ is an orthonormal basis of $\fg$.
-In this basis we write 
-\begin{equation}
-  [X^i, X^j] = f^{ijk} X^k
-\end{equation}
-and the structure constant $f^{ijk}$ is antisymmetric in all exchanges of indices.
-
-The dual Coxeter number $h^\vee$ is defined by the property that
-$C_2$ acts in the adjoint representation by the scalar $2 h^\vee$.
-i.e. for any $Y \in \fg$
-\begin{equation}
-  \sum_{i=1}^{\dim \fg} [X^i, [X^i, Y]] = 2 h^\vee Y \, .
-\end{equation}
-Taking $Y = X^j$ and summing repeated indices this is also
-\begin{equation}
-  [X^i, f^{ijk} X^k] = f^{ik\ell} f^{ijk} X^\ell = 2 h^\vee X^j
-\end{equation}
-i.e.
-\begin{equation} \label{eq:f-coxeter}
-  f^{ik\ell} f^{ijk} = 2 h^\vee \delta^{j \ell}
-\end{equation}
-
-When $\fg = \fsl(N)$, the normalized form is
-\begin{equation}
-  \kappa(X,Y) = \Tr (XY)
-\end{equation}
-and
-\begin{equation}
-  h^\vee = N \, .
-\end{equation}
-
-For any root $\alpha \in \fh^*$ the corresponding coroot $\alpha^\vee$ is determined by the condition
-\begin{equation}
-  \alpha^\vee \cdot \lambda = \frac{2 \kappa^{-1}(\lambda,\alpha)}{\kappa^{-1}(\alpha,\alpha)}
-\end{equation}
-i.e.
-\begin{equation}
-  \alpha^\vee = \frac{2 \alpha^\sharp}{\kappa^{-1}(\alpha,\alpha)}
-\end{equation}
-
-We use $\theta \in \fh^*$ to denote the \ti{highest root}: it is the one maximal in the partial order
-(i.e. $\theta + \alpha_i$ is not a root for any simple root $\alpha_i$.)
-For $\fg = \fsl(N)$, $\theta = \alpha_1 + \cdots + \alpha_{N-1}$, with root space spanned by $E_{1N}$.
-The corresponding coroot is $\theta^\vee = E_{11} - E_{NN} = [E_{1N}, E_{N1}]$.
-
-
-% \section{Vertex algebras} \label{sec:vertex-algebras}
-
-% Definition (vertex algebra).  Here \vertex is a complex vector space.
-
-% We informally defined vertex algebras in \fixme{...} above.
-% To formalize things, we will have a vector space $\vertex$ of
-% defects, and then for $\psi, \chi \in \vertex$
-% we will introduce a symbol ``$Y(\psi,z) \chi$'' which should be understood to mean ``the power series expansion 
-% of $\psi(z) \chi(0)$ around $z = 0$.''
-% Each term in this expansion will be an element in $\vertex$.
-% Then we make a lot of computations involving formal Laurent series in many variables,
-% but always with the idea that they secretly represent the expansions of actual objects
-% which are analytic away from diagonals.
-% In that situation what you expect is that there are two different expansions, one in the region
-% $\abs{z} > \abs{w}$, another in the region $\abs{w} > \abs{z}$.
-% So the symbol I wrote $\psi(z) \phi(w) \chi$ will get represented by \ti{two} different things in this 
-% formalization.
-% But they are closely related: they are $Y(\psi,z) Y(\phi,w) \chi$ and $Y(\phi, w) Y(\psi,z) \chi$.
-
-
-
-\section{The zeta-regularized determinant} \label{sec:zeta-determinant}
- 
-In the theory of the free boson one expects that
-\begin{equation}
-  \IP{1} = \sqrt{A} / \sqrt{\det{}' \Delta}
-\end{equation}
-Since $\Delta$ acts on an infinite-dimensional space we need to explain what we mean by
-its determinant.
-Precisely we mean the \ti{zeta-regularized} determinant.
-
-Define 
-\begin{equation}
- \zeta_\Delta(s) = \sum_{k \ge1 }\lambda_k^{-s} 
-\end{equation}
-for
-$\re(s) > 1$, where $0=\lambda_0<\lambda_1\le\lambda_2\le\cdots$ are the eigenvalues of $\Delta$.
-In fact this function admits meromorphic continuation to the full
-$s$-plane. To see this consider the operator $\e^{-t \Delta}$ 
-giving heat flow for time $t$. This is a nice
-integral operator with a smooth kernel $K_t(x,y)$, i.e.
-\begin{equation}
-  \e^{-t \Delta} f = \int_{y \in C} K_t(x,y) f(y) \, .
-\end{equation}
-As $t \to 0$ the kernel $K_t$ 
-concentrates around the diagonal (it converges in some distributional sense to a $\delta$-function). On the diagonal we have\footnote{To understand the leading term $\frac{1}{4 \pi t}$, note the heat kernel on $\bbR^2$ is a Gaussian, $K_t(x,y) = \frac{1}{4 \pi t} \exp\left(- \frac{\abs{x-y}^2}{4t} \right)$.}
-\begin{equation}
-  K_t(x,x) \sim \frac{1}{4 \pi t} \left(1 + \frac{R}{6} t + \cdots\right)
-\end{equation}
-We can subtract these leading divergent terms from $K_t$,
-to get a new kernel $\widetilde K_t(x) = K_t(x,x) - \frac{1}{4 \pi t} - \frac{R}{24 \pi}$.
-Now, for $\re(s) > 1$ we have an integral representation
-\begin{equation}
-  \zeta_\Delta(s) = \frac{1}{\Gamma(s)} \int_0^\infty \frac{\de t}{t} t^s \Tr{}' \e^{-t \Delta}
-\end{equation}
-
-With the analytic continuation computed, we finally have
-\begin{equation}
-\det{}'\Delta = \exp\big(-\zeta'_{\Delta}(0)\big)
-\end{equation}
-
-
-
-
-\printbibliography
-
-\end{document}
-
-
 
 
 
@@ -4098,163 +4102,5 @@ Then we get a regularized determinant
 The factorization of this determinant is proved in
 \cite{McIntyreTakhtajan2006}.
 
-
-
-
-
-
-
-
-\subsection{Conformal blocks for affine Kac-Moody algebras}
-
-Continue with the setup of the last section.
-Given a chiral correlation system we could consider just the 
-sector with $m=0$, i.e. the quantities
-\begin{equation}
-  \IP{\prod_i \chi_i(p_i)}
-\end{equation}
-which give a map
-\begin{equation}
-  \bigotimes_i \vrep_i \to \bbC \, .
-\end{equation}
-Now suppose $C$ is compact. In that case
-this map is not arbitrary: it obeys some constraints,
-coming from the existence of the meromorphic 1-forms
-\begin{equation}
- \eta = \IP{J^X(\cdot) \prod_i \chi_i(p_i)} \, .
-\end{equation}
-To formulate the constraints,
-let $f$ be any global section of $\cO(*p)$, i.e. 
-any meromorphic function on $C$, holomorphic away from 
-the $p_i$. Then $f \eta$ is a meromorphic $1$-form
-on $C$, and thus
-\begin{equation}
-  \sum_{i=1}^n \Res_{p_i} (f \eta) = 0 \, .
-\end{equation}
-So what are these residues?
-Laurent expand near each $p_i$ as
-\begin{equation}
-  f = \sum_{n \in \bbZ} f_{i,n}\, z_i^{n}
-\end{equation}
-Then, a short computation gives that
-\begin{equation}
-  \Res_{p_j} f \eta = \sum_{n \in \bbZ} \IP{\left( \prod_{i \neq j} \chi_i(p_i)  \right) f_{j,n} J^X_n \chi_j(p_j)}
-\end{equation}
-(note only finitely many terms are nonzero).
-
-This motivates the following.
-For $X\in\fg$ define a formal infinite sum
-\begin{equation}
-  X(f)_i = \sum_{n \in \bbZ} f_{i,n}\, J^{X}_{n} ,
-\end{equation}
-and let $X(f) \in \End(\bigotimes_i \vrep_i)$ be\footnote{The operator $X(f)_i$ depends on the local coordinate $z_i$ we chose; different choices differ by conjugation by an operator in
-$\End(\vrep_i)$, 
-built by exponentiating a Virasoro action. Thus in the end
-the spaces $\Coinv(C,\vertex)$ for different choices of local 
-coordinate are canonically isomorphic. \fixme{watch out for choice of log in defining $\lambda^{L_0}$}}\footnote{For any vector $v \in \vrep_i$ we always have $J^X_n v = 0$ for large enough $n$, so $X(f)_i v$ is well defined.}
-\begin{equation}
-  X(f) = \sum_{i=1}^n \, 
-  \bid\otimes\cdots\otimes X(f)_i \otimes\cdots\otimes \bid \, .
-\end{equation}
-
-\begin{defn}[Kac-Moody vertex algebra coinvariants on a Riemann surface]
-The space of coinvariants is
-\begin{equation}
-  \Coinv(C, \vertex)
-  = \Bigl(\bigotimes_{i=1}^n \vrep_i\Bigr)\Big/\Big\langle
-  X(f)\,v \ \Big|\ X\in\fg,\ f\in H^0(\cO(*p)),\
-  v\in\bigotimes_i \vrep_i
-  \Big\rangle
-\end{equation}
-\end{defn}
-
-\begin{defn}[Conformal block for Kac-Moody vertex algebra]
-\begin{equation}
-  \Conf(C, \vertex) = \Coinv(C, \vertex)^* \, .
-\end{equation}
-In other words, a conformal block is a map
-$\bigotimes_i \vrep_i \to \bbC$ which annihilates all
-elements of the form $X(f) v$.
-\end{defn}
-
-What we just explained is:
-
-\begin{prop}[Chiral correlation systems give conformal blocks]
-Given a chiral correlation system for $\vertex = V^k(\fg)$,
-the map
-\begin{equation}
-  \bigotimes_i \vrep_i \to \bbC \, .
-\end{equation}
-given by
-\begin{equation}
-  \bigotimes_i \chi_i(p_i) \mapsto  \IP{\prod_i \chi_i(p_i)}
-\end{equation}
-is a conformal block.
-\end{prop}
-
-The converse is also true \fixme{...}
-
-
-
-
-
-
-
-
-
-
-\subsection{Additional material}
-
-This motivates the following.
-For $X\in\fg$ define a formal infinite sum
-\begin{equation}
-  X(f)_i = \sum_{n \in \bbZ} f_{i,n}\, J^{X}_{n} ,
-\end{equation}
-and let $X(f) \in \End(\bigotimes_i \vrep_i)$ be\footnote{The operator $X(f)_i$ depends on the local coordinate $z_i$ we chose; different choices differ by conjugation by an operator in
-$\End(\vrep_i)$, 
-built by exponentiating a Virasoro action. Thus in the end
-the spaces $\Coinv(C,\vertex)$ for different choices of local 
-coordinate are canonically isomorphic. \fixme{watch out for choice of log in defining $\lambda^{L_0}$}}\footnote{For any vector $v \in \vrep_i$ we always have $J^X_n v = 0$ for large enough $n$, so $X(f)_i v$ is well defined.}
-\begin{equation}
-  X(f) = \sum_{i=1}^n \, 
-  \bid\otimes\cdots\otimes X(f)_i \otimes\cdots\otimes \bid \, .
-\end{equation}
-
-\begin{defn}[Kac-Moody vertex algebra coinvariants on a Riemann surface]
-The space of coinvariants is
-\begin{equation}
-  \Coinv(C, \vertex)
-  = \Bigl(\bigotimes_{i=1}^n \vrep_i\Bigr)\Big/\Big\langle
-  X(f)\,v \ \Big|\ X\in\fg,\ f\in H^0(\cO(*p)),\
-  v\in\bigotimes_i \vrep_i
-  \Big\rangle
-\end{equation}
-\end{defn}
-
-\begin{defn}[Conformal block for Kac-Moody vertex algebra]
-\begin{equation}
-  \Conf(C, \vertex) = \Coinv(C, \vertex)^* \, .
-\end{equation}
-In other words, a conformal block is a map
-$\bigotimes_i \vrep_i \to \bbC$ which annihilates all
-elements of the form $X(f) v$.
-\end{defn}
-
-What we just explained is:
-
-\begin{prop}[Chiral correlation systems give conformal blocks]
-Given a chiral correlation system for $\vertex = V^k(\fg)$,
-the map
-\begin{equation}
-  \bigotimes_i \vrep_i \to \bbC \, .
-\end{equation}
-given by
-\begin{equation}
-  \bigotimes_i \chi_i(p_i) \mapsto  \IP{\prod_i \chi_i(p_i)}
-\end{equation}
-is a conformal block.
-\end{prop}
-
-The converse is also true \fixme{...}
 
 
