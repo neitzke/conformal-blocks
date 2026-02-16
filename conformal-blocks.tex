@@ -2545,6 +2545,21 @@ $\vrep \simeq \vrep^*$ if and only if this unique pairing is
 nondegenerate.
 
 
+\subsection{Varying the curve}
+
+So far we discussed how to vary conformal blocks when we move marked points, i.e.
+we got a connection on the bundle of conformal blocks over $C$.
+But the Virasoro action on $\vertex$ actually allows us to do more: we can vary the curve $C$ itself,
+thus obtaining (roughly) a connection over the moduli space of curves.
+
+Variations of $C$ are realized by the cohomology $H^1(C,T)$.
+The details of how we describe this connection depends on exactly how we realize the variations of
+$C$. First: suppose given a Cech cocycle, i.e. cover $C$ by patches $U_\alpha$ and give
+vector fields $v_{\alpha \beta}$ on overlaps $U_{\alpha \beta}$, obeying
+$v_{\alpha \beta} + v_{\beta \gamma} + v_{\gamma \alpha} = 0$.
+\fixme{...}
+
+
 \subsection{Plumbing conformal blocks}
 
 \begin{defn}[Plumbing Riemann surfaces]
@@ -2591,11 +2606,17 @@ where $(\xi_{i,n})$ and $(\xi^*_{i,n})$ are dual bases for $\vrep_n$ and $\vrep^
 one could say we insert the operator $q^{L_0}$ into
 the $\vrep \otimes \vrep^*$ slots of $\Phi_1 \otimes \Phi_2$.}
 Note that in the limit $q \to 0$ the leading term comes from the 
-primaries of weight $h$ in $\vrep$ contribute, and if we rescale by overall $q^{-h}$ then these
+primaries of weight $h$ in $\vrep$ contribute, and if we rescale by an overall factor $q^{-h}$ then these
 are the only ones that survive the limit; for finite $q$ the whole
 tower of descendants is involved.
 
-Here is the idea of this definition. Suppose we consider a completely arbitrary linear functional of $\chi_1$
+If the conformal weights $n \notin \bbZ$, then 
+formula \eqref{eq:block-gluing} is multivalued as a function of $q$. To make 
+it well defined we should replace $q \to \exp(2 \pi \I \tau)$ in this formula;
+then we get a single-valued function of $\tau$.
+
+Here is the idea of the definition \eqref{eq:block-gluing}. 
+Suppose we consider a completely arbitrary linear functional of $\chi_1$
 and $\chi_2$. We could try to build chiral correlation functions out of such a functional, and they will make
 sense at least on formal discs around the insertions. 
 If our functional is of the form $\Phi_1(\chi_1, \xi) \Phi_2(\xi', \chi_2)$ then the chiral
@@ -2639,9 +2660,9 @@ plumbed surface $C$.
 \end{exercise}
 
 More generally, instead of having two surfaces we can just suppose
-$C_0$ is a surface (maybe disconnected),
-with a conformal block and two
-punctures carrying $\vrep$ and $\vrep^*$; then we can plumb those two punctures together
+$C_0$ is a surface (either disconnected or connected),
+with two punctures carrying $\vrep$ and $\vrep^*$, and a conformal block; 
+then we can plumb those two punctures together
 and get a conformal block on the plumbed surface $C_q$.
 
 \begin{exercise}
@@ -2663,9 +2684,18 @@ What is the resulting conformal block?
 check!}
 \end{exercise}
 
-In all this we have been cavalier about how our construction depends on the initial local coordinates $z_1$, $z_2$ which we choose on 
-the two sides, and also about the multivaluedness of $q^n$ when $n \notin \bbZ$. These two issues are connected. \fixme{...}
+Finally let us try to formulate this construction in a more intrinsic way.
+Recall that in the coordinate-invariant framework, 
+to define conformal blocks with general ordinary modules $\vrep$,
+we need to fix a tangent vector at each marked point.
+Then, suppose given a surface $C_0$ with two marked points and two
+tangent vectors. These two vectors can be used to define conformal blocks with 
+$\vrep$ and $\vrep^*$ inserted;
+simultaneously they determine a bilinear pairing, which we use for plumbing.
+\fixme{...}
 
+
+\section{The rational case}
 
 \subsection{Nice categories of modules}
 
@@ -3085,7 +3115,13 @@ It acts by a scalar in each simple module.
 \subsubsection{Double duals}
 
 As we have remarked, we have a canonical isomorphism
-$\vrep^{**} \simeq \vrep$.
+$\vrep^{**} \simeq \vrep$ (sometiems called \ti{pivotal structure}).
+
+
+\subsubsection{Identity object}
+
+The object $\bid = \vertex$ is the identity for the tensor product,
+in the sense that we have given isomorphisms $\vertex \otimes \vrep \to \vrep$, $\vrep \otimes \vertex \to \vrep$.
 
 
 \subsubsection{Evaluation}
@@ -3135,22 +3171,25 @@ Again it gives \ti{two} morphisms,
 There are many coherence relations between these various structures.
 For instance,
 \begin{enumerate}
-\item The associator obeys a pentagon relation concerning
-tensor products of four objects. (We can understand it as coming from a homotopy between paths in configuration space \fixme{draw figure}.)
-\item The braiding and associator together obey a hexagon relation, which connects braiding across $X \otimes Y$
+\item The associator obeys a pentagon relation relating five different ways of
+bracketing the tensor product of four objects. (We can understand it as coming from a homotopy between paths in configuration space \fixme{draw figure}.)
+\item The braiding and associator together obey a hexagon relation, 
+which connects braiding across $X \otimes Y$
 with braiding across $X$ and $Y$ separately. (Again it comes from a homotopy between paths \fixme{draw figure}.)
 \item The coevaluation and evaluation obey zig-zag (straightening) relations, connecting $\coev^L$ and $\ev^L$,
 or $\coev^R$ and $\ev^R$.
+\item Braiding is compatible with evaluation and coevaluation.
 \item The twist is compatible with evaluation and coevaluation, in the sense that it connects $\coev^L$ and $\ev^R$, or $\coev^R$ and $\ev^L$.
 \item The twist is compatible with the braiding and associator.
 \end{enumerate}
 All of them are automatic in our setup, but it is interesting to see how they play out.
-For example, we have a chain of maps which:
+For example, we have a chain of maps which: \fixme{draw a picture}
 \begin{itemize}
 \item starts with a single object $\vrep$; 
 \item creates a pair ($\coev^L$) to get $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
-\item braids positively to $\vrep \boxtimes (\vrep^* \boxtimes \vrep)$;
-\item associates to $(\vrep \boxtimes \vrep^*) \boxtimes \vrep$;
+\item associates to $(\vrep \boxtimes \vrep) \boxtimes \vrep^*$;
+\item braids positively to $(\vrep \boxtimes \vrep) \boxtimes \vrep^*$;
+\item associates to $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
 \item annihilates a pair ($\ev^R$) to get $\vrep$ again.
 \end{itemize}
 Now the coherence relation is that this whole operation is equal to the twist $\theta_\vrep$
@@ -3159,21 +3198,42 @@ Now the coherence relation is that this whole operation is equal to the twist $\
 % $\vrep$, $\vrep$, $\vrep^*$ is given by $\e^{2 \pi \I h_\vrep}$, as we already noted.
 % But it is rather subtle 
 
-
-\subsection{Premodular tensor category}
-
 All of these properties together make $\cC$ into 
 a \ti{premodular tensor category} or \ti{ribbon fusion category}.
-
-One reference that looks nice for these kinds of structures is \cite{Muger2010TensorCategoriesRUMA}.
+The complete axioms and much more can be found in \cite{Mueger2012,BK2001,EGNO2015}.
 
 
 \subsection{Link invariants}
 
-Given such a category we can define invariants of colored framed links
+Now given any premodular tensor category $\cC$
+we can consider oriented ribbon link diagrams,
+where each component is labeled by an object $\vrep$ of $\cC$ (reversing orientation
+swaps $\vrep \to \vrep^*$).
+Such a diagram gives a morphism $\bid \to \bid$ in $\cC$:
+cups/caps give $\coev_\vrep$ and $\ev_\vrep$, twists/kinks give $\theta_\vrep^{\pm 1}$,
+crossings give $b^\pm_{\vrep,\vrep'}$.
+Since $\Hom(\bid,\bid) = \bbC$ we can think of this as a number associated to the 
+link diagram.
+Now the nontrivial claim: it is actually an invariant of the ribbon link.
+This amounts to checking that it is invariant under the three Reidemeister moves.
 \fixme{...}
 
-\fixme{Reidemeister 1}
+\fixme{think of the ribbon structure as coming from the dependence on tangent vectors}
+
+
+
+\subsection{Modular structure}
+
+So far we have discussed a lot of structure on the category $\cC$ that comes from
+studying conformal blocks on the sphere.
+We actually get a bit more by considering the torus.
+
+As we already discussed, by plumbing a sphere to itself we get
+a conformal block $\Phi_i$ on the torus $C_q$ for each simple module $\cS_i$,
+and the $\Phi_i$ span the space of conformal blocks on the torus.
+Moreover they give \ti{parallel} sections 
+
+\subsection{The WZW model}
 
 
 \subsection{Verlinde line operators}
@@ -3212,7 +3272,8 @@ Given such a category we can define invariants of colored framed links
 
 \subsection{The center at the critical level}
 
-\fixme{we get an object $T(z)$ which transforms }
+\fixme{we get an object $T(z)$ which transforms as an oper}
+
 
 % This \ti{almost} works, but for one subtlety: in the group $\cG$ we have the relation $\exp(2 \pi \I L_0) = 1$,
 % which need not hold in a general $\vrep$-module. Thus the action of $\fG$ on $\vrep$ need not integrate
