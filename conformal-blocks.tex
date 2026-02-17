@@ -2762,6 +2762,17 @@ $\vrep$ and $\vrep^*$ inserted;
 simultaneously they determine a bilinear pairing, which we use for plumbing.
 \fixme{...}
 
+We can (and should) also ask whether the gluing operation is compatible with
+the connection coming from variation of the curve.
+The answer is yes, \ti{if} we choose a complex projective structure which includes
+the glued coordinate $z_1$ or $z_2$. \fixme{include a calculation}
+Another popular choice would be to write $z = \exp(2 \pi \I t)$ and use the coordinate
+$t$. In that case we need to include an extra $q^{-c/24}$ in the plumbing formula
+to get it to be compatible.
+(The difference comes from the fact that the Schwarzian derivative of the
+change of coordinates from $t$ to $q$ is $\{t,q\} = \frac12$, 
+so the Virasoro field in the $t$-coordinate has an extra $c/24$.)
+
 
 \section{The rational case}
 
@@ -3206,19 +3217,20 @@ In particular, this gives \ti{two} morphisms,
   \ev^L_\vrep: \vrep^* \boxtimes \vrep \to \vertex, \qquad   \ev^R_\vrep: \vrep \boxtimes \vrep^* \to \vertex
 \end{equation}
 
-For concrete computations, it seems useful to describe how these morphisms behave in correlation functions.
-Here it is important that $\boxtimes = \boxtimes_{0,1}$. Using the connection on conformal blocks we get
-unambiguous continuation to $z_2 - z_1 \in \bbR_+$.
-In hopefully-understandable notation we get in this domain
-\begin{equation}
-  (\ev^L_\vrep \Phi)(\eta(z_1), \chi(z_2), \cdots) = (\eta \cdot \chi) (z_2-z_1)^{-2h} \Phi(\cdots) 
-\end{equation}
-and
-\begin{equation}
-  (\ev^R_\vrep \Phi)(\chi(z_1), \eta(z_2), \cdots) = (\eta \cdot \chi) (z_2-z_1)^{-2h} \Phi(\cdots) 
-\end{equation}
-Note one is not the analytic continuation of the other: the two would differ by $\exp(\pm 2 \pi \I h)$ depending
-on how we continue.
+% For concrete computations, it seems useful to describe how these morphisms behave in correlation functions.
+% Here it is important that $\boxtimes = \boxtimes_{0,1}$. Using the connection on conformal blocks we get
+% unambiguous continuation to $z_2 - z_1 \in \bbR_+$.
+% In hopefully-understandable notation we get in this domain
+% \begin{equation}
+%   (\ev^L_\vrep \Phi)(\eta(z_1), \chi(z_2), \cdots) = (\eta \cdot \chi) (z_2-z_1)^{-2h} \Phi(\cdots) 
+% \end{equation}
+% and
+% \begin{equation}
+%   (\ev^R_\vrep \Phi)(\chi(z_1), \eta(z_2), \cdots) = (\eta \cdot \chi) (z_2-z_1)^{-2h} \Phi(\cdots) 
+% \end{equation}
+% Note one is not the analytic continuation of the other: the two would differ by $\exp(\pm 2 \pi \I h)$ depending
+% on how we continue.
+
 
 \subsubsection{Coevaluation}
 
@@ -3227,12 +3239,18 @@ There is also a morphism
   \coev_{\vrep,z_1,z_2}: \vertex \to \vrep \boxtimes_{z_1,z_2} \vrep^*
 \end{equation}
 built by plumbing in a sphere carrying the
-canonical block with insertions $\vrep, \vrep^*, \vertex$.
+canonical block with insertions $\vrep, \vrep^*, \vertex$ at $z_1, z_2, \infty$ respectively.
 Again it gives \ti{two} morphisms,
 \begin{equation}
   \coev^R_\vrep: \vertex \to \vrep^* \boxtimes \vrep, \qquad \coev^L_\vrep: \vertex \to \vrep \boxtimes \vrep^*
 \end{equation}
 
+For instance, concretely we have
+\begin{equation}
+ \coev_\vrep^L(\vac) = \sum_{n,i} e_{n,i} \otimes \rho(g) e^*_{n,i}
+\end{equation}
+where $g$ is the pointed change of coordinates from the coordinate $1/z$ around $\infty$
+to the coordinate $z-1$ around $1$.
 
 \subsubsection{Coherence}
 
@@ -3250,18 +3268,8 @@ or $\coev^R$ and $\ev^R$.
 \item The twist is compatible with evaluation and coevaluation, in the sense that it connects $\coev^L$ and $\ev^R$, or $\coev^R$ and $\ev^L$.
 \item The twist is compatible with the braiding and associator.
 \end{enumerate}
+
 All of them are automatic in our setup, but it is interesting to see how they play out.
-For example, we have a chain of maps which: \fixme{draw a picture}
-\begin{itemize}
-\item starts with a single object $\vrep$; 
-\item creates a pair ($\coev^L$) to get $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
-\item associates to $(\vrep \boxtimes \vrep) \boxtimes \vrep^*$;
-\item braids positively to $(\vrep \boxtimes \vrep) \boxtimes \vrep^*$;
-\item associates to $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
-\item annihilates a pair ($\ev^R$) to get $\vrep$ again.
-\end{itemize}
-Now the coherence relation is that this whole operation is equal to the twist $\theta_\vrep$
-(it would be $\theta_\vrep^{-1}$ if we braided negatively). \fixme{...}
 % The proof uses the fact that the monodromy of $\vrep$ around $\vrep^*$ in a 3-point block with
 % $\vrep$, $\vrep$, $\vrep^*$ is given by $\e^{2 \pi \I h_\vrep}$, as we already noted.
 % But it is rather subtle 
@@ -3281,12 +3289,46 @@ Such a diagram gives a morphism $\bid \to \bid$ in $\cC$:
 cups/caps give $\coev_\vrep$ and $\ev_\vrep$, twists/kinks give $\theta_\vrep^{\pm 1}$,
 crossings give $b^\pm_{\vrep,\vrep'}$.
 Since $\Hom(\bid,\bid) = \bbC$ we can think of this as a number associated to the 
-link diagram.
+link diagram. (Or, perhaps more concretely, we can think of the link diagram as defining
+an operator which maps the space of conformal blocks on $S^2$ to itself.)
 Now the nontrivial claim: it is actually an invariant of the ribbon link.
 This amounts to checking that it is invariant under the three Reidemeister moves.
-\fixme{...}
+Two of them, RII and RIII, are more or less immediate (they come from homotopy and flatness
+of the KZ equation). \fixme{figures} The third one, RI, is trickier. 
+It involves a chain of maps which: \fixme{draw a picture}
+\begin{itemize}
+\item starts with a single object $\vrep$; 
+\item creates a pair ($\coev^L$) to get $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
+\item associates to $(\vrep \boxtimes \vrep) \boxtimes \vrep^*$;
+\item braids positively to $(\vrep \boxtimes \vrep) \boxtimes \vrep^*$;
+\item associates to $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
+\item annihilates a pair ($\ev^R$) to get $\vrep$ again.
+\end{itemize}
+Now the necessary relation is that this whole operation is equal to the twist $\theta_\vrep$
+(it would be $\theta_\vrep^{-1}$ if we braided negatively). \fixme{...}
 
 \fixme{think of the ribbon structure as coming from the dependence on tangent vectors}
+
+Now how to calculate the link invariants in practice?
+One simple example of such a link invariant would be the case of the unknot.
+The invariant for an unknot labeled with $\cS_i$ is called the \ti{quantum dimension}
+$d_i$.
+
+\begin{exercise}
+Show that the quantum dimensions obey the relation
+\begin{equation}
+  d_i d_j = \sum_k N_{ij}^k d_k
+\end{equation}
+Use this relation to determine the quantum dimension in a few examples. \fixme{...}
+\end{exercise}
+
+\fixme{but isn't there also a more direct way?}
+
+\subsection{Verlinde loop operators}
+
+More generally, given a conformal block on a surface $C$, a colored framed oriented link
+in $C \times I$ produces an operator on the space of conformal blocks. In the case
+of a simple loop in $C$, this is sometimes called a \ti{Verlinde loop operator}.
 
 
 
@@ -3304,7 +3346,6 @@ Moreover they give \ti{parallel} sections
 \subsection{The WZW model}
 
 
-\subsection{Verlinde line operators}
 
 \subsection{Chern-Simons theory}
 \fixme{...}
