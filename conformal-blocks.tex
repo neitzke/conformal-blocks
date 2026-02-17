@@ -2552,12 +2552,80 @@ we got a connection on the bundle of conformal blocks over $C$.
 But the Virasoro action on $\vertex$ actually allows us to do more: we can vary the curve $C$ itself,
 thus obtaining (roughly) a connection over the moduli space of curves.
 
-Variations of $C$ are realized by the cohomology $H^1(C,T)$.
-The details of how we describe this connection depends on exactly how we realize the variations of
-$C$. First: suppose given a Cech cocycle, i.e. cover $C$ by patches $U_\alpha$ and give
+Deformations of $C$ are realized by the cohomology $H^1(C,T)$.
+The details of how we describe this connection depends on exactly how we realize the deformation of
+$C$. 
+
+First: suppose given a Cech cocycle $v$, i.e. cover $C$ by patches $U_\alpha$ and give
 vector fields $v_{\alpha \beta}$ on overlaps $U_{\alpha \beta}$, obeying
 $v_{\alpha \beta} + v_{\beta \gamma} + v_{\gamma \alpha} = 0$.
-\fixme{...}
+Then the corresponding variation of chiral correlation functions is given by
+\begin{equation} \label{eq:complex-variation-cech}
+  \partial_v \IP{\cdots} = \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) \IP{T(z) \cdots}
+\end{equation}
+The contours $c_{\alpha \beta}$ are defined as follows. \fixme{fig} 
+Shrink each $U_\alpha$ slightly to $V_\alpha$ with smooth boundary, such that
+they still cover $C$, and the boundaries meet transversely; then let $c_{\alpha \beta} = \overline{V_\alpha} \cap U_\beta$.
+Choose the ordering $<$ arbitrarily.
+
+A simple but useful example arises when we cover $C$ by two open sets $U_{1,2}$, intersecting in an annulus.
+Then the deformation is induced by a single vector field $v_{12}$ on the annulus,
+and \eqref{eq:complex-variation-cech} becomes an integral over a loop $c$ around the annulus:
+\begin{equation}
+  \partial_v \IP{\cdots} = \frac{1}{2 \pi \I} \int_{z \in c} v_{12}(z) \IP{T(z) \cdots}
+\end{equation}
+
+Second: suppose given an infinitesimal Beltrami differential $\mu \in H^{0,1}(T)$.
+Then
+\begin{equation} \label{eq:complex-variation-beltrami}
+  \partial_\mu \IP{\cdots} = \frac{1}{2 \pi \I} \int_{z \in C} \mu(z) \IP{T(z) \cdots}
+\end{equation}
+(Note this is well defined only as long as the support of $\mu(z)$ avoids the points where the insertions $\cdots$ are placed.
+This is a good feature, not a bug; it allows us to make canonical sense of what we mean by varying
+the curve while ``holding the marked points fixed.'' Every deformation class can be 
+represented by a $\mu(z)$ avoiding any particular set of points.)
+
+The formulas \eqref{eq:complex-variation-beltrami} and \eqref{eq:complex-variation-cech} are related essentially
+by integration by parts.
+
+
+\subsection{Virasoro twisting}
+
+One caution: the formula \eqref{eq:complex-variation-beltrami} depends on the local coordinate we use. If $T(z)$ transformed as a quadratic
+differential, then $\mu(z) T(z)$ would be a $(1,1)$-form, perfect for integration. 
+But the truth is that $T(z)$ is not quite a quadratic differential, rather it has
+the transformation law \eqref{eq:stress-tensor-transformation}. Using that formula we see that changing the local coordinate $z \to g(z)$ changes
+the integrand in \eqref{eq:complex-variation-beltrami} by
+\begin{equation}
+  \frac{c}{12} \mu(z) \{g(z),z\} \IP{\cdots}
+\end{equation}
+There are a few ways of thinking about this problem.
+One, the most concrete, is to fix \ti{complex projective structures} on our surfaces:
+\begin{defn}[Complex projective structure]
+A \ti{complex projective structure} on a Riemann surface $C$ is a choice of an atlas of coordinate 
+systems for which the transition maps are M\"obius transformations.
+\end{defn}
+Every surface admits a complex projective structure, e.g. from Fuchsian uniformization; indeed Fuchsian uniformization gives
+a complex projective structure where the transition maps are in $PSL(2,\bbR)$, not only $PSL(2,\bbC)$. 
+But for our purposes we don't want to use that one: we want to use one which varies holomorphically as we vary $C$
+(i.e. there should exist coordinate systems in the atlas which vary holomorphically as functions of the moduli of $C$).
+% One which would be OK is the \ti{Bergman} projective structure \fixme{...}
+
+Given two complex projective structures we can consider their \ti{difference}:
+\begin{defn}[Difference of complex projective structures]
+Let $S_1$ and $S_2$ be two complex projective structures on $C$.
+There is a globally defined holomorphic quadratic differential $S_2 - S_1$ 
+on $C$, given locally by $S_2 - S_1 = \{z,w\} \, \de z^2$, where
+$z$ is a local coordinate in $S_1$ and $w$ is a coordinate in $S_2$.  
+\end{defn}
+For any smooth compact Riemann surface $C$, the complex projective structures on $C$ form a torsor over the space $H^0(C, K^2)$ of holomorphic
+quadratic differentials. Thus complex projective structures make up a holomorphic affine bundle over the moduli space of curves.
+
+At any rate, once we have locally fixed a holomorphic section of the bundle of 
+complex projective structures, \eqref{eq:complex-variation-beltrami} 
+defines an honest connection locally over the moduli of curves.
+
+\fixme{twisted D-module}
 
 
 \subsection{Plumbing conformal blocks}
