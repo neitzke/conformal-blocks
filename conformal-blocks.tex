@@ -3205,10 +3205,12 @@ in the sense that we have given isomorphisms $\vertex \otimes \vrep \to \vrep$, 
 
 \subsubsection{Evaluation}
 
-Given $\vrep$ we can build a canonical conformal block 
-on $\bbC \bbP^1$ with $\vrep^*$ at $z_1$, $\vrep$ at $z_2$,
-and $\vertex^* = \vertex$ at $\infty$.
-This induces a morphism
+Given a 3-point conformal block with insertions of $\vrep^*$, $\vrep$, $W^*$ 
+at $z_1$, $z_2$, $\infty$ we can construct a $1$-point conformal block with only $W^*$ inserted,
+as follows: use factorization to represent the given block
+as an element of $\bigoplus_i \Hom(\vrep^* \boxtimes \vrep, \cS_i) \otimes \Hom(\cS_i, W)$,
+then pick out the component with $\cS_i = \vertex$, and use the fact that $\Hom(\vrep^* \boxtimes \vrep, \vertex)$ is $1$-dimensional.
+Up to an overall normalization this determines a map 
 \begin{equation}
   \ev_{\vrep,z_1,z_2}: \vrep^* \boxtimes_{z_1,z_2} \vrep \to \vertex
 \end{equation}
@@ -3216,6 +3218,7 @@ In particular, this gives \ti{two} morphisms,
 \begin{equation}
   \ev^L_\vrep: \vrep^* \boxtimes \vrep \to \vertex, \qquad   \ev^R_\vrep: \vrep \boxtimes \vrep^* \to \vertex
 \end{equation}
+We will fix the normalizations below.
 
 % For concrete computations, it seems useful to describe how these morphisms behave in correlation functions.
 % Here it is important that $\boxtimes = \boxtimes_{0,1}$. Using the connection on conformal blocks we get
@@ -3234,23 +3237,26 @@ In particular, this gives \ti{two} morphisms,
 
 \subsubsection{Coevaluation}
 
-There is also a morphism
+Given $\vrep$ we can build a conformal block 
+on $\bbC \bbP^1$ with $\vrep^*$ at $z_1$, $\vrep$ at $z_2$,
+and $\vertex^* = \vertex$ at $\infty$.
+Once we somehow choose a normalization of this conformal block,
+it gives a morphism\footnote{As usual we think of this morphism as induced from morphisms on the $\Hom$-spaces to an arbitrary $W$.}
 \begin{equation}
   \coev_{\vrep,z_1,z_2}: \vertex \to \vrep \boxtimes_{z_1,z_2} \vrep^*
 \end{equation}
-built by plumbing in a sphere carrying the
-canonical block with insertions $\vrep, \vrep^*, \vertex$ at $z_1, z_2, \infty$ respectively.
 Again it gives \ti{two} morphisms,
 \begin{equation}
   \coev^R_\vrep: \vertex \to \vrep^* \boxtimes \vrep, \qquad \coev^L_\vrep: \vertex \to \vrep \boxtimes \vrep^*
 \end{equation}
+and again we will fix the normalizations below.
 
-For instance, concretely we have
-\begin{equation}
- \coev_\vrep^L(\vac) = \sum_{n,i} e_{n,i} \otimes \rho(g) e^*_{n,i}
-\end{equation}
-where $g$ is the pointed change of coordinates from the coordinate $1/z$ around $\infty$
-to the coordinate $z-1$ around $1$.
+% For instance, concretely we have
+% \begin{equation}
+%  \coev_\vrep^L(\vac) = \sum_{n,i} e_{n,i} \otimes \rho(g) e^*_{n,i}
+% \end{equation}
+% where $g$ is the pointed change of coordinates from the coordinate $1/z$ around $\infty$
+% to the coordinate $z-1$ around $1$.
 
 \subsubsection{Coherence}
 
@@ -3258,7 +3264,8 @@ There are many coherence relations between these various structures.
 For instance,
 \begin{enumerate}
 \item The associator obeys a pentagon relation relating five different ways of
-bracketing the tensor product of four objects. (We can understand it as coming from a homotopy between paths in configuration space \fixme{draw figure}.)
+bracketing the tensor product of four objects. (We can understand it as coming from a homotopy between paths in configuration space.
+The key point is that the configuration space of ordered $4$-tuples of points on the real line is simply connected \fixme{draw figure}.)
 \item The braiding and associator together obey a hexagon relation, 
 which connects braiding across $X \otimes Y$
 with braiding across $X$ and $Y$ separately. (Again it comes from a homotopy between paths \fixme{draw figure}.)
