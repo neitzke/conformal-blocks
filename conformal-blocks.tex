@@ -13,6 +13,7 @@
 \usepackage{verbatim}
 \usepackage[letterpaper,margin=1in,headheight=15pt]{geometry}
 \usepackage{tikz}
+\usepackage{tikz-cd}
 \usetikzlibrary{calc}
 \usepackage{booktabs}
 \usepackage{framed}
@@ -2794,6 +2795,7 @@ Let $\cC$ be the category of ordinary modules for $L_k(\fg)$.
 
 
 \subsubsection{Semisimplicity}
+
 \begin{prop}[Nice properties of ordinary modules for $L_k(\fg)$] For $k \in \bbN$, every ordinary module for $L_k(\fg)$ is a finite direct sum of simple ones. (``Simple'' means they have no 
 proper submodules.)
 The simple ones are irreducible quotients of parabolic Verma modules, with highest weights
@@ -2803,6 +2805,16 @@ is the highest coroot of $\fg$. Call these simple modules $\vrep(\lambda)$.
 
 In particular: $\cC$ is a $\bbC$-linear semisimple abelian category,
 with finitely many simple objects.
+This fact already has lots of consequences which we will use repeatedly.
+For instance, every simple module has
+$\Hom(\cS_i,\cS_i) = \bbC$, and every 
+module $\vrep$ has a canonical decomposition
+isomorphism
+\begin{equation}
+  \vrep \to \bigoplus_i V^\vrep_i \otimes \cS_i
+\end{equation}
+where the $V^\vrep_i$ are finite-dimensional vector spaces
+(given by $V_i^\vrep = \Hom(\cS_i, \vrep)$.)
 
 % The proof of complete reducibility uses the fact that every ordinary module for $L_k(\fg)$ carries 
 % a positive definite Hermitian form.
@@ -2894,7 +2906,7 @@ By formally adjoining negatives
 of objects (Grothendieck ring) we get the \ti{fusion ring}.
 \begin{exercise}
 Suppose $\fg = \fsl_2$ and $k=3$. Check directly that the fusion ring
-is associative, and prove that it is isomorphic to $\bbC[x] / (x^4 - 3x^2 + 1)$.
+is associative, and prove that it is isomorphic to $\bbZ[x] / (x^4 - 3x^2 + 1)$.
 \end{exercise}
 
 \begin{example}
@@ -2909,15 +2921,18 @@ ring of finite-dimensional $\fsl_2$-modules and then formally
 % But the more complicated construction above provides also the map
 % $\vrep_1 \otimes \vrep_2 \to \overline{\vrep_1 \boxtimes \vrep_2}$ which is important.
 We could try to produce a tensor product ``by hand'' by just
-defining $\cS_i \boxtimes \cS_j = \bigoplus_{k} \bbC^{N_{ij}^k} \otimes \cS_k$.
+defining $\cS_i \boxtimes \cS_j = \bigoplus_{k} \bbC^{N_{ij}^k} \otimes \cS_k$, or more generally
+$\vrep_1 \otimes \vrep_2 = \bigoplus_k V^{\vrep_1}_i \otimes V^{\vrep_2}_j \otimes \bbC^{N_{ij}^k} \otimes \cS_k$.
 This won't have the properties we usually want.
 For example, it isn't associative in any reasonable way,
 i.e. we don't have any canonical isomorphism
-$(\cS_i \boxtimes \cS_j) \boxtimes \cS_k \simeq \cS_i \boxtimes (\cS_j \boxtimes \cS_k)$.
-(It is true that the two sides decompose isomorphically into simple objects, but we don't have
-a map between them.) It is not even functorial in any obvious way, i.e. we don't know how to take tensor
-products of general representations, only ones which come to us already as direct sums of the
-simple objects $\cS_i$.
+$(\cS_i \boxtimes \cS_j) \boxtimes \cS_k \simeq \cS_i \boxtimes (\cS_j \boxtimes \cS_k)$. (It is true that the two sides decompose isomorphically into simple objects, but we don't have
+a map between them; it would mean giving a map
+$\bigoplus_\ell \bbC^{N_{ij}^\ell} \otimes \bbC^{N_{\ell k}^m} \simeq \bigoplus_\ell \bbC^{N_{jk}^\ell} \otimes \bbC^{N_{\ell i}^m}$.)
+
+% It is not even functorial in any obvious way, i.e. we don't know how to take tensor
+% products of general representations, only ones which come to us already as direct sums of the
+% simple objects $\cS_i$.
 
 Nevertheless, for any modules $\vrep_1$, $\vrep_2$ we \ti{can} define a product module 
 $\vrep_1 \boxtimes \vrep_2$, for which we do have \eqref{eq:boxtimes-coeff}.
@@ -3145,14 +3160,31 @@ This has been carried out in \fixme{...}.
 
 \subsubsection{Associator}
 
-At any rate, once we know \autoref{prop:factorization-strongly-rational} we can identify the space of 4-point blocks with
+At any rate, suppose we know \autoref{prop:factorization-strongly-rational}.
+Then we consider the space of 4-point blocks with
 $\vrep_1$, $\vrep_2$, $\vrep_3$, $W$ inserted,
-when $z_1$ is close to $z_2$, as
+at points $z_1 < z_2 < z_3$ in $\bbR$ and $\infty$.
+When $z_2$ is close to $z_1$ this is
 \begin{equation}
   \bigoplus_i \Hom(\vrep_1 \boxtimes \vrep_2, \cS_i) \otimes \Hom(\cS_i \boxtimes \vrep_3, W^*)
 \end{equation}
-In turn this is equal to\footnote{Indeed $\bigoplus_i \Hom(A, \cS_i) \otimes F(\cS_i) = F(A)$ for any functor $F: \cC^\op \to \Vect$.
-It's an instance of the ``co-Yoneda lemma.'' We apply it here with $A = \vrep_1 \boxtimes \vrep_2$ and $F(A) = \Hom(A \boxtimes \vrep_3, W)$.}
+In turn this is equal to\footnote{Indeed, in any finite semisimple abelian category $\cC$, we have $\bigoplus_i \Hom(A, \cS_i) \otimes F(\cS_i) = F(A)$ for any additive functor $F: \cC^\op \to \Vect$.
+We apply it here with $A = \vrep_1 \boxtimes \vrep_2$ and $F(A) = \Hom(A \boxtimes \vrep_3, W)$.
+To think about it concretely imagine $F(A) = \Hom(A,B)$: 
+then it says $\bigoplus_i \Hom(A, \cS_i) \otimes \Hom(\cS_i, B) = \Hom(A,B)$.
+To prove that version: we have an obvious map from the left
+side to the right; what we need is to invert it. For this
+use the canonical decomposition 
+$A \simeq \bigoplus_j V_{j,A} \otimes \cS_{j}$;
+that induces an isomorphism $\Hom(A, \cS_i) \otimes \Hom(\cS_i, B) \to \bigoplus_j V_{j,A} \otimes \Hom(\cS_j, \cS_i) \otimes \Hom(\cS_i, B) = V_{i,A}^* \otimes \Hom(\cS_i, B) = \Hom(V_{i,A} \otimes \cS_i, B)$,
+and then taking the direct sum over $i$ gives $\Hom(A,B)$ as desired.
+
+For those who know more about category theory than I do: if I understand
+right, this is an example of the co-Yoneda lemma, applied to the coend
+$\int^{X \in \cC} \Hom(A,X) \otimes F(X)$ of the functor
+$G(X,Y): \cC^{\op} \times \cC \to \Vect$ defined by
+$G(X,Y) = \Hom(A,Y) \otimes F(X)$.
+}
 \begin{equation}
  \Hom((\vrep_1 \boxtimes \vrep_2) \boxtimes \vrep_3, W^*) 
 \end{equation}
@@ -3161,17 +3193,33 @@ we can identify the space of $4$-point blocks with
 \begin{equation}
  \Hom(\vrep_1 \boxtimes (\vrep_2 \boxtimes \vrep_3), W^*) \, . 
 \end{equation}
-Thus, fixing an analytic continuation from one region to
-the other, we get an isomorphism
+Continuation in the $z_2$ parameter then gives an isomorphism
 \begin{equation}
  \Hom((\vrep_1 \boxtimes \vrep_2) \boxtimes \vrep_3, W) \to \Hom(\vrep_1 \boxtimes (\vrep_2 \boxtimes \vrep_3), W) \, .
 \end{equation}
-Then having this for every $W$ is equivalent to having
+Having this for every $W$ is equivalent to having
 an \ti{associator} map
 \begin{equation}
- (\vrep_1 \boxtimes \vrep_2) \boxtimes \vrep_3 \to \vrep_1 \boxtimes (\vrep_2 \boxtimes \vrep_3) \, .
+ a_{1,2,3}: (\vrep_1 \boxtimes \vrep_2) \boxtimes \vrep_3 \to \vrep_1 \boxtimes (\vrep_2 \boxtimes \vrep_3) \, .
 \end{equation}
 
+What is the concrete data here? Recall that we have the canonical multiplicity vector spaces $V_{ij}^k$, $\dim V_{ij}^k = N_{ij}^k$, 
+with a canonical isomorphism
+\begin{equation}
+  \cS_i \boxtimes \cS_j \simeq \bigoplus_{k} V_{ij}^k \otimes \cS_k \, .
+\end{equation}
+Then the associator amounts to a collection of linear isomorphisms
+\begin{equation}
+  F^\ell_{ijk}: \bigoplus_p V^p_{ij} \otimes V^\ell_{pk} \to \bigoplus_q V^q_{jk} \otimes V^\ell_{iq} \, .
+\end{equation}
+They are sometimes called \ti{$F$-matrices} or \ti{$6j$ symbols}
+(but they don't literally become matrices unless we choose bases in
+each $V_{ij}^k$.)
+They satisfy the \ti{pentagon relation} which we will discuss below.
+
+(I should emphasize that this is not something spooky:
+the same sort of objects would appear already for the
+representation ring of a group.)
 
 % as a composite
 % \begin{equation}
@@ -3205,12 +3253,11 @@ in the sense that we have given isomorphisms $\vertex \otimes \vrep \to \vrep$, 
 
 \subsubsection{Evaluation}
 
-Given a 3-point conformal block with insertions of $\vrep^*$, $\vrep$, $W^*$ 
-at $z_1$, $z_2$, $\infty$ we can construct a $1$-point conformal block with only $W^*$ inserted,
-as follows: use factorization to represent the given block
-as an element of $\bigoplus_i \Hom(\vrep^* \boxtimes \vrep, \cS_i) \otimes \Hom(\cS_i, W)$,
-then pick out the component with $\cS_i = \vertex$, and use the fact that $\Hom(\vrep^* \boxtimes \vrep, \vertex)$ is $1$-dimensional.
-Up to an overall normalization this determines a map 
+Given $\vrep$ we can build a conformal block 
+on $\bbC \bbP^1$ with $\vrep^*$ at $z_1$, $\vrep$ at $z_2$,
+and $\vertex^* = \vertex$ at $\infty$.
+Once we somehow choose a normalization of this conformal block,
+it gives an element in $\Hom(\vrep^* \boxtimes_{z_1,z_2} \vrep, \vertex)$ i.e.
 \begin{equation}
   \ev_{\vrep,z_1,z_2}: \vrep^* \boxtimes_{z_1,z_2} \vrep \to \vertex
 \end{equation}
@@ -3237,15 +3284,20 @@ We will fix the normalizations below.
 
 \subsubsection{Coevaluation}
 
-Given $\vrep$ we can build a conformal block 
-on $\bbC \bbP^1$ with $\vrep^*$ at $z_1$, $\vrep$ at $z_2$,
-and $\vertex^* = \vertex$ at $\infty$.
-Once we somehow choose a normalization of this conformal block,
-it gives a morphism\footnote{As usual we think of this morphism as induced from morphisms on the $\Hom$-spaces to an arbitrary $W$.}
+Now consider a conformal block 
+on $\bbC \bbP^1$ with $\vrep$ at $z_1$, $\vrep^*$ at $z_2$,
+and $\vertex^* = \vertex$ at $\infty$, with some choice of normalization.
+Such a block induces for us a map
 \begin{equation}
-  \coev_{\vrep,z_1,z_2}: \vertex \to \vrep \boxtimes_{z_1,z_2} \vrep^*
+ \Hom(\vertex, \cS) \to \Hom(\vrep \boxtimes_{z_1,z_2} \vrep^*, \cS) 
 \end{equation}
-Again it gives \ti{two} morphisms,
+for each simple $\cS$. (Namely, if $\cS = \vertex$ then this means a map $\bbC \to \Hom(\vrep \boxtimes_{z_1,z_2} \vrep^*, \vertex)$,
+which we can get from the given conformal block; and if $\cS \neq \vertex$ then both sides are the zero vector space.)
+Thus it induces a morphism
+\begin{equation}
+  \coev_{\vrep,z_1,z_2}: \vertex \to \vrep \boxtimes_{z_1,z_2} \vrep^* \, .
+\end{equation}
+Again this gives two morphisms,
 \begin{equation}
   \coev^R_\vrep: \vertex \to \vrep^* \boxtimes \vrep, \qquad \coev^L_\vrep: \vertex \to \vrep \boxtimes \vrep^*
 \end{equation}
@@ -3264,11 +3316,108 @@ There are many coherence relations between these various structures.
 For instance,
 \begin{enumerate}
 \item The associator obeys a pentagon relation relating five different ways of
-bracketing the tensor product of four objects. (We can understand it as coming from a homotopy between paths in configuration space.
-The key point is that the configuration space of ordered $4$-tuples of points on the real line is simply connected \fixme{draw figure}.)
-\item The braiding and associator together obey a hexagon relation, 
-which connects braiding across $X \otimes Y$
-with braiding across $X$ and $Y$ separately. (Again it comes from a homotopy between paths \fixme{draw figure}.)
+bracketing the tensor product of four objects:
+
+% Pentagon axiom for the associator a_{X,Y,Z} : (X\otimes Y)\otimes Z \to X\otimes (Y\otimes Z)
+
+\[
+a_{A,B,C\boxtimes D}\circ a_{A\boxtimes B,C,D}
+=
+(\id_A\boxtimes a_{B,C,D})\circ a_{A,B\boxtimes C,D}\circ (a_{A,B,C}\boxtimes \id_D).
+\]
+
+\[
+\begin{tikzcd}[column sep=huge,row sep=huge]
+& ((A\boxtimes B)\boxtimes C)\boxtimes D
+  \arrow[dl,"a_{A,B,C}\boxtimes \id_D"']
+  \arrow[dr,"a_{A\boxtimes B,C,D}"] & \\
+(A\boxtimes (B\boxtimes C))\boxtimes D
+  \arrow[d,"a_{A,B\boxtimes C,D}"'] & &
+(A\boxtimes B)\boxtimes (C\boxtimes D)
+  \arrow[d,"a_{A,B,C\boxtimes D}"] \\
+A\boxtimes ((B\boxtimes C)\boxtimes D)
+  \arrow[rr,"\id_A\boxtimes a_{B,C,D}"'] & &
+A\boxtimes (B\boxtimes (C\boxtimes D))
+\end{tikzcd}
+\]
+
+We can understand it as coming from a homotopy between paths in configuration space.
+The key point is that all of the tensor products we consider can be described in terms of 
+conformal blocks where \ti{all insertions are on the real line}, and 
+the configuration space of ordered $4$-tuples of points $t_1 < t_2 < t_3 < t_4$ on the real line is simply connected \fixme{draw figure}.)
+For instance: the space $\Hom(A \boxtimes (B \boxtimes (C \boxtimes D)), W^*)$ is a space of 5-point conformal blocks
+constructed by iterated plumbing, which converges in a region 
+where $t_4 - t_3 \ll t_3 - t_2 \ll t_2 - t_1$. 
+The other bracketings are similar. Then the associator corresponds to analytic continuation of the correlation functions
+from one of these convergence domains to another.
+
+\item The braiding and associator together obey two hexagon relations.
+The first connects braiding $X$ to the right across $Y \boxtimes Z$
+with braiding it across $Y$ and $Z$ separately;
+the second is similar for braiding $Z$ to the left.
+
+% Hexagon axioms (braiding b, associator a)
+
+\[
+a_{Y,Z,X}\circ b_{X,\,Y\boxtimes Z}\circ a_{X,Y,Z}
+=
+(\mathrm{id}_Y\boxtimes b_{X,Z})\circ a_{Y,X,Z}\circ (b_{X,Y}\boxtimes \mathrm{id}_Z).
+\]
+
+\[
+\begin{tikzcd}[column sep=huge,row sep=huge]
+{} &
+\bigl((X\boxtimes Y)\boxtimes Z\bigr)
+  \arrow[r,"a_{X,Y,Z}"]
+  \arrow[dl,"b_{X,Y}\boxtimes \mathrm{id}_Z"'] &
+\bigl(X\boxtimes (Y\boxtimes Z)\bigr)
+  \arrow[dr,"b_{X,\,Y\boxtimes Z}"] &
+{} \\
+\bigl((Y\boxtimes X)\boxtimes Z\bigr)
+  \arrow[dr,"a_{Y,X,Z}"'] &
+{} & {} &
+\bigl((Y\boxtimes Z)\boxtimes X\bigr)
+  \arrow[dl,"a_{Y,Z,X}"] \\
+{} &
+\bigl(Y\boxtimes (X\boxtimes Z)\bigr)
+  \arrow[r,"\mathrm{id}_Y\boxtimes b_{X,Z}"'] &
+\bigl(Y\boxtimes (Z\boxtimes X)\bigr) &
+{}
+\end{tikzcd}
+\]
+
+\[
+a^{-1}_{Z,X,Y}\circ b_{X\boxtimes Y,\,Z}\circ a^{-1}_{X,Y,Z}
+=
+(b_{X,Z}\boxtimes \mathrm{id}_Y)\circ a^{-1}_{X,Z,Y}\circ (\mathrm{id}_X\boxtimes b_{Y,Z}).
+\]
+
+\[
+\begin{tikzcd}[column sep=huge,row sep=huge]
+{} &
+\bigl(X\boxtimes (Y\boxtimes Z)\bigr)
+  \arrow[r,"a^{-1}_{X,Y,Z}"]
+  \arrow[dl,"\mathrm{id}_X\boxtimes b_{Y,Z}"'] &
+\bigl((X\boxtimes Y)\boxtimes Z\bigr)
+  \arrow[dr,"b_{X\boxtimes Y,\,Z}"] &
+{} \\
+\bigl(X\boxtimes (Z\boxtimes Y)\bigr)
+  \arrow[dr,"a^{-1}_{X,Z,Y}"'] &
+{} & {} &
+\bigl(Z\boxtimes (X\boxtimes Y)\bigr)
+  \arrow[dl,"a^{-1}_{Z,X,Y}"] \\
+{} &
+\bigl((X\boxtimes Z)\boxtimes Y\bigr)
+  \arrow[r,"b_{X,Z}\boxtimes \mathrm{id}_Y"'] &
+\bigl((Z\boxtimes X)\boxtimes Y\bigr) &
+{}
+\end{tikzcd}
+\]
+
+(As with the pentagon relation, these identities come 
+from homotopies between paths in the configuration
+space of triples of points, where we \ti{mostly} keep
+$z_1, z_2, z_3$ on the real line, but for the braiding we let them move slightly outside the real domain.)
 \item The coevaluation and evaluation obey zig-zag (straightening) relations, connecting $\coev^L$ and $\ev^L$,
 or $\coev^R$ and $\ev^R$.
 \item Braiding is compatible with evaluation and coevaluation.
