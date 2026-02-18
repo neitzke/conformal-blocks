@@ -3080,6 +3080,8 @@ and in particular
  b_{12}^\pm:  \vrep_1 \boxtimes \vrep_2 \to \vrep_2 \boxtimes \vrep_1 \, .
 \end{equation}
 
+Sometimes we just use $b$ for $b^+$.
+
 % \subsubsection{Categorical dual}
 
 % The existence of $\coev$, $\ev$ means that $\vrep^*$ is actually a \ti{left dual} to $\vrep$
@@ -3248,8 +3250,8 @@ $\vrep^{**} \simeq \vrep$ (sometiems called \ti{pivotal structure}).
 \subsubsection{Identity object}
 
 The object $\bid = \vertex$ is the identity for the tensor product,
-in the sense that we have given isomorphisms $\vertex \otimes \vrep \to \vrep$, $\vrep \otimes \vertex \to \vrep$.
-
+in the sense that we have given isomorphisms 
+$\lambda_X: \bid \otimes X\to X$ and $\rho_X:X\otimes \bid \to X$.
 
 \subsubsection{Evaluation}
 
@@ -3315,6 +3317,21 @@ and again we will fix the normalizations below.
 There are many coherence relations between these various structures.
 For instance,
 \begin{enumerate}
+
+\item All of the data are \ti{natural} with respect to morphisms.
+
+\item We have the triangle identity:
+\[
+\begin{tikzcd}[column sep=huge,row sep=huge]
+\bigl((X\otimes \bid)\otimes Y\bigr)
+  \arrow[r,"a_{X,\bid,Y}"]
+  \arrow[dr,"\rho_X\otimes \id_Y"'] &
+\bigl(X\otimes (\bid\otimes Y)\bigr)
+  \arrow[d,"\id_X\otimes \lambda_Y"] \\
+& \bigl(X\otimes Y\bigr)
+\end{tikzcd}
+\]
+
 \item The associator obeys a pentagon relation relating five different ways of
 bracketing the tensor product of four objects:
 
@@ -3350,6 +3367,15 @@ constructed by iterated plumbing, which converges in a region
 where $t_4 - t_3 \ll t_3 - t_2 \ll t_2 - t_1$. 
 The other bracketings are similar. Then the associator corresponds to analytic continuation of the correlation functions
 from one of these convergence domains to another.
+
+One pretty way of formulating this is: interpret factorization as 
+saying that the bundle of conformal blocks extends over a
+\ti{compactification} of the moduli of curves, to include 
+stable nodal curves. Then the pentagon relation can be formulated
+as a homotopy in $\overline{\cM_{0,5}}(\bbR)$ the moduli space of 
+real stable curves of genus zero with 5 marked points;
+this moduli space is a pentagon, with the 
+five bracketings correspond to the five vertices.
 
 \item The braiding and associator together obey two hexagon relations.
 The first connects braiding $X$ to the right across $Y \boxtimes Z$
@@ -3419,16 +3445,100 @@ from homotopies between paths in the configuration
 space of triples of points, where we \ti{mostly} keep
 $z_1, z_2, z_3$ on the real line, but for the braiding we let them move slightly outside the real domain.)
 \item The coevaluation and evaluation obey zig-zag (straightening) relations, connecting $\coev^L$ and $\ev^L$,
-or $\coev^R$ and $\ev^R$.
-\item Braiding is compatible with evaluation and coevaluation.
-\item The twist is compatible with evaluation and coevaluation, in the sense that it connects $\coev^L$ and $\ev^R$, or $\coev^R$ and $\ev^L$.
-\item The twist is compatible with the braiding and associator.
+or $\coev^R$ and $\ev^R$:
+\[
+\rho_X\circ(\mathrm{id}_X\boxtimes \ev^L)\circ a_{X,X^*,X}\circ(\coev^L\boxtimes \mathrm{id}_X)\circ \lambda_X^{-1}
+=\mathrm{id}_X,
+\]
+\[
+\lambda_{X^*}\circ(\ev^L\boxtimes \mathrm{id}_{X^*})\circ a^{-1}_{X^*,X,X^*}\circ(\mathrm{id}_{X^*}\boxtimes \coev^L)\circ \rho_{X^*}^{-1}
+=\mathrm{id}_{X^*}.
+\]
+% Right zig-zag (triangle) identities:
+
+\[
+\lambda_X\circ(\ev^R\boxtimes \mathrm{id}_X)\circ a^{-1}_{X,X^*,X}\circ(\mathrm{id}_X\boxtimes \coev^R)\circ \rho_X^{-1}
+=\mathrm{id}_X,
+\]
+\[
+\rho_{X^*}\circ(\mathrm{id}_{X^*}\boxtimes \ev^R)\circ a_{X^*,X,X^*}\circ(\coev^R\boxtimes \mathrm{id}_{X^*})\circ \lambda_{X^*}^{-1}
+=\mathrm{id}_{X^*}.
+\]
+We think of these relations as partially fixing the normalization
+of $\ev$ and $\coev$, which we left unfixed until now.
+
+% If your monoidal category is strict (a=\lambda=\rho=\mathrm{id}), these reduce to:
+% (\mathrm{id}_X\boxtimes\ev^L)\circ(\coev^L\boxtimes\mathrm{id}_X)=\mathrm{id}_X, etc.
+
+
+\item Braiding is compatible with evaluation and coevaluation:
+% Let b_{X,Y}: X\boxtimes Y \to Y\boxtimes X be the braiding (with inverse b^{-1}_{X,Y}).
+% Suppose you have chosen the same dual object X^\vee for both left and right duality of X,
+% with maps
+%   \coev_X^L:\mathbb{1}\to X\boxtimes X^\vee,    \ev_X^L: X^\vee\boxtimes X\to\mathbb{1},
+%   \coev_X^R:\mathbb{1}\to X^\vee\boxtimes X,    \ev_X^R: X\boxtimes X^\vee\to\mathbb{1}.
+%
+% Then the standard relations expressing that the right cup/cap are obtained from the left
+% by inserting a crossing are:
+\[
+\coev_X^{R} = b^{-1}_{X^*,X} \circ \coev_X^{L} \, ,
+\qquad
+\ev_X^{R} = \ev_X^{L} \circ b_{X,X^*} \, ,
+\]
+or equivalently,
+\[
+\coev_X^{L} = b_{X^*,X}\circ \coev_X^{R},
+\qquad
+\ev_X^{L} = \ev_X^{R}\circ b^{-1}_{X,X^*}.
+\]
+These relations mean that the structure is somewhat redundant:
+we could \ti{define} $\coev^R$ in terms of $\coev^L$ and the
+braiding, and similarly we could define $\ev^R$ in terms of
+$\ev^L$ and the braiding.
+
+
+\item The twist is compatible with the braiding and associator,
+in the sense that:
+\[
+\theta_{\bid}=\id_{\bid} \, , \quad
+a_{X,Y,Z}\circ \theta_{(X\boxtimes Y)\boxtimes Z}
+=
+\theta_{X\boxtimes (Y\boxtimes Z)}\circ a_{X,Y,Z} \, , \quad
+\theta_{X\boxtimes Y}
+=
+b_{Y,X}\circ b_{X,Y}\circ (\theta_X\boxtimes \theta_Y) \, .
+\]
+The proof of the last identity here 
+uses the fact that the monodromy of $X$ around $Y$ in a 3-point block with $X$, $Y$, $Z$ is given by $\e^{2 \pi \I (h_X + h_Y - h_Z)}$, as we already noted.
+
+\item The twist is compatible with evaluation and coevaluation, in the sense that twisting on either leg is equivalent:
+\[
+(\theta_X\boxtimes \id_{X^*})\circ \coev_X^{L}
+=
+(\id_X\boxtimes \theta_{X^*})\circ \coev_X^{L},
+\qquad
+\ev_X^{L}\circ(\theta_{X^*}\boxtimes \id_X)
+=
+\ev_X^{L}\circ(\id_{X^*}\boxtimes \theta_X).
+\]
+\[
+(\theta_{X^*}\boxtimes \id_X)\circ \coev_X^{R}
+=
+(\id_{X^*}\boxtimes \theta_X)\circ \coev_X^{R},
+\qquad
+\ev_X^{R}\circ(\theta_X\boxtimes \id_{X^*})
+=
+\ev_X^{R}\circ(\id_X\boxtimes \theta_{X^*}).
+\]
+
+We can also write this as
+\[
+\theta_{X^*} = (\theta_X)^*
+\]
+(with a proper understanding of what that should mean!)
+
 \end{enumerate}
 
-All of them are automatic in our setup, but it is interesting to see how they play out.
-% The proof uses the fact that the monodromy of $\vrep$ around $\vrep^*$ in a 3-point block with
-% $\vrep$, $\vrep$, $\vrep^*$ is given by $\e^{2 \pi \I h_\vrep}$, as we already noted.
-% But it is rather subtle 
 
 All of these properties together make $\cC$ into 
 a \ti{premodular tensor category} or \ti{ribbon fusion category}.
@@ -3442,26 +3552,31 @@ we can consider oriented ribbon link diagrams,
 where each component is labeled by an object $\vrep$ of $\cC$ (reversing orientation
 swaps $\vrep \to \vrep^*$).
 Such a diagram gives a morphism $\bid \to \bid$ in $\cC$:
-cups/caps give $\coev_\vrep$ and $\ev_\vrep$, twists/kinks give $\theta_\vrep^{\pm 1}$,
-crossings give $b^\pm_{\vrep,\vrep'}$.
-Since $\Hom(\bid,\bid) = \bbC$ we can think of this as a number associated to the 
+cups/caps give $\coev$ and $\ev$, twists/kinks give $\theta_\vrep^{\pm 1}$,
+crossings give $b^\pm_{\vrep,\vrep'}$,
+and we sprinkle in associators as necessary.
+Since $\Hom(\bid,\bid) = \bbC$ 
+we can think of the result as a number associated to the 
 link diagram. (Or, perhaps more concretely, we can think of the link diagram as defining
 an operator which maps the space of conformal blocks on $S^2$ to itself.)
-Now the nontrivial claim: it is actually an invariant of the ribbon link.
-This amounts to checking that it is invariant under the three Reidemeister moves.
-Two of them, RII and RIII, are more or less immediate (they come from homotopy and flatness
-of the KZ equation). \fixme{figures} The third one, RI, is trickier. 
-It involves a chain of maps which: \fixme{draw a picture}
-\begin{itemize}
-\item starts with a single object $\vrep$; 
-\item creates a pair ($\coev^L$) to get $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
-\item associates to $(\vrep \boxtimes \vrep) \boxtimes \vrep^*$;
-\item braids positively to $(\vrep \boxtimes \vrep) \boxtimes \vrep^*$;
-\item associates to $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
-\item annihilates a pair ($\ev^R$) to get $\vrep$ again.
-\end{itemize}
-Now the necessary relation is that this whole operation is equal to the twist $\theta_\vrep$
-(it would be $\theta_\vrep^{-1}$ if we braided negatively). \fixme{...}
+Now the nontrivial claim: this number 
+is actually an invariant of the ribbon link.
+This amounts to checking that it is invariant under various moves.
+\fixme{...}
+
+% Two of them, RII and RIII, are more or less immediate (they come from homotopy and flatness
+% of the KZ equation). \fixme{figures} The third one, RI, is trickier. 
+% It involves a chain of maps which: \fixme{draw a picture}
+% \begin{itemize}
+% \item starts with a single object $\vrep$; 
+% \item creates a pair ($\coev^L$) to get $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
+% \item associates to $(\vrep \boxtimes \vrep) \boxtimes \vrep^*$;
+% \item braids positively to $(\vrep \boxtimes \vrep) \boxtimes \vrep^*$;
+% \item associates to $\vrep \boxtimes (\vrep \boxtimes \vrep^*)$;
+% \item annihilates a pair ($\ev^R$) to get $\vrep$ again.
+% \end{itemize}
+% Now the necessary relation is that this whole operation is equal to the twist $\theta_\vrep$
+% (it would be $\theta_\vrep^{-1}$ if we braided negatively). \fixme{...}
 
 \fixme{think of the ribbon structure as coming from the dependence on tangent vectors}
 
@@ -3478,7 +3593,7 @@ Show that the quantum dimensions obey the relation
 Use this relation to determine the quantum dimension in a few examples. \fixme{...}
 \end{exercise}
 
-\fixme{but isn't there also a more direct way?}
+\fixme{but can also compute directly from the torus characters...}
 
 \subsection{Verlinde loop operators}
 
