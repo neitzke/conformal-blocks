@@ -2338,6 +2338,22 @@ In favorable situations, where $\cB / \cB_K$ is actually a vector bundle of fini
 structure really does mean a flat connection, and this is a useful intuitive picture even when it is not
 literally true.
 
+\begin{exercise}
+Suppose $C = \bbC \bbP^1$. Let $v = (a + b z + c z^2) \partial_z$ 
+be a global vector field on $C$.
+Consider a family of conformal blocks $\Phi_z$ 
+on $C$ with insertions at points
+$z_1, \dots, z_n$, obeying \eqref{eq:connection-conformal-blocks}
+in all variables.
+Prove that \fixme{check signs}
+\begin{equation}
+  \partial_v \Phi_z = (a L_{-1} + b L_0 + c L_1) \Phi_z
+\end{equation}
+where on both sides the action is on all insertions, i.e. 
+all $z_i$ flow by the vector field $v$, and the operators
+$(a L_{-1} + b L_0 + c L_1)$ act on all of the inserted modules.
+\end{exercise}
+
 \begin{example}
 Suppose $\vertex = V^k(\fg)$.
 We take $C = \bbC \bbP^1$, with marked points at $z_1$, $z_2$, and $\infty$.
@@ -2850,7 +2866,7 @@ dimensions $1, 2, \dots, k+1$.
 
 
 
-\subsubsection{Tensor}
+\subsubsection{Tensor products}
 
 What happens when we have two $\vertex$-modules $\vrep_1$, $\vrep_2$
 and bring them close together?
@@ -2946,11 +2962,19 @@ $\vrep_1, \vrep_2, W$ at $z_1, z_2, \infty$ respectively.
 The modules $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ are all isomorphic (they have the same decomposition into simple objects), 
 but not canonically so.
 Then we define $\vrep_1 \boxtimes \vrep_2$ by fixing (arbitrarily) $z_1 = 0$, $z_2 = 1$.
-We emphasize that $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ is not $\vrep_1 \otimes \vrep_2$ as a vector space
-(but its completion $\overline{\vrep_1 \boxtimes_{z_1,z_2} \vrep_2}$ 
-does receive a map from $\vrep_1 \otimes \vrep_2$.)
 
-The module $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ is characterized by a universal property, like the usual tensor
+The module
+$\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ is not $\vrep_1 \otimes \vrep_2$ as a vector space.
+Nevertheless, informally we should think of $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ as follows: it is some kind of completion of $\vrep_1 \otimes \vrep_2$,
+made into a $\vertex$-module by the rule that any mode $a_{(n)}$ acts
+by a big contour-integral encircling $0$, $z_1$ and $z_2$,
+which by contour-deformation we can replace with small contours 
+encircling $z_1$ and $z_2$ alone.
+
+\subsubsection{Tensor products, continued}
+
+To be more precise,
+the module $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ is characterized by a universal property, like the usual tensor
 product of vector spaces. Here is our replacement for ``bilinear
 map'' in this context:
 \begin{defn} Given $\vertex$-modules $\vrep_1$, $\vrep_2$, $W$, a \ti{$(z_1,z_2)$-intertwining map}\footnote{Here $\overline{W}$ means the completion of $W$ with respect to the grading, i.e. $\overline{W} = \prod_n W_n$.}
@@ -3023,7 +3047,8 @@ with a $(z_1,z_2)$-intertwining map
 \end{equation}
 such that any other $(z_1,z_2)$-intertwining 
 map $\vrep_1 \otimes \vrep_2 \to \overline{W}$
-factors uniquely through this one.
+factors uniquely through this one, via a map of $\vertex$-modules,
+$\vrep_1 \boxtimes_{z_1,z_2} \vrep_2 \to W$.
 \end{prop}
 
 See \cite{HuangLepowsky1995TensorI} for this definition, \cite{HuangLepowsky1995TensorIII} for the construction.
@@ -3064,7 +3089,6 @@ Still, for any $W$, using the operator $\partial_z + L_{-1}$ we can define an is
   \Hom(\vrep_1 \boxtimes_{z_1,z_2} \vrep_2, W) \to \Hom(\vrep_1 \boxtimes_{z'_1,z'_2} \vrep_2, W)
 \end{equation}
 given any path from $(z_1,z_2)$ to $(z'_1, z'_2)$ which avoids the diagonal.
-
 In particular, this gives two \ti{braiding} isomorphisms (depending which way $z_1$ and $z_2$ exchange),
 \begin{equation}
   b_{12}^\pm(W): \Hom(\vrep_1 \boxtimes_{z_1,z_2} \vrep_2, W) \to \Hom(\vrep_1 \boxtimes_{z_1,z_2} \vrep_2, W) \, ,
@@ -3081,6 +3105,16 @@ and in particular
 \end{equation}
 
 Sometimes we just use $b$ for $b^+$.
+
+Concretely, what is the data of $b$?
+Use the canonical decomposition 
+$\cS_i \boxtimes \cS_j = \bigoplus_k V_{ij}^k \otimes \cS_k$; then
+$b$ amounts to a linear isomorphism
+\begin{equation}
+  R_{ij}^k: V_{ij}^k \to V_{ji}^k \, .
+\end{equation}
+It becomes a concrete matrix ($R$-matrix) if we choose bases in
+all $V_{ij}^k$.
 
 % \subsubsection{Categorical dual}
 
@@ -3332,6 +3366,11 @@ For instance,
 \end{tikzcd}
 \]
 
+\item The unit element is transparent to braiding:
+\begin{equation}
+  b_{X,\bid} = \lambda_X^{-1} \circ \rho_X, \quad b_{\bid,X} = \rho_X^{-1} \circ \lambda_X \, .
+\end{equation}
+
 \item The associator obeys a pentagon relation relating five different ways of
 bracketing the tensor product of four objects:
 
@@ -3372,7 +3411,7 @@ One pretty way of formulating this is: interpret factorization as
 saying that the bundle of conformal blocks extends over a
 \ti{compactification} of the moduli of curves, to include 
 stable nodal curves. Then the pentagon relation can be formulated
-as a homotopy in $\overline{\cM_{0,5}}(\bbR)$ the moduli space of 
+as a homotopy in the moduli space $\overline{\cM_{0,5}}(\bbR)$ of 
 real stable curves of genus zero with 5 marked points;
 this moduli space is a pentagon, with the 
 five bracketings correspond to the five vertices.
@@ -3446,24 +3485,23 @@ space of triples of points, where we \ti{mostly} keep
 $z_1, z_2, z_3$ on the real line, but for the braiding we let them move slightly outside the real domain.)
 \item The coevaluation and evaluation obey zig-zag (straightening) relations, connecting $\coev^L$ and $\ev^L$,
 or $\coev^R$ and $\ev^R$:
-\[
+\begin{equation} \label{eq:zigzag-1}
 \rho_X\circ(\mathrm{id}_X\boxtimes \ev^L)\circ a_{X,X^*,X}\circ(\coev^L\boxtimes \mathrm{id}_X)\circ \lambda_X^{-1}
 =\mathrm{id}_X,
-\]
-\[
+\end{equation}
+\begin{equation} \label{eq:zigzag-2}
 \lambda_{X^*}\circ(\ev^L\boxtimes \mathrm{id}_{X^*})\circ a^{-1}_{X^*,X,X^*}\circ(\mathrm{id}_{X^*}\boxtimes \coev^L)\circ \rho_{X^*}^{-1}
 =\mathrm{id}_{X^*}.
-\]
+\end{equation}
 % Right zig-zag (triangle) identities:
-
-\[
+\begin{equation} \label{eq:zigzag-3}
 \lambda_X\circ(\ev^R\boxtimes \mathrm{id}_X)\circ a^{-1}_{X,X^*,X}\circ(\mathrm{id}_X\boxtimes \coev^R)\circ \rho_X^{-1}
 =\mathrm{id}_X,
-\]
-\[
+\end{equation}
+\begin{equation} \label{eq:zigzag-4}
 \rho_{X^*}\circ(\mathrm{id}_{X^*}\boxtimes \ev^R)\circ a_{X^*,X,X^*}\circ(\coev^R\boxtimes \mathrm{id}_{X^*})\circ \lambda_{X^*}^{-1}
 =\mathrm{id}_{X^*}.
-\]
+\end{equation}
 We think of these relations as partially fixing the normalization
 of $\ev$ and $\coev$, which we left unfixed until now.
 
@@ -3494,8 +3532,9 @@ or equivalently,
 These relations mean that the structure is somewhat redundant:
 we could \ti{define} $\coev^R$ in terms of $\coev^L$ and the
 braiding, and similarly we could define $\ev^R$ in terms of
-$\ev^L$ and the braiding.
-
+$\ev^L$ and the braiding. We can think of them as
+fixing the normalization of $\coev^R$, $\ev^R$ completely
+in terms of those of $\coev^L$, $\ev^L$.
 
 \item The twist is compatible with the braiding and associator,
 in the sense that:
@@ -3508,11 +3547,36 @@ a_{X,Y,Z}\circ \theta_{(X\boxtimes Y)\boxtimes Z}
 =
 b_{Y,X}\circ b_{X,Y}\circ (\theta_X\boxtimes \theta_Y) \, .
 \]
-The proof of the last identity here 
-uses the fact that the monodromy of $X$ around $Y$ in a 3-point block with $X$, $Y$, $Z$ is given by $\e^{2 \pi \I (h_X + h_Y - h_Z)}$, as we already noted.
+The last identity here has some real content.
+The intuitive picture is: acting with a twist on $X \boxtimes Y$
+means applying $\exp(2 \pi \I L_0)$ to the whole composite, which
+amounts to applying it to each of $X$ and $Y$ separately, plus
+moving the insertion point at $1$ around a circle around $0$.
+To turn this into an actual proof,
+\fixme{...}
 
-\item The twist is compatible with evaluation and coevaluation, in the sense that twisting on either leg is equivalent:
-\[
+% We consider conformal blocks on a sphere with $X$, $Y$, $Z$
+% inserted at $0$, $z = 1$, $\infty$. 
+% Then, we consider taking $z = \exp(\I t)$ and
+% letting $t$ run from $0$ to $2 \pi$.
+% The same argument in \fixme{...}
+% shows that
+% \begin{equation}
+%   \frac{\de}{\de t} \Phi_t(x,y,z) = \Phi_t(L_0 x,y,z) + \Phi_t(x,L_0 y,z) + \Phi_t(x,y,L_0 z)
+% \end{equation}
+% which is solved by
+% \begin{equation}
+%   \Phi_t(x,y,z) = \Phi_0(\exp(\I t L_0) x, \exp(\I t L_0) y, \exp(\I t L_0) z)
+% \end{equation}
+
+
+% The proof of the last identity here 
+% uses the fact that the monodromy of $X$ around $Y$ in a 3-point block with $X$, $Y$, $Z$ is given by $\e^{2 \pi \I (h_X + h_Y - h_Z)}$, as we already noted.
+
+
+
+\item The twist is compatible with evaluation and coevaluation, in the sense that twisting on either leg is equivalent:\footnote{This condition is sometimes written more succinctly as $\theta_{X^*} = (\theta_X)^*$,}
+\begin{equation} \label{eq:twist-coev-ev-1}
 (\theta_X\boxtimes \id_{X^*})\circ \coev_X^{L}
 =
 (\id_X\boxtimes \theta_{X^*})\circ \coev_X^{L},
@@ -3520,8 +3584,8 @@ uses the fact that the monodromy of $X$ around $Y$ in a 3-point block with $X$, 
 \ev_X^{L}\circ(\theta_{X^*}\boxtimes \id_X)
 =
 \ev_X^{L}\circ(\id_{X^*}\boxtimes \theta_X).
-\]
-\[
+\end{equation}
+\begin{equation} \label{eq:twist-coev-ev-2}
 (\theta_{X^*}\boxtimes \id_X)\circ \coev_X^{R}
 =
 (\id_{X^*}\boxtimes \theta_X)\circ \coev_X^{R},
@@ -3529,20 +3593,32 @@ uses the fact that the monodromy of $X$ around $Y$ in a 3-point block with $X$, 
 \ev_X^{R}\circ(\theta_X\boxtimes \id_{X^*})
 =
 \ev_X^{R}\circ(\id_X\boxtimes \theta_{X^*}).
-\]
-
-We can also write this as
-\[
-\theta_{X^*} = (\theta_X)^*
-\]
-(with a proper understanding of what that should mean!)
-
+\end{equation}
 \end{enumerate}
 
 
 All of these properties together make $\cC$ into 
 a \ti{premodular tensor category} or \ti{ribbon fusion category}.
-The complete axioms and much more can be found in \cite{Mueger2012,BK2001,EGNO2015}.
+I hope I have now listed all the axioms. For much more on these
+kinds of categories see e.g. \cite{Mueger2012,BK2001,EGNO2015}.
+
+One observation you quickly make when you start playing with $\cC$
+is: the objects $a$, $\lambda$, $\rho$ are needed to make the 
+equations sensible, but you can always guess where you need to put
+them, and so it should be possible to use a reduced notation where
+you simply omit them. This is indeed the case:
+
+\begin{thm}[Coherence theorem] Every premodular tensor category $\cC$ is equivalent to
+one which is \ti{strict}, meaning that $X \boxtimes (Y \boxtimes Z) = (X \boxtimes Y) \boxtimes Z$ on the nose, similarly $\bid \boxtimes X = X = X \boxtimes \bid$, and $a$, $\lambda$, $\rho$ are all identity maps.
+\end{thm}
+
+This theorem is stated at least in \cite{Turaev1992ModularCategories}
+and the version for monoidal categories is in \cite{EGNO2015}.
+Here ``equivalence'' means it's an equivalence of linear categories,
+compatible in an appropriate way with the monoidal structure, 
+braiding and twist.
+The upshot is that for some purposes it is safe to pretend that the 
+category $\cC$ is indeed strict.
 
 
 \subsection{Link invariants}
@@ -3551,18 +3627,71 @@ Now given any premodular tensor category $\cC$
 we can consider oriented ribbon link diagrams,
 where each component is labeled by an object $\vrep$ of $\cC$ (reversing orientation
 swaps $\vrep \to \vrep^*$).
+
 Such a diagram gives a morphism $\bid \to \bid$ in $\cC$:
-cups/caps give $\coev$ and $\ev$, twists/kinks give $\theta_\vrep^{\pm 1}$,
-crossings give $b^\pm_{\vrep,\vrep'}$,
-and we sprinkle in associators as necessary.
+cups/caps give $\coev_\vrep$ and $\ev_\vrep$, 
+twists/kinks give $\theta_\vrep^{\pm 1}$,
+crossings give $b^\pm_{\vrep,\vrep'}$.
+We can also sprinkle in associators as necessary, or maybe better,
+pass to a strictification of $\cC$, so we don't need them.
+
 Since $\Hom(\bid,\bid) = \bbC$ 
 we can think of the result as a number associated to the 
 link diagram. (Or, perhaps more concretely, we can think of the link diagram as defining
 an operator which maps the space of conformal blocks on $S^2$ to itself.)
 Now the nontrivial claim: this number 
 is actually an invariant of the ribbon link.
-This amounts to checking that it is invariant under various moves.
-\fixme{...}
+This amounts to checking that it is invariant under various moves:
+
+\begin{enumerate}
+\item Zig-zag identities (pulling a strand straight): use \eqref{eq:zigzag-1}-\eqref{eq:zigzag-4}.
+\item Reidemeister I: see an exercise below (this is the most interesting one).
+\item Reidemeister II: cancel $b_{X,Y}$ with $b^{-1}_{X,Y}$.
+\item Reidemeister III: see an exercise below.
+\item Pitchfork identities (pulling a strand across a cup or cap): see an exercise below.
+\item Moving twists across cups/caps: use \eqref{eq:twist-coev-ev-1}-\eqref{eq:twist-coev-ev-2}.
+\end{enumerate}
+
+\begin{exercise}
+Prove the ``pitchfork'' identities:
+\begin{align*}
+&\text{(cup pitchfork)}\\
+&(\id_X\boxtimes b_{Y,X^*})\circ(b_{Y,X}\boxtimes \id_{X^*})\circ(\id_Y\boxtimes \coev_X)
+=\coev_X\boxtimes \id_Y,\\[1.2em]
+&\text{(cup pitchfork, other side)}\\
+&(b_{X,Y}\boxtimes \id_{X^*})\circ(\id_X\boxtimes b_{X^*,Y})\circ(\coev_X\boxtimes \id_Y)
+=\id_Y\boxtimes \coev_X,\\[1.6em]
+&\text{(cap pitchfork)}\\
+&(\id_Y\boxtimes \ev_X)\circ(b_{X^*,Y}\boxtimes \id_X)\circ(\id_{X^*}\boxtimes b_{X,Y})
+=\ev_X\boxtimes \id_Y,\\[1.2em]
+&\text{(cap pitchfork, other side)}\\
+&(\ev_X\boxtimes \id_Y)\circ(\id_{X^*}\boxtimes b_{Y,X})\circ(b_{Y,X^*}\boxtimes \id_X)
+=\id_Y\boxtimes \ev_X.
+\end{align*}
+\end{exercise}
+
+
+
+\begin{exercise}
+
+Prove the Reidemeister III identity, and draw the corresponding picture:
+\[
+(b_{Y,Z}\boxtimes \id_X)\circ(\id_Y\boxtimes b_{X,Z})\circ(b_{X,Y}\boxtimes \id_Z)
+=
+(\id_Z\boxtimes b_{X,Y})\circ(b_{X,Z}\boxtimes \id_Y)\circ(\id_X\boxtimes b_{Y,Z}).
+\]
+
+\end{exercise}
+
+
+\begin{exercise}
+
+Prove the Reidemeister I identity, and draw the corresponding picture: \fixme{check sign}
+\begin{equation}
+  (\id_X \boxtimes \ev^L_X) \circ (b_{X,X} \boxtimes \id_X) \circ (\id_X \boxtimes \coev_X^L) = \theta_X \, .
+\end{equation}
+
+\end{exercise}
 
 % Two of them, RII and RIII, are more or less immediate (they come from homotopy and flatness
 % of the KZ equation). \fixme{figures} The third one, RI, is trickier. 
@@ -3580,18 +3709,55 @@ This amounts to checking that it is invariant under various moves.
 
 \fixme{think of the ribbon structure as coming from the dependence on tangent vectors}
 
+
+
+\subsection{Examples}
+
+Let me describe what these structures actually are in two examples
+(but not prove it yet!)
+
+\begin{example}
+
+Take $\vertex = L_1(\fsl_2)$.
+In this case we just have simple modules $\cS_0, \cS_1$.
+The only nontrivial fusion rule is $\cS_1 \boxtimes \cS_1 \simeq \cS_0$.
+
+All of the triple fusion spaces $\cS_i \boxtimes \cS_j \boxtimes \cS_k$ 
+are $1$-dimensional. After choosing bases appropriately we can take all the 
+$F_{ijk}^\ell = 1$. (Note it indeed satisfies the pentagon equation.)
+
+The only nontrivial $R$-matrix is $R^{0}_{11} = \I$.
+
+(Note it means that these particles are ``semions,'' like half of a 
+fermion: when you exchange them you get a factor of $\I$.)
+
+\end{example}
+
+
+\begin{example}
+
+Take $\vertex = L_2(\fsl_2)$. This case is a bit more interesting \fixme{...}
+
+\end{example}
+
+\subsection{Quantum dimensions}
+
 Now how to calculate the link invariants in practice?
 One simple example of such a link invariant would be the case of the unknot.
 The invariant for an unknot labeled with $\cS_i$ is called the \ti{quantum dimension}
 $d_i$.
 
+By taking two colored unknots and putting them close together we can
+show the following:
+
 \begin{exercise}
 Show that the quantum dimensions obey the relation
 \begin{equation}
-  d_i d_j = \sum_k N_{ij}^k d_k
+  d_i d_j = \sum_k N_{ij}^k d_k \, .
 \end{equation}
-Use this relation to determine the quantum dimension in a few examples. \fixme{...}
 \end{exercise}
+
+
 
 \fixme{but can also compute directly from the torus characters...}
 
@@ -3612,7 +3778,9 @@ We actually get a bit more by considering the torus.
 As we already discussed, by plumbing a sphere to itself we get
 a conformal block $\Phi_i$ on the torus $C_q$ for each simple module $\cS_i$,
 and the $\Phi_i$ span the space of conformal blocks on the torus.
-Moreover they give \ti{parallel} sections 
+Moreover they give \ti{parallel} sections \fixme{...}
+
+
 
 \subsection{The WZW model}
 
@@ -3643,11 +3811,6 @@ Moreover they give \ti{parallel} sections
 % below.
 
 % \fixme{now finish the construction of knot invariants}
-
-
-\subsection{Variations of the curve}
-
-\fixme{...}
 
 
 \subsection{The center at the critical level}
