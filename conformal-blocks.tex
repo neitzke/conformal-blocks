@@ -3536,6 +3536,11 @@ $\ev^L$ and the braiding. We can think of them as
 fixing the normalization of $\coev^R$, $\ev^R$ completely
 in terms of those of $\coev^L$, $\ev^L$.
 
+Note there is a \ti{convention} here: we could have replaced
+$b \to b^{-1}$ in these formulas. As far as I understand,
+we have to live with this convention, since there is no 
+canonical way of taking a square-root of the braiding.
+
 \item The twist is compatible with the braiding and associator,
 in the sense that:
 \[
@@ -3547,13 +3552,19 @@ a_{X,Y,Z}\circ \theta_{(X\boxtimes Y)\boxtimes Z}
 =
 b_{Y,X}\circ b_{X,Y}\circ (\theta_X\boxtimes \theta_Y) \, .
 \]
-The last identity here has some real content.
+Let us discuss how to prove the last identity here.
 The intuitive picture is: acting with a twist on $X \boxtimes Y$
 means applying $\exp(2 \pi \I L_0)$ to the whole composite, which
 amounts to applying it to each of $X$ and $Y$ separately, plus
 moving the insertion point at $1$ around a circle around $0$.
-To turn this into an actual proof,
-\fixme{...}
+To turn this into an actual proof, we need to think about how
+we even define the action of $L_0$ (or any vertex
+algebra element for that matter) on a tensor product.
+As usual the answer has to be in terms of the universal property:
+it's enough to give the action of $L_0$ on all conformal blocks.
+We use the formula
+$L_0 = \oint z T(z) \de z$, and contour deformation. \fixme{...}
+
 
 % We consider conformal blocks on a sphere with $X$, $Y$, $Z$
 % inserted at $0$, $z = 1$, $\infty$. 
@@ -3641,7 +3652,9 @@ link diagram. (Or, perhaps more concretely, we can think of the link diagram as 
 an operator which maps the space of conformal blocks on $S^2$ to itself.)
 Now the nontrivial claim: this number 
 is actually an invariant of the ribbon link.
-This amounts to checking that it is invariant under various moves:
+This amounts to checking that it is invariant under various moves.
+All of the needed invariance follow from the coherences we have
+already discussed:
 
 \begin{enumerate}
 \item Zig-zag identities (pulling a strand straight): use \eqref{eq:zigzag-1}-\eqref{eq:zigzag-4}.
@@ -3710,11 +3723,26 @@ Prove the Reidemeister I identity, and draw the corresponding picture: \fixme{ch
 \fixme{think of the ribbon structure as coming from the dependence on tangent vectors}
 
 
+\begin{exercise}
+Suppose $\cS$ is a simple object with
+$\cS \boxtimes \cS \simeq \bid$.
+Then prove that
+\begin{equation}
+  R^1_{\cS \cS} = \theta_\cS \, .
+\end{equation}
+(You could do this concretely by thinking about correlation functions
+on the sphere, or more abstractly using the premodular tensor category
+structure. Note there is something that looks arbitrary here:
+how come we got $\theta_\cS$ and not $\theta_\cS^{-1}$? I think it is 
+a convention baked into our normalization of $\coev$ and $\ev$, in
+turn determined by how we wrote the identities \fixme{...}.)
+\end{exercise}
+
+
 
 \subsection{Examples}
 
-Let me describe what these structures actually are in two examples
-(but not prove it yet!)
+Let me describe what these structures actually are in two baby examples.
 
 \begin{example}
 
@@ -3722,11 +3750,15 @@ Take $\vertex = L_1(\fsl_2)$.
 In this case we just have simple modules $\cS_0, \cS_1$.
 The only nontrivial fusion rule is $\cS_1 \boxtimes \cS_1 \simeq \cS_0$.
 
-All of the triple fusion spaces $\cS_i \boxtimes \cS_j \boxtimes \cS_k$ 
-are $1$-dimensional. After choosing bases appropriately we can take all the 
-$F_{ijk}^\ell = 1$. (Note it indeed satisfies the pentagon equation.)
+The only nontrivial $R$-matrix is $R^{0}_{11} = \I$, and 
+the twist is $\theta_1 = \I$. (We can calculate the latter 
+directly, since $\cS_1$ has highest 
+weight $h_1 = C_2(M_1) / 2(k+h^\vee) = \frac32 / 2(3) = \frac14$);
+then this determines the former, using the exercise above.)
 
-The only nontrivial $R$-matrix is $R^{0}_{11} = \I$.
+All of the triple fusion spaces $\cS_i \boxtimes \cS_j \boxtimes \cS_k$ 
+are simple. After choosing bases appropriately we can take all the 
+$F_{ijk}^\ell = 1$. (Note it indeed satisfies the pentagon equation.)
 
 (Note it means that these particles are ``semions,'' like half of a 
 fermion: when you exchange them you get a factor of $\I$.)
@@ -3736,7 +3768,55 @@ fermion: when you exchange them you get a factor of $\I$.)
 
 \begin{example}
 
-Take $\vertex = L_2(\fsl_2)$. This case is a bit more interesting \fixme{...}
+Take $\vertex = L_2(\fsl_2)$. This case is a bit more interesting;
+physicists call it the ``Ising anyon'' statistics.
+
+We have three simple modules $\cS_0, \cS_1, \cS_2$,
+with nontrivial fusion rules
+\begin{equation}
+  \cS_1 \boxtimes \cS_1 \simeq \cS_0 \oplus \cS_2, \quad \cS_2 \boxtimes \cS_1 \simeq \cS_1, \quad \cS_2 \boxtimes \cS_2 \simeq \cS_0 \, . 
+\end{equation}
+Now we look up the formulas and find:
+the $R$-matrices are, again relative to some basis \fixme{check!}
+\begin{equation}
+R^0_{22} = -1, \quad R^0_{11} = \e^{5 \pi \I/8}, \quad R^2_{11} = \e^{\pi \I / 8}, \quad R^1_{12} = R^1_{21} = \I, \, ,
+\end{equation}
+and the twists are
+\begin{equation}
+  \theta_0 = 1, \quad \theta_1 = \e^{3 \pi \I/8}, \quad \theta_2 = -1 \, .
+\end{equation}
+There is one 2-dimensional fusion space 
+\begin{equation}
+ \cS_1 \boxtimes \cS_1 \boxtimes \cS_1 \simeq \cS_1 \oplus \cS_1 \, . 
+\end{equation}
+So, we have a nontrivial operator
+$F_{111}^1$. On each side we have a line decomposition 
+given by the intermediate channels
+in $\cS_1 \boxtimes \cS_1 = \cS_0 \oplus \cS_2$.
+The $F$-matrix is (relative to some basis)
+\begin{equation}
+  F_{111}^1 = \frac{1}{\sqrt2} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} \, ,
+\end{equation}
+There are also some other nontrivial $F$-matrices (again relative to some basis)
+\begin{equation}
+  F_{212}^1 = -1, \qquad F_{121}^2 = -1
+\end{equation}
+
+Let us try to recover this structure directly from the vertex algebra.
+The fact that some of it is basis-dependent is a little discouraging,
+but at least the diagonal entries of the $F$-matrix above are canonical, 
+so we can try those first.
+We consider conformal blocks on the sphere with 4 marked points,
+all carrying the representation $\vrep(M_1)$, where we recall $M_1$
+is the fundamental representation of $\fsl_2$.
+The flat connection on these conformal blocks is
+\eqref{eq:kz-kohno}, restricted to the locus of $\fsl_2$-invariants
+in $M_1^{\otimes 4}$, which is a $2$-dimensional space.
+Thus ultimately we are studying a connection in a rank $2$ holomorphic
+vector bundle over $\cM_{0,4}$, with regular singularities
+at the $3$ collision points (concretely, parameterizing by 
+the cross-ratio $q$, the $3$ singularities are at $q = 0,1,\infty$.)
+It has bases \fixme{...}
 
 \end{example}
 
@@ -3899,6 +3979,14 @@ and
   h^\vee = N \, .
 \end{equation}
 
+The quadratic Casimir operator for $\fg = \fsl(2)$ is
+\begin{equation}
+  C_2 = \frac12 H^2 + EF + FE \, .
+\end{equation}
+In the representation with highest weight $n \omega$, it has 
+eigenvalue $C_2 = \frac12 n(n+2)$.
+In particular, for the fundamental representation we have $C_2 = \frac32$.
+
 For any root $\alpha \in \fh^*$ the corresponding coroot $\alpha^\vee$ is determined by the condition
 \begin{equation}
   \alpha^\vee \cdot \lambda = \frac{2 \kappa^{-1}(\lambda,\alpha)}{\kappa^{-1}(\alpha,\alpha)}
@@ -3912,6 +4000,7 @@ We use $\theta \in \fh^*$ to denote the \ti{highest root}: it is the one maximal
 (i.e. $\theta + \alpha_i$ is not a root for any simple root $\alpha_i$.)
 For $\fg = \fsl(N)$, $\theta = \alpha_1 + \cdots + \alpha_{N-1}$, with root space spanned by $E_{1N}$.
 The corresponding coroot is $\theta^\vee = E_{11} - E_{NN} = [E_{1N}, E_{N1}]$.
+
 
 
 % \section{Vertex algebras} \label{sec:vertex-algebras}
