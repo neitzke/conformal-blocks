@@ -3563,8 +3563,11 @@ algebra element for that matter) on a tensor product.
 As usual the answer has to be in terms of the universal property:
 it's enough to give the action of $L_0$ on all conformal blocks.
 We use the formula
-$L_0 = \oint z T(z) \de z$, and contour deformation. \fixme{...}
-
+$L_0 = \oint z T(z) \de z$, and contour deformation:
+this shows that with insertions at $0$ and $w$,
+$L_0$ acts by $L_0 \otimes \id + \id \otimes L_0 + w \id \otimes L_{-1}$. 
+The third vector field is $w \partial_w$, the generator of dilations.
+\fixme{...}
 
 % We consider conformal blocks on a sphere with $X$, $Y$, $Z$
 % inserted at $0$, $z = 1$, $\infty$. 
@@ -3768,8 +3771,9 @@ fermion: when you exchange them you get a factor of $\I$.)
 
 \begin{example}
 
-Take $\vertex = L_2(\fsl_2)$. This case is a bit more interesting;
-physicists call it the ``Ising anyon'' statistics.
+Take $\vertex = L_2(\fsl_2)$. This case is a bit more interesting.\footnote{The fusion rules we get here match with what physicists call ``Ising anyon'' statistics.
+But, warning: I think the $R$-matrix is not that of the usual
+Ising model.}
 
 We have three simple modules $\cS_0, \cS_1, \cS_2$,
 with nontrivial fusion rules
@@ -3779,7 +3783,7 @@ with nontrivial fusion rules
 Now we look up the formulas and find:
 the $R$-matrices are, again relative to some basis \fixme{check!}
 \begin{equation}
-R^0_{22} = -1, \quad R^0_{11} = \e^{5 \pi \I/8}, \quad R^2_{11} = \e^{\pi \I / 8}, \quad R^1_{12} = R^1_{21} = \I, \, ,
+R^0_{22} = -1, \quad R^0_{11} = \e^{5 \pi \I/8}, \quad R^2_{11} = \e^{\pi \I / 8}, \quad R^1_{12} = R^1_{21} = \I \, ,
 \end{equation}
 and the twists are
 \begin{equation}
@@ -3799,7 +3803,7 @@ The $F$-matrix is (relative to some basis)
 \end{equation}
 There are also some other nontrivial $F$-matrices (again relative to some basis)
 \begin{equation}
-  F_{212}^1 = -1, \qquad F_{121}^2 = -1
+  F_{212}^1 = \pm 1, \qquad F_{121}^2 = \pm 1
 \end{equation}
 
 Let us try to recover this structure directly from the vertex algebra.
@@ -3816,7 +3820,12 @@ Thus ultimately we are studying a connection in a rank $2$ holomorphic
 vector bundle over $\cM_{0,4}$, with regular singularities
 at the $3$ collision points (concretely, parameterizing by 
 the cross-ratio $q$, the $3$ singularities are at $q = 0,1,\infty$.)
-It has bases \fixme{...}
+The monodromy around each singular point is determined by the
+exponents $\exp(2 \pi \I (- h_a - h_b + h_c))$, which are
+$h_0 - 2 h_1 = -3/8$ and $h_2 - 2 h_1 = +1/8$.
+Then we can look for the change of basis.
+The connection problem for such cases was solved already by
+Gauss: \fixme{...}
 
 \end{example}
 
