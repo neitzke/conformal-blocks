@@ -2523,7 +2523,9 @@ sufficient to verify \eqref{eq:dual-vertex-operator}.
 Consider the involution $\lambda \mapsto \lambda^* = -w_0(\lambda)$, where $w_0$ is the longest
 element in the Weyl group $W(\fg)$. (For $\fg = \fsl_2$ we just have $\lambda^* = \lambda$.)
 Let $L_\lambda$ be the finite-dimensional $\fg$-module with highest weight $\lambda$. Then $L_{\lambda^*}$
-is the dual of $L_{\lambda}$. Prove similarly that the dual of $\vrep(L_\lambda)$ is $\vrep(L_{\lambda^*})$.
+is the dual of $L_{\lambda}$. Prove similarly that the dual of $\vrep(L_\lambda)$ is $\vrep(L_{\lambda^*})$, provided that $k$ is generic
+(so that the invariant bilinear form on $\vrep(L_\lambda)$ is 
+nondegenerate).
 \end{exercise}
 
 \begin{exercise}
@@ -2675,7 +2677,23 @@ either side rescales $q$. Said more abstractly, we use a bilinear pairing $b$ be
 marked points; then identifying each side locally with its tangent space, the plumbed surface is $b(z_1,z_2) = q$.
 \end{exercise}
 
-In the limit as $q \to 0$ the plumbed surface degenerates to develop a node.
+One can also think of plumbing as connecting the two sides
+$C''_i = C_i \setminus \{\abs{z_i} \le r_i \}$ by adding in 
+a cylinder, whose modulus is $\abs{q} / r_1 r_2$.
+Conformally, this cylinder is equivalent to a tube with circumference 
+$2 \pi$ and length $\log (r_1 r_2 / \abs{q})$. In the limit $q \to 0$ this cylinder becomes infinitely long, and the plumbed surface develops
+a node.
+
+\begin{exercise}
+Suppose that $C_1$ and $C_2$ are spheres, with the
+standard coordinates $z_1$ and $z_2$,
+each with marked points at $0,1,\infty$. Fix some $q$ 
+with $\abs{q} < 1$. Plumbing together the 
+marked points at $z_1=0$ and $z_2=0$,
+the plumbed surface $C_q$ is again a sphere, with
+four marked points. Prove that the invariant cross-ratio 
+of these four points is $q$.
+\end{exercise}
 
 Now we claim it's possible to make conformal blocks on the plumbed surface from conformal blocks on the original two,
 as follows. 
@@ -2695,9 +2713,11 @@ primaries of weight $h$ in $\vrep$ contribute, and if we rescale by an overall f
 are the only ones that survive the limit; for finite $q$ the whole
 tower of descendants is involved.
 
+The formula \eqref{eq:block-gluing} makes sense for $q \in \bbR_{+}$.
 If the conformal weights $n \notin \bbZ$, then 
-formula \eqref{eq:block-gluing} is multivalued as a function of $q$. To make 
-it well defined we should replace $q \to \exp(2 \pi \I \tau)$ in this formula;
+it is multivalued as a function of $q \in \bbC$. 
+To make it well defined we can 
+replace $q \to \exp(2 \pi \I \tau)$;
 then we get a single-valued function of $\tau$.
 
 Here is the idea of the definition \eqref{eq:block-gluing}. 
@@ -2787,7 +2807,7 @@ Another popular choice would be to write $z = \exp(2 \pi \I t)$ and use the coor
 $t$. In that case we need to include an extra $q^{-c/24}$ in the plumbing formula
 to get it to be compatible.
 (The difference comes from the fact that the Schwarzian derivative of the
-change of coordinates from $t$ to $q$ is $\{t,q\} = \frac12$, 
+change of coordinates from $t$ to $z$ is $\{t,z\} = \frac12$, 
 so the Virasoro field in the $t$-coordinate has an extra $c/24$.)
 
 
@@ -3759,12 +3779,13 @@ directly, since $\cS_1$ has highest
 weight $h_1 = C_2(M_1) / 2(k+h^\vee) = \frac32 / 2(3) = \frac14$);
 then this determines the former, using the exercise above.)
 
+(Note it means that these particles are ``semions,'' like half of a 
+fermion: when you exchange them you get a factor of $\I$.)
+
 All of the triple fusion spaces $\cS_i \boxtimes \cS_j \boxtimes \cS_k$ 
 are simple. After choosing bases appropriately we can take all the 
 $F_{ijk}^\ell = 1$. (Note it indeed satisfies the pentagon equation.)
 
-(Note it means that these particles are ``semions,'' like half of a 
-fermion: when you exchange them you get a factor of $\I$.)
 
 \end{example}
 
