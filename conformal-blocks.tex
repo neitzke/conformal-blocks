@@ -201,6 +201,7 @@
 \newcommand{\fG}{{\mathfrak G}}
 \newcommand{\fgl}{{\mathfrak {gl}}}
 \newcommand{\fsl}{{\mathfrak {sl}}}
+\newcommand{\fsu}{{\mathfrak {su}}}
 
 \newcommand{\hfsl}{{\widehat\fsl}}
 \newcommand{\hfg}{{\widehat\fg}}
@@ -2486,6 +2487,12 @@ What is the analogous relation if we take $\fg = \fsl_N$?
 
 \subsection{Duals}
 
+Given a $\vertex$-module $\vrep$, we can define its \ti{dual} 
+in a tautological way: 
+we imagine putting $\vrep$ at $0$ on the sphere, and then
+the dual consists of all objects which
+can be placed at $\infty$.
+
 \begin{defn}[Dual module]
 Say $\vertex$ is a conformal vertex algebra, and let $\vrep$ be an ordinary $\vertex$-module.
 Then let $\vrep^* = \bigoplus \vrep_n^*$ be the graded dual space,\footnote{Some authors would call this $\vrep'$ and reserve $\vrep^*$ for the vector space dual without regard for grading.} 
@@ -2500,14 +2507,10 @@ codifying something that was implicit in our definition of
 conformal blocks for a general vertex algebra.
 Indeed, around a point $z \in \bbC^\times$ there are two natural
 pointed coordinate systems: $t(w) = w - z$ and $t'(w) = 1/w - 1/z$.
-The transformation $\e^{z L_1} (-z^{-2})^{L_0}$ appearing in
+The transformation $g(z) = \e^{z L_1} (-z^{-2})^{L_0}$ appearing in
 \eqref{eq:dual-vertex-operator} is the action of the
-change of coordinates from
-$t$ to $t'$.
-Said otherwise, there is a M\"obius transformation $g(z)$
-which is the \ti{pointed} version 
-of the transformation $w \to 1/w$ around $w=z$, 
-and \eqref{eq:dual-vertex-operator} is
+change of coordinates from $t$ to $t'$.
+Then \eqref{eq:dual-vertex-operator} is
 \begin{equation} \label{eq:dual-vertex-operator-abstract}
   (Y^{\vrep^*}(a,z) \alpha)  \cdot  \chi = \alpha \cdot (Y^\vrep(\rho(g(z)) a, z^{-1}) \chi) \, .
 \end{equation}
@@ -2818,10 +2821,60 @@ change of coordinates from $t$ to $z$ is $\{t,z\} = \frac12$,
 so the Virasoro field in the $t$-coordinate has an extra $c/24$.)
 
 
+
+\subsection{Unitarity}
+
+So far all the structures we have discussed were complex-linear.
+But in addition, we may have another symmetry, which introduces
+some useful \ti{positivity} in the story.
+In this section we let $\overline{V}$ denote the complex conjugate
+vector space to $V$.
+
+Suppose $\vertex$ is a conformal vertex algebra, and
+equip $\vertex$ with a map $\sigma: \vertex \to \overline{\vertex}$,
+such that $\sigma^2 = \bid$ (sometimes called PCT symmetry).
+For instance, if $\vertex = V^k(\fg)$ one way to get such a $\sigma$
+would be to choose a real structure on $\fg$.
+
+Then we can define:
+\begin{defn}[Conjugate $\vertex$-module]
+Suppose $\vrep$ is an ordinary $\vertex$-module.
+Then we make $\overline{\vrep}$ into a $\vertex$-module by
+the action
+\begin{equation}
+  Y^{\overline{\vrep}}(a,z) \overline{\chi} = \overline{Y^\vrep(\sigma(a),\overline{z}) \chi} \, .
+\end{equation}
+\end{defn}
+
+\begin{defn}[Hermitian pairing]
+A \ti{Hermitian pairing} on $\vrep$ is an isomorphism $\overline{\vrep} \simeq \vrep^*$, where $\vrep^*$ is the dual module defined above.
+Such a pairing induces a Hermitian pairing $(\cdot,\cdot)$ on 
+the vector space $\vrep$.
+\end{defn}
+
+\begin{defn}[Unitarity]
+We call a $\vertex$-module $\vrep$ \ti{unitary} if it is
+equipped with a positive definite Hermitian pairing.
+\end{defn}
+
+The Heisenberg vertex algebra can be made unitary,
+but as far as I understand this is not true for
+more general $V^k(\fg)$ or for Virasoro.
+But we will discuss some more interesting 
+unitary vertex algebras below.
+
+% We say $\vrep$ is \ti{unitary} if it carries a positive-definite
+% Hermitian pairing $(,)$ such that for $a \in \vertex$ we have
+%   \begin{equation}
+%     (Y^\vrep(a,z) \chi, \chi') = (\chi, Y^\vrep(\rho(g(z)) \mu(a), z^{-1}) )
+%   \end{equation}
+% \end{defn}
+
+
+
 \section{The rational case}
 
-
-\subsection{Nice categories of modules}
+\subsection{Category of ordinary modules}
 
 So far we have been working with the vertex algebra $\vertex^k(\fg)$ at generic $k$.
 Now let us instead take $k \in \bbN$ and 
@@ -2836,6 +2889,13 @@ finite-dimensional eigenspaces.
 \end{defn}
 
 Let $\cC$ be the category of ordinary modules for $L_k(\fg)$.
+
+
+\subsection{The premodular tensor category structure}
+
+We will explain in this section that $\cC$ has a bunch of nice 
+structures, which together make it a \ti{premodular tensor
+category}.
 
 
 \subsubsection{Semisimplicity}
@@ -2855,10 +2915,10 @@ $\Hom(\cS_i,\cS_i) = \bbC$, and every
 module $\vrep$ has a canonical decomposition
 isomorphism
 \begin{equation}
-  \vrep \to \bigoplus_i V^\vrep_i \otimes \cS_i
+  \vrep \to \bigoplus_i V_\vrep^i \otimes \cS_i
 \end{equation}
-where the $V^\vrep_i$ are finite-dimensional vector spaces
-(given by $V_i^\vrep = \Hom(\cS_i, \vrep)$.)
+where the $V_\vrep^i$ are finite-dimensional vector spaces
+(given by $V_\vrep^i = \Hom(\cS_i, \vrep)$.)
 
 % The proof of complete reducibility uses the fact that every ordinary module for $L_k(\fg)$ carries 
 % a positive definite Hermitian form.
@@ -3135,7 +3195,8 @@ Sometimes we just use $b$ for $b^+$.
 
 Concretely, what is the data of $b$?
 Use the canonical decomposition 
-$\cS_i \boxtimes \cS_j = \bigoplus_k V_{ij}^k \otimes \cS_k$; then
+$\cS_i \boxtimes \cS_j = \bigoplus_k V_{ij}^k \otimes \cS_k$ (so
+$V_{ij}^k = V^k_{\cS_i \boxtimes \cS_j}$); then
 $b$ amounts to a linear isomorphism
 \begin{equation}
   R_{ij}^k: V_{ij}^k \to V_{ji}^k \, .
@@ -3825,11 +3886,8 @@ $R^2_{11} = \exp( \pi \I (h_2 - 2 h_1))$,
 and $R^0_{22} = \exp( \pi \I (h_0 - 2 h_2))$.
 The exponential factor comes from the 
 half-monodromy of $z^{h_c - h_a - h_b}$.
-The extra $\pm$ sign is the eigenvalue $\eps^j_{ii}$ 
-of the swap acting on the multiplicity space $V_{ii}^j$;
-this boils down to the classical question of whether
-$\cS_j$ is sitting in the \ti{symmetric} or \ti{antisymmetric}
-square of $\cS_i$.
+The extra $\pm$ sign is the eigenvalue
+of the swap acting on the \ti{classical} multiplicity space.
 Finally, the choice of $R^1_{12}$ is a gauge choice, which then fixes
 $R^1_{21}$ since $R^1_{12} R^1_{21} = \exp(2 \pi \I h_2) = -1$.
 
@@ -3849,15 +3907,11 @@ There is one 2-dimensional fusion space
 \begin{equation}
  \cS_1 \boxtimes \cS_1 \boxtimes \cS_1 \simeq \cS_1 \oplus \cS_1 \, . 
 \end{equation}
-So, we would like to describe $F_{111}^1$.
-On each side we have a line decomposition 
-given by the intermediate channels
-in $\cS_1 \boxtimes \cS_1 = \cS_0 \oplus \cS_2$.
-The $F$-matrix is a map
+Its gives rise to a single $F$-matrix,
 \begin{equation}
- F_{111}^1: (V_{11}^{0} \otimes V_{01}^1 \oplus V_{11}^2 \otimes V_{21}^1) \to (V_{10}^{1} \otimes V_{11}^0 \oplus V_{12}^1 \otimes V_{11}^2)
+ F_{111}^1: (V_{11}^{0} \otimes V_{01}^1 \oplus V_{11}^2 \otimes V_{21}^1) \to (V_{10}^{1} \otimes V_{11}^0 \oplus V_{12}^1 \otimes V_{11}^2) \, .
 \end{equation}
-Again using the hexagon relations it is determined, to
+Again using the hexagon relations this matrix is determined,
 \begin{equation}
   F_{111}^1 = \frac{1}{\sqrt2} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}
 \end{equation}
@@ -3879,17 +3933,31 @@ the finite plane and one more at $\infty$ we would write the operator $\partial_
 \end{equation}
 acting on the invariant subspace 
 $V \subset M_1^{\otimes 4}$.
-Relative to a basis of $V$ we can compute these matrices explicitly, 
+Relative to the basis of $V$ given by
+$e_1 = \eps_{12} \eps_{34}$ and $e_2 = \eps_{13} \eps_{24}$,
+we can compute these matrices explicitly, 
 getting
 \begin{equation}
   T_{13} = \begin{pmatrix} \frac12 & 0 \\ -1 & -\frac32 \end{pmatrix}, \qquad T_{23} = \begin{pmatrix} -\frac12 & 1 \\ 1 & -\frac12 \end{pmatrix} \, .
 \end{equation}
 
-Now, from the eigenvalues of the residues of the ODE we can read out
-the local exponents, and using Frobenius's method 
-conclude there exist solutions \fixme{...}
-
-
+Now, \eqref{eq:kz-4-punctures} has regular singularities at $x = 0$ and $x = 1$. 
+The eigenvalues of the residues of the operator
+\eqref{eq:kz-4-punctures} give
+the local exponents $\lambda = \frac18, -\frac38$ of
+this ODE at the singular
+points. Since these exponents do not differ by an integer,
+Frobenius's method (solve order by order) 
+is guaranteed to produce series with a finite radius of convergence,
+thus exact solutions
+with eigenvalue $\lambda$ around each singular point; so we can
+write four solutions on the interval $(0,1)$ by
+\begin{align}
+  \psi_{\lambda,0} (x) &= x^{\lambda} \sum_{n=0}^\infty a_{\lambda,n} x^n , \\
+  \psi_{\lambda,1} (x) &= (1-x)^{\lambda} \sum_{n=0}^\infty b_{\lambda,n} x^n ,
+\end{align}
+where the leading terms $a_{\lambda,0}$, $b_{\lambda,0}$ are eigenvectors of the residue matrix.
+\fixme{...}
 
 % If we put all four singularities at finite points and choose 
 % the standard coordinate, then we have a flat connection on these
@@ -3909,23 +3977,75 @@ conclude there exist solutions \fixme{...}
 
 \end{example}
 
+
+\subsection{Unitarity}
+
+In the case $\vertex = L_k(\fg)$, $k \in \bbN$, we have even more structure.
+Suppose we equip $\fg$ with the compact involution $\sigma(X) = - X^*$,
+and define $\sigma: V^k(\fg) \to V^k(\fg)$ by
+$\sigma(\vac) = \vac$
+and $\sigma(J^X) = J^{\sigma(X)}$.
+Then:
+\begin{prop}
+All of the ordinary modules for $L_k(\fg)$ are unitary.
+\end{prop}
+This extends the fact that the finite-dimensional modules for 
+$\fg$ itself are unitary.
+
+Moreover it implies a kind of unitarity for the category $\cC$,
+as follows. \fixme{...}
+
+
 \subsection{Quantum dimensions}
 
 Now how to calculate the link invariants in practice?
 One simple example of such a link invariant would be the case of the unknot.
-The invariant for an unknot labeled with $\cS_i$ is called the \ti{quantum dimension}
-$d_i$.
+The invariant for an unknot labeled with $X$ is 
+called the \ti{quantum dimension} $d_X$. It has
+\begin{equation}
+  d_X = \ev_X^R \circ \coev_X^L \, .
+\end{equation}
 
-By taking two colored unknots and putting them close together we can
-show the following:
+% By taking two colored unknots and putting them close together we can
+% show the following:
 
 \begin{exercise}
-Show that the quantum dimensions obey the relation
+Show that the quantum dimensions obey the relations
 \begin{equation}
-  d_i d_j = \sum_k N_{ij}^k d_k \, .
+  d_{X \boxtimes Y} = d_X d_Y, \quad d_{X \oplus Y} = d_X + d_Y \, .
 \end{equation}
 \end{exercise}
 
+How to calculate the quantum dimensions? 
+For any object $X$ consider the matrix $N_X$ representing
+fusion with simple objects, $(N_X)_{jk} = \dim V_{X \otimes \cS_j}^k$. 
+Then the vector $(d_i)$ is an eigenvector of the matrix $N_X$, with 
+eigenvalue $d_X$.
+In general this isn't quite enough to determine $(d_i)$.
+But in the unitary situation it is, because of the following:
+
+\begin{prop} If $\cC$ is unitary, then all $d_i > 0$.
+\end{prop}
+
+\begin{example}
+In \fixme{...} we have 
+\begin{equation}
+  N_0 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}, \quad N_1 = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}, \quad N_2 = \begin{pmatrix} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \end{pmatrix}
+\end{equation}
+Diagonalizing these matrices we see that the only positive eigenvalues are
+$(d_0,d_1,d_2) = (1,\sqrt 2,1)$; and sure enough, this vector
+is a simultaneous eigenvector of all three matrices.
+\end{example}
+
+
+
+
+% Then all $N_X$
+% commute with one another, and moreover they are normal matrices \fixme{...}, 
+% so we can simultaneously diagonalize them; 
+
+% consider the matrices $N_i$ with entries $(N_i)_{jk} = N_{ij}^k$.
+% All $N_i$ commute with one another
 
 
 \fixme{but can also compute directly from the torus characters...}
@@ -4090,7 +4210,16 @@ We use $\theta \in \fh^*$ to denote the \ti{highest root}: it is the one maximal
 For $\fg = \fsl(N)$, $\theta = \alpha_1 + \cdots + \alpha_{N-1}$, with root space spanned by $E_{1N}$.
 The corresponding coroot is $\theta^\vee = E_{11} - E_{NN} = [E_{1N}, E_{N1}]$.
 
-
+A \ti{Cartan involution} is a Lie algebra involution $\theta: \fg \to \fg$.
+If $\fg$ is complex and 
+$\theta$ commutes with the compact involution $\tau$, then
+we can define a real form of $\fg$ as the fixed locus of $\sigma = \theta \circ \tau$.
+For example, for $\fg = \fsl(N,\bbC)$ we can take $\theta(X) = - X^T$,
+$\tau(X) = - X^*$, so $\sigma(X) = \overline{X}$,
+and the corresponding real form is $\fsl(N,\bbR)$.
+We can also take $\theta(X) = X$,
+so $\sigma(X) = - X^*$,
+and the corresponding real form is $\fsu(N)$.
 
 % \section{Vertex algebras} \label{sec:vertex-algebras}
 
