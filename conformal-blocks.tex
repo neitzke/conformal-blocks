@@ -3873,10 +3873,16 @@ The nontrivial fusion rules are
 \begin{equation}
   \cS_1 \boxtimes \cS_1 \simeq \cS_0 \oplus \cS_2, \quad \cS_1 \boxtimes \cS_2 \simeq \cS_1, \quad \cS_2 \boxtimes \cS_2 \simeq \cS_0 \, . 
 \end{equation}
-Now we look up the formulas.
+
+Now we describe the $R$ and $F$ matrices.
 They will depend on choices of bases in the nontrivial invariant spaces
 $V_{ij}^k$; thus we have $(\bbC^\times)^4$ worth of ambiguity.
-In the following formulas we fix that ambiguity.
+
+Note that $V_{ij}^k$ is a space of 3-point blocks on the sphere,
+identified with the \ti{classical} multiplicity space
+$H_{ij}^k = \Hom_\fg(M_i \otimes M_j, M_k)$. So, concretely,
+we can fix all the ambiguity by choosing bases in $H_{ij}^k$.
+
 First, the $R$-matrices are
 \begin{equation}
 \quad R^0_{11} = \e^{5 \pi \I/8}, \quad R^2_{11} = \e^{\pi \I / 8}, \quad R^1_{12} = R^1_{21} = \I, \quad R^0_{22} = -1.
@@ -3887,7 +3893,7 @@ and $R^0_{22} = \exp( \pi \I (h_0 - 2 h_2))$.
 The exponential factor comes from the 
 half-monodromy of $z^{h_c - h_a - h_b}$.
 The extra $\pm$ sign is the eigenvalue
-of the swap acting on the \ti{classical} multiplicity space.
+of the swap acting on the \ti{classical} multiplicity space $H_{ii}^k$.
 Finally, the choice of $R^1_{12}$ is a gauge choice, which then fixes
 $R^1_{21}$ since $R^1_{12} R^1_{21} = \exp(2 \pi \I h_2) = -1$.
 
@@ -3920,8 +3926,11 @@ the $R$-matrices; the off-diagonal entries involve an extra
 gauge choice.)
 
 Let us try to calculate $F_{111}^1$ directly from the vertex algebra.
+Actually we 
+will do the computation a bit more generally, for any $k \ge 2$ instead
+of just $k=2$.
 We consider conformal blocks on the sphere with 4 marked points at
-$0, 1, x, \infty$,
+$0, x, 1, \infty$,
 all carrying the representation $\vrep(M_1)$, where we recall $M_1$
 is the fundamental representation of $\fsl_2$.
 Now we consider varying $x$.
@@ -3929,35 +3938,67 @@ The connection in the bundle of conformal blocks then
 takes the concrete form\footnote{More generally, with $n$ punctures in
 the finite plane and one more at $\infty$ we would write the operator $\partial_{z_i} - \frac{1}{k + h^\vee} \sum_{j \neq i} \frac{T_{ij}}{z_i - z_j}$ --- just like \eqref{eq:kz-kohno}.}
 \begin{equation} \label{eq:kz-4-punctures}
-  \left[  \partial_{x} + \frac{1}{4} \left(  \frac{T_{13}}{x} + \frac{T_{23}}{x-1} \right) \right] \psi = 0 \, ,
+  \left[  \partial_{x} - \frac{1}{k+2} \left(  \frac{T_{12}}{x} + \frac{T_{23}}{x-1} \right) \right] \psi = 0 \, ,
 \end{equation}
-acting on the invariant subspace 
-$V \subset M_1^{\otimes 4}$.
-Relative to the basis of $V$ given by
-$e_1 = \eps_{12} \eps_{34}$ and $e_2 = \eps_{13} \eps_{24}$,
-we can compute these matrices explicitly, 
-getting
-\begin{equation}
-  T_{13} = \begin{pmatrix} \frac12 & 0 \\ -1 & -\frac32 \end{pmatrix}, \qquad T_{23} = \begin{pmatrix} -\frac12 & 1 \\ 1 & -\frac12 \end{pmatrix} \, .
-\end{equation}
+acting on the classical invariant subspace 
+$H \subset M_1^{\otimes 4}$, which has dimension $2$.
 
-Now, \eqref{eq:kz-4-punctures} has regular singularities at $x = 0$ and $x = 1$. 
-The eigenvalues of the residues of the operator
-\eqref{eq:kz-4-punctures} give
-the local exponents $\lambda = \frac18, -\frac38$ of
-this ODE at the singular
-points. Since these exponents do not differ by an integer,
-Frobenius's method (solve order by order) 
-is guaranteed to produce series with a finite radius of convergence,
-thus exact solutions
-with eigenvalue $\lambda$ around each singular point; so we can
-write four solutions on the interval $(0,1)$ by
-\begin{align}
-  \psi_{\lambda,0} (x) &= x^{\lambda} \sum_{n=0}^\infty a_{\lambda,n} x^n , \\
-  \psi_{\lambda,1} (x) &= (1-x)^{\lambda} \sum_{n=0}^\infty b_{\lambda,n} x^n ,
-\end{align}
-where the leading terms $a_{\lambda,0}$, $b_{\lambda,0}$ are eigenvectors of the residue matrix.
-\fixme{...}
+For $x$ near $0$ ($\abs{x}<1$), 
+given a vector $\varphi \in H_{11}^a \otimes H_{a1}^1$,
+we can get a conformal block $\psi$ by plumbing.
+What the plumbing would give us directly is a power series in $x$,
+\begin{equation}
+ \psi = \sum_n x^n \psi_n = x^{\lambda_a} \varphi + \cdots 
+\end{equation}
+where $\lambda_a = h_a - 2 h_1$, so $\lambda_0 = - \frac{3}{2(k+2)}$ and
+$\lambda_2 = \frac{1}{2(k+2)}$.
+The higher terms are the contributions from descendants in $\cS_a$.
+Happily we don't need to write out the whole power series:
+it is determined from $\varphi$, by the differential equation
+\eqref{eq:kz-4-punctures}.
+Indeed, we could have constructed the same power series by 
+Frobenius's method for constructing
+solutions of ODE around regular singularities: every eigenvector $\varphi$
+of the residue matrix $\frac{1}{k+2} T_{12}$ gives a solution
+of the ODE. (To be precise, this is true as long as no two eigenvalues
+differ by an integer; that's the case here, since their difference is $\frac{2}{k+2}$.)
+The fusion channels $H_{11}^a \otimes H_{a1}^1 \subset H$ 
+indeed give eigenlines of $T_{12}$.
+
+Now suppose $x$ is near $1$. Then given a vector
+$\varphi \in H_{1a}^1 \otimes H_{11}^a$ we again get a conformal
+block $\psi$ by plumbing, now of the form
+\begin{equation}
+ \psi = \sum_n (1-x)^n \psi_n = (1-x)^{\lambda_a} \varphi + \cdots 
+\end{equation}
+Again these blocks can be built by Frobenius's method, now starting from 
+the eigenvector $\varphi$ of $T_{13}$ instead of $T_{12}$.
+
+% Relative to the basis of $V$ given by
+% $e_1 = \eps_{12} \eps_{34}$ and $e_2 = \eps_{13} \eps_{24}$,
+% we can compute these matrices explicitly, 
+% getting
+% \begin{equation}
+%   T_{13} = \begin{pmatrix} \frac12 & 0 \\ -1 & -\frac32 \end{pmatrix}, \qquad T_{23} = \begin{pmatrix} -\frac12 & 1 \\ 1 & -\frac12 \end{pmatrix} \, .
+% \end{equation}
+
+% Now, \eqref{eq:kz-4-punctures} has regular singularities at $x = 0$ and $x = 1$. 
+% The eigenvalues of the residues of the operator
+% \eqref{eq:kz-4-punctures} give
+% the local exponents $\lambda = \frac{1}{2(k+2)}, -\frac{3}{2(k+2)}$ of
+% this ODE at the singular
+% points. Since these exponents do not differ by an integer,
+% Frobenius's method (solve order by order) 
+% is guaranteed to produce series with a finite radius of convergence,
+% thus exact solutions
+% with eigenvalue $\lambda$ around each singular point; so we can
+% write four solutions on the interval $(0,1)$ by
+% \begin{align}
+%   \psi_{\lambda,0} (x) &= x^{\lambda} \sum_{n=0}^\infty a_{\lambda,n} x^n , \\
+%   \psi_{\lambda,1} (x) &= (1-x)^{\lambda} \sum_{n=0}^\infty b_{\lambda,n} x^n ,
+% \end{align}
+% where the leading terms $a_{\lambda,0}$, $b_{\lambda,0}$ are eigenvectors of the residue matrix.
+% \fixme{...}
 
 % If we put all four singularities at finite points and choose 
 % the standard coordinate, then we have a flat connection on these
@@ -4037,18 +4078,20 @@ $(d_0,d_1,d_2) = (1,\sqrt 2,1)$; and sure enough, this vector
 is a simultaneous eigenvector of all three matrices.
 \end{example}
 
+There is also another direct way of computing the 
+quantum dimension if we already know the $F$-matrices:
+
+\begin{exercise}
+Show that $d_X = 1 / (F_{X X^* X}^X)_{00}$.
+\end{exercise}
 
 
+\subsection{Skein relations}
 
-% Then all $N_X$
-% commute with one another, and moreover they are normal matrices \fixme{...}, 
-% so we can simultaneously diagonalize them; 
+What else can we say?
+Consider the case of $L_k(\fsl_2)$.
+We would like to relate overcrossings to undercrossings.
 
-% consider the matrices $N_i$ with entries $(N_i)_{jk} = N_{ij}^k$.
-% All $N_i$ commute with one another
-
-
-\fixme{but can also compute directly from the torus characters...}
 
 \subsection{Verlinde loop operators}
 
