@@ -3883,15 +3883,16 @@ identified with the \ti{classical} multiplicity space
 $H_{ij}^k = \Hom_\fg(M_i \otimes M_j, M_k)$. So, concretely,
 we can fix all the ambiguity by choosing bases in $H_{ij}^k$.
 
-First, the $R$-matrices are
+The $R$-matrices are
 \begin{equation}
 \quad R^0_{11} = \e^{5 \pi \I/8}, \quad R^2_{11} = \e^{\pi \I / 8}, \quad R^1_{12} = R^1_{21} = \I, \quad R^0_{22} = -1.
 \end{equation}
 Here $R^0_{11} = - \exp(\pi \I (h_0-2 h_1))$,
 $R^2_{11} = \exp( \pi \I (h_2 - 2 h_1))$,
 and $R^0_{22} = \exp( \pi \I (h_0 - 2 h_2))$.
-The exponential factor comes from the 
-half-monodromy of $z^{h_c - h_a - h_b}$.
+The exponential factor in $R_{ii}^k$
+comes from the 
+half-monodromy of $z^{h_k - 2 h_i}$.
 The extra $\pm$ sign is the eigenvalue
 of the swap acting on the \ti{classical} multiplicity space $H_{ii}^k$.
 Finally, the choice of $R^1_{12}$ is a gauge choice, which then fixes
@@ -3942,6 +3943,10 @@ the finite plane and one more at $\infty$ we would write the operator $\partial_
 \end{equation}
 acting on the classical invariant subspace 
 $H \subset M_1^{\otimes 4}$, which has dimension $2$.
+(Happily, this $2$ matches the dimension of the space of 
+$4$-point conformal blocks, i.e. in this example 
+there is no additional truncation
+to worry about.)
 
 For $x$ near $0$ ($\abs{x}<1$), 
 given a vector $\varphi \in H_{11}^a \otimes H_{a1}^1$,
@@ -3966,13 +3971,69 @@ The fusion channels $H_{11}^a \otimes H_{a1}^1 \subset H$
 indeed give eigenlines of $T_{12}$.
 
 Now suppose $x$ is near $1$. Then given a vector
-$\varphi \in H_{1a}^1 \otimes H_{11}^a$ we again get a conformal
-block $\psi$ by plumbing, now of the form
+$\varphi' \in H_{1a}^1 \otimes H_{11}^a$ we again get a conformal
+block $\psi'$ by plumbing, now of the form
 \begin{equation}
- \psi = \sum_n (1-x)^n \psi_n = (1-x)^{\lambda_a} \varphi + \cdots 
+ \psi' = \sum_n (1-x)^n \psi_n = (1-x)^{\lambda_a} \varphi' + \cdots 
 \end{equation}
 Again these blocks can be built by Frobenius's method, now starting from 
-the eigenvector $\varphi$ of $T_{13}$ instead of $T_{12}$.
+the eigenvector $\varphi'$ of $T_{13}$.
+
+Now we look at the space of solutions of \eqref{eq:kz-4-punctures}
+on the interval $(0,1)$. We have identified this space 
+both with $\oplus_a H_{11}^a \otimes H_{a1}^1$ and with 
+$\oplus_a H_{1a}^1 \otimes H_{11}^a$, so we get a map between these two:
+that is the $F$-matrix $F_{111}^1$.
+
+To go further we should fix our bases. Let's choose generators as
+follows. Define $M_1$ to be the standard representation, 
+and $M_2 = \Sym^2 M_1$.
+Let $\eps: M_1 \otimes M_1 \to \bbC$ be the standard
+antisymmetric pairing.
+\begin{enumerate}
+  \item For $H^0_{11}$ use the antisymmetric pairing $\eps$.
+  \item For $H^2_{11}$ take the projection to the symmetric part.
+  \item For $H^1_{01}$ and $H^1_{10}$ use the identity map.
+  \item For $H^1_{21}$ use the intertwiner
+  \begin{equation}
+    m((uv) \otimes w) = \frac{1}{\sqrt3} (\eps(v,w) u + \eps(u,w) v) \, . 
+  \end{equation}
+  \item For $H^1_{12}$ use the intertwiner
+  \begin{equation}
+    m(u \otimes (vw)) = \frac{1}{\sqrt3} (\eps(u,v) w + \eps(u,w) v) \, . 
+  \end{equation}
+\end{enumerate}
+Then $\phi_a: M_1^3 \to M_a$ are
+\begin{equation}
+  \phi_0(u,v,w) = \eps(u,v) w, \quad \phi_2(u,v,w) = \frac{1}{\sqrt3} (\eps(v,w) u + \eps(u,w) v) \, ,
+\end{equation}
+and similarly $\phi'_a: M_1^3 \to M_a$ are
+\begin{equation}
+  \phi'_0(u,v,w) = \eps(v,w) u, \quad \phi'_2(u,v,w) = \frac{1}{\sqrt3} (\eps(u,v) w + \eps(u,w) v) \, .
+\end{equation}
+
+The change-of-basis between these two is
+\begin{equation}
+  F_{cl} = \frac12 \begin{pmatrix} -1 & \sqrt3 \\ \sqrt3 & 1 \end{pmatrix} \, ,
+\end{equation}
+and relative to the basis $(\phi_0, \phi_2)$ we have
+\begin{equation}
+  T_{12} = \begin{pmatrix} - \frac32 & 0 \\ 0 & \frac12 \end{pmatrix}, \qquad T_{23} = F_{cl}^{-1} T_{12} F_{cl} \, .
+\end{equation}
+
+Then \eqref{eq:kz-4-punctures} becomes a fully explicit $2 \times 2$
+matrix equation.
+We can reduce it to a hypergeometric
+equation, and use the connection formula for such equations.
+To write the result, let
+\begin{equation}
+  \kappa = k + 2, \qquad q = \exp(\pi \I / \kappa), \qquad [n]_q = q^{n-1} + q^{n-3} + \cdots + q^{-n+1} = \frac{\sin(\frac{n\pi}{\kappa})}{\sin(\frac{\pi}{\kappa})}
+\end{equation}
+Then
+\begin{equation}
+  F_{111}^1 = \frac{1}{[2]_q} \begin{pmatrix} -1 & \sqrt{[3]_q} \\ \sqrt{[3]_q} & 1 \end{pmatrix} \, .
+\end{equation}
+At $k=2$ this recovers the formula we wrote before.
 
 % Relative to the basis of $V$ given by
 % $e_1 = \eps_{12} \eps_{34}$ and $e_2 = \eps_{13} \eps_{24}$,
@@ -4047,8 +4108,24 @@ called the \ti{quantum dimension} $d_X$. It has
   d_X = \ev_X^R \circ \coev_X^L \, .
 \end{equation}
 
+There is a direct way of computing the 
+quantum dimension if we already know the $F$-matrices:
+
+\begin{exercise}
+Show that $d_X = 1 / (F_{X X^* X}^X)_{00}$.
+\end{exercise}
+
+\begin{example}
+In \fixme{...} this formula gives
+$d_1 = [2]_q = q + q^{-1}$.
+(For $k = 2$ this is $d_1 = \sqrt2$.)
+\end{example}
+
 % By taking two colored unknots and putting them close together we can
 % show the following:
+
+It is interesting to explore a little more of the structure 
+of quantum dimensions:
 
 \begin{exercise}
 Show that the quantum dimensions obey the relations
@@ -4078,12 +4155,6 @@ $(d_0,d_1,d_2) = (1,\sqrt 2,1)$; and sure enough, this vector
 is a simultaneous eigenvector of all three matrices.
 \end{example}
 
-There is also another direct way of computing the 
-quantum dimension if we already know the $F$-matrices:
-
-\begin{exercise}
-Show that $d_X = 1 / (F_{X X^* X}^X)_{00}$.
-\end{exercise}
 
 
 \subsection{Skein relations}
@@ -4091,6 +4162,7 @@ Show that $d_X = 1 / (F_{X X^* X}^X)_{00}$.
 What else can we say?
 Consider the case of $L_k(\fsl_2)$.
 We would like to relate overcrossings to undercrossings.
+\fixme{...}
 
 
 \subsection{Verlinde loop operators}
@@ -4098,7 +4170,7 @@ We would like to relate overcrossings to undercrossings.
 More generally, given a conformal block on a surface $C$, a colored framed oriented link
 in $C \times I$ produces an operator on the space of conformal blocks. In the case
 of a simple loop in $C$, this is sometimes called a \ti{Verlinde loop operator}.
-
+\fixme{...}
 
 
 \subsection{Modular structure}
