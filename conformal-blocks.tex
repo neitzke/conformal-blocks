@@ -4022,18 +4022,22 @@ and relative to the basis $(\phi_0, \phi_2)$ we have
 \end{equation}
 
 Then \eqref{eq:kz-4-punctures} becomes a fully explicit $2 \times 2$
-matrix equation.
-We can reduce it to a hypergeometric
-equation, and use the connection formula for such equations.
+matrix equation in the plane, with regular singularities at $0$, $1$
+and $\infty$. Such equations can always be reduced to hypergeometric
+equations, and for those there is a connection formula available which
+relates the monodromy eigenbasis at $0$ to the monodromy eigenbasis 
+at $1$. That's what we need here.
 To write the result, let
 \begin{equation}
-  \kappa = k + 2, \qquad q = \exp(\pi \I / \kappa), \qquad [n]_q = q^{n-1} + q^{n-3} + \cdots + q^{-n+1} = \frac{\sin(\frac{n\pi}{\kappa})}{\sin(\frac{\pi}{\kappa})}
+  \kappa = k + 2, \qquad q = \exp(\pi \I / \kappa), \qquad [n]_q = q^{n-1} + q^{n-3} + \cdots + q^{-n+1} = \frac{\sin(\frac{n\pi}{\kappa})}{\sin(\frac{\pi}{\kappa})} > 0 \, .
 \end{equation}
-Then
+Then the connection formula gives
 \begin{equation}
   F_{111}^1 = \frac{1}{[2]_q} \begin{pmatrix} -1 & \sqrt{[3]_q} \\ \sqrt{[3]_q} & 1 \end{pmatrix} \, .
 \end{equation}
-At $k=2$ this recovers the formula we wrote before.
+At $k=2$ this recovers the formula we wrote before \fixme{up to tricky sign!} while as $k \to \infty$ it recovers the classical change-of-basis
+(as it must since in that limit the equation just becomes
+$\partial_z \psi = 0$.)
 
 % Relative to the basis of $V$ given by
 % $e_1 = \eps_{12} \eps_{34}$ and $e_2 = \eps_{13} \eps_{24}$,
@@ -4112,13 +4116,15 @@ There is a direct way of computing the
 quantum dimension if we already know the $F$-matrices:
 
 \begin{exercise}
-Show that $d_X = 1 / (F_{X X^* X}^X)_{00}$.
+Show that $d_X = 1 / (F_{X X^* X}^X)_{\bid \bid}$.
 \end{exercise}
 
 \begin{example}
 In \fixme{...} this formula gives
-$d_1 = [2]_q = q + q^{-1}$.
+$d_1 = [2]_q = q + q^{-1}$. \fixme{again up to tricky sign!}
 (For $k = 2$ this is $d_1 = \sqrt2$.)
+Note this matches with the Jones polynomial of the unknot,
+in blackboard framing.
 \end{example}
 
 % By taking two colored unknots and putting them close together we can
