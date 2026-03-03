@@ -15,6 +15,7 @@
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta,decorations.markings}
 \usepackage{booktabs}
 \usepackage{framed}
 \usepackage{float}
@@ -2592,14 +2593,107 @@ Then the corresponding variation of chiral correlation functions is given by
 \begin{equation} \label{eq:complex-variation-cech}
   \partial_v \IP{\cdots} = \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) \IP{T(z) \cdots}
 \end{equation}
-The contours $c_{\alpha \beta}$ are defined as follows. \fixme{fig} 
-Shrink each $U_\alpha$ slightly to $V_\alpha$ with smooth boundary, such that
-they still cover $C$, and the boundaries meet transversely; then let $c_{\alpha \beta} = \overline{V_\alpha} \cap U_\beta$.
-Choose the ordering $<$ arbitrarily.
+The contours $c_{\alpha \beta}$ are defined as follows.
+Choose an ordering $<$ arbitrarily on the index set.
+Shrink each $U_\alpha$ slightly to $V_\alpha$ with smooth boundary, such that they still cover $C$, and the boundaries meet transversely; then let $c_{\alpha \beta} = \overline{V_\alpha} \cap U_\beta$, with the boundary orientation induced by $V_\alpha$, for each $\alpha < \beta$.
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[scale=1.0, line cap=round, line join=round]
+    % A schematic of a Cech cover and the contours c_{alpha beta}
+    \def\R{1.35}
+    \def\rV{1.10}
+
+    % centers
+    \coordinate (A) at (-0.55,0.55);
+    \coordinate (B) at (0.75,0.55);
+    \coordinate (C) at (0.10,-0.85);
+
+    % three overlapping patches (with transparency so overlaps are visible)
+    \fill[blue!25,  opacity=0.35]  (A) circle (\R);
+    \fill[red!25,   opacity=0.35]  (B) circle (\R);
+    \fill[green!25, opacity=0.35]  (C) circle (\R);
+
+    % boundaries of slightly shrunken sets V_alpha (schematic)
+    \draw[blue!45!black, thick]  (A) circle (\rV);
+    \draw[red!45!black, thick]   (B) circle (\rV);
+    \draw[green!45!black, thick] (C) circle (\rV);
+
+    % labels
+    \node[blue!45!black]  at (-1.05,1.15) {$U_\alpha$};
+    \node[red!45!black]   at (1.25,1.15) {$U_\beta$};
+    \node[green!45!black] at (0.55,-1.65) {$U_\gamma$};
+
+    % intersection contours c_{alpha beta} = \overline{V_\alpha}\cap U_\beta
+    % draw the portions of the V-boundaries that lie inside the other U
+    \begin{scope}
+      \clip (B) circle (\R);
+      \draw[very thick, black] (A) circle (\rV);
+      % orientation induced by boundary of V_\alpha (counterclockwise)
+      \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
+        ($(A)+({\rV*cos(35)},{\rV*sin(35)})$) arc[start angle=35,end angle=55,radius=\rV];
+    \end{scope}
+    \node[black] at (0.10,1.55) {$c_{\alpha\beta}$};
+
+    \begin{scope}
+      \clip (C) circle (\R);
+      \draw[very thick, black] (A) circle (\rV);
+      % orientation induced by boundary of V_\alpha (counterclockwise)
+      \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
+        ($(A)+({\rV*cos(-70)},{\rV*sin(-70)})$) arc[start angle=-70,end angle=-50,radius=\rV];
+    \end{scope}
+    \node[black] at (-0.25,-0.35) {$c_{\alpha\gamma}$};
+
+    \begin{scope}
+      \clip (C) circle (\R);
+      \draw[very thick, black] (B) circle (\rV);
+      % orientation induced by boundary of V_\beta (counterclockwise)
+      \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
+        ($(B)+({\rV*cos(-120)},{\rV*sin(-120)})$) arc[start angle=-120,end angle=-100,radius=\rV];
+    \end{scope}
+    \node[black] at (1.55,-0.35) {$c_{\beta\gamma}$};
+
+    % second example: two patches intersecting in an annulus
+    \begin{scope}[xshift=5.2cm]
+      \def\Rone{1.75}   % outer radius of annulus U_1 (bigger)
+      \def\Rtwo{1.35}   % outer radius of disc U_2 (smaller)
+      \def\rVone{1.05}  % outer boundary of V_1
+      \def\rVtwo{1.05}  % boundary of V_2
+      \def\rhole{0.70}
+
+      \coordinate (A2) at (0,0);
+      \coordinate (B2) at (0,0);
+
+      % U_1 is an annulus, U_2 is a disc (same center)
+      \fill[blue!25, opacity=0.35, even odd rule] (A2) circle (\Rone) (A2) circle (\rhole);
+      \fill[red!25,  opacity=0.35] (B2) circle (\Rtwo);
+
+      % % shrunken sets: V_1 annulus, V_2 disc
+      % \draw[blue!60!black, thick] (A2) circle (\rVone);
+      % \draw[blue!60!black, thick] (A2) circle (\rhole);
+      % \draw[red!60!black, thick]  (B2) circle (\rVtwo);
+
+      % labels
+      \node[blue!45!black] at (-1.05,1.55) {$U_1$};
+      \node[red!45!black]  at (0,0) {$U_2$};
+
+      % contour c_{12} = \overline{V_1}\cap U_2 (schematic loop in the annulus)
+      \begin{scope}
+        \clip (B2) circle (\Rtwo);
+        \draw[very thick, black] (A2) circle (\rVone);
+        \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
+          ($(A2)+({\rVone*cos(45)},{\rVone*sin(45)})$) arc[start angle=45,end angle=20,radius=\rVone];
+      \end{scope}
+      \node[black] at (0.55,1.15) {$c_{12}$};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{Cover by patches $U_\alpha$ and shrunken sets; the contours $c_{\alpha\beta}=\overline{V_\alpha}\cap U_\beta$ run along the overlaps.}
+\end{figure}
+
+
 
 A simple but useful example arises when we cover $C$ by two open sets $U_{1,2}$, intersecting in an annulus.
 Then the deformation is induced by a single vector field $v_{12}$ on the annulus,
-and \eqref{eq:complex-variation-cech} becomes an integral over a loop $c$ around the annulus:
+and \eqref{eq:complex-variation-cech} becomes an integral over a loop $c_{12}$ around the annulus:
 \begin{equation}
   \partial_v \IP{\cdots} = \frac{1}{2 \pi \I} \int_{z \in c} v_{12}(z) \IP{T(z) \cdots}
 \end{equation}
@@ -2616,6 +2710,20 @@ represented by a $\mu(z)$ avoiding any particular set of points.)
 
 The formulas \eqref{eq:complex-variation-beltrami} and \eqref{eq:complex-variation-cech} are related essentially
 by integration by parts.
+
+There is something to prove here; for notational convenience we consider
+only the case of a single marked point, carrying the representation $\vrep$:
+\begin{prop}
+Fix $v \in H^1(C,T)$. 
+Let $\delta_v \in \End (\vrep)$ be the operator induced by
+\begin{equation}
+  \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) T(z) \,
+\end{equation}
+and suppose that
+$s$ is a section of the bundle $\cB_K$ over the moduli space of
+Riemann surfaces with a marked point.
+Then $(\partial_v + \delta_v) s$ is also a section of $\cB_K$.
+\end{prop}
 
 
 \subsection{Virasoro twisting}
@@ -2659,6 +2767,46 @@ defines an honest connection locally over the moduli of curves.
 
 \subsection{Plumbing conformal blocks}
 
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[scale=1.0, line cap=round, line join=round]
+    % parameters
+    \def\R{1.25}
+    \def\r{0.55}
+
+    % left surface C1 with puncture and annulus A1
+    \begin{scope}[shift={(-3.2,0)}]
+      \fill[blue!6] (0,0) circle (\R);
+      \draw[very thick, blue!55!black] (0,0) circle (\R);
+      \fill[white] (0,0) circle (\r);
+      \draw[thick, blue!55!black] (0,0) circle (\r);
+      \node[blue!60!black] at (0,1.65) {$C'_1$};
+      \node[blue!60!black] at (0,0.95) {$A_1$};
+      \fill[blue!55!black] (0,0) circle (1.2pt);
+      \node[blue!60!black] at (0.25,-0.15) {$p_1$};
+      \node at (0,-1.65) {$z_1$};
+    \end{scope}
+
+    % right surface C2 with puncture and annulus A2
+    \begin{scope}[shift={(3.2,0)}]
+      \fill[red!6] (0,0) circle (\R);
+      \draw[very thick, red!55!black] (0,0) circle (\R);
+      \fill[white] (0,0) circle (\r);
+      \draw[thick, red!55!black] (0,0) circle (\r);
+      \node[red!60!black] at (0,1.65) {$C'_2$};
+      \node[red!60!black] at (0,0.95) {$A_2$};
+      \fill[red!55!black] (0,0) circle (1.2pt);
+      \node[red!60!black] at (0.25,-0.15) {$p_2$};
+      \node at (0,-1.65) {$z_2$};
+    \end{scope}
+
+    % identification arrows between annuli
+    \draw[thick, -{Latex[length=2.4mm,width=1.8mm]}] (-1.55,0.55) -- (1.55,0.55);
+    \draw[thick, -{Latex[length=2.4mm,width=1.8mm]}] (1.55,-0.55) -- (-1.55,-0.55);
+    \node at (0,0.95) {$z_1 = q/z_2$};
+  \end{tikzpicture}
+  \caption{Plumbing: remove small discs around $p_1,p_2$ to get $C'_1,C'_2$ with annuli $A_1,A_2$, then identify by $z_1 \sim q/z_2$ to form $C_q$.}
+\end{figure}
 \begin{defn}[Plumbing Riemann surfaces]
 Suppose $C_1$ and $C_2$ are two Riemann surfaces with marked points $p_1$, $p_2$. Fix holomorphic coordinates $z_1$, $z_2$ around these points. Also fix parameters $r_1, r_2 > 0$ such that the $z_i$-coordinate patch contains $\{ \abs{z_i} < r_i \}$, 
 and fix $q \in \bbC^\times$ with $0 < \abs{q} < r_1 r_2$.
@@ -2694,6 +2842,88 @@ Conformally, this cylinder is equivalent to a tube with circumference
 $2 \pi$ and length $\log (r_1 r_2 / \abs{q})$. In the limit $q \to 0$ this cylinder becomes infinitely long, and the plumbed surface develops
 a node.
 
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[scale=1.0, line cap=round, line join=round]
+    % parameters
+    \def\R{1.15}
+
+    % left thrice-marked sphere
+    \begin{scope}[shift={(-4.1,0)}]
+      \fill[gray!6] (0,0) circle (\R);
+      \draw[very thick, gray!60!black] (0,0) circle (\R);
+      \draw[gray!50!black, thick] (-\R,0) arc (180:360:{\R} and {0.42});
+
+      \coordinate (L0) at (0,-0.78);
+      \coordinate (L1) at (0.78,0.35);
+      \coordinate (Linf) at (0,0.92);
+
+      \fill[black] (L0) circle (1.4pt);
+      \fill[black] (L1) circle (1.4pt);
+      \fill[black] (Linf) circle (1.4pt);
+
+      \node[below=3pt] at (L0) {$0$};
+      \node[above right=2pt] at (L1) {$1$};
+      \node[above=3pt] at (Linf) {$\infty$};
+
+      \node at (0,0) {$C_1$};
+    \end{scope}
+
+    % right thrice-marked sphere
+    \begin{scope}[shift={(-1.0,0)}]
+      \fill[gray!6] (0,0) circle (\R);
+      \draw[very thick, gray!60!black] (0,0) circle (\R);
+      \draw[gray!50!black, thick] (-\R,0) arc (180:360:{\R} and {0.42});
+
+      \coordinate (R0) at (0,-0.78);
+      \coordinate (R1) at (0.78,0.35);
+      \coordinate (Rinf) at (0,0.92);
+
+      \fill[black] (R0) circle (1.4pt);
+      \fill[black] (R1) circle (1.4pt);
+      \fill[black] (Rinf) circle (1.4pt);
+
+      \node[below=3pt] at (R0) {$0$};
+      \node[above right=2pt] at (R1) {$1$};
+      \node[above=3pt] at (Rinf) {$\infty$};
+
+      \node at (0,0) {$C_2$};
+    \end{scope}
+
+    % dashed line connecting punctures to be plumbed
+    \draw[thick, dashed, gray!70!black] (-4.1,-0.78) -- (-1.0,-0.78);
+    \node[above=2pt, gray!70!black] at (-2.55,-0.78) {$q$};
+
+    % sphere with four marked points; cross-ratio parameter q
+    \begin{scope}[shift={(3.9,0)}]
+      \def\RR{1.55}
+      \fill[gray!6] (0,0) circle (\RR);
+      \draw[very thick, gray!60!black] (0,0) circle (\RR);
+
+      % equator
+      \draw[gray!50!black, thick] (-\RR,0) arc (180:360:{\RR} and {0.55});
+
+      % marked points (schematic positions)
+      \coordinate (p0) at (-1.05,0.55);
+      \coordinate (p1) at (1.05,0.55);
+      \coordinate (pinf) at (0,1.25);
+      \coordinate (pq) at (0,-1.05);
+
+      \fill[black] (p0) circle (1.4pt);
+      \fill[black] (p1) circle (1.4pt);
+      \fill[black] (pinf) circle (1.4pt);
+      \fill[black] (pq) circle (1.4pt);
+
+      \node[above left=2pt] at (p0) {$0$};
+      \node[above right=2pt] at (p1) {$1$};
+      \node[above=3pt] at (pinf) {$\infty$};
+      \node[below=3pt] at (pq) {$q$};
+
+      \node at (0,0) {$C_q$};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{After plumbing two thrice-marked spheres at $0$ and $0$, the resulting sphere has four marked points with cross-ratio $q$.}
+\end{figure}
 \begin{exercise}
 Suppose that $C_1$ and $C_2$ are spheres, with the
 standard coordinates $z_1$ and $z_2$,
@@ -2788,12 +3018,41 @@ Then there is a canonical block on $C_0$ given by the dual pairing. Show that by
 \end{equation}
 \end{exercise}
 
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+  % C0 = CP^1 with 0 and infinity
+  \draw[thick] (-3,0) circle (1.2);
+  \node at (-3,1.75) {$C_0=\bbC\bbP^1$};
+  \fill (-3,-1.2) circle (1.5pt);
+  \fill (-3,1.2) circle (1.5pt);
+  \node[below] at (-3,-1.2) {$0$};
+  \node[above] at (-3,1.2) {$\infty$};
+  \node[above] at (-3,-1.2) {$\vrep$};
+  \node[below] at (-3,1.2) {$\vrep^*$};
+
+  % arrow to torus
+  \draw[->, thick] (-1.4,0) -- (0.2,0);
+  \node[above] at (-0.6,0.15) {plumb};
+
+  % Torus C_q = C^x/(z~qz)
+  \begin{scope}[shift={(2.6,0)}]
+    % draw a torus-like shape (annulus with identification)
+    \draw[thick] (0,0) ellipse (1.6 and 1.0);
+    \draw[thick] (0,0) ellipse (0.8 and 0.5);
+    \node at (0,1.55) {$C_q=\bbC^\times/(z\sim qz)$};
+    \draw[->] (1.05,0.55) .. controls (1.55,0.25) and (1.55,-0.25) .. (1.05,-0.55);
+    \node[right] at (1.55,0) {$z\mapsto qz$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Plumbing the punctures on $\bbC\bbP^1$ produces the torus $C_q$.}
+\end{figure}
 \begin{exercise}
-Suppose $C_1$ is a surface with a puncture carrying $\vrep$,
+Suppose $C_1$ is a surface with a puncture at $p_1$ carrying $\vrep$,
 and a conformal block.
-Let $C_2$ be a copy of $\bbC \bbP^1$ carrying
-the canonical pairing between $\vrep^*$ and $\vrep$.
-Now plumb $C_1$ and $C_2$, gluing $\vrep$ to $\vrep^*$.
+Let $C_2$ be a copy of $\bbC \bbP^1$ carrying $\vrep^*$ at $p_2 = 0$
+and $\vrep$ at $\infty$.
+Now plumb $C_1$ and $C_2$, gluing $p_1$ to $p_2$.
 What is the resulting conformal block?
 \fixme{I bet it's the original block on $C_1$ again but we should
 check!}
@@ -3025,7 +3284,7 @@ ring of finite-dimensional $\fsl_2$-modules and then formally
 % $\vrep_1 \otimes \vrep_2 \to \overline{\vrep_1 \boxtimes \vrep_2}$ which is important.
 We could try to produce a tensor product ``by hand'' by just
 defining $\cS_i \boxtimes \cS_j = \bigoplus_{k} \bbC^{N_{ij}^k} \otimes \cS_k$, or more generally
-$\vrep_1 \otimes \vrep_2 = \bigoplus_k V^{\vrep_1}_i \otimes V^{\vrep_2}_j \otimes \bbC^{N_{ij}^k} \otimes \cS_k$.
+$\vrep_1 \boxtimes \vrep_2 = \bigoplus_k V^{\vrep_1}_i \otimes V^{\vrep_2}_j \otimes \bbC^{N_{ij}^k} \otimes \cS_k$.
 This won't have the properties we usually want.
 For example, it isn't associative in any reasonable way,
 i.e. we don't have any canonical isomorphism
@@ -3183,6 +3442,40 @@ In particular, this gives two \ti{braiding} isomorphisms (depending which way $z
 obeying $b_{12}^+ b_{21}^- = \bid$.
 
 Finally, knowing this map for every $W$ is enough to define 
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[baseline,>=Latex,scale=1,yscale=0.65]
+  % worldlines (time from top to bottom), showing b^+ as an overcrossing
+  \draw[
+    thick,
+    postaction={decorate},
+    decoration={markings,mark=at position 0.78 with {\arrowreversed{Latex}}}
+  ] (-1.2,2.6) .. controls (-1.2,0.8) and (1.2,-0.8) .. (1.2,-2.6);
+
+  \draw[thick] (1.2,2.6) .. controls (1.2,0.8) and (0.35,0.25) .. (0.12,0.12);
+  \draw[thick,white,line width=6pt] (0.12,0.12) .. controls (0,0) and (-0.12,-0.12) .. (-0.12,-0.12);
+  \draw[thick] (0.12,0.12) .. controls (0,0) and (-0.12,-0.12) .. (-0.12,-0.12);
+  \draw[
+    thick,
+    postaction={decorate},
+    decoration={markings,mark=at position 0.28 with {\arrowreversed{Latex}}}
+  ] (-0.12,-0.12) .. controls (-0.35,-0.25) and (-1.2,-0.8) .. (-1.2,-2.6);
+
+  % endpoints / labels
+  \fill (-1.2,2.6) circle (1.2pt);
+  \fill (-1.2,-2.6) circle (1.2pt);
+  \fill (1.2,2.6) circle (1.2pt);
+  \fill (1.2,-2.6) circle (1.2pt);
+
+  \node[above] at (-1.2,2.6) {$\vrep_2(z_1)$};
+  \node[below] at (-1.2,-2.6) {$\vrep_1(z_1)$};
+  \node[above] at (1.2,2.6) {$\vrep_1(z_2)$};
+  \node[below] at (1.2,-2.6) {$\vrep_2(z_2)$};
+
+  % crossing marker
+  \node at (-1,0) {$b_{12}^{+}$};
+\end{tikzpicture}
+\end{figure}
 \begin{equation}
  b_{12}^\pm:  \vrep_1 \boxtimes_{z_1,z_2} \vrep_2 \to \vrep_2 \boxtimes_{z_1,z_2} \vrep_1 \, .
 \end{equation}
@@ -3334,11 +3627,16 @@ with a canonical isomorphism
 \end{equation}
 Then the associator amounts to a collection of linear isomorphisms
 \begin{equation}
-  F^\ell_{ijk}: \bigoplus_p V^p_{ij} \otimes V^\ell_{pk} \to \bigoplus_q V^\ell_{iq} \otimes V^q_{jk} \, .
+  F^\ell_{ijk}: \bigoplus_p V^p_{ij} \otimes V^\ell_{pk} \to \bigoplus_q V^\ell_{iq} \otimes V^q_{jk} \, ,
 \end{equation}
-They are sometimes called \ti{$F$-matrices} or \ti{$6j$ symbols}
-(but they don't literally become matrices unless we choose bases in
-each $V_{ij}^k$.)
+or more atomically
+\begin{equation}
+  [F^\ell_{ijk}]_{pq}: V^p_{ij} \otimes V^\ell_{pk} \to V^\ell_{iq} \otimes V^q_{jk} \, .
+\end{equation}
+They are sometimes called \ti{$F$-matrices}, or \ti{$6j$ symbols} because
+of the $6$ indices $ijk\ell{}pq$.
+They don't literally become matrices unless we choose bases in
+each $V_{ij}^k$.
 They satisfy the \ti{pentagon relation} which we will discuss below.
 
 (I should emphasize that this is not something spooky:
@@ -3378,6 +3676,7 @@ $\lambda_X: \bid \otimes X\to X$ and $\rho_X:X\otimes \bid \to X$.
 
 \subsubsection{Evaluation}
 
+
 Given $\vrep$ we can build a conformal block 
 on $\bbC \bbP^1$ with $\vrep^*$ at $z_1$, $\vrep$ at $z_2$,
 and $\vertex^* = \vertex$ at $\infty$.
@@ -3392,6 +3691,50 @@ In particular, this gives \ti{two} morphisms,
 \end{equation}
 We will fix the normalizations below.
 
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[baseline,>=Latex,scale=0.9,yscale=0.7]
+  % ---------------- ev^L ----------------
+  \begin{scope}[xshift=-3.2cm]
+    % cap, oriented R -> R*
+    \draw[
+      thick,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.18 with {\arrow{Latex}}}
+    ] (1.2,-2.2)
+      .. controls (1.2,-0.8) and (0.45,0.15) .. (0,0.15)
+      .. controls (-0.45,0.15) and (-1.2,-0.8) .. (-1.2,-2.2);
+
+    \fill (-1.2,-2.2) circle (1.2pt);
+    \fill (1.2,-2.2) circle (1.2pt);
+
+    \node[below] at (-1.2,-2.2) {$\vrep^*(z_1)$};
+    \node[below] at (1.2,-2.2) {$\vrep(z_2)$};
+
+    \node at (0,-1.05) {$\ev_{\vrep}^{L}$};
+  \end{scope}
+
+  % ---------------- ev^R ----------------
+  \begin{scope}[xshift=3.2cm]
+    % cap, oriented R -> R*
+    \draw[
+      thick,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.18 with {\arrow{Latex}}}
+    ] (-1.2,-2.2)
+      .. controls (-1.2,-0.8) and (-0.45,0.15) .. (0,0.15)
+      .. controls (0.45,0.15) and (1.2,-0.8) .. (1.2,-2.2);
+
+    \fill (-1.2,-2.2) circle (1.2pt);
+    \fill (1.2,-2.2) circle (1.2pt);
+
+    \node[below] at (-1.2,-2.2) {$\vrep(z_1)$};
+    \node[below] at (1.2,-2.2) {$\vrep^*(z_2)$};
+
+    \node at (0,-1.05) {$\ev_{\vrep}^{R}$};
+  \end{scope}
+\end{tikzpicture}
+\end{figure}
 % For concrete computations, it seems useful to describe how these morphisms behave in correlation functions.
 % Here it is important that $\boxtimes = \boxtimes_{0,1}$. Using the connection on conformal blocks we get
 % unambiguous continuation to $z_2 - z_1 \in \bbR_+$.
@@ -3428,12 +3771,58 @@ Again this gives two morphisms,
 \end{equation}
 and again we will fix the normalizations below.
 
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[baseline,>=Latex,scale=0.9,yscale=0.7]
+  % ---------------- coev^L ----------------
+  \begin{scope}[xshift=-3.2cm]
+    % cup, arrow reversed
+    \draw[
+      thick,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.18 with {\arrowreversed{Latex}}}
+    ] (-1.2,2.2)
+      .. controls (-1.2,0.8) and (-0.45,-0.15) .. (0,-0.15)
+      .. controls (0.45,-0.15) and (1.2,0.8) .. (1.2,2.2);
+
+    \fill (-1.2,2.2) circle (1.2pt);
+    \fill (1.2,2.2) circle (1.2pt);
+
+    \node[above] at (-1.2,2.2) {$\vrep(z_1)$};
+    \node[above] at (1.2,2.2) {$\vrep^*(z_2)$};
+
+    \node at (0,1.05) {$\coev_{\vrep}^{L}$};
+  \end{scope}
+
+  % ---------------- coev^R ----------------
+  \begin{scope}[xshift=3.2cm]
+    % cup, arrow reversed
+    \draw[
+      thick,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.18 with {\arrowreversed{Latex}}}
+    ] (1.2,2.2)
+      .. controls (1.2,0.8) and (0.45,-0.15) .. (0,-0.15)
+      .. controls (-0.45,-0.15) and (-1.2,0.8) .. (-1.2,2.2);
+
+    \fill (-1.2,2.2) circle (1.2pt);
+    \fill (1.2,2.2) circle (1.2pt);
+
+    \node[above] at (-1.2,2.2) {$\vrep^*(z_1)$};
+    \node[above] at (1.2,2.2) {$\vrep(z_2)$};
+
+    \node at (0,1.05) {$\coev_{\vrep}^{R}$};
+  \end{scope}
+\end{tikzpicture}
+\end{figure}
+
 % For instance, concretely we have
 % \begin{equation}
 %  \coev_\vrep^L(\vac) = \sum_{n,i} e_{n,i} \otimes \rho(g) e^*_{n,i}
 % \end{equation}
 % where $g$ is the pointed change of coordinates from the coordinate $1/z$ around $\infty$
 % to the coordinate $z-1$ around $1$.
+
 
 \subsubsection{Coherence}
 
@@ -3610,25 +3999,39 @@ of $\ev$ and $\coev$, which we left unfixed until now.
 \[
 \coev_X^{R} = b^{-1}_{X^*,X} \circ \coev_X^{L} \, ,
 \qquad
-\ev_X^{R} = \ev_X^{L} \circ b_{X,X^*} \, ,
+\ev_X^{R} = \ev_X^{L} \circ b^{-1}_{X^*,X} \, ,
 \]
 or equivalently,
 \[
 \coev_X^{L} = b_{X^*,X}\circ \coev_X^{R},
 \qquad
-\ev_X^{L} = \ev_X^{R}\circ b^{-1}_{X,X^*}.
+\ev_X^{L} = \ev_X^{R}\circ b_{X^*,X}.
 \]
 These relations mean that the structure is somewhat redundant:
 we could \ti{define} $\coev^R$ in terms of $\coev^L$ and the
 braiding, and similarly we could define $\ev^R$ in terms of
 $\ev^L$ and the braiding. We can think of them as
 fixing the normalization of $\coev^R$, $\ev^R$ completely
-in terms of those of $\coev^L$, $\ev^L$.
+in terms of those of $\coev^L$, $\ev^L$. 
+They imply $\ev^L_X \circ \coev^R_X = \ev^R_X \circ \coev^L_X$.
+
+\begin{example}
+If $\vrep = \vrep(M)$, then we may choose 
+$\coev^L_{\vrep}(\bid)$
+to be the standard conformal block, which in particular acts
+on $m \in M$, $\eta \in M^*$ by $\Phi(m,\eta) = \eta \cdot m$.
+If we do so, then 
+$\coev^R_{\vrep}(\bid)$ is fixed to \fixme{sign}
+$\Phi(m,\eta) = \exp(2 \pi \I h_M) \eta \cdot m$.
+\end{example}
 
 Note there is a \ti{convention} here: we could have replaced
-$b \to b^{-1}$ in these formulas. As far as I understand,
-we have to live with this convention, since there is no 
-canonical way of taking a square-root of the braiding.
+$b_{X,Y} \to b^{-1}_{Y,X}$ in these formulas. As far as I understand,
+we have to live with this convention, and different authors
+even make different choices here.
+
+
+
 
 \item The twist is compatible with the braiding and associator,
 in the sense that:
@@ -3919,13 +4322,13 @@ Its gives rise to a single $F$-matrix,
 \begin{equation}
  F_{111}^1: (V_{11}^{0} \otimes V_{01}^1 \oplus V_{11}^2 \otimes V_{21}^1) \to (V_{10}^{1} \otimes V_{11}^0 \oplus V_{12}^1 \otimes V_{11}^2) \, .
 \end{equation}
-Again using the hexagon relations this matrix is determined,
-\begin{equation}
-  F_{111}^1 = \frac{1}{\sqrt2} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}
-\end{equation}
-(Here the diagonal entries are canonical once we have fixed
-the $R$-matrices; the off-diagonal entries involve an extra
-gauge choice.)
+% Again using the hexagon relations this matrix is determined,
+% \begin{equation}
+%   F_{111}^1 = \frac{1}{\sqrt2} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}
+% \end{equation}
+% (Here the diagonal entries are canonical once we have fixed
+% the $R$-matrices; the off-diagonal entries involve an extra
+% gauge choice.)
 
 Let us try to calculate $F_{111}^1$ directly from the vertex algebra.
 Actually we 
@@ -4030,13 +4433,13 @@ relates the monodromy eigenbasis at $0$ to the monodromy eigenbasis
 at $1$. That's what we need here.
 To write the result, let
 \begin{equation}
-  \kappa = k + 2, \qquad q = \exp(\pi \I / \kappa), \qquad [n]_q = q^{n-1} + q^{n-3} + \cdots + q^{-n+1} = \frac{\sin(\frac{n\pi}{\kappa})}{\sin(\frac{\pi}{\kappa})} > 0 \, .
+  \kappa = k + 2, \qquad q = \exp(\pi \I / \kappa), \qquad [n]_q = q^{n-1} + q^{n-3} + \cdots + q^{-n+1} = \frac{\sin(\frac{n\pi}{\kappa})}{\sin(\frac{\pi}{\kappa})} \, .
 \end{equation}
-Then the connection formula gives
+Then (after some work, omitted here!) the connection formula gives
 \begin{equation}
   F_{111}^1 = \frac{1}{[2]_q} \begin{pmatrix} -1 & \sqrt{[3]_q} \\ \sqrt{[3]_q} & 1 \end{pmatrix} \, .
 \end{equation}
-At $k=2$ this recovers the formula we wrote before \fixme{up to tricky sign!} while as $k \to \infty$ it recovers the classical change-of-basis
+As $k \to \infty$ this recovers the classical change-of-basis
 (as it must since in that limit the equation just becomes
 $\partial_z \psi = 0$.)
 
@@ -4103,30 +4506,110 @@ Moreover it implies a kind of unitarity for the category $\cC$,
 as follows. \fixme{...}
 
 
-\subsection{Quantum dimensions}
+\subsection{Quantum dimensions and quantum traces}
 
 Now how to calculate the link invariants in practice?
 One simple example of such a link invariant would be the case of the unknot.
 The invariant for an unknot labeled with $X$ is 
 called the \ti{quantum dimension} $d_X$. It has
 \begin{equation}
-  d_X = \ev_X^R \circ \coev_X^L \, .
+  d_X = \ev_X^R \circ \coev_X^L = \ev_X^L \circ \coev_X^R \, .
 \end{equation}
 
 There is a direct way of computing the 
 quantum dimension if we already know the $F$-matrices:
 
-\begin{exercise}
-Show that $d_X = 1 / (F_{X X^* X}^X)_{\bid \bid}$.
-(Warning: we have to be careful about which bases we use, to make
-this statement true on the nose!)
-\end{exercise}
+\begin{prop}
+Choose bases for $V_{XX^*}^\bid = \Hom(\bid, X \boxtimes X^*)$ and $V_{X^*X}^\bid = \Hom(\bid, X^* \boxtimes X)$
+given by $\coev_X^R(\bid)$ and $\coev_X^L(\bid)$ respectively.
+Then we have 
+\begin{equation}
+  d_X = 1 / (F_{X X^* X}^X)_{\bid \bid}
+\end{equation}
+\end{prop}
+
+\begin{proof}
+Call $(X \boxtimes X^*) \boxtimes X$ and $X \boxtimes (X^* \boxtimes X)$
+respectively the $t$ and $s$ channels.
+Let $\psi_t^\mu$ and $\psi_s^\mu$ be the $t$- and $s$-channel bases of
+$\Hom(X\boxtimes X^*\boxtimes X,X)$ induced by the chosen bases of the multiplicity spaces.
+% Since our basis vectors in
+% \[
+% V_{XX^*}^{\bid}=\Hom(\bid,X\boxtimes X^*),
+% \qquad
+% V_{X^*X}^{\bid}=\Hom(\bid,X^*\boxtimes X)
+% \]
+% are $\coev_X^R$ and $\coev_X^L$, the corresponding dual basis vectors in
+% \[
+% \Hom(X\boxtimes X^*,\bid),\qquad \Hom(X^*\boxtimes X,\bid)
+% \]
+% are $d_X^{-1}\ev_X^L$ and $d_X^{-1}\ev_X^R$.
+We have
+\[
+\psi_t^{\bid}=\frac1{d_X}\,(\ev_X^L\boxtimes \id_X),
+\qquad
+\psi_s^{\bid}=\frac1{d_X}\,(\id_X\boxtimes \ev_X^R).
+\]
+By definition of the $F$-matrix,
+\[
+\psi_t^{\bid}=\sum_\mu (F_{XX^*X}^X)_{\mu\bid}\,\psi_s^\mu .
+\]
+
+Now let
+\[
+e=\frac1{d_X}\,\coev_X^L\circ \ev_X^R \in \End(X^*\boxtimes X).
+\]
+We have $e^2=e$, so $e$ is the projector onto the
+$\bid$-summand in $X^*\boxtimes X$. Therefore
+\[
+\psi_s^\mu\circ (\id_X\boxtimes e)=
+\begin{cases}
+\psi_s^{\bid}, & \mu=\bid,\\
+0, & \mu\neq \bid.
+\end{cases}
+\]
+Thus
+\[
+\psi_t^{\bid}\circ(\id_X\boxtimes e)
+=
+(F_{XX^*X}^X)_{\bid\bid}\,\psi_s^{\bid}.
+\]
+
+On the other hand,
+\begin{align*}
+\psi_t^{\bid}\circ(\id_X\boxtimes e)
+&=
+\frac1{d_X^2}\,
+(\ev_X^L\boxtimes \id_X)\circ
+(\id_X\boxtimes \coev_X^L\circ \ev_X^R) \\
+&=
+\frac1{d_X^2}\,
+(\id_X\boxtimes \ev_X^R)
+=
+\frac1{d_X}\,\psi_s^{\bid},
+\end{align*}
+using the zig-zag identity.
+% \[
+% (\ev_X^L\boxtimes \id_X)\circ(\id_X\boxtimes \coev_X^L)=\id_X.
+% \]
+Comparing the two expressions, we obtain
+\[
+(F_{XX^*X}^X)_{\bid\bid}=\frac1{d_X},
+\]
+as desired.
+\end{proof}
 
 \begin{example}
-In \fixme{...} this formula gives
-$d_1 = [2]_q = q + q^{-1}$. \fixme{again up to tricky sign!}
-(For $k = 2$ this is $d_1 = \sqrt2$.)
-Note this matches with the Jones polynomial of the unknot,
+Applying this formula to $L_k(\fsl_2)$ we get
+\begin{equation}
+ d_1 = [2]_q = q + q^{-1} \, . 
+\end{equation}
+(Note a tricky sign here: the bases we used in the 
+calculation \fixme{...} disagree with the ones needed
+in \fixme{...})
+For $k = 2$ this is $d_1 = \sqrt2$ as we expected.
+Note that $d_1$ 
+matches with the Jones polynomial of the unknot,
 in blackboard framing.
 \end{example}
 
@@ -4164,6 +4647,11 @@ $(d_0,d_1,d_2) = (1,\sqrt 2,1)$; and sure enough, this vector
 is a simultaneous eigenvector of all three matrices.
 \end{example}
 
+More generally we also have the quantum trace:
+given $f: X \to X$ we define
+\begin{equation}
+  \Tr f = \ev^R_X \circ (f \otimes \id_{X^*}) \circ \coev^L_X = \ev_X^L \circ (\id_{X^*} \otimes f) \circ \coev_X^R \, .
+\end{equation}
 
 
 \subsection{Skein relations}
