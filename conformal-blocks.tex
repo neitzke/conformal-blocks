@@ -2550,7 +2550,7 @@ inserted the space of conformal blocks is $\Hom(\vrep_1, \vrep_2^*)$
 \end{exercise}
 
 \begin{exercise}
-Prove that $(\vrep^*)^* = \vrep$.
+Prove that $(\vrep^*)^* = \vrep$ in a canonical way.
 \end{exercise}
 
 \begin{exercise}
@@ -2573,6 +2573,10 @@ there is a unique invariant bilinear pairing up to scale
 as long as $L_1$ annihilates $\vertex_1$. Then we have
 $\vrep \simeq \vrep^*$ if and only if this unique pairing is 
 nondegenerate.
+
+\begin{exercise}
+Prove that $\Hom(\vrep_1, \vrep_2) = \Hom(\vrep_2^*, \vrep_1^*)$.
+\end{exercise}
 
 
 \subsection{Varying the curve}
@@ -3485,7 +3489,6 @@ and in particular
 \end{equation}
 
 Sometimes we just use $b$ for $b^+$.
-\fixme{diagram: left over right, i.e. overcrossing}
 
 Concretely, what is the data of $b$?
 Use the canonical decomposition 
@@ -4130,11 +4133,11 @@ category $\cC$ is indeed strict.
 \subsection{Link invariants}
 
 Now given any premodular tensor category $\cC$
-we can consider oriented ribbon link diagrams,
+we can consider oriented ribbon link diagrams $L$,
 where each component is labeled by an object $\vrep$ of $\cC$ (reversing orientation
 swaps $\vrep \to \vrep^*$).
 
-Such a diagram gives a morphism $\bid \to \bid$ in $\cC$:
+Such a diagram gives a morphism $Z_L: \bid \to \bid$ in $\cC$:
 cups/caps give $\coev_\vrep$ and $\ev_\vrep$, 
 twists/kinks give $\theta_\vrep^{\pm 1}$,
 crossings give $b^\pm_{\vrep,\vrep'}$.
@@ -4142,11 +4145,12 @@ We can also sprinkle in associators as necessary, or maybe better,
 pass to a strictification of $\cC$, so we don't need them.
 
 Since $\Hom(\bid,\bid) = \bbC$ 
-we can think of the result as a number associated to the 
-link diagram. (Or, perhaps more concretely, we can think of the link diagram as defining
-an operator which maps the space of conformal blocks on $S^2$ to itself.)
-Now the nontrivial claim: this number 
-is actually an invariant of the ribbon link.
+we can think of $Z_L$ as a number associated to the 
+link diagram. (Or, perhaps more concretely, we can think of the link diagram as defining an operator which maps the
+ space of conformal blocks on $S^2$ to itself.)
+Now the nontrivial claim: $Z_L$
+is actually an invariant of the ribbon link, not only of the link
+diagram.
 This amounts to checking that it is invariant under various moves.
 All of the needed invariance follow from the coherences we have
 already discussed:
@@ -4521,7 +4525,7 @@ quantum dimension if we already know the $F$-matrices:
 
 \begin{prop}
 Choose bases for $V_{XX^*}^\bid = \Hom(\bid, X \boxtimes X^*)$ and $V_{X^*X}^\bid = \Hom(\bid, X^* \boxtimes X)$
-given by $\coev_X^R(\bid)$ and $\coev_X^L(\bid)$ respectively.
+given by $\coev_X^L(\bid)$ and $\coev_X^R(\bid)$ respectively.
 Then we have 
 \begin{equation}
   d_X = 1 / (F_{X X^* X}^X)_{\bid \bid}
@@ -4546,9 +4550,9 @@ $\Hom(X\boxtimes X^*\boxtimes X,X)$ induced by the chosen bases of the multiplic
 % are $d_X^{-1}\ev_X^L$ and $d_X^{-1}\ev_X^R$.
 We have
 \[
-\psi_t^{\bid}=\frac1{d_X}\,(\ev_X^L\boxtimes \id_X),
+\psi_t^{\bid}=\frac1{d_X}\,(\ev_X^R\boxtimes \id_X),
 \qquad
-\psi_s^{\bid}=\frac1{d_X}\,(\id_X\boxtimes \ev_X^R).
+\psi_s^{\bid}=\frac1{d_X}\,(\id_X\boxtimes \ev_X^L).
 \]
 By definition of the $F$-matrix,
 \[
@@ -4557,7 +4561,7 @@ By definition of the $F$-matrix,
 
 Now let
 \[
-e=\frac1{d_X}\,\coev_X^L\circ \ev_X^R \in \End(X^*\boxtimes X).
+e=\frac1{d_X}\,\coev_X^R\circ \ev_X^L \in \End(X^*\boxtimes X).
 \]
 We have $e^2=e$, so $e$ is the projector onto the
 $\bid$-summand in $X^*\boxtimes X$. Therefore
@@ -4580,11 +4584,11 @@ On the other hand,
 \psi_t^{\bid}\circ(\id_X\boxtimes e)
 &=
 \frac1{d_X^2}\,
-(\ev_X^L\boxtimes \id_X)\circ
-(\id_X\boxtimes \coev_X^L\circ \ev_X^R) \\
+(\ev_X^R\boxtimes \id_X)\circ
+(\id_X\boxtimes \coev_X^R\circ \ev_X^L) \\
 &=
 \frac1{d_X^2}\,
-(\id_X\boxtimes \ev_X^R)
+(\id_X\boxtimes \ev_X^L)
 =
 \frac1{d_X}\,\psi_s^{\bid},
 \end{align*}
@@ -4599,14 +4603,237 @@ Comparing the two expressions, we obtain
 as desired.
 \end{proof}
 
+There is a little subtlety about self-dual objects:
+
+\begin{defn}
+The \ti{transpose} of an element $f \in \Hom(X,Y)$
+is an element $f^t \in \Hom(Y^*, X^*)$ 
+defined by
+\[
+f^t
+=
+(\ev_Y^R\boxtimes \id_{X^*})
+\circ
+(\id_{Y^*}\boxtimes f\boxtimes \id_{X^*})
+\circ
+(\id_{Y^*}\boxtimes \coev_X^L) \, .
+\] \,
+\end{defn}
+The transpose obeys (and is characterized by)
+\[
+\ev_Y^L\circ(f\boxtimes \id_{Y^*})
+=
+\ev_X^L\circ(\id_X\boxtimes f^t), \quad \ev_Y^R\circ(\id_{Y^*}\boxtimes f)
+=
+\ev_X^R\circ(f^t\boxtimes \id_X).
+\]
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[baseline,>=Latex,scale=0.9,yscale=0.7]
+  \tikzset{
+    strand/.style={line width=0.9pt},
+    morph/.style={draw,thick,minimum width=0.55cm,minimum height=0.42cm,inner sep=1pt,fill=white},
+  }
+
+  % ---------------- left side ----------------
+  \begin{scope}[xshift=-2.8cm]
+    % cap
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.82 with {\arrowreversed{Latex}}}
+    ]
+      (-1.2,0.7)
+      .. controls (-1.2,1.3) and (-0.45,1.6) .. (0,1.6)
+      .. controls (0.45,1.6) and (1.2,1.3) .. (1.2,0.7);
+
+    % left strand with f
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.25 with {\arrow{Latex}}}
+    ] (-1.2,0.7) -- (-1.2,-0.1);
+    \node[morph] at (-1.2,-0.42) {$f$};
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.75 with {\arrow{Latex}}}
+    ] (-1.2,-0.74) -- (-1.2,-1.45);
+
+    % right strand
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.5 with {\arrowreversed{Latex}}}
+    ] (1.2,0.7) -- (1.2,-1.45);
+
+    \fill (-1.2,-1.45) circle (1.2pt);
+    \fill (1.2,-1.45) circle (1.2pt);
+
+    \node[below] at (-1.2,-1.45) {$X$};
+    \node[below] at (1.2,-1.45) {$Y^*$};
+
+    \node at (0,0.42) {$\ev_Y^L$};
+  \end{scope}
+
+  \node at (0,-0.4) {$=$};
+
+  % ---------------- right side ----------------
+  \begin{scope}[xshift=2.8cm]
+    % cap
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.82 with {\arrowreversed{Latex}}}
+    ]
+      (-1.2,0.7)
+      .. controls (-1.2,1.3) and (-0.45,1.6) .. (0,1.6)
+      .. controls (0.45,1.6) and (1.2,1.3) .. (1.2,0.7);
+
+    % left strand
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.5 with {\arrow{Latex}}}
+    ] (-1.2,0.7) -- (-1.2,-1.45);
+
+    % right strand with f^t
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.25 with {\arrowreversed{Latex}}}
+    ] (1.2,0.7) -- (1.2,-0.1);
+    \node[morph] at (1.2,-0.42) {$f^t$};
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.75 with {\arrowreversed{Latex}}}
+    ] (1.2,-0.74) -- (1.2,-1.45);
+
+    \fill (-1.2,-1.45) circle (1.2pt);
+    \fill (1.2,-1.45) circle (1.2pt);
+
+    \node[below] at (-1.2,-1.45) {$X$};
+    \node[below] at (1.2,-1.45) {$Y^*$};
+
+    \node at (0,0.42) {$\ev_X^L$};
+  \end{scope}
+\end{tikzpicture}
+\end{figure}
+
+Suppressing the pivotal identifications $X\simeq X^{**}$ and $Y\simeq Y^{**}$, we have
+\[
+f^{tt}=f.
+\]
+We also have the canonical isomorphism
+\[
+\Hom(X,Y^*)  \simeq  \Hom(X\boxtimes Y,\bid),
+\qquad
+f \longmapsto \ev_Y^L \circ (f\boxtimes \id_Y)
+\]
+Composing with this, we can define the transpose of
+$\phi \in \Hom(X \boxtimes Y, \bid)$ 
+as
+$\phi^t \in \Hom(Y \boxtimes X, \bid)$.
+
+\begin{defn}
+Suppose $X$ is a simple object with $X \simeq X^*$. 
+Consider the $1$-dimensional vector space $\Hom(X,X^*) \simeq \Hom(X \boxtimes X, \bid)$.
+It has an involution $\phi \mapsto \phi^t$.
+This involution acts as a scalar $\nu_X \in \{ \pm 1 \}$, called
+the \ti{Frobenius-Schur indicator} of $X$.
+\end{defn}
+
+\begin{example}
+The classical example arises when $\cC$ is the category of 
+representations of a group, say a finite group or a compact Lie group.
+Then, for simple $X$ which is self-dual, there is a map of representations
+\begin{equation}
+  X \otimes X \to \bbC
+\end{equation}
+(invariant bilinear pairing), unique up to scalar multiple, 
+which could be either symmetric or
+antisymmetric. We have $\nu_X = +1 $ if it is symmetric,
+$-1$ if antisymmetric.
+\end{example}
+
+\begin{example}
+For $L_k(\fg)$ the Frobenius-Schur indicator is inherited from
+the finite-dimensional modules. In particular,
+for $L_k(\fsl_2)$ every simple object $\cS_k$ is self-dual,
+and $\nu_k = (-1)^k$.
+\end{example}
+
+\begin{exercise}
+Prove that $\nu_X = \theta_X R_{XX}^\bid$. \fixme{check sign}
+\end{exercise}
+
+\begin{prop}
+Suppose $X$ is simple and self-dual. Then
+\[
+(F_{XXX}^X)_{\bid\bid}
+=
+\nu_X\,(F_{XX^*X}^X)_{\bid\bid} \, .
+\]
+\end{prop}
+
+\begin{proof}
+
+Choose a basis vector
+\[
+q\in V_{XX}^{\bid}=\Hom(\bid,X\boxtimes X),
+\]
+which we will use for the vacuum channel in both copies of $V_{XX}^{\bid}$ in the definition of $F_{XXX}^X$.
+Let
+\[
+p\in \Hom(X\boxtimes X,\bid)
+\]
+be the dual basis vector, so that $p\circ q=\id_{\bid}$.
+$p$ determines a map $u: X \to X^*$, by 
+\[
+p=\ev_X^L\circ (u \boxtimes \id_X),
+\]
+which then has
+\[
+p^t=\ev_X^R\circ (\id_X \boxtimes u).
+\]
+Let
+\[
+T:\Hom(X\boxtimes X^*\boxtimes X,X)\longrightarrow \Hom(X\boxtimes X\boxtimes X,X)
+\]
+be the isomorphism given by precomposition with $d_X \id_X\boxtimes u\boxtimes \id_X$.
+Applying $T$ to the vacuum basis vectors we 
+used for $F_{XX^*X}^X$ gives
+\[
+T\!\left(\frac1{d_X}\,\ev_X^R\boxtimes \id_X\right)
+= p^t \boxtimes \id_X, \qquad
+T\!\left(\frac1{d_X}\,\id_X\boxtimes \ev_X^L\right)
+=
+\id_X\boxtimes p \, .
+\]
+On the other hand, the vacuum basis vectors for $F_{XXX}^X$ determined by $q$ are
+\[
+p\boxtimes \id_X,
+\qquad
+\id_X\boxtimes p.
+\]
+Thus the change-of-basis coefficients for the two bases differ by
+$\nu_X$, giving the desired result.
+\end{proof}
+\begin{cor}
+Suppose $X \simeq X^*$.
+Choose a basis for $V^1_{XX}$ once and for all.
+Then we have
+\begin{equation}
+  d_X = \nu_X/(F^X_{XXX})_{\bid \bid} \, .
+\end{equation}
+\end{cor}
+
 \begin{example}
 Applying this formula to $L_k(\fsl_2)$ we get
-\begin{equation}
+\begin{equation} \label{eq:qdim-1}
  d_1 = [2]_q = q + q^{-1} \, . 
 \end{equation}
-(Note a tricky sign here: the bases we used in the 
-calculation \fixme{...} disagree with the ones needed
-in \fixme{...})
 For $k = 2$ this is $d_1 = \sqrt2$ as we expected.
 Note that $d_1$ 
 matches with the Jones polynomial of the unknot,
@@ -4656,19 +4883,60 @@ given $f: X \to X$ we define
 
 \subsection{Skein relations}
 
-What else can we say?
 Consider the case of $L_k(\fsl_2)$.
-We would like to relate overcrossings to undercrossings.
+Let $X = S_1$. We are interested in links colored by the object $X$.
+We would like to relate overcrossings to undercrossings,
+i.e. $b_{X,X}$ to $b^{-1}_{X,X}$.
+We have, with $Y = S_2$,
+\begin{equation}
+  X \boxtimes X = \bid \oplus Y
+\end{equation}
+and the braiding $b_{X,X}$ is diagonal with respect to this
+decomposition, with eigenvalues $\lambda_\bid = -\exp(-\pi \I (2 h_X)) = -q^{-3/2}$ and $\lambda_Y = \exp(-\pi \I(2 h_X - h_Y)) = q^{1/2}$.\footnote{By $q^{1/2}$ we mean $\exp(\pi \I / (2(k + 2)))$. Some authors would call this $A$.}
+
+Choose a definite isomorphism $\iota: X^* \to X$. Then, the element $e \in \End(X^* \boxtimes X)$ which we considered above becomes an element in
+$\End(X \boxtimes X)$. Since this space is $2$-dimensional,
+we must have
+\begin{equation}
+  b_{X,X} = \alpha \id + \beta \, e
+\end{equation}
+for some $\alpha$, $\beta$.
+In the $\bid$ channel this gives $\lambda_\bid = \alpha + \beta$
+and in the $Y$ channel it gives $\lambda_Y = \alpha$. In other words
+we have $q^{1/2} = \alpha$, $-q^{-3/2} = \alpha + \beta$.
+Solving these we get $\alpha = q^{1/2}$, $\beta = -q^{-1/2} (q + q^{-1}) e$, so
+\begin{equation} \label{eq:braiding-expansion}
+  b_{X,X} = q^{1/2} \id - q^{-1/2} (q + q^{-1}) e \, .
+\end{equation}
+For $b_{X,X}^{-1}$ we get a very similar relation, with all $q \to q^{-1}$,
+\begin{equation} \label{eq:braiding-expansion-2}
+  b^{-1}_{X,X} = q^{-1/2} \id - q^{1/2} (q + q^{-1}) e \, .
+\end{equation}
+Now we can subtract to get 
+\begin{equation} \label{eq:skein-relation}
+  q^{1/2} b_{X,X} - q^{-1/2} b^{-1}_{X,X} = (q - q^{-1}) \id
+\end{equation}
+which is an example of a \ti{skein relation}. \fixme{fig}
+
+Using \eqref{eq:skein-relation} and \eqref{eq:qdim-1}
+we can evaluate the invariants for framed link diagrams.
 \fixme{...}
 
+\fixme{warning, we don't get Kauffman bracket on the nose! Frobenius-Schur
+sign would spoil attempt to use unoriented diagrams; apparently there's a slightly
+different category that gives Kauffman bracket}
 
 \subsection{Verlinde loop operators}
 
 More generally, given a conformal block on a surface $C$, a colored framed oriented link
 in $C \times I$ produces an operator on the space of conformal blocks. In the case
 of a simple loop in $C$, this is sometimes called a \ti{Verlinde loop operator}.
-\fixme{...}
 
+Key facts about the Verlinde operators:
+\begin{enumerate}
+  \item They give an action of a \ti{skein algebra} on $\Conf(C)$.
+  \item ...
+\end{enumerate}
 
 \subsection{Modular structure}
 
@@ -4684,7 +4952,7 @@ Moreover they give \ti{parallel} sections \fixme{...}
 
 
 \subsection{The WZW model}
-
+\fixme{...}
 
 
 \subsection{Chern-Simons theory}
