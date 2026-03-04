@@ -415,6 +415,7 @@
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\ev}{ev}
 \DeclareMathOperator{\coev}{coev}
+\DeclareMathOperator{\Sk}{Sk}
 
 \newcommand{\insfig}[3]{
 
@@ -4146,8 +4147,9 @@ pass to a strictification of $\cC$, so we don't need them.
 
 Since $\Hom(\bid,\bid) = \bbC$ 
 we can think of $Z_L$ as a number associated to the 
-link diagram. (Or, perhaps more concretely, we can think of the link diagram as defining an operator which maps the
- space of conformal blocks on $S^2$ to itself.)
+link diagram. 
+% (Or, perhaps more concretely, we can think of the link diagram as defining an operator which maps the
+%  space of conformal blocks on $S^2$ to itself.)
 Now the nontrivial claim: $Z_L$
 is actually an invariant of the ribbon link, not only of the link
 diagram.
@@ -4255,9 +4257,7 @@ then this determines the former, using the exercise above.)
 (Note it means that these particles are ``semions,'' like half of a 
 fermion: when you exchange them you get a factor of $\I$.)
 
-All of the triple fusion spaces $\cS_i \boxtimes \cS_j \boxtimes \cS_k$ 
-are simple. After choosing bases appropriately we can take all the 
-$F_{ijk}^\ell = 1$. (Note it indeed satisfies the pentagon equation.)
+\fixme{should also discuss $F$-matrices, carefully; all scalars $\pm 1$ but which?}
 
 \end{example}
 
@@ -4322,7 +4322,7 @@ There is one 2-dimensional fusion space
 \begin{equation}
  \cS_1 \boxtimes \cS_1 \boxtimes \cS_1 \simeq \cS_1 \oplus \cS_1 \, . 
 \end{equation}
-Its gives rise to a single $F$-matrix,
+It gives rise to a single $F$-matrix,
 \begin{equation}
  F_{111}^1: (V_{11}^{0} \otimes V_{01}^1 \oplus V_{11}^2 \otimes V_{21}^1) \to (V_{10}^{1} \otimes V_{11}^0 \oplus V_{12}^1 \otimes V_{11}^2) \, .
 \end{equation}
@@ -4411,7 +4411,8 @@ antisymmetric pairing.
     m(u \otimes (vw)) = \frac{1}{\sqrt3} (\eps(u,v) w + \eps(u,w) v) \, . 
   \end{equation}
 \end{enumerate}
-Then $\phi_a: M_1^3 \to M_a$ are
+Once we have made these choices, everything else is fixed.
+The $\phi_a: M_1^3 \to M_a$ are
 \begin{equation}
   \phi_0(u,v,w) = \eps(u,v) w, \quad \phi_2(u,v,w) = \frac{1}{\sqrt3} (\eps(v,w) u + \eps(u,w) v) \, ,
 \end{equation}
@@ -4419,9 +4420,8 @@ and similarly $\phi'_a: M_1^3 \to M_a$ are
 \begin{equation}
   \phi'_0(u,v,w) = \eps(v,w) u, \quad \phi'_2(u,v,w) = \frac{1}{\sqrt3} (\eps(u,v) w + \eps(u,w) v) \, .
 \end{equation}
-
 The change-of-basis between these two is
-\begin{equation}
+\begin{equation} \label{eq:F-classical}
   F_{cl} = \frac12 \begin{pmatrix} -1 & \sqrt3 \\ \sqrt3 & 1 \end{pmatrix} \, ,
 \end{equation}
 and relative to the basis $(\phi_0, \phi_2)$ we have
@@ -4490,6 +4490,11 @@ $\partial_z \psi = 0$.)
 
 
 \end{example}
+
+
+\begin{exercise}
+Verify \eqref{eq:F-classical} by direct calculation.
+\end{exercise}
 
 
 \subsection{Unitarity}
@@ -4892,51 +4897,55 @@ We have, with $Y = S_2$,
   X \boxtimes X = \bid \oplus Y
 \end{equation}
 and the braiding $b_{X,X}$ is diagonal with respect to this
-decomposition, with eigenvalues $\lambda_\bid = -\exp(-\pi \I (2 h_X)) = -q^{-3/2}$ and $\lambda_Y = \exp(-\pi \I(2 h_X - h_Y)) = q^{1/2}$.\footnote{By $q^{1/2}$ we mean $\exp(\pi \I / (2(k + 2)))$. Some authors would call this $A$.}
-
-Choose a definite isomorphism $\iota: X^* \to X$. Then, the element $e \in \End(X^* \boxtimes X)$ which we considered above becomes an element in
-$\End(X \boxtimes X)$. Since this space is $2$-dimensional,
-we must have
+decomposition, with eigenvalues\footnote{By $q^{1/2}$ we mean specifically $\exp(\pi \I / (2(k + 2)))$. Some authors would call this $A$.}
 \begin{equation}
-  b_{X,X} = \alpha \id + \beta \, e
+ \lambda_\bid = -\exp(-\pi \I (2 h_X)) = -q^{-3/2}, \qquad  \lambda_Y = \exp(-\pi \I(2 h_X - h_Y)) = q^{1/2} \, .
 \end{equation}
-for some $\alpha$, $\beta$.
-In the $\bid$ channel this gives $\lambda_\bid = \alpha + \beta$
-and in the $Y$ channel it gives $\lambda_Y = \alpha$. In other words
-we have $q^{1/2} = \alpha$, $-q^{-3/2} = \alpha + \beta$.
-Solving these we get $\alpha = q^{1/2}$, $\beta = -q^{-1/2} (q + q^{-1}) e$, so
-\begin{equation} \label{eq:braiding-expansion}
-  b_{X,X} = q^{1/2} \id - q^{-1/2} (q + q^{-1}) e \, .
-\end{equation}
-For $b_{X,X}^{-1}$ we get a very similar relation, with all $q \to q^{-1}$,
-\begin{equation} \label{eq:braiding-expansion-2}
-  b^{-1}_{X,X} = q^{-1/2} \id - q^{1/2} (q + q^{-1}) e \, .
-\end{equation}
-Now we can subtract to get 
+Similarly we can write the action of $b^{-1}_{X,X}$, and the action of $\id_{X \boxtimes X}$.
+Since these are $3$ operators acting on a $2$-dimensional space they must obey a linear relation,
+and we work it out to
 \begin{equation} \label{eq:skein-relation}
-  q^{1/2} b_{X,X} - q^{-1/2} b^{-1}_{X,X} = (q - q^{-1}) \id
+  q^{1/2} b_{X,X} - q^{-1/2} b^{-1}_{X,X} = (q - q^{-1}) \id \, .
 \end{equation}
-which is an example of a \ti{skein relation}. \fixme{fig}
+This is an example of a \ti{skein relation}. \fixme{fig}
 
-Using \eqref{eq:skein-relation} and \eqref{eq:qdim-1}
-we can evaluate the invariants for framed link diagrams.
-\fixme{...}
+Using \eqref{eq:skein-relation} and \eqref{eq:qdim-1}, together with the ribbon isotopy invariance,
+we can evaluate the invariants $Z_L$ for oriented link diagrams $L$ colored by the representation $X$.
+(The idea is that we can use the skein relation to replace overcrossings by undercrossings and
+vice versa, modulo links with fewer crossings; but by changing crossings appropriately we can always reduce
+the knot to a bunch of unknots, so we can evaluate it.)
+The resulting $Z_L$ is an invariant of the ribbon link. We can modify it slightly to get an invariant of 
+the link alone:
+\begin{prop}[$L_k(\fsl_2)$ invariants vs Jones polynomials]
+Let $J(L)$ denote the Jones polynomial of the link $L$. Then
+$Z_L = q^{3w(L)/2} J(L)$, where $w(L)$ is the \ti{writhe} of $L$, i.e.
+the number of overcrossings minus undercrossings.
+\end{prop}
 
-\fixme{warning, we don't get Kauffman bracket on the nose! Frobenius-Schur
-sign would spoil attempt to use unoriented diagrams; apparently there's a slightly
-different category that gives Kauffman bracket}
+A side remark, for those who know: $Z_L$ is very similar to the Kauffman bracket invariant. This is a little 
+puzzling, since the Kauffman bracket invariant is defined by an \ti{unoriented} skein relation,
+one which you can't really even write down if you use oriented links.
+You might think that it is possible to use unoriented links, since $X \simeq X^*$. But the
+fact that $\nu_X = -1$ makes this tricky: you have to insert ``coupons'' on the links representing the
+isomorphism $X \simeq X^*$, and you can get a sign when you slide a coupon past a $\coev$ or $\ev$.
+There is a fix: you can modify the category $\cC$, changing the twist $\theta_X \to \nu_X \theta_X$; 
+after so doing you will have $\nu_X = 1$ for all simple objects. In this modified category you can really
+use unoriented links without fear, and then you get the Kauffman bracket relation on the nose.
+See the notorious \cite{Tingley2017MinusSign}, and \cite{SnyderTingley2009HalfTwist}.
+
 
 \subsection{Verlinde loop operators}
 
-More generally, given a conformal block on a surface $C$, a colored framed oriented link
-in $C \times I$ produces an operator on the space of conformal blocks. In the case
-of a simple loop in $C$, this is sometimes called a \ti{Verlinde loop operator}.
+Above we discussed colored oriented ribbon links $L \subset \bbR^3$.
 
-Key facts about the Verlinde operators:
-\begin{enumerate}
-  \item They give an action of a \ti{skein algebra} on $\Conf(C)$.
-  \item ...
-\end{enumerate}
+More generally by the same construction, a colored oriented ribbon link
+in $C \times I$ produces an operator on the space $\Conf(C)$ of conformal blocks. In the case
+of a simple loop in $C$, this is sometimes called a \ti{Verlinde loop operator}.
+The Verlinde loop operators generate a \ti{skein algebra} which we call $\Sk(\vertex, C)$.
+In the case $\vertex = L_k(\fsl_2)$ we wrote explicitly the relations defining the skein 
+algebra above.
+
+
 
 \subsection{Modular structure}
 
@@ -4956,8 +4965,69 @@ Moreover they give \ti{parallel} sections \fixme{...}
 
 
 \subsection{Chern-Simons theory}
-\fixme{...}
 
+Fix a compact, simply connected Lie group $G$ and 
+level $k\in \mathbb Z$. Also fix a connection $\de + A$ on a (trivialized)\footnote{Fortunately, when $G$ is compact
+simply connected, every principal $G$-bundle over a $3$-manifold is trivializable.}
+principal $G$-bundle over a closed oriented 
+$3$-manifold $M$. Then the \ti{Chern--Simons action} is
+\[
+S_{\mathrm{CS}}(A)
+=
+\frac{k}{4\pi}\int_M \Tr\!\left(
+A\wedge dA + \frac23 A\wedge A\wedge A
+\right).
+\]
+Then \ti{formally} the \ti{Chern-Simons partition function} is
+\[
+Z_{\mathrm{CS}}(M,g)
+=
+\int \mathcal D A \; e^{\, \I S_{\mathrm{CS}}(A)} \, .
+\]
+Here the integral is supposed to run over connections \ti{modulo gauge transformations}.
+It is important that the action $S_{\mathrm CS}(A)$ is invariant 
+under gauge transformations, up to a multiple of $2 \pi$; this is why we
+needed $k \in \bbZ$.
+Witten \cite{Witten1989Jones} introduced this quantum field theory and
+gave a method of computing the partition function, which was more fully developed 
+in \cite{ReshetikhinTuraev1991}.
+
+Formally one would
+expect it to be independent of the metric; actually this is not quite right:
+there is an \ti{anomaly}, expressed as follows.
+If $g_0$ and $g_1$ are two Riemannian metrics on $M$, then
+fix a metric $g$ on $\widetilde{M} = M \times[0,1]$, 
+restricting to $g_0$ and $g_1$ at the two ends.
+Let $R\in \Omega^2(\widetilde{M},\End(T\widetilde{M}))$ be the
+curvature of $g$.
+Then we have
+\[
+\frac{Z_{\mathrm{CS}}(M,g_1)}{Z_{\mathrm{CS}}(M,g_0)}
+=
+\exp \left[ -\frac{2 \pi \I\, c}{24}\int_{M\times[0,1]} p_1(R) \right] \, .
+\]
+where $p_1$ denotes the first Pontryagin form,
+\[
+p_1(R) = -\frac{1}{8\pi^2}\Tr(R\wedge R) \, .
+\]
+
+\begin{exercise} Prove that $p_1$ is conformally invariant.
+\end{exercise}
+
+% With the same convention, the gravitational Chern--Simons $3$-form is
+% \[
+% \cs(\omega)= -\frac{1}{8\pi^2}\Tr\!\left(\omega\wedge d\omega+\frac23\,\omega\wedge\omega\wedge\omega\right),
+% \]
+% so that
+% \[
+% d\,\cs(\omega)=p_1(\nabla),
+% \]
+% and hence
+% \[
+% \CS_{\mathrm{grav}}(g_1;f)-\CS_{\mathrm{grav}}(g_0;f)
+% =
+% \int_{M\times[0,1]} p_1(\widetilde\nabla).
+% \]
 
 
 % Now, let's consider conformal blocks
