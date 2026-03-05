@@ -5007,7 +5007,25 @@ consider the Bessel equation
 \[
 z^{2}y''+zy'+(z^{2}-\nu^{2})y=0 \, .
 \]
-Formally expanding around $\infty$ we expect solutions of the form
+Formally expanding around $\infty$ we expect solutions of the form\footnote{More exactly
+\[
+y^R_\pm(z)=z^{-1/2}\,e^{\pm \I z}\,\sum_{k\ge 0} a_k^{(\pm)}\,z^{-k},\qquad a_0^{(\pm)}=1,
+\]
+with
+\[
+a_k^{(\pm)}=\frac{(\pm \I)^k}{k!\,8^k}\prod_{m=1}^k\Bigl(4\nu^2-(2m-1)^2\Bigr).
+\]
+So
+\[
+y^R_\pm(z)=z^{-1/2}e^{\pm \I z}\Biggl(
+1
+\ \pm\ \frac{\I(4\nu^2-1)}{8z}
+\ -\ \frac{(4\nu^2-1)(4\nu^2-9)}{2!\,(8z)^2}
+\ \mp\ \frac{\I(4\nu^2-1)(4\nu^2-9)(4\nu^2-25)}{3!\,(8z)^3}
+\ + O(z^{-4})
+\Biggr).
+\]
+}
 \[ \label{eq:series-bessel}
 y^{R}_{\pm}(z)\sim z^{-1/2}e^{\pm \I z}\Bigl(1+O(z^{-1})\Bigr)\qquad (z\to +\infty),
 \]
@@ -5015,6 +5033,7 @@ and
 \[ \label{eq:series-bessel-2}
 y^{L}_{\pm}(z)\sim (-z)^{-1/2}e^{\pm \I z}\Bigl(1+O(z^{-1})\Bigr)\qquad (z\to -\infty).
 \]
+
 These series are not convergent.
 Nevertheless, there exist unique solutions $(y^{R}_{+},y^{R}_{-})$ (resp. $(y^{L}_{+},y^{L}_{-})$) which have the
 asymptotics \eqref{eq:series-bessel} as $z \to \infty$ (resp. \eqref{eq:series-bessel-2} as $z \to -\infty$). 
