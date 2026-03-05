@@ -416,6 +416,7 @@
 \DeclareMathOperator{\ev}{ev}
 \DeclareMathOperator{\coev}{coev}
 \DeclareMathOperator{\Sk}{Sk}
+\DeclareMathOperator{\CS}{CS}
 
 \newcommand{\insfig}[3]{
 
@@ -2364,7 +2365,7 @@ all $z_i$ flow by the vector field $v$, and the operators
 $(a L_{-1} + b L_0 + c L_1)$ act on all of the inserted modules.
 \end{exercise}
 
-\begin{example}
+\begin{example} \label{ex:kz-2-reg-1-irreg}
 Suppose $\vertex = V^k(\fg)$.
 We take $C = \bbC \bbP^1$, with marked points at $z_1$, $z_2$, and $\infty$.
 At $z_1$ and $z_2$ we insert parabolic Verma modules $\vrep(M_1)$ and $\vrep(M_2)$
@@ -2378,10 +2379,9 @@ the fact
 \end{equation}
 All positive modes annihilate $M_1$, so we only have to deal with $J^a_{-1} J^a_0$.
 Now consider the function $f = \frac{1}{z-z_1}$. 
-We use its expansions around $z_1, z_2, \infty$ to see
-it generates the operator
+We use its expansions around $z_1, z_2, \infty$ to see that
 \begin{equation}
-  J^a_{-1} \otimes \bid \otimes \bid + \sum_{n \ge 0} \frac{\bid \otimes J^a_{n} \otimes \bid}{(z_1 - z_2)^{n+1}} + \sum_{n \ge 0} z_1^n (\bid \otimes \bid \otimes J^a_{n+1})
+ o(f J^a) = J^a_{-1} \otimes \bid \otimes \bid + \sum_{n \ge 0} \frac{\bid \otimes J^a_{n} \otimes \bid}{(z_1 - z_2)^{n+1}} + \sum_{n \ge 0} z_1^n (\bid \otimes \bid \otimes J^a_{n+1})
 \end{equation}
 Acting on $M_1 \otimes M_2 \otimes \bbC \vac_u$
 this reduces to
@@ -2399,7 +2399,7 @@ Very similarly, if we have $n$ marked points in the plane, the action of $L_{-1}
 \begin{equation}
   L^{(i)}_{-1} = - \frac{1}{k + h^\vee} \sum_{j \neq i} \sum_{a=1}^{\dim \fg} \frac{(J^a_0)^{(i)} (J^a_0)^{(j)}}{z_i - z_j}
 \end{equation}
-Altogether then, we have a PDE in the bundle $\Coinv(C) \simeq \bigotimes_i V_i$
+Altogether then, we have a PDE in the bundle $\Coinv(C) \simeq \bigotimes_i M_i$
 over $\Conf_n(\bbC)$, given by the operators
 \begin{equation} \label{eq:kz-kohno}
   \partial_{z_i} - \frac{1}{k + h^\vee} \sum_{j \neq i} \frac{T_{ij}}{z_i - z_j}
@@ -4437,7 +4437,7 @@ relates the monodromy eigenbasis at $0$ to the monodromy eigenbasis
 at $1$. That's what we need here.
 To write the result, let
 \begin{equation}
-  \kappa = k + 2, \qquad q = \exp(\pi \I / \kappa), \qquad [n]_q = q^{n-1} + q^{n-3} + \cdots + q^{-n+1} = \frac{\sin(\frac{n\pi}{\kappa})}{\sin(\frac{\pi}{\kappa})} \, .
+  q = \exp(\pi \I / (k+2)), \qquad [n]_q = q^{n-1} + q^{n-3} + \cdots + q^{-n+1} = \frac{\sin(\frac{n\pi}{k+2})}{\sin(\frac{\pi}{k+2})} \, .
 \end{equation}
 Then (after some work, omitted here!) the connection formula gives
 \begin{equation}
@@ -4946,22 +4946,237 @@ In the case $\vertex = L_k(\fsl_2)$ we wrote explicitly the relations defining t
 algebra above.
 So each space $\Conf(C)$ is naturally a representation of $\Conf(C)$.
 
-The case of the torus is particularly interesting.
-\fixme{... Verlinde formula}
+
+
+\subsection{Irregular Verlinde operators}
+
+When we insert irregular modules on $C$, there is an additional possibility:
+we can define \ti{irregular Verlinde operators}. I don't know how to set
+up the theory generally, but let's discuss a specific example.
+
+We revisit the setup of \autoref{ex:kz-2-reg-1-irreg}.
+So, suppose $\vertex = V^k(\fg)$.
+We take $C = \bbC \bbP^1$, with marked points at $z_1$, $z_2$, and $\infty$.
+At $z_1$ and $z_2$ we insert parabolic 
+Verma modules $\vrep(M_1)$ and $\vrep(M_2)$
+while at $\infty$ we insert the irregular module $\vrep(u)$, for some $u \in \fg$ (identified with $\fg^*$ using the invariant pairing $\kappa$.)
+Again, the subspace $M_1 \otimes M_2 \otimes \bbC \vac_u \subset \vrep(M_1) \otimes \vrep(M_2) \otimes \vrep(u)$ 
+represents $\Coinv(C)$ for every $z_1$, $z_2$.
+The computation we did there is now modified by an extra term: we get
+% \begin{equation}
+%  o(f J^a) = J^a_{-1} \otimes \bid \otimes \bid + \sum_{n \ge 0} \frac{\bid \otimes J^a_{n} \otimes \bid}{(z_1 - z_2)^{n+1}} + \sum_{n \ge 0} z_1^n (\bid \otimes \bid \otimes J^a_{n+1})
+% \end{equation}
+% Acting on $M_1 \otimes M_2 \otimes \bbC \vac_u$
+% this reduces to
+% \begin{equation}
+%   J^a_{-1} \otimes \bid \otimes \bid + \frac{\bid \otimes J^a_{0} \otimes \bid}{z_1 - z_2} + \bid \otimes \bid \otimes u^a
+% \end{equation}
+% Thus the image of this operator lies in $K(C)$,
+% so modulo $K(C)$
+% we can replace the action of $J_{-1}$ at $z_1$
+% with the action of $J_0$ at $z_2$ plus the action of $u$ at $\infty$. 
+% This gives
+\begin{equation}
+  L^{(1)}_{-1} = - \frac{1}{k + h^\vee} \left( \sum_{a=1}^{\dim \fg} \frac{J^a_0 \otimes J^a_0 \otimes \bid}{z_1 - z_2} - u \otimes \bid \otimes \bid \right)
+\end{equation}
+Now fix $z_1 = z$, $z_2 = 0$. Then we get the ODE
+\begin{equation} \label{eq:kz-irregular}
+  \partial_z + \frac{1}{\hbar}  \left( u \otimes \bid + \frac{T}{z} \right)
+\end{equation}
+acting on $\Coinv(C) \simeq M_1 \otimes M_2$, where we introduced
+the notation $\hbar = k + h^\vee$.
+
+This ODE has a regular singularity at $z=0$ as we have discussed
+before, but also an irregular singularity at $z=\infty$.
+How can we think about its solutions near the irregular singularity? 
+A crude first approximation would be to forget the $T / z$ term.
+In that approximation we could write solutions in the form
+\begin{equation} \label{eq:naive-asymptotics}
+  \psi = \exp(-u z / \hbar) \, v \otimes w
+\end{equation}
+Now following the spirit of Frobenius's method one might try to build
+\ti{actual} solutions which behave ``like'' \eqref{eq:naive-asymptotics}
+as $z \to \infty$, by some kind of series expansion around $z = \infty$.
+If you try this, you discover a problem: the equation actually does not
+have solutions which behave this way, uniformly in $z$. The best we 
+can do is to pick some \ti{sector} and ask for these asymptotics
+as $z \to \infty$ in that sector.
+
+Here is a baby example of the same phenomenon. We
+consider the Bessel equation
+\[
+z^{2}y''+zy'+(z^{2}-\nu^{2})y=0 \, .
+\]
+Formally expanding around $\infty$ we expect solutions of the form
+\[ \label{eq:series-bessel}
+y^{R}_{\pm}(z)\sim z^{-1/2}e^{\pm \I z}\Bigl(1+O(z^{-1})\Bigr)\qquad (z\to +\infty),
+\]
+and
+\[ \label{eq:series-bessel-2}
+y^{L}_{\pm}(z)\sim (-z)^{-1/2}e^{\pm \I z}\Bigl(1+O(z^{-1})\Bigr)\qquad (z\to -\infty).
+\]
+These series are not convergent.
+Nevertheless, there exist unique solutions $(y^{R}_{+},y^{R}_{-})$ (resp. $(y^{L}_{+},y^{L}_{-})$) which have the
+asymptotics \eqref{eq:series-bessel} as $z \to \infty$ (resp. \eqref{eq:series-bessel-2} as $z \to -\infty$). 
+The Stokes phenomenon is the fact that 
+these solutions do \emph{not} analytically 
+continue to one another.
+Continuing in the upper half-plane gives
+\[
+\binom{y^{L}_{+}}{y^{L}_{-}}
+=
+S^{+}\binom{y^{R}_{+}}{y^{R}_{-}},
+\qquad
+S^{+}=
+\begin{pmatrix}
+-\I & 2\cos(\pi\nu)\\
+0 & -\I
+\end{pmatrix},
+\]
+while continuing in the lower half-plane gives
+\[
+\binom{y^{R}_{+}}{y^{R}_{-}}
+=
+S^{-}\binom{y^{L}_{+}}{y^{L}_{-}},
+\qquad
+S^{-}=
+\begin{pmatrix}
+-\I & 0\\
+2\cos(\pi\nu) & -\I
+\end{pmatrix}.
+\]
+The diagonal entries here reflect the \ti{formal} monodromy,
+i.e. the naive analytic continuation we would expect just by looking
+at the formal series solution.
+The product $S^+ S^-$ gives the actual monodromy.
+
+We meet a similar situation for our equation \eqref{eq:kz-irregular},
+but more complicated because here there are blocks of solutions with the
+same exponential coefficient.
+
+To be concrete, let us specialize to the situation where 
+$\fg = \fsl_N$, and $u = \I \diag(u_1, \dots, u_N)$ with all $u_i$ real
+and $u_1 < u_2 < \cdots < u_N$.
+Further specialize so that $M_1$ is the fundamental representation
+and write $M = M_2$.
+Then, for each $m \in M$ we have $N$ distinguished solutions
+$\psi^{L,R}_i(m)$, which have roughly
+\begin{equation}
+  \psi^{L,R}_i(m,z) \sim \exp(-\I u_i z / \hbar) \, e_i \otimes m
+\end{equation}
+as $z \to \pm \infty$.
+Now we have again Stokes phenomenon, now with the Stokes matrices 
+$S^\pm$ organized into $N \times N$ block matrices,
+whose entries are valued in $\End(M)$.
+The remarkable fact\footnote{which I learned from Xiaomeng Xu and Yan Zhou}
+proven in \cite{Xu2020StokesQuantumGroups}
+is that these Stokes matrix entries give a representation of 
+the quantum group $U_q(\fgl_N)$ on $M$.
+
+For instance consider the case $\fg = \fsl_2$.
+Then we have
+\begin{equation}
+  S^+ = \begin{pmatrix}  k & e \\ 0 & k^{-1} \end{pmatrix} \, , \qquad
+  S^- = \begin{pmatrix}  k & 0 \\ f & k^{-1} \end{pmatrix}
+\end{equation}
+for some operators $e, f, k \in \End(M)$.
+Then define
+\begin{equation}
+  K = k, \quad E = \frac{K^{-1} e}{q^{-1} - q}, \quad F = \frac{f K}{q - q^{-1}} \, .
+\end{equation}
+These operators obey the relations of $U_q(\fsl_2)$:
+\begin{equation}
+K E K^{-1} = q^2 E, \qquad K F K^{-1} = q^{-2} F, \qquad [E,F] = \frac{K - K^{-1}}{q - q^{-1}} \, .  
+\end{equation}
+
+\fixme{try to prove it using skein relations!}
+
+This is a theorem about Stokes matrices, which can be formulated
+and proved without mentioning conformal blocks. But
+we think of it as an analogue of the notion of Verlinde operator.
+We start with a conformal block. Then we create a new insertion of the 
+module $\vrep(M_1)$ near the irregular module at $z = + \infty$.
+There seem to be $N$ different
+``channels'' in which to create this insertion, corresponding to the 
+$N$ solutions $\psi^L_i$ above.
+Then we use the usual connection on conformal blocks to continue this
+insertion to $z = - \infty$ and fuse it to the irregular module again,
+choosing again one of $N$ possible channels.
+In this way we get operators $S^\pm_{ij}$
+on the space of conformal blocks, giving the quantum group action.
+
+This construction should work much more generally: if we have 
+a Riemann surface with 3 such irregular insertions we should get 
+3 actions of the quantum group, etc.
+
 
 
 \subsection{Modular structure}
 
-So far we have discussed a lot of structure on the category $\cC$ that comes from
-studying conformal blocks on the sphere.
+So far we have discussed a lot of structure on the category $\cC$ 
+that comes from studying conformal blocks on the sphere.
 We actually get a bit more by considering the torus.
 
-As we already discussed, by plumbing a sphere to itself we get
-a conformal block $\Phi_i$ on the torus $C_q$ for each simple module $\cS_i$,
-and the $\Phi_i$ span the space of conformal blocks on the torus.
-Moreover they give \ti{parallel} sections \fixme{...}
+As we already discussed,
+by plumbing a sphere to itself we get
+a conformal block $\Phi_i$ on the torus $C_q = \bbC^\times / (z \sim qz)$ for each simple module $\cS_i$,
+and the $\Phi_i$ span the space $V = \Conf(C_q)$.
 
-
+Now, recall that the mapping class group of the torus acts on $V$.
+(We remarked in \fixme{...} that the action of the mapping class
+group is in general only projective; but the case of the torus is an
+exception, because we have a global section of the bundle of complex
+projective structures.) So we get a representation of $\SL(2,\bbZ)$ on $V$.
+In particular the standard $S$ generator acts; let $S_{ij}$ denote its
+matrix elements, i.e.
+\begin{equation}
+  S(\Phi_i) = \sum_j S_{ij} \Phi_j
+\end{equation}
+Note that $S^2$ gives the action of $-1 \in \SL(2,\bbZ)$, which is
+\begin{equation}
+  S^2 \Phi_i = \Phi_{i^*} \, .
+\end{equation}
+implying
+\begin{equation}
+  (S^{-1})_{ij} = S_{i^* j} = S_{i j^*} \, .
+\end{equation}
+The torus $C_q$ created by plumbing comes with distinguished
+$A$ and $B$ cycles: the $A$ cycle comes from the unit circle in the
+original sphere, the $B$ cycle comes from the positive real line (when 
+$q$ is real).
+For each of these cycles and each simple module $\cS_i$ we get
+a Verlinde loop operator; so we have operators $A_i$, $B_i$ acting
+on $V$.
+The action of $A_i$ is particularly simple: it acts already
+\ti{before} the plumbing, so it must be diagonal in the basis of 
+the $\Phi_j$, 
+\begin{equation}
+  A_i \Phi_j = \lambda_{ij} \Phi_j \, .
+\end{equation}
+Equivalently, the basis
+% \begin{equation}
+%   B_i (S \Phi_j) = \lambda_{ij} (S \Phi_k) \, ,
+% \end{equation}
+$\Psi_j = S \Phi_j$ diagonalizes the $B_i$.
+On the other hand, $B_i$ creates a copy of $\cS_j$ and moves it
+close to $z = 0$, and moves $\cS_j^*$ close to $z = \infty$,
+where they can fuse with the $\cS_i$ and $\cS_i^*$ already there:
+in other words $B_i$ acts by fusion with $\Phi_i$, i.e.
+\begin{equation}
+  B_i \Phi_j = N_{ij}^k \Phi_k \, .
+\end{equation}
+Thus $S$ diagonalizes the fusion operation. From here, it is a 
+matter of pure linear algebra to derive:
+\begin{exercise}
+Prove that $\lambda_{ij} = \frac{S_{ij}}{S_{0j}}$. (Hint: use the
+fact that $B_i \Phi_0 = \Phi_i$ for all $i$.)
+\end{exercise}
+\begin{exercise}
+Prove the \ti{Verlinde formula}: 
+\begin{equation}
+  N_{ij}^k = \sum_a \frac{S_{ia} S_{ja} S_{k^* a}}{S_{0a}} \, .
+\end{equation}
+\end{exercise}
 
 \subsection{The WZW model}
 \fixme{...}
@@ -4977,13 +5192,13 @@ $3$-manifold $M$. Then the \ti{Chern--Simons action} is
 \[
 S_{\mathrm{CS}}(A)
 =
-\frac{k}{4\pi}\int_M \Tr\!\left(
-A\wedge dA + \frac23 A\wedge A\wedge A
+\frac{k}{4\pi} \int_M \Tr \left(
+A\wedge \de A + \frac23 A \wedge A \wedge A
 \right).
 \]
 Then \ti{formally} the \ti{Chern-Simons partition function} is
 \[
-Z_{\mathrm{CS}}(M,g)
+Z_{\mathrm{CS}}(M)
 =
 \int \mathcal D A \; e^{\, \I S_{\mathrm{CS}}(A)} \, .
 \]
@@ -4995,9 +5210,13 @@ Witten \cite{Witten1989Jones} introduced this quantum field theory and
 gave a method of computing the partition function, which was more fully developed 
 in \cite{ReshetikhinTuraev1991}.
 
+There is a pesky detail we should discuss.
+In order to calculate the partition function one needs to introduce 
+a Riemannian metric $g$ on $M$.
 Formally one would
-expect it to be independent of the metric; actually this is not quite right:
-there is an \ti{anomaly}, expressed as follows.
+expect the partition function to be independent of $g$, but 
+actually this is not quite right:
+there is an \ti{anomaly}, as follows.
 If $g_0$ and $g_1$ are two Riemannian metrics on $M$, then
 fix a metric $g$ on $\widetilde{M} = M \times[0,1]$, 
 restricting to $g_0$ and $g_1$ at the two ends.
@@ -5016,6 +5235,18 @@ p_1(R) = -\frac{1}{8\pi^2}\Tr(R\wedge R) \, .
 
 \begin{exercise} Prove that $p_1$ is conformally invariant.
 \end{exercise}
+
+So $Z_{\CS}$ is ``almost topological:'' it depends on the metric, but 
+in a simple and controllable way.
+
+Now suppose $M$ is an oriented Riemannian 3-manifold, with
+boundary $Y$ equipped with the induced boundary orientation. In this case, on general QFT grounds, one expects 
+that there is a vector space
+$V(Y)$, and the path integral of Chern-Simons theory provides a 
+vector $Z_{\mathrm CS}(M) \in V(Y)$.
+\fixme{gluing law}
+
+\fixme{say $V(Y)$ is the space of conformal blocks}
 
 % With the same convention, the gravitational Chern--Simons $3$-form is
 % \[
