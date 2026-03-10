@@ -1,0 +1,12 @@
+\begin{tikzcd}[column sep=huge,row sep=huge]
+& ((A\boxtimes B)\boxtimes C)\boxtimes D
+  \arrow[dl,"a_{A,B,C}\boxtimes \id_D"']
+  \arrow[dr,"a_{A\boxtimes B,C,D}"] & \\
+(A\boxtimes (B\boxtimes C))\boxtimes D
+  \arrow[d,"a_{A,B\boxtimes C,D}"'] & &
+(A\boxtimes B)\boxtimes (C\boxtimes D)
+  \arrow[d,"a_{A,B,C\boxtimes D}"] \\
+A\boxtimes ((B\boxtimes C)\boxtimes D)
+  \arrow[rr,"\id_A\boxtimes a_{B,C,D}"'] & &
+A\boxtimes (B\boxtimes (C\boxtimes D))
+\end{tikzcd}

@@ -1,0 +1,92 @@
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[scale=1.0, line cap=round, line join=round]
+    % A schematic of a Cech cover and the contours c_{alpha beta}
+    \def\R{1.35}
+    \def\rV{1.10}
+
+    % centers
+    \coordinate (A) at (-0.55,0.55);
+    \coordinate (B) at (0.75,0.55);
+    \coordinate (C) at (0.10,-0.85);
+
+    % three overlapping patches (with transparency so overlaps are visible)
+    \fill[blue!25,  opacity=0.35]  (A) circle (\R);
+    \fill[red!25,   opacity=0.35]  (B) circle (\R);
+    \fill[green!25, opacity=0.35]  (C) circle (\R);
+
+    % boundaries of slightly shrunken sets V_alpha (schematic)
+    \draw[blue!45!black, thick]  (A) circle (\rV);
+    \draw[red!45!black, thick]   (B) circle (\rV);
+    \draw[green!45!black, thick] (C) circle (\rV);
+
+    % labels
+    \node[blue!45!black]  at (-1.05,1.15) {$U_\alpha$};
+    \node[red!45!black]   at (1.25,1.15) {$U_\beta$};
+    \node[green!45!black] at (0.55,-1.65) {$U_\gamma$};
+
+    % intersection contours c_{alpha beta} = \overline{V_\alpha}\cap U_\beta
+    % draw the portions of the V-boundaries that lie inside the other U
+    \begin{scope}
+      \clip (B) circle (\R);
+      \draw[very thick, black] (A) circle (\rV);
+      % orientation induced by boundary of V_\alpha (counterclockwise)
+      \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
+        ($(A)+({\rV*cos(35)},{\rV*sin(35)})$) arc[start angle=35,end angle=55,radius=\rV];
+    \end{scope}
+    \node[black] at (0.10,1.55) {$c_{\alpha\beta}$};
+
+    \begin{scope}
+      \clip (C) circle (\R);
+      \draw[very thick, black] (A) circle (\rV);
+      % orientation induced by boundary of V_\alpha (counterclockwise)
+      \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
+        ($(A)+({\rV*cos(-70)},{\rV*sin(-70)})$) arc[start angle=-70,end angle=-50,radius=\rV];
+    \end{scope}
+    \node[black] at (-0.25,-0.35) {$c_{\alpha\gamma}$};
+
+    \begin{scope}
+      \clip (C) circle (\R);
+      \draw[very thick, black] (B) circle (\rV);
+      % orientation induced by boundary of V_\beta (counterclockwise)
+      \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
+        ($(B)+({\rV*cos(-120)},{\rV*sin(-120)})$) arc[start angle=-120,end angle=-100,radius=\rV];
+    \end{scope}
+    \node[black] at (1.55,-0.35) {$c_{\beta\gamma}$};
+
+    % second example: two patches intersecting in an annulus
+    \begin{scope}[xshift=5.2cm]
+      \def\Rone{1.75}   % outer radius of annulus U_1 (bigger)
+      \def\Rtwo{1.35}   % outer radius of disc U_2 (smaller)
+      \def\rVone{1.05}  % outer boundary of V_1
+      \def\rVtwo{1.05}  % boundary of V_2
+      \def\rhole{0.70}
+
+      \coordinate (A2) at (0,0);
+      \coordinate (B2) at (0,0);
+
+      % U_1 is an annulus, U_2 is a disc (same center)
+      \fill[blue!25, opacity=0.35, even odd rule] (A2) circle (\Rone) (A2) circle (\rhole);
+      \fill[red!25,  opacity=0.35] (B2) circle (\Rtwo);
+
+      % % shrunken sets: V_1 annulus, V_2 disc
+      % \draw[blue!60!black, thick] (A2) circle (\rVone);
+      % \draw[blue!60!black, thick] (A2) circle (\rhole);
+      % \draw[red!60!black, thick]  (B2) circle (\rVtwo);
+
+      % labels
+      \node[blue!45!black] at (-1.05,1.55) {$U_1$};
+      \node[red!45!black]  at (0,0) {$U_2$};
+
+      % contour c_{12} = \overline{V_1}\cap U_2 (schematic loop in the annulus)
+      \begin{scope}
+        \clip (B2) circle (\Rtwo);
+        \draw[very thick, black] (A2) circle (\rVone);
+        \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
+          ($(A2)+({\rVone*cos(45)},{\rVone*sin(45)})$) arc[start angle=45,end angle=20,radius=\rVone];
+      \end{scope}
+      \node[black] at (0.55,1.15) {$c_{12}$};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{Cover by patches $U_\alpha$ and shrunken sets; the contours $c_{\alpha\beta}=\overline{V_\alpha}\cap U_\beta$ run along the overlaps.}
+\end{figure}

@@ -1,0 +1,40 @@
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[scale=1.0, line cap=round, line join=round]
+    % parameters
+    \def\R{1.25}
+    \def\r{0.55}
+
+    % left surface C1 with puncture and annulus A1
+    \begin{scope}[shift={(-3.2,0)}]
+      \fill[blue!6] (0,0) circle (\R);
+      \draw[very thick, blue!55!black] (0,0) circle (\R);
+      \fill[white] (0,0) circle (\r);
+      \draw[thick, blue!55!black] (0,0) circle (\r);
+      \node[blue!60!black] at (0,1.65) {$C'_1$};
+      \node[blue!60!black] at (0,0.95) {$A_1$};
+      \fill[blue!55!black] (0,0) circle (1.2pt);
+      \node[blue!60!black] at (0.25,-0.15) {$p_1$};
+      \node at (0,-1.65) {$z_1$};
+    \end{scope}
+
+    % right surface C2 with puncture and annulus A2
+    \begin{scope}[shift={(3.2,0)}]
+      \fill[red!6] (0,0) circle (\R);
+      \draw[very thick, red!55!black] (0,0) circle (\R);
+      \fill[white] (0,0) circle (\r);
+      \draw[thick, red!55!black] (0,0) circle (\r);
+      \node[red!60!black] at (0,1.65) {$C'_2$};
+      \node[red!60!black] at (0,0.95) {$A_2$};
+      \fill[red!55!black] (0,0) circle (1.2pt);
+      \node[red!60!black] at (0.25,-0.15) {$p_2$};
+      \node at (0,-1.65) {$z_2$};
+    \end{scope}
+
+    % identification arrows between annuli
+    \draw[thick, -{Latex[length=2.4mm,width=1.8mm]}] (-1.55,0.55) -- (1.55,0.55);
+    \draw[thick, -{Latex[length=2.4mm,width=1.8mm]}] (1.55,-0.55) -- (-1.55,-0.55);
+    \node at (0,0.95) {$z_1 = q/z_2$};
+  \end{tikzpicture}
+  \caption{Plumbing: remove small discs around $p_1,p_2$ to get $C'_1,C'_2$ with annuli $A_1,A_2$, then identify by $z_1 \sim q/z_2$ to form $C_q$.}
+\end{figure}

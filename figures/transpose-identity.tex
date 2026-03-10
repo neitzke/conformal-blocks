@@ -1,0 +1,93 @@
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[baseline,>=Latex,scale=0.9,yscale=0.7]
+  \tikzset{
+    strand/.style={line width=0.9pt},
+    morph/.style={draw,thick,minimum width=0.55cm,minimum height=0.42cm,inner sep=1pt,fill=white},
+  }
+
+  % ---------------- left side ----------------
+  \begin{scope}[xshift=-2.8cm]
+    % cap
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.82 with {\arrowreversed{Latex}}}
+    ]
+      (-1.2,0.7)
+      .. controls (-1.2,1.3) and (-0.45,1.6) .. (0,1.6)
+      .. controls (0.45,1.6) and (1.2,1.3) .. (1.2,0.7);
+
+    % left strand with f
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.25 with {\arrow{Latex}}}
+    ] (-1.2,0.7) -- (-1.2,-0.1);
+    \node[morph] at (-1.2,-0.42) {$f$};
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.75 with {\arrow{Latex}}}
+    ] (-1.2,-0.74) -- (-1.2,-1.45);
+
+    % right strand
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.5 with {\arrowreversed{Latex}}}
+    ] (1.2,0.7) -- (1.2,-1.45);
+
+    \fill (-1.2,-1.45) circle (1.2pt);
+    \fill (1.2,-1.45) circle (1.2pt);
+
+    \node[below] at (-1.2,-1.45) {$X$};
+    \node[below] at (1.2,-1.45) {$Y^*$};
+
+    \node at (0,0.42) {$\ev_Y^L$};
+  \end{scope}
+
+  \node at (0,-0.4) {$=$};
+
+  % ---------------- right side ----------------
+  \begin{scope}[xshift=2.8cm]
+    % cap
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.82 with {\arrowreversed{Latex}}}
+    ]
+      (-1.2,0.7)
+      .. controls (-1.2,1.3) and (-0.45,1.6) .. (0,1.6)
+      .. controls (0.45,1.6) and (1.2,1.3) .. (1.2,0.7);
+
+    % left strand
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.5 with {\arrow{Latex}}}
+    ] (-1.2,0.7) -- (-1.2,-1.45);
+
+    % right strand with f^t
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.25 with {\arrowreversed{Latex}}}
+    ] (1.2,0.7) -- (1.2,-0.1);
+    \node[morph] at (1.2,-0.42) {$f^t$};
+    \draw[
+      strand,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.75 with {\arrowreversed{Latex}}}
+    ] (1.2,-0.74) -- (1.2,-1.45);
+
+    \fill (-1.2,-1.45) circle (1.2pt);
+    \fill (1.2,-1.45) circle (1.2pt);
+
+    \node[below] at (-1.2,-1.45) {$X$};
+    \node[below] at (1.2,-1.45) {$Y^*$};
+
+    \node at (0,0.42) {$\ev_X^L$};
+  \end{scope}
+\end{tikzpicture}
+\end{figure}
