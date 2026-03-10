@@ -1,0 +1,19 @@
+\begin{tikzcd}[column sep=huge,row sep=huge]
+{} &
+\bigl(X\boxtimes (Y\boxtimes Z)\bigr)
+  \arrow[r,"a^{-1}_{X,Y,Z}"]
+  \arrow[dl,"\mathrm{id}_X\boxtimes b_{Y,Z}"'] &
+\bigl((X\boxtimes Y)\boxtimes Z\bigr)
+  \arrow[dr,"b_{X\boxtimes Y,\,Z}"] &
+{} \\
+\bigl(X\boxtimes (Z\boxtimes Y)\bigr)
+  \arrow[dr,"a^{-1}_{X,Z,Y}"'] &
+{} & {} &
+\bigl(Z\boxtimes (X\boxtimes Y)\bigr)
+  \arrow[dl,"a^{-1}_{Z,X,Y}"] \\
+{} &
+\bigl((X\boxtimes Z)\boxtimes Y\bigr)
+  \arrow[r,"b_{X,Z}\boxtimes \mathrm{id}_Y"'] &
+\bigl((Z\boxtimes X)\boxtimes Y\bigr) &
+{}
+\end{tikzcd}

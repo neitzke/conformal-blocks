@@ -1,0 +1,44 @@
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[baseline,>=Latex,scale=0.9,yscale=0.7]
+  % ---------------- coev^L ----------------
+  \begin{scope}[xshift=-3.2cm]
+    % cup, arrow reversed
+    \draw[
+      thick,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.18 with {\arrowreversed{Latex}}}
+    ] (-1.2,2.2)
+      .. controls (-1.2,0.8) and (-0.45,-0.15) .. (0,-0.15)
+      .. controls (0.45,-0.15) and (1.2,0.8) .. (1.2,2.2);
+
+    \fill (-1.2,2.2) circle (1.2pt);
+    \fill (1.2,2.2) circle (1.2pt);
+
+    \node[above] at (-1.2,2.2) {$\vrep(z_1)$};
+    \node[above] at (1.2,2.2) {$\vrep^*(z_2)$};
+
+    \node at (0,1.05) {$\coev_{\vrep}^{L}$};
+  \end{scope}
+
+  % ---------------- coev^R ----------------
+  \begin{scope}[xshift=3.2cm]
+    % cup, arrow reversed
+    \draw[
+      thick,
+      postaction={decorate},
+      decoration={markings,mark=at position 0.18 with {\arrowreversed{Latex}}}
+    ] (1.2,2.2)
+      .. controls (1.2,0.8) and (0.45,-0.15) .. (0,-0.15)
+      .. controls (-0.45,-0.15) and (-1.2,0.8) .. (-1.2,2.2);
+
+    \fill (-1.2,2.2) circle (1.2pt);
+    \fill (1.2,2.2) circle (1.2pt);
+
+    \node[above] at (-1.2,2.2) {$\vrep^*(z_1)$};
+    \node[above] at (1.2,2.2) {$\vrep(z_2)$};
+
+    \node at (0,1.05) {$\coev_{\vrep}^{R}$};
+  \end{scope}
+\end{tikzpicture}
+\end{figure}
