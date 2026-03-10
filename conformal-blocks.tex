@@ -2020,7 +2020,8 @@ This lemma is an efficient way of keeping track of the various singular terms wh
 composite objects together.
 To get an idea of the proof of the lemma we can use successive contour-integration: indeed the two operations
 $\nop{ab}$ and $\lb{a}{\lambda}{b}$ are both defined by contour-integrals.
-The left side of \eqref{eq:nc-wick} can be written as \fixme{make figure with contours}
+The left side of \eqref{eq:nc-wick} can be written as
+\input{figures/nc-wick-contours}
 \begin{equation}
   \oint_x \de z \, \e^{\lambda (z-x)} a(z) \left(  \oint_x \, \frac{\de w}{w-x} b(w) c(x) \right)
 \end{equation}
@@ -3203,7 +3204,7 @@ every conformal block on the sphere
 with 4 ordinary modules inserted can be obtained by plumbing
 two blocks with 3 ordinary modules inserted, giving 
 when $z_1$ is close to $z_2$ and $z_3$ is close to $z_4$
-\fixme{draw a picture here}
+\input{figures/factorization-four-punctures}
 \begin{equation} \label{eq:factorization-four-punctures}
   \Conf(\vrep_1, \vrep_2, \vrep_3, \vrep_4) = \bigoplus_i \Conf(\vrep_1, \vrep_2, \cS_i) \otimes \Conf(\cS^*_i, \vrep_3, \vrep_4) \, .
 \end{equation}
@@ -3464,10 +3465,12 @@ a_{A,B,C\boxtimes D}\circ a_{A\boxtimes B,C,D}
 We can understand it as coming from a homotopy between paths in configuration space.
 The key point is that all of the tensor products we consider can be described in terms of 
 conformal blocks where \ti{all insertions are on the real line}, and 
-the configuration space of ordered $4$-tuples of points $t_1 < t_2 < t_3 < t_4$ on the real line is simply connected \fixme{draw figure}.)
+the configuration space of ordered $4$-tuples of points $t_1 < t_2 < t_3 < t_4$ on the real line is simply connected.)
+\input{figures/ordered-four-points-real-line}
 For instance: the space $\Hom(A \boxtimes (B \boxtimes (C \boxtimes D)), W^*)$ is a space of 5-point conformal blocks
 constructed by iterated plumbing, which converges in a region 
-where $t_4 - t_3 \ll t_3 - t_2 \ll t_2 - t_1$. 
+where $t_4 - t_3 \ll t_3 - t_2 \ll t_2 - t_1$.
+\input{figures/five-point-scale-separation} 
 The other bracketings are similar. Then the associator corresponds to analytic continuation of the correlation functions
 from one of these convergence domains to another.
 
@@ -3479,6 +3482,7 @@ as a homotopy in the moduli space $\overline{\cM_{0,5}}(\bbR)$ of
 real stable curves of genus zero with 5 marked points;
 this moduli space is a pentagon, with the 
 five bracketings correspond to the five vertices.
+\input{figures/m05r-pentagon}
 
 \item The braiding and associator together obey two hexagon relations.
 The first connects braiding $X$ to the right across $Y \boxtimes Z$

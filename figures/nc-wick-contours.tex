@@ -1,0 +1,35 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.95,>=Latex]
+  % insertion points
+  \coordinate (x) at (0,0);
+  \coordinate (w) at (2.6,0);
+  \fill (x) circle (1.3pt) node[below=4pt] {$x$};
+  \fill (w) circle (1.3pt) node[below=4pt] {$w$};
+
+  % left panel
+  \begin{scope}[xshift=-4.2cm]
+    \draw[thick] (x) circle (1.7);
+    \draw[thick] (x) circle (0.65);
+    \node at (0,2.1) {$\oint_x\!\de z$};
+    \node at (0,0.95) {$\oint_x\!\dfrac{\de w}{w-x}$};
+    \fill (x) circle (1.3pt) node[below=4pt] {$x$};
+    \node at (0,-2.15) {nested contours in $\lb{a}{\lambda}{\nop{bc}}$};
+  \end{scope}
+
+  % arrow
+  \draw[->,thick] (-1.2,0) -- (1.2,0) node[midway,above] {deform $z$ contour};
+
+  % right panel
+  \begin{scope}[xshift=4.2cm]
+    \draw[thick] (x) circle (1.45);
+    \draw[thick] (w) circle (0.6);
+    \node at (0,1.85) {$\oint_x\!\dfrac{\de w}{w-x}$};
+    \node at (2.6,1.0) {$\oint_w\!\de z$};
+    \fill (x) circle (1.3pt) node[below=4pt] {$x$};
+    \fill (w) circle (1.3pt) node[below=4pt] {$w$};
+    \node at (1.3,-2.15) {$\oint_w\de z + \oint_x\de z$ channels};
+  \end{scope}
+\end{tikzpicture}
+\caption{Contour deformation underlying the noncommutative Wick formula.}
+\end{figure}

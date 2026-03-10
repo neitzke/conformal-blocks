@@ -1,0 +1,14 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Latex]
+  \draw[thick,->] (-0.4,0) -- (8.6,0) node[right] {$\mathbb{R}$};
+  \foreach \x/\lab in {1.0/t_1,3.0/t_2,5.2/t_3,7.2/t_4} {
+    \fill (\x,0) circle (1.3pt);
+    \node[below=5pt] at (\x,0) {$\lab$};
+  }
+  \draw[<->,thick] (0.9,1.0) .. controls (3.0,1.8) .. (7.1,1.0);
+  \node at (4.0,2.05) {no crossing constraints};
+  \node at (4.0,-1.0) {$\{(t_1,t_2,t_3,t_4)\in\mathbb{R}^4\mid t_1<t_2<t_3<t_4\}$ is convex};
+\end{tikzpicture}
+\caption{The ordered configuration space of four points on $\mathbb{R}$ is contractible.}
+\end{figure}

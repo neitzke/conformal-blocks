@@ -1,0 +1,15 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Latex]
+  \draw[thick,->] (-0.2,0) -- (8.4,0) node[right] {$\mathbb{R}$};
+  \foreach \x/\lab in {0.4/t_1,2.6/t_2,5.6/t_3,6.3/t_4,6.55/t_5} {
+    \fill (\x,0) circle (1.2pt);
+    \node[below=4pt] at (\x,0) {$\lab$};
+  }
+  \draw[thick] (0.4,-0.25) -- (2.6,-0.25);\node[below=7pt] at (1.5,-0.25) {$t_2-t_1$};
+  \draw[thick] (2.6,-0.25) -- (5.6,-0.25);\node[below=7pt] at (4.1,-0.25) {$t_3-t_2$};
+  \draw[thick] (5.6,-0.25) -- (6.3,-0.25);\node[below=7pt] at (5.95,-0.25) {$t_4-t_3$};
+  \node at (4.2,1.0) {$t_4-t_3\ll t_3-t_2\ll t_2-t_1$};
+\end{tikzpicture}
+\caption{Ordered real insertions in a strongly separated plumbing regime.}
+\end{figure}

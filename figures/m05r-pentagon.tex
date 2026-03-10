@@ -1,0 +1,21 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Latex]
+  \coordinate (v1) at (90:2.1);
+  \coordinate (v2) at (18:2.1);
+  \coordinate (v3) at (-54:2.1);
+  \coordinate (v4) at (-126:2.1);
+  \coordinate (v5) at (162:2.1);
+
+  \draw[thick] (v1)--(v2)--(v3)--(v4)--(v5)--cycle;
+
+  \node[above] at (v1) {$((AB)C)D$};
+  \node[right] at (v2) {$(AB)(CD)$};
+  \node[right] at (v3) {$A(B(CD))$};
+  \node[left] at (v4) {$A((BC)D)$};
+  \node[left] at (v5) {$(A(BC))D$};
+
+  \node at (0,0) {$\overline{\mathcal M}_{0,5}(\mathbb{R})$};
+\end{tikzpicture}
+\caption{The real moduli space $\overline{\mathcal M}_{0,5}(\mathbb{R})$ and its five boundary bracketings.}
+\end{figure}
