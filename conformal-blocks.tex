@@ -1771,7 +1771,7 @@ Said otherwise, the space of chiral correlation systems on $C$ is
 
 Our last discussion motivates the following:
 
-\begin{defn}[Conformal block for affine algebra]
+\begin{defn}[Conformal block for affine algebra] \label{defn:conformal-block-affine}
 Suppose $C$ is a Riemann surface with marked points $p_i$, local coordinates $z_i$, and $V^k(\fg)$-modules $\vrep_i$.
 A \ti{conformal block} for $V^k(\fg)$ on $C$ is a linear map $\Phi: \bigotimes_i \vrep_i \to \bbC$ which annihilates
 all vectors of the form
@@ -1893,25 +1893,60 @@ with a compatible $\cG$-action, instead of just $\vertex = V^k(\fg)$.
 There are variants depending on how we treat the coordinate
 systems around the marked points.
 
-\begin{defn}[Vector bundles associated to $\vertex$-modules] For $p \in C$ and $\vrep$ a $\vertex$-module with compatible $\cG$-action, let $F_p$ be the set of
-formal local coordinate systems around $p$, and
+\begin{defn}[Torsor of formal local coordinates]
+Fix $p \in C$. Let $F_p$ be the set of
+formal local coordinate systems $z$ around $p$, with $z(p) = 0$.
+\end{defn}
+
+$F_p$ is a torsor for $\cG$. Moreover, 
+the $F_p$ fit together into a principal
+$\cG$-bundle $F_C$ over $C$. Local trivializations are
+given as follows: fix a local coordinate $z$ on a patch $U$,
+then assign to $p \in U$ the local coordinate 
+$z_p = z-z(p)$, which has $z_p(p) = 0$ as needed.
+% \footnote{
+% In fact, $F_C$ is a bundle with connection,
+% for which the above trivializations are parallel.
+% But this connection is not compatible with the
+% action of $\cG$.}
+
+\begin{defn}[Twisting of $\vertex$-modules by local coordinate systems] Fix $p \in C$ and $\vrep$ a $\vertex$-module with compatible $\cG$-action. Then define
 \begin{equation}
 \vrep_p = \vrep \times_{\cG} F_p \, .
 \end{equation}
-\end{defn}
 (In particular we can apply this when $\vrep = \vertex$.)
-If $\vrep$ is graded, then
-the spaces $\vrep_p$ are fibers of an ind-vector bundle 
-over $C$: roughly this means a quasicoherent sheaf which is 
-filtered by holomorphic (finite-rank) vector bundles (note that the action of $\cG$ on
-$\vrep$ does not preserve the graded components $\vrep_n$ 
-but does preserve the filtration $\vrep_{\le n}$.)
+\end{defn}
+Each space $\vrep_p$ can be identified with $\vrep$, but not canonically: one gets an identification only
+after choosing an element in $F_p$.
+Because $F_p$ is a principal $\cG$-bundle, 
+the spaces $\vrep_p$ are fibers of an associated 
+(infinite rank) vector bundle $\vrep_C$, whose transition
+maps lie in $\cG$.
 
-The fibers $\vrep_p$ can be identified with $\vrep$, but not canonically: one gets an identification only
-after choosing an element in $F_p$, i.e. a local coordinate around $z$.
-We can use them to define chiral correlation systems in a way that is independent of the local coordinate:
+Now suppose $\vrep$ is graded.
+In this case we can consider the filtered components
+$\vrep_{\le n}$. Each of these is also acted on by $\cG$\footnote{The action of $\cG$ does not preserve the grading, but does preserve this filtration.}
+so we have a corresponding filtration of $\vrep_p$ by
+$\vrep_{p, \le n}$.
+For any $n$, the $\vrep_{p, \le n}$
+are the fibers of a vector bundle $\vrep_{C, \le n}$ over $C$.
+So the infinite rank bundle $\vrep_C$ is filtered
+by the finite rank bundles $\vrep_{C,\le n}$.
 
-\begin{defn}[Chiral correlation systems for a vertex algebra and modules with $\cG$-action]
+% (Indeed we can get a local trivialization by choosing a 
+% local coordinate $z$ and a basis $(\chi_i)$ for $\vrep_{\le n}$; 
+% then the local basis sections are 
+% $w \mapsto (z-w, \chi_i)$.)
+
+% the spaces $\vrep_p$ are fibers of an ind-vector bundle $\vrep_C$
+% over $C$: roughly this means a quasicoherent sheaf which is 
+% filtered by holomorphic (finite-rank) vector bundles (note that the action of $\cG$ on
+% $\vrep$ does not preserve the graded components $\vrep_n$ 
+% but does preserve the filtration $\vrep_{\le n}$.)
+
+We can use these constructions to define chiral correlation systems in a way that is independent of the local coordinate:
+
+\begin{defn}[Chiral correlation systems for a vertex algebra and modules with $\cG$-action] \label{defn:chiral-correlation-system}
 Suppose $\vertex$ is a vertex algebra with a compatible $\cG$-action, and $C$ is a Riemann surface, with marked points $p_i$, and $\vertex$-modules $\vrep_i$
 with compatible $\cG$-actions. 
 Then a \ti{chiral correlation system} is a collection
@@ -1924,7 +1959,7 @@ where each $a_i \in \vertex_{q_i}$, $\chi_i \in \vrep_{p_i}$, such that:
   \item The $\IP{\cdots}$ are multilinear in the $a_i$ and $\chi_i$.
   \item The $\IP{\cdots}$ vary meromorphically with each $q_i$.
   \item Fix $s$ either $p_i$ or $q_i$, and choose a local coordinate $z$ around $s$.
-  We describe the singular part of $\IP{\cdots}$ as $q \to s$.
+  We describe the singular part of $\IP{\cdots}$ as some $q_j \to s$.
   Let $\vrep$ be the $\vertex$-module corresponding to $s$.
   Given $a \in \vertex$, and $q$ near $s$,
   use the local coordinate $z$ to produce $a(q) \in \vrep_q$.
@@ -1937,15 +1972,15 @@ where each $a_i \in \vertex_{q_i}$, $\chi_i \in \vrep_{p_i}$, such that:
 
 Likewise we can define conformal blocks in a way that is independent of the local coordinate:
 
-\begin{defn}[Conformal blocks for a vertex algebra and modules with $\cG$-action]
+\begin{defn}
 Suppose $\vertex$ is a vertex algebra with $\cG$-action.
 Suppose $C$ is a Riemann surface with marked points $p_i$, and $\vertex$-modules $\vrep_i$ with compatible $\cG$-action.
-Let $\vertex(C)$ denote the space of global meromorphic sections of the vertex algebra bundle 
-over $C$, with poles only at the $p_i$.
+Let $\vertex(C)$ denote the space of global meromorphic sections of $\vertex_C \otimes K_C$, 
+with poles only at the $p_i$.
 Fix a local coordinate $z_i$ around each $p_i$, and
 for any $a \in \vertex(C)$
-write its local expansion around $p_i$ as $\sum_{m \in \bbZ} a_{i,m} z_i^{m}$, with each $a_{i,m} \in \vertex$.
-Then, for any $a \in \vertex(C)$, we have the operator
+write its local expansion around $p_i$ as $\sum_{m \in \bbZ} a_{i,m} z_i^{m} \de z_i$, with each $a_{i,m} \in \vertex$.
+Then, for any $a \in \vertex(C)$, define
 \begin{equation}
   o(a) \in \End \bigotimes_i (\vrep_i)_{p_i} 
 \end{equation}
@@ -1954,6 +1989,9 @@ given by
   o(a) = \sum_{i=1}^n \sum_{m \in \bbZ} \bid \otimes \cdots \otimes (a_{i,m})_{(m)} \otimes \cdots \otimes \bid
 \end{equation}
 where we use the local coordinate $z_i$ to identify $\vrep_i$ with $(\vrep_i)_{p_i}$.
+\end{defn}
+
+\begin{defn}[Conformal blocks for a vertex algebra and modules with $\cG$-action] \label{defn:conformal-block}
 Define the subspace
 \begin{equation} \label{eq:K-subspace}
  K(C) = \Span \{ \im o(a) \mid  a \in \vertex(C) \}
@@ -1962,18 +2000,30 @@ and
 \begin{equation}
   \Coinv(C) = \left( \bigotimes_i (\vrep_i)_{p_i} \right) / K(C) \, .
 \end{equation}
-Then a \ti{conformal block} for $\vertex$ on $C$ is a linear map 
+A \ti{conformal block} for $\vertex$ on $C$ is a linear map 
 \begin{equation}
  \Phi: \Coinv(C) \to \bbC \, . 
 \end{equation}
 \end{defn}
 
-In the case $\vertex = V^k(\fg)$ this recovers our earlier definition of conformal blocks by coinvariants.
+In the case $\vertex = V^k(\fg)$ this recovers 
+\autoref{defn:conformal-block-affine}.
+(To compare the two, note that any meromorphic function
+$f$ on $C$ induces a meromorphic section $f J^X$ of 
+$\vertex_C \otimes K_C$.)
+
 
 \begin{exercise}
 Prove that the subspace $K(C)$ is independent of the local coordinate $z_i$ we use around $p_i$. (Hint: if $\tilde z_i = g_i(z_i)$ then the identification of $(\vrep_i)_{p_i}$ with $\vrep_i$ changes by $\rho(g_i)$. Check that the local mode expansions are conjugated accordingly, so the span of the $\im o(a)$ is unchanged.)
 \end{exercise}
 
+\begin{exercise}
+Prove that a chiral correlation system in
+the sense of \autoref{defn:chiral-correlation-system} 
+induces a conformal block in the sense of \autoref{defn:conformal-block}. (Hint: as usual, 
+use iterated Laurent expansions
+of the correlation functions to define $\Phi$.)
+\end{exercise}
 
 There is also a variant of all the above where we consider only an action of the subgroup $\fG_+$,
 consisting of power series with $a_1 = 1$, i.e. $z + a_2 z^2 + a_3 z^3 + \cdots$ In this case we cannot completely eliminate the coordinate dependence, but we can reduce it to a dependence
@@ -2241,7 +2291,7 @@ To formulate this precisely we work in the language of conformal blocks rather t
 systems. Fix a base curve $C$ with punctures and modules, 
 and let one puncture $p$ vary while the others $p_i$ are held fixed. 
 Then the spaces $\vrep_p \otimes \bigotimes_i (\vrep_i)_{p_i}$
-are the fibers of an ind-vector bundle $\cB$ over $C$,
+are the fibers of an infinite rank vector bundle $\cB$ over $C$,
 with a subsheaf $\cB_K$ given by the spaces $K(C_p)$ from \eqref{eq:K-subspace}.
 
 Now, first suppose we fix a local coordinate $z$ around $p$.
@@ -2252,17 +2302,17 @@ If $s$ is a section of $\cB_K$, then $(\partial_z + L_{-1}) s$ is also a section
 \end{prop}
 
 Here is the key calculation.
-Given an operator $o(a)$ where $a$ is a section of the vertex algebra bundle, we
+Given a section $a$ of the vertex algebra bundle $\vertex(C)$, we
 need to determine $\partial_z o(a)$. That amounts to understanding how the local coefficients
 $a_m$ in the expansion of $a$ around $z$ vary as we shift $z$. \fixme{...} This gives
 \begin{equation}
-  [\partial_z + L_{-1}, o(a)] = 0 \, .
+  [\partial_z + L_{-1}, o(a)] = o(\partial_z a + L_{-1} a) \, .
 \end{equation}
 
 \begin{example}
 Suppose $\vertex = \Heis$ and
 $C = \bbC \bbP^1$ with marked points at $w,\infty$.
-Then consider the global section $z J$ of the vertex algebra bundle, with
+Then consider the global section $z J$ of $\vertex(C)$, with
 (using $z = (z-w) + w = (z^{-1})^{-1}$)
 \begin{equation}
  o(z J) = (J_1 + w J_0) \otimes \bid + \bid \otimes J_{-1} \, .
@@ -2548,8 +2598,8 @@ But the Virasoro action on $\vertex$ actually allows us to do more: we can vary 
 thus obtaining (roughly) a connection over the moduli space of curves.
 
 Deformations of $C$ are realized by the cohomology $H^1(C,T)$.
-The details of how we describe this connection depends on exactly how we realize the deformation of
-$C$. 
+The details of how we describe this connection depends on exactly how we realize this 
+cohomology. 
 
 First: suppose given a Cech cocycle $v$, i.e. cover $C$ by patches $U_\alpha$ and give
 vector fields $v_{\alpha \beta}$ on overlaps $U_{\alpha \beta}$, obeying
@@ -2569,7 +2619,7 @@ A simple but useful example arises when we cover $C$ by two open sets $U_{1,2}$,
 Then the deformation is induced by a single vector field $v_{12}$ on the annulus,
 and \eqref{eq:complex-variation-cech} becomes an integral over a loop $c_{12}$ around the annulus:
 \begin{equation}
-  \partial_v \IP{\cdots} = \frac{1}{2 \pi \I} \int_{z \in c} v_{12}(z) \IP{T(z) \cdots}
+  \partial_v \IP{\cdots} = \oint_{z \in c} v_{12}(z) \IP{T(z) \cdots}
 \end{equation}
 
 Second: suppose given an infinitesimal Beltrami differential $\mu \in H^{0,1}(T)$.
@@ -2581,24 +2631,78 @@ Then
 This is a good feature, not a bug; it allows us to make canonical sense of what we mean by varying
 the curve while ``holding the marked points fixed.'' Every deformation class can be 
 represented by a $\mu(z)$ avoiding any particular set of points.)
-
 The formulas \eqref{eq:complex-variation-beltrami} and \eqref{eq:complex-variation-cech} are related essentially
 by integration by parts.
 
-There is something to prove here; for notational convenience we consider
-only the case of a single marked point, carrying the representation $\vrep$:
+There is something to prove here: we need to check that this variation procedure actually maps conformal blocks to 
+conformal blocks,
+i.e. that it preserves the condition of vanishing on coinvariants. 
+For notational convenience we consider
+only the case of a single marked point $p \in C$, carrying the representation $\vrep$.
 \begin{prop}
-Fix $v \in H^1(C,T)$. 
-Let $\delta_v \in \End (\vrep)$ be the operator induced by
+Let $\cM$ be a moduli space parameterizing deformations of $C$,
+and let $s$ be a section of the bundle $\cB_K$ over $\cM$.
+Let $v \in H^1(C,T)$,
+let $(v_{\alpha \beta})$ be a Cech representative for $v$, and
+let $T_v \in \End (\vrep)$ be the operator induced by
 \begin{equation}
-  \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) T(z) \,
+  \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) T(z) \, .
 \end{equation}
-and suppose that
-$s$ is a section of the bundle $\cB_K$ over the moduli space of
-Riemann surfaces with a marked point.
-Then $(\partial_v + \delta_v) s$ is also a section of $\cB_K$.
+Then $(\partial_v + T_v) s \in K(C)$.
 \end{prop}
 
+Here is the idea of proof.
+\fixme{...}
+
+% We consider $s = o(a) \chi$, where both $a$ and $\chi$
+% are allowed to vary over $\cM$.
+% Now use $\cdot$ to denote the first-order variation in the $v$
+% direction. We claim:
+% \begin{equation}
+%   \dot{s} + T_v(s) = o(a) (\dot\chi + T_v(\chi)) + o(\dot{a} + T_v(a)) \chi \, .
+% \end{equation}
+% In particular the right side is in $K(C)$ as desired.
+% (We should emphasize that all the objects appearing in this
+% formula really depend on the choice of Cech representative, not
+% only on the class $v$.)
+
+% % We have discussed the vertex algebra bundle $\vertex_C$
+% % over a fixed surface $C$. Its definition involved the 
+% % group $\cG$ i.e. positive part of Virasoro, acting by 
+% % coordinate transformations.
+% % Now we will use its extension to a bundle $\vertex_\tC$ over 
+% % the universal curve $\tC$ over $\cM$.
+% % For this purpose we need the action of the whole 
+% % Virasoro.
+
+% To prove this we need 
+% to describe what this data looks like to first order
+% around $C$, varying in the $v$ direction.
+% To make things easier for ourselves 
+% we may choose a Cech representative $(v_{\alpha \beta})$ 
+% for $v$ which vanishes at
+% the marked point $p$. Then $\vrep_p$ is constant along the $v$
+% direction, so the first derivative of $\chi$ 
+% along $v$ is just an element $\dot\chi \in \vrep_p$.
+% The first derivative $\dot{a}$ is more interesting:
+% it is given by elements 
+% $\dot{a}_\alpha$ over each $U_\alpha$, obeying 
+% the deformed overlap condition
+% \begin{equation}
+%  \dot{a}_\alpha - \dot{a}_\beta = \cL_{v_{\alpha \beta}} a \, . 
+% \end{equation}
+% Here $\cL_v a$ means the Lie derivative of $a$ along the
+% vector field $v$, which we can write as
+% \begin{align}
+%   \cL_v a(z) &= \nabla_{v(z)} a(z) - \oint_z T(w) v(w) a(z) \\ 
+%     &= \partial_{v(z)} a(z) + \sum_{n \ge 0} v^{(n+1)}(z) L_{n} a(z)
+% \end{align}
+% % or concretely expand in terms of modes $L_{\ge -1}$
+% % acting on $\vertex$.
+% Now we can write 
+% $\dot{s} = o(\dot{a}_\alpha) \chi + o(a) \dot\chi$
+% (where $p \in U_\alpha$),
+% and $T_v (s) = \oint_c v_{\alpha \beta}(w) T(w) \chi$.
 
 \subsection{Virasoro twisting}
 
@@ -2638,6 +2742,7 @@ defines an honest connection locally over the moduli of curves.
 
 \fixme{twisted D-module}
 
+\fixme{projective representation of mapping class group}
 
 \subsection{Plumbing conformal blocks}
 
@@ -4564,7 +4669,7 @@ These operators obey the relations of $U_q(\fsl_2)$:
 K E K^{-1} = q^2 E, \qquad K F K^{-1} = q^{-2} F, \qquad [E,F] = \frac{K - K^{-1}}{q - q^{-1}} \, .  
 \end{equation}
 
-\fixme{try to prove it using skein relations!}
+\fixme{check this precise formula; prove it directly using skein relations}
 
 This is a theorem about Stokes matrices, which can be formulated
 and proved without mentioning conformal blocks. But
@@ -4714,14 +4819,28 @@ p_1(R) = -\frac{1}{8\pi^2}\Tr(R\wedge R) \, .
 So $Z_{\CS}$ is ``almost topological:'' it depends on the metric, but 
 in a simple and controllable way.
 
-Now suppose $M$ is an oriented Riemannian 3-manifold, with
-boundary $Y$ equipped with the induced boundary orientation. In this case, on general QFT grounds, one expects 
-that there is a vector space
-$V(Y)$, and the path integral of Chern-Simons theory provides a 
+Now, on general QFT grounds, one expects:
+\begin{itemize}
+  \item For every oriented compact surface $Y$ with a Riemannian metric there is a 
+  finite-dimensional vector space $V(Y)$.
+\item Suppose $M$ is an oriented Riemannian 3-manifold, with
+boundary $Y$ equipped with the induced boundary orientation.
+Then the path integral of Chern-Simons theory provides a 
 vector $Z_{\mathrm CS}(M) \in V(Y)$.
-\fixme{gluing law}
+  \item Disjoint union: $V(Y_1 \sqcup Y_2) = V(Y_1) \otimes V(Y_2)$.
+  \item Orientation reversal: $V(-Y) = V(Y)^*$.
+  \item Gluing: if $N$ is obtained by gluing of $M$ along a boundary component $Y$, then 
+  $Z_{\CS(N)} = \ev_Y (Z_{\CS(M)})$
+\end{itemize}
 
-\fixme{say $V(Y)$ is the space of conformal blocks}
+Witten made the following remarkable proposal:
+\ti{$V(Y)$ is the space of conformal blocks of $L_k(\fg)$ on $Y$}.
+(In particular $V(Y)$ only depends on the conformal class of
+the metric, not the full metric.)
+
+To understand why this proposal could be true,
+the main idea is to introduce a \ti{boundary condition}
+\fixme{...}
 
 % With the same convention, the gravitational Chern--Simons $3$-form is
 % \[
