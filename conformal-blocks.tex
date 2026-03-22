@@ -2601,20 +2601,19 @@ Deformations of $C$ are realized by the cohomology $H^1(C,T)$.
 The details of how we describe this connection depends on exactly how we realize this 
 cohomology. 
 
-First: suppose given a Cech cocycle $v$, i.e. cover $C$ by patches $U_\alpha$ and give
+\begin{enumerate}
+\item Suppose given a Cech cocycle $v$, i.e. cover $C$ by patches $U_\alpha$ and give
 vector fields $v_{\alpha \beta}$ on overlaps $U_{\alpha \beta}$, obeying
 $v_{\alpha \beta} + v_{\beta \gamma} + v_{\gamma \alpha} = 0$.
-Then the corresponding variation of chiral correlation functions is given by
-\begin{equation} \label{eq:complex-variation-cech}
-  \partial_v \IP{\cdots} = \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) \IP{T(z) \cdots}
-\end{equation}
-The contours $c_{\alpha \beta}$ are defined as follows.
+Now define contours $c_{\alpha \beta}$ as follows.
 Choose an ordering $<$ arbitrarily on the index set.
 Shrink each $U_\alpha$ slightly to $V_\alpha$ with smooth boundary, such that they still cover $C$, and the boundaries meet transversely; then let $c_{\alpha \beta} = \overline{V_\alpha} \cap U_\beta$, with the boundary orientation induced by $V_\alpha$, for each $\alpha < \beta$.
 \input{figures/cech-cover-contours}
-
-
-
+Then the variation of chiral correlation functions 
+induced by $v$ is
+\begin{equation} \label{eq:complex-variation-cech}
+  \partial_v \IP{\cdots} = \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) \IP{T(z) \cdots}
+\end{equation}
 A simple but useful example arises when we cover $C$ by two open sets $U_{1,2}$, intersecting in an annulus.
 Then the deformation is induced by a single vector field $v_{12}$ on the annulus,
 and \eqref{eq:complex-variation-cech} becomes an integral over a loop $c_{12}$ around the annulus:
@@ -2622,19 +2621,29 @@ and \eqref{eq:complex-variation-cech} becomes an integral over a loop $c_{12}$ a
   \partial_v \IP{\cdots} = \oint_{z \in c} v_{12}(z) \IP{T(z) \cdots}
 \end{equation}
 
-Second: suppose given an infinitesimal Beltrami differential $\mu \in H^{0,1}(T)$.
+\item Suppose given an infinitesimal Beltrami differential $\mu \in H^{0,1}(T)$.
 Then
 \begin{equation} \label{eq:complex-variation-beltrami}
   \partial_\mu \IP{\cdots} = \frac{1}{2 \pi \I} \int_{z \in C} \mu(z) \IP{T(z) \cdots}
 \end{equation}
-(Note this is well defined only as long as the support of $\mu(z)$ avoids the points where the insertions $\cdots$ are placed.
-This is a good feature, not a bug; it allows us to make canonical sense of what we mean by varying
-the curve while ``holding the marked points fixed.'' Every deformation class can be 
-represented by a $\mu(z)$ avoiding any particular set of points.)
+
+\end{enumerate}
+
 The formulas \eqref{eq:complex-variation-beltrami} and \eqref{eq:complex-variation-cech} are related essentially
 by integration by parts.
+Indeed, given the cocycle $v_{\alpha \beta}$
+a corresponding Beltrami differential can be given as
+\fixme{...}
 
-There is something to prove here: we need to check that this variation procedure actually maps conformal blocks to 
+
+Note that both formulas are well defined only as long as 
+the support of $\mu(z)$ or $v_{\alpha \beta}(z)$ avoids the points where the insertions $\cdots$ are placed.
+This is a good feature, not a bug; it allows us to make canonical sense of what we mean by varying
+the curve while ``holding the marked points fixed.'' Every deformation class can be 
+represented by $\mu(z)$ or $v_{\alpha \beta}(z)$ 
+avoiding any particular set of points.
+
+Using either approach, there is something to prove: we need to check that this variation procedure actually maps conformal blocks to 
 conformal blocks,
 i.e. that it preserves the condition of vanishing on coinvariants. 
 For notational convenience we consider
