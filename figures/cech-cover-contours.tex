@@ -25,7 +25,7 @@
     \node[red!45!black]   at (1.25,1.15) {$U_\beta$};
     \node[green!45!black] at (0.55,-1.65) {$U_\gamma$};
 
-    % intersection contours c_{alpha beta} = \overline{V_\alpha}\cap U_\beta
+    % intersection contours c_{alpha beta} = \partial V_\alpha \cap U_\beta
     % draw the portions of the V-boundaries that lie inside the other U
     \begin{scope}
       \clip (B) circle (\R);
@@ -78,7 +78,7 @@
       \node[blue!45!black] at (-1.05,1.55) {$U_1$};
       \node[red!45!black]  at (0,0) {$U_2$};
 
-      % contour c_{12} = \overline{V_1}\cap U_2 (schematic loop in the annulus)
+      % contour c_{12} = \partial V_1 \cap U_2 (schematic loop in the annulus)
       \begin{scope}
         \clip (B2) circle (\Rtwo);
         \draw[very thick, black] (A2) circle (\rVone);
@@ -88,5 +88,5 @@
       \node[black] at (0.55,1.15) {$c_{12}$};
     \end{scope}
   \end{tikzpicture}
-  \caption{Cover by patches $U_\alpha$ and shrunken sets; the contours $c_{\alpha\beta}=\overline{V_\alpha}\cap U_\beta$ run along the overlaps.}
+  \caption{Cover by patches $U_\alpha$ and shrunken sets; the contours $c_{\alpha\beta}=\partial V_\alpha \cap U_\beta$ run along the overlaps.}
 \end{figure}

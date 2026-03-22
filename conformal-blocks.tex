@@ -2607,7 +2607,7 @@ vector fields $v_{\alpha \beta}$ on overlaps $U_{\alpha \beta}$, obeying
 $v_{\alpha \beta} + v_{\beta \gamma} + v_{\gamma \alpha} = 0$.
 Now define contours $c_{\alpha \beta}$ as follows.
 Choose an ordering $<$ arbitrarily on the index set.
-Shrink each $U_\alpha$ slightly to $V_\alpha$ with smooth boundary, such that they still cover $C$, and the boundaries meet transversely; then let $c_{\alpha \beta} = \overline{V_\alpha} \cap U_\beta$, with the boundary orientation induced by $V_\alpha$, for each $\alpha < \beta$.
+Shrink each $U_\alpha$ slightly to $V_\alpha$ with smooth boundary, such that they still cover $C$, and the boundaries meet transversely; then let $c_{\alpha \beta} = \partial V_\alpha \cap U_\beta$, with the boundary orientation induced by $V_\alpha$, for each $\alpha < \beta$.
 \input{figures/cech-cover-contours}
 Then the variation of chiral correlation functions 
 induced by $v$ is
@@ -2633,7 +2633,49 @@ The formulas \eqref{eq:complex-variation-beltrami} and \eqref{eq:complex-variati
 by integration by parts.
 Indeed, given the cocycle $v_{\alpha \beta}$
 a corresponding Beltrami differential can be given as
-\fixme{...}
+follows.
+Choose a smooth partition of unity $(\rho_\gamma)$ subordinate to the open cover $(U_\gamma)$, and define smooth local vector fields
+\begin{equation}
+  \xi_\alpha = \sum_\gamma \rho_\gamma v_{\alpha \gamma}
+\end{equation}
+on each patch $U_\alpha$.
+Since $(v_{\alpha \beta})$ is a Cech cocycle, these obey
+\begin{equation}
+  \xi_\alpha - \xi_\beta = v_{\alpha \beta}
+\end{equation}
+on the overlaps $U_{\alpha \beta}$.
+Therefore the local $(0,1)$-forms
+\begin{equation}
+  \mu|_{U_\alpha} = \bar \partial \xi_\alpha = \sum_\gamma (\bar \partial \rho_\gamma) v_{\alpha \gamma}
+\end{equation}
+glue to a global Beltrami differential $\mu \in \Omega^{0,1}(T)$.
+To compare the variation formulas more concretely, write $F(z) = \IP{T(z) \cdots}$.
+Using the ordering on the indices, decompose $C$ into the disjoint regions
+\begin{equation}
+  R_\alpha = V_\alpha \setminus \bigcup_{\beta < \alpha} V_\beta .
+\end{equation}
+Since the support of the deformation avoids the insertions, $F(z)$ is holomorphic on a neighborhood of each $R_\alpha$.
+Hence on $R_\alpha$ we have
+\begin{equation}
+  \mu(z) F(z) = \bar \partial (\xi_\alpha(z) F(z)) .
+\end{equation}
+Applying Stokes' theorem on each $R_\alpha$ gives
+\begin{equation}
+  \int_C \mu(z) F(z) = \sum_\alpha \int_{R_\alpha} \bar \partial (\xi_\alpha F)
+  = \sum_\alpha \int_{\partial R_\alpha} \xi_\alpha(z) F(z) .
+\end{equation}
+Each internal boundary between $R_\alpha$ and $R_\beta$ with $\alpha < \beta$ is precisely the contour $c_{\alpha \beta}$.
+It contributes once with the orientation induced from $R_\alpha$ and once with the opposite orientation induced from $R_\beta$, so the two terms combine to give
+\begin{equation}
+  \int_{z \in c_{\alpha \beta}} (\xi_\alpha(z) - \xi_\beta(z)) F(z)
+  = \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) F(z) .
+\end{equation}
+Summing over all interfaces and using that $C$ has no outer boundary, we get
+\begin{equation}
+  \frac{1}{2 \pi \I} \int_C \mu(z) \IP{T(z) \cdots}
+  = \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) \IP{T(z) \cdots},
+\end{equation}
+recovering \eqref{eq:complex-variation-cech}.
 
 
 Note that both formulas are well defined only as long as 
@@ -5799,5 +5841,3 @@ Then we get a regularized determinant
 
 The factorization of this determinant is proved in
 \cite{McIntyreTakhtajan2006}.
-
-
