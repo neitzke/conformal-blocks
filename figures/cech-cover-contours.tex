@@ -25,12 +25,11 @@
     \node[red!45!black]   at (1.25,1.15) {$U_\beta$};
     \node[green!45!black] at (0.55,-1.65) {$U_\gamma$};
 
-    % intersection contours c_{alpha beta} = \partial V_\alpha \cap U_\beta
-    % draw the portions of the V-boundaries that lie inside the other U
+    % interfaces c_{alpha beta} between the ordered regions R_alpha and R_beta
     \begin{scope}
       \clip (B) circle (\R);
       \draw[very thick, black] (A) circle (\rV);
-      % orientation induced by boundary of V_\alpha (counterclockwise)
+      % orientation induced by boundary of R_\alpha (counterclockwise here)
       \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
         ($(A)+({\rV*cos(35)},{\rV*sin(35)})$) arc[start angle=35,end angle=55,radius=\rV];
     \end{scope}
@@ -38,19 +37,25 @@
 
     \begin{scope}
       \clip (C) circle (\R);
-      \draw[very thick, black] (A) circle (\rV);
-      % orientation induced by boundary of V_\alpha (counterclockwise)
-      \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
-        ($(A)+({\rV*cos(-70)},{\rV*sin(-70)})$) arc[start angle=-70,end angle=-50,radius=\rV];
+      \begin{scope}[even odd rule]
+        \clip (-2.8,-2.8) rectangle (2.8,2.8) (B) circle (\R);
+        \draw[very thick, black] (A) circle (\rV);
+        % orientation induced by boundary of R_\alpha
+        \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
+          ($(A)+({\rV*cos(-70)},{\rV*sin(-70)})$) arc[start angle=-70,end angle=-50,radius=\rV];
+      \end{scope}
     \end{scope}
     \node[black] at (-0.25,-0.35) {$c_{\alpha\gamma}$};
 
     \begin{scope}
       \clip (C) circle (\R);
-      \draw[very thick, black] (B) circle (\rV);
-      % orientation induced by boundary of V_\beta (counterclockwise)
-      \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
-        ($(B)+({\rV*cos(-120)},{\rV*sin(-120)})$) arc[start angle=-120,end angle=-100,radius=\rV];
+      \begin{scope}[even odd rule]
+        \clip (-2.8,-2.8) rectangle (2.8,2.8) (A) circle (\R);
+        \draw[very thick, black] (B) circle (\rV);
+        % orientation induced by boundary of R_\beta
+        \draw[black, -{Latex[length=2.2mm,width=1.6mm]}]
+          ($(B)+({\rV*cos(-120)},{\rV*sin(-120)})$) arc[start angle=-120,end angle=-100,radius=\rV];
+      \end{scope}
     \end{scope}
     \node[black] at (1.55,-0.35) {$c_{\beta\gamma}$};
 
@@ -78,7 +83,7 @@
       \node[blue!45!black] at (-1.05,1.55) {$U_1$};
       \node[red!45!black]  at (0,0) {$U_2$};
 
-      % contour c_{12} = \partial V_1 \cap U_2 (schematic loop in the annulus)
+      % contour c_{12}: interface between the two ordered regions
       \begin{scope}
         \clip (B2) circle (\Rtwo);
         \draw[very thick, black] (A2) circle (\rVone);
@@ -88,5 +93,5 @@
       \node[black] at (0.55,1.15) {$c_{12}$};
     \end{scope}
   \end{tikzpicture}
-  \caption{Cover by patches $U_\alpha$ and shrunken sets; the contours $c_{\alpha\beta}=\partial V_\alpha \cap U_\beta$ run along the overlaps.}
+  \caption{Cover by patches $U_\alpha$ and shrunken sets. After choosing an ordering on the cover, the sets $R_\alpha = V_\alpha \setminus \bigcup_{\gamma < \alpha} V_\gamma$ give a partition of the surface, and the contours $c_{\alpha\beta}$ are the interfaces between $R_\alpha$ and $R_\beta$, oriented as boundary components of $R_\alpha$.}
 \end{figure}
