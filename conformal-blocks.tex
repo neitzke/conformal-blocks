@@ -2756,7 +2756,7 @@ Let $\cM$ be a moduli space parameterizing deformations of $C$,
 and let $s$ be a section of the bundle $\cB_K$ over $\cM$.
 Let $v \in H^1(C,T)$,
 let $(v_{\alpha \beta})$ be a Cech representative for $v$, 
-vanishing at the marked points $p_i$,
+with support away from the marked points $p_i$,
 and let $T_v \in \End (\bigotimes_i \vrep_i)$ be the operator induced by
 \begin{equation}
   \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) T(z) \, .
@@ -2764,20 +2764,24 @@ and let $T_v \in \End (\bigotimes_i \vrep_i)$ be the operator induced by
 Then $(\partial_v + T_v) s \in K(C)$.
 \end{prop}
 
-Here is the idea of the proof.
+\begin{proof}
+Choose smooth local vector fields $\xi_\alpha$ on $U_\alpha$ as in the construction above,
+for example
+\begin{equation}
+  \xi_\alpha = \sum_\gamma \rho_\gamma v_{\alpha\gamma}
+\end{equation}
+for a partition of unity $(\rho_\gamma)$ subordinate to $(U_\gamma)$ and supported away from the marked points.
+Then $\xi_\alpha - \xi_\beta = v_{\alpha \beta}$ on $U_{\alpha\beta}$, and each $\xi_\alpha$
+vanishes on a neighborhood of every marked point.
+There is no contradiction with the possibility that $v$ defines a nontrivial class in $H^1(C,T)$:
+the fields $\xi_\alpha$ are only smooth, not holomorphic, so they do not split the cocycle in the holomorphic Cech complex.
 We have discussed the vertex algebra bundle $\vertex_C$
 over a fixed surface $C$. 
-% Its definition involved the 
-% group $\cG$ i.e. positive part of Virasoro, acting by 
-% coordinate transformations.
-Now we will use its extension to a bundle $\vertex_\tC$ over 
+Now we use its extension to a bundle $\vertex_\tC$ over 
 the universal curve $\tC$ over $\cM$.
 Given a section $a$ of $\vertex_\tC \otimes K_C$ 
-we can consider
-its first derivative $\dot{a}$ in the direction $v$:
-it is given by elements 
-$\dot{a}_\alpha$ over each $U_\alpha$, obeying 
-the deformed overlap condition
+representing $s = o(a)\chi$, its first derivative in the direction $v$
+is given by local sections $\dot a_\alpha$ over each $U_\alpha$, obeying
 \begin{equation}
  \dot{a}_\alpha - \dot{a}_\beta = \cL_{v_{\alpha \beta}} a \, . 
 \end{equation}
@@ -2785,29 +2789,42 @@ Here $\cL_v a$ means the Lie derivative of $a$ along the
 vector field $v$, which we can write as
 \begin{align}
   \cL_v a(z) &= \nabla_{v(z)} a(z) + \oint_{w \in c(z)} T(w) v(w) a(z) \\ 
-    &= v(z) (\partial_z + L_{-1}) a(z) + \sum_{n \ge 1} \frac{v^{(n)}(z)}{n!} L_{n+1} a(z)
+    &= v(z) (\partial_z + L_{-1}) a(z) + \sum_{n \ge 1} \frac{v^{(n)}(z)}{n!} L_{n+1} a(z) .
 \end{align}
-Now, suppose 
+Since $\xi_\alpha - \xi_\beta = v_{\alpha\beta}$, the local sections
 \begin{equation}
- s = o(a) \chi = \sum_i \Res_{p_i} a \chi \, .
+  \widetilde a_\alpha = \dot a_\alpha - \cL_{\xi_\alpha} a
 \end{equation}
-We want to understand the first-order variation $\dot{s}$.
-It is given by
+have trivial overlaps, hence glue to a global meromorphic section
+$\widetilde a \in \vertex(C)$. Therefore
 \begin{equation}
-  \dot{s} = \sum_i \Res_{p_i} \dot{a}_{\alpha_i} \chi = \sum_i \oint_{w \in c(p_i)} \dot{a}_{\alpha_i}(w) \chi
+  \dot s = \sum_i \Res_{p_i} \dot a_{\alpha_i} \chi
+  = o(\widetilde a)\chi + \sum_i \Res_{p_i} \cL_{\xi_{\alpha_i}} a\,\chi .
 \end{equation}
-where each $p_i \in U_{\alpha_i}$.
-We also have
+The first term already lies in $K(C)$.
+For the second term, the vanishing of $\xi_{\alpha_i}$ near $p_i$ kills the
+$\nabla_{\xi_{\alpha_i}} a$ contribution, so
 \begin{equation}
-  T_v s = \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \sum_i \int_{z \in c_{\alpha \beta}} v(z) T(z) \Res_{p_i} a \chi =
-  \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \sum_i \int_{z \in c_{\alpha \beta}} \oint_{w \in c(p_i)} v(z) T(z) a(w) \chi  
+  \sum_i \Res_{p_i} \cL_{\xi_{\alpha_i}} a\,\chi
+  = \sum_i \Res_{p_i} \oint_{z \in c(w)} \xi_{\alpha_i}(z) T(z) a(w)\chi .
 \end{equation}
-% Up to a term in $K(C)$ this is
-% \begin{equation}
-%   \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \sum_i \int_{z \in c_{\alpha \beta}} \oint_{w \in c(p_i)} v(z) T(z) a(w) \chi
-% \end{equation}
-
-\fixme{...}
+Now fix $i$ and regard the inner expression as a meromorphic $1$-form in $z$.
+Because the support of the deformation avoids the marked points, we can deform the
+small contour around $w \in c(p_i)$ outward through the regions $R_\alpha$.
+Exactly as in the comparison between the Beltrami and Cech formulas, the boundary terms on the interfaces combine to give the Cech contours $c_{\alpha\beta}$, with coefficient
+$\xi_\alpha-\xi_\beta=v_{\alpha\beta}$. Thus
+\begin{equation}
+  \sum_i \Res_{p_i} \cL_{\xi_{\alpha_i}} a\,\chi
+  = - \frac{1}{2\pi \I} \sum_{\alpha<\beta} \sum_i \int_{z \in c_{\alpha\beta}}
+    \oint_{w \in c(p_i)} v_{\alpha\beta}(z) T(z) a(w)\chi
+  = -T_v s .
+\end{equation}
+Combining the two pieces, we get
+\begin{equation}
+  (\partial_v + T_v)s = o(\widetilde a)\chi \in K(C),
+\end{equation}
+as claimed.
+\end{proof}
 
 
 \subsection{Virasoro twisting}
