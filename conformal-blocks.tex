@@ -2265,6 +2265,14 @@ Thus, for a M\"obius transformation $g(z)$, the computation of $\rho(g) \omega$ 
 the central charge $c$ --- that can only appear if we use $\ell_2$. This matches the fact that
 for a M\"obius transformation we have $\{g(z), z\} = 0$.
 
+A few other useful properties of the Schwarzian derivative:
+\begin{prop} We have:
+\begin{enumerate}
+\item  $\{ M \circ f(z), z \} = \{ f(z), z \}$ if $M$ is a M\"obius transformation.
+\item  $\{ f \circ g, z \} = \{f \circ g, g \} (g'(z))^2 + \{ g, z \}$.
+\end{enumerate}
+\end{prop}
+
 
 \subsection{Moving the marked points}
 
@@ -2840,11 +2848,11 @@ the integrand in \eqref{eq:complex-variation-beltrami} by
 There are a few ways of thinking about this problem.
 One, the most concrete, is to fix \ti{complex projective structures} on our surfaces:
 \begin{defn}[Complex projective structure]
-A \ti{complex projective structure} on a Riemann surface $C$ is a choice of an atlas of coordinate 
-systems for which the transition maps are M\"obius transformations.
+A \ti{complex projective structure} $S$ on a Riemann surface $C$ is 
+an atlas of local coordinate systems, for which all transition maps are M\"obius transformations.
 \end{defn}
 Every surface admits a complex projective structure, e.g. from Fuchsian uniformization; indeed Fuchsian uniformization gives
-a complex projective structure where the transition maps are in $PSL(2,\bbR)$, not only $PSL(2,\bbC)$. 
+a complex projective structure where the transition maps are in $\PSL(2,\bbR)$, not only $\PSL(2,\bbC)$. 
 But for our purposes we don't want to use that one: we want to use one which varies holomorphically as we vary $C$
 (i.e. there should exist coordinate systems in the atlas which vary holomorphically as functions of the moduli of $C$).
 % One which would be OK is the \ti{Bergman} projective structure \fixme{...}
@@ -2853,15 +2861,22 @@ Given two complex projective structures we can consider their \ti{difference}:
 \begin{defn}[Difference of complex projective structures]
 Let $S_1$ and $S_2$ be two complex projective structures on $C$.
 There is a globally defined holomorphic quadratic differential $S_2 - S_1$ 
-on $C$, given locally by $S_2 - S_1 = \{z,w\} \, \de z^2$, where
+on $C$, given locally by $S_2 - S_1 = \{w,z\} \, \de z^2$, where
 $z$ is a local coordinate in $S_1$ and $w$ is a coordinate in $S_2$.  
 \end{defn}
-For any smooth compact Riemann surface $C$, the complex projective structures on $C$ form a torsor over the space $H^0(C, K^2)$ of holomorphic
-quadratic differentials. Thus complex projective structures make up a holomorphic affine bundle over the moduli space of curves.
 
-At any rate, once we have locally fixed a holomorphic section of the bundle of 
-complex projective structures, \eqref{eq:complex-variation-beltrami} 
-defines an honest connection locally over the moduli of curves.
+\begin{prop}
+For any smooth compact Riemann surface $C$, the complex projective structures on $C$ form a torsor over the space $H^0(C, K^2)$ of holomorphic
+quadratic differentials. 
+\end{prop}
+
+Thus complex projective structures make up a holomorphic affine bundle over the moduli space $\cM$ of curves.
+Once we locally fix a holomorphic section $S$ 
+of the bundle of 
+complex projective structures, \eqref{eq:complex-variation-beltrami} defines an honest connection locally over the moduli of curves.
+The difference $S_1 - S_2$ is a section
+of the bundle of holomorphic quadratic differentials over $\cM$. 
+This bundle is also $T^* \cM$.
 
 \fixme{twisted D-module}
 
