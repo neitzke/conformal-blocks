@@ -2607,7 +2607,16 @@ vector fields $v_{\alpha \beta}$ on overlaps $U_{\alpha \beta}$, obeying
 $v_{\alpha \beta} + v_{\beta \gamma} + v_{\gamma \alpha} = 0$.
 Now define contours $c_{\alpha \beta}$ as follows.
 Choose an ordering $<$ arbitrarily on the index set.
-Shrink each $U_\alpha$ slightly to $V_\alpha$ with smooth boundary, such that they still cover $C$, and the boundaries meet transversely; then let $c_{\alpha \beta} = \partial V_\alpha \cap U_\beta$, with the boundary orientation induced by $V_\alpha$, for each $\alpha < \beta$.
+Shrink each $U_\alpha$ slightly to $V_\alpha$ with smooth boundary, such that they still cover $C$, and the boundaries meet transversely.
+Then define disjoint regions
+\begin{equation}
+  R_\alpha = V_\alpha \setminus \bigcup_{\gamma < \alpha} V_\gamma .
+\end{equation}
+For each $\alpha < \beta$, let $c_{\alpha \beta}$ be the $1$-dimensional part of the common boundary
+\begin{equation}
+  c_{\alpha \beta} = \partial R_\alpha \cap \partial R_\beta ,
+\end{equation}
+with the boundary orientation induced by $R_\alpha$.
 \input{figures/cech-cover-contours}
 Then the variation of chiral correlation functions 
 induced by $v$ is
@@ -2650,10 +2659,6 @@ Therefore the local $(0,1)$-forms
 \end{equation}
 glue to a global Beltrami differential $\mu \in \Omega^{0,1}(T)$.
 To compare the variation formulas more concretely, write $F(z) = \IP{T(z) \cdots}$.
-Using the ordering on the indices, decompose $C$ into the disjoint regions
-\begin{equation}
-  R_\alpha = V_\alpha \setminus \bigcup_{\beta < \alpha} V_\beta .
-\end{equation}
 Since the support of the deformation avoids the insertions, $F(z)$ is holomorphic on a neighborhood of each $R_\alpha$.
 Hence on $R_\alpha$ we have
 \begin{equation}
@@ -2664,8 +2669,8 @@ Applying Stokes' theorem on each $R_\alpha$ gives
   \int_C \mu(z) F(z) = \sum_\alpha \int_{R_\alpha} \bar \partial (\xi_\alpha F)
   = \sum_\alpha \int_{\partial R_\alpha} \xi_\alpha(z) F(z) .
 \end{equation}
-Each internal boundary between $R_\alpha$ and $R_\beta$ with $\alpha < \beta$ is precisely the contour $c_{\alpha \beta}$.
-It contributes once with the orientation induced from $R_\alpha$ and once with the opposite orientation induced from $R_\beta$, so the two terms combine to give
+The internal boundary between $R_\alpha$ and $R_\beta$ with $\alpha < \beta$ is the contour $c_{\alpha \beta}$.
+It contributes once with the orientation induced from $R_\alpha$ and once with the opposite orientation induced from $R_\beta$; the two terms combine to give
 \begin{equation}
   \int_{z \in c_{\alpha \beta}} (\xi_\alpha(z) - \xi_\beta(z)) F(z)
   = \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) F(z) .
