@@ -1991,6 +1991,11 @@ given by
 where we use the local coordinate $z_i$ to identify $\vrep_i$ with $(\vrep_i)_{p_i}$.
 \end{defn}
 
+We could alternatively write this
+\begin{equation}
+  o(a) \chi = \sum_{i=1}^n \sum_{m \in \bbZ} \bid \otimes \cdots \Res_{p_i} a \otimes \cdots \otimes \bid
+\end{equation}
+
 \begin{defn}[Conformal blocks for a vertex algebra and modules with $\cG$-action] \label{defn:conformal-block}
 Define the subspace
 \begin{equation} \label{eq:K-subspace}
@@ -2294,24 +2299,18 @@ Then the spaces $\vrep_p \otimes \bigotimes_i (\vrep_i)_{p_i}$
 are the fibers of an infinite rank vector bundle $\cB$ over $C$,
 with a subsheaf $\cB_K$ given by the spaces $K(C_p)$ from \eqref{eq:K-subspace}.
 
-Now, first suppose we fix a local coordinate $z$ around $p$.
+Now, suppose we fix a local coordinate system 
+$z$, and let $p$ be a moving marked point in the $z$-patch.
 Then:
 \begin{prop} \label{prop:translation-preserves-coinvariants}
-If $s$ is a section of $\cB_K$, then $(\partial_z + L_{-1}) s$ is also a section of $\cB_K$.
+If $s(p)$ is a section of $\cB_K$, then $(\partial_{z(p)} + L_{-1}) s(p)$ is also a section of $\cB_K$.
 (Here $L_{-1}$ acts in the tensor factor $\vrep_p$ of $\cB$.)
 \end{prop}
-
-Here is the key calculation.
-Given a section $a$ of the vertex algebra bundle $\vertex(C)$, we
-need to determine $\partial_z o(a)$. That amounts to understanding how the local coefficients
-$a_m$ in the expansion of $a$ around $z$ vary as we shift $z$. \fixme{...} This gives
-\begin{equation}
-  [\partial_z + L_{-1}, o(a)] = o(\partial_z a + L_{-1} a) \, .
-\end{equation}
 
 \begin{example}
 Suppose $\vertex = \Heis$ and
 $C = \bbC \bbP^1$ with marked points at $w,\infty$.
+(So in the above notation we are taking $w = z(p)$.)
 Then consider the global section $z J$ of $\vertex(C)$, with
 (using $z = (z-w) + w = (z^{-1})^{-1}$)
 \begin{equation}
@@ -2321,12 +2320,71 @@ Then using $[L_{-1}, J_1] = -J_0$ and $[L_{-1}, J_0] = 0$ we see that
 \begin{equation}
   [\partial_w + L_{-1} \otimes \bid, o(z J)] = 0 \, .
 \end{equation}
-% \begin{multline}
-% % [\partial_w + L_{-1} \otimes \bid, o(z J)] = 0
-%   (\partial_w + (L_{-1} \otimes 1)) \left( (J_1 + w J_0) \chi_1 \otimes \chi_2 + \chi_1 \otimes J_{-1} \chi_2 \right) = \\
-%   (J_1 + w J_0) L_{-1} \chi_1 \otimes \chi_2 + L_{-1} \chi_1 \otimes J_{-1} \chi_2 \ \in \ \cB_K
-% \end{multline}
+It follows that if $s$ is a section of $\cB_K$
+of the form $s(w) = o(zJ) \chi$,
+then indeed 
+ $(\partial_w + L_{-1} \otimes \bid) s(w) = o(z J) (\partial_w + L_{-1}) \chi$
+ which is also a section of $\cB_K$, as desired.
 \end{example}
+
+More generally, here is the proof.
+As in the example,
+let $z$ denote a fixed local coordinate, and let $p$ 
+be a moving marked point in the $z$-coordinate patch, with
+$w = z(p)$.
+% Given a section $a$ of the vertex algebra bundle $\vertex(C)$, we
+% need to determine $\partial_z o(a)$.
+We consider a section $a(w)$ of the vertex algebra bundle $\vertex(C_w)$, expanded as
+\begin{equation}
+  a(w) = \sum_m a_m(w) (z-w)^m \, .
+\end{equation}
+Then we have
+% Write the local expansion near the moving puncture as
+% \begin{equation}
+%   a = \sum_{m \in \bbZ} a_m(z) t^m \de t
+% \end{equation}
+% in a fixed local coordinate $t$ vanishing at the puncture.
+\begin{equation}
+  \partial_w a_m(w) = (m+1) a_{m+1}(w) + (\partial_w a)_m(w)
+\end{equation}
+and thus
+\begin{equation}
+  [\partial_w, o(a)] = [\partial_z, \sum_m (a_m(z))_{(m)}] = \sum_{m} (m+1) (a_{m+1})_{(m)} + ((\partial_w a)_m)_{(m)} \, .
+\end{equation}
+On the other hand, we have
+\begin{equation}
+  [L_{-1}, o(a)] = \sum_{m} [L_{-1}, (a_m)_{(m)}] = -\sum_m m (a_m)_{(m-1)} 
+\end{equation}
+% \begin{equation}
+%   [L_{-1}, Y(b,t)] = \partial_t Y(b,t) = Y(L_{-1} b, t) \, ,
+% \end{equation}
+% and comparing coefficients of $t^{-m-1}$ gives
+% \begin{equation}
+%   [L_{-1}, b_{(m)}] = (L_{-1} b)_{(m)} \, .
+% \end{equation}
+% Therefore
+% \begin{equation}
+%   [L_{-1}, o(a)] = \sum_{m \in \bbZ} (L_{-1} a_m)_{(m)} \, .
+% \end{equation}
+% But the local expansion of $\partial_z a + L_{-1} a$ is
+% \begin{equation}
+%   \partial_z a + L_{-1} a
+%   = \sum_{m \in \bbZ} (\partial_z a_m + L_{-1} a_m) t^m \de t \, ,
+% \end{equation}
+% so by the definition of $o(\cdot)$ we obtain
+and combining these two we get
+\begin{equation} \label{eq:deriv-check-tricky}
+  [\partial_w + L_{-1}, o(a)] = o(\partial_w a) \, .
+\end{equation}
+(In the example we had $\partial_w a = 0$, but in general
+this might not be possible, since $a$ might have a pole at $z=w$,
+which then has to move as $w$ does).
+The conclusion follows.
+
+\begin{exercise}
+Verify \eqref{eq:deriv-check-tricky} directly
+in case $a = z w J$.
+\end{exercise}
 
 Because of \autoref{prop:translation-preserves-coinvariants} 
 it is sensible to ask for a family $\Phi_z$ of conformal blocks obeying
@@ -2683,7 +2741,6 @@ Summing over all interfaces and using that $C$ has no outer boundary, we get
 \end{equation}
 recovering \eqref{eq:complex-variation-cech}.
 
-
 Note that both formulas are well defined only as long as 
 the support of $\mu(z)$ or $v_{\alpha \beta}(z)$ avoids the points where the insertions $\cdots$ are placed.
 This is a good feature, not a bug; it allows us to make canonical sense of what we mean by varying
@@ -2694,14 +2751,13 @@ avoiding any particular set of points.
 Using either approach, there is something to prove: we need to check that this variation procedure actually maps conformal blocks to 
 conformal blocks,
 i.e. that it preserves the condition of vanishing on coinvariants. 
-For notational convenience we consider
-only the case of a single marked point $p \in C$, carrying the representation $\vrep$.
 \begin{prop}
 Let $\cM$ be a moduli space parameterizing deformations of $C$,
 and let $s$ be a section of the bundle $\cB_K$ over $\cM$.
 Let $v \in H^1(C,T)$,
-let $(v_{\alpha \beta})$ be a Cech representative for $v$, and
-let $T_v \in \End (\vrep)$ be the operator induced by
+let $(v_{\alpha \beta})$ be a Cech representative for $v$, 
+vanishing at the marked points $p_i$,
+and let $T_v \in \End (\bigotimes_i \vrep_i)$ be the operator induced by
 \begin{equation}
   \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) T(z) \, .
 \end{equation}
@@ -2710,25 +2766,15 @@ Then $(\partial_v + T_v) s \in K(C)$.
 
 Here is the idea of the proof.
 We have discussed the vertex algebra bundle $\vertex_C$
-over a fixed surface $C$. Its definition involved the 
-group $\cG$ i.e. positive part of Virasoro, acting by 
-coordinate transformations.
+over a fixed surface $C$. 
+% Its definition involved the 
+% group $\cG$ i.e. positive part of Virasoro, acting by 
+% coordinate transformations.
 Now we will use its extension to a bundle $\vertex_\tC$ over 
 the universal curve $\tC$ over $\cM$.
-Given a section $a$ of $\vertex_\tC$ we can consider
-its first derivative
-% For this purpose we need the action of the whole 
-% Virasoro.
-% To prove this we need 
-% to describe what this data looks like to first order
-% around $C$, varying in the $v$ direction.
-% To make things easier for ourselves 
-% we may choose a Cech representative $(v_{\alpha \beta})$ 
-% for $v$ which vanishes at
-% the marked point $p$. Then $\vrep_p$ is constant along the $v$
-% direction, so the first derivative of $\chi$ 
-% along $v$ is just an element $\dot\chi \in \vrep_p$.
-$\dot{a}$ in the direction $v$:
+Given a section $a$ of $\vertex_\tC \otimes K_C$ 
+we can consider
+its first derivative $\dot{a}$ in the direction $v$:
 it is given by elements 
 $\dot{a}_\alpha$ over each $U_\alpha$, obeying 
 the deformed overlap condition
@@ -2738,61 +2784,12 @@ the deformed overlap condition
 Here $\cL_v a$ means the Lie derivative of $a$ along the
 vector field $v$, which we can write as
 \begin{align}
-  \cL_v a(z) &= \nabla_{v(z)} a(z) - \oint_z T(w) v(w) a(z) \\ 
-    &= \partial_{v(z)} a(z) + \sum_{n \ge 0} v^{(n+1)}(z) L_{n} a(z)
+  \cL_v a(z) &= \nabla_{v(z)} a(z) + \oint_z T(w) v(w) a(z) \\ 
+    &= v(z) (\partial_z + L_{-1}) a(z) + \sum_{n \ge 1} \frac{v^{(n)}(z)}{n!} L_{n+1} a(z)
 \end{align}
 
 \fixme{...}
 
-% We consider $s = o(a) \chi$, where both $a$ and $\chi$
-% are allowed to vary over $\cM$.
-% Now use $\cdot$ to denote the first-order variation in the $v$
-% direction. We claim:
-% \begin{equation}
-%   \dot{s} + T_v(s) = o(a) (\dot\chi + T_v(\chi)) + o(\dot{a} + T_v(a)) \chi \, .
-% \end{equation}
-% In particular the right side is in $K(C)$ as desired.
-% (We should emphasize that all the objects appearing in this
-% formula really depend on the choice of Cech representative, not
-% only on the class $v$.)
-
-% % We have discussed the vertex algebra bundle $\vertex_C$
-% % over a fixed surface $C$. Its definition involved the 
-% % group $\cG$ i.e. positive part of Virasoro, acting by 
-% % coordinate transformations.
-% % Now we will use its extension to a bundle $\vertex_\tC$ over 
-% % the universal curve $\tC$ over $\cM$.
-% % For this purpose we need the action of the whole 
-% % Virasoro.
-
-% To prove this we need 
-% to describe what this data looks like to first order
-% around $C$, varying in the $v$ direction.
-% To make things easier for ourselves 
-% we may choose a Cech representative $(v_{\alpha \beta})$ 
-% for $v$ which vanishes at
-% the marked point $p$. Then $\vrep_p$ is constant along the $v$
-% direction, so the first derivative of $\chi$ 
-% along $v$ is just an element $\dot\chi \in \vrep_p$.
-% The first derivative $\dot{a}$ is more interesting:
-% it is given by elements 
-% $\dot{a}_\alpha$ over each $U_\alpha$, obeying 
-% the deformed overlap condition
-% \begin{equation}
-%  \dot{a}_\alpha - \dot{a}_\beta = \cL_{v_{\alpha \beta}} a \, . 
-% \end{equation}
-% Here $\cL_v a$ means the Lie derivative of $a$ along the
-% vector field $v$, which we can write as
-% \begin{align}
-%   \cL_v a(z) &= \nabla_{v(z)} a(z) - \oint_z T(w) v(w) a(z) \\ 
-%     &= \partial_{v(z)} a(z) + \sum_{n \ge 0} v^{(n+1)}(z) L_{n} a(z)
-% \end{align}
-% % or concretely expand in terms of modes $L_{\ge -1}$
-% % acting on $\vertex$.
-% Now we can write 
-% $\dot{s} = o(\dot{a}_\alpha) \chi + o(a) \dot\chi$
-% (where $p \in U_\alpha$),
-% and $T_v (s) = \oint_c v_{\alpha \beta}(w) T(w) \chi$.
 
 \subsection{Virasoro twisting}
 
