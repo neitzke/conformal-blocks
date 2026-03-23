@@ -2784,9 +2784,28 @@ the deformed overlap condition
 Here $\cL_v a$ means the Lie derivative of $a$ along the
 vector field $v$, which we can write as
 \begin{align}
-  \cL_v a(z) &= \nabla_{v(z)} a(z) + \oint_z T(w) v(w) a(z) \\ 
+  \cL_v a(z) &= \nabla_{v(z)} a(z) + \oint_{w \in c(z)} T(w) v(w) a(z) \\ 
     &= v(z) (\partial_z + L_{-1}) a(z) + \sum_{n \ge 1} \frac{v^{(n)}(z)}{n!} L_{n+1} a(z)
 \end{align}
+Now, suppose 
+\begin{equation}
+ s = o(a) \chi = \sum_i \Res_{p_i} a \chi \, .
+\end{equation}
+We want to understand the first-order variation $\dot{s}$.
+It is given by
+\begin{equation}
+  \dot{s} = \sum_i \Res_{p_i} \dot{a}_{\alpha_i} \chi = \sum_i \oint_{w \in c(p_i)} \dot{a}_{\alpha_i}(w) \chi
+\end{equation}
+where each $p_i \in U_{\alpha_i}$.
+We also have
+\begin{equation}
+  T_v s = \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \sum_i \int_{z \in c_{\alpha \beta}} v(z) T(z) \Res_{p_i} a \chi =
+  \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \sum_i \int_{z \in c_{\alpha \beta}} \oint_{w \in c(p_i)} v(z) T(z) a(w) \chi  
+\end{equation}
+% Up to a term in $K(C)$ this is
+% \begin{equation}
+%   \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \sum_i \int_{z \in c_{\alpha \beta}} \oint_{w \in c(p_i)} v(z) T(z) a(w) \chi
+% \end{equation}
 
 \fixme{...}
 
