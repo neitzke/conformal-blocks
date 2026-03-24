@@ -2343,7 +2343,8 @@ be a moving marked point in the $z$-coordinate patch, with
 $w = z(p)$.
 % Given a section $a$ of the vertex algebra bundle $\vertex(C)$, we
 % need to determine $\partial_z o(a)$.
-We consider a section $a(w)$ of the vertex algebra bundle $\vertex(C_w)$, expanded as
+We consider a section $a(w)$ of the vertex algebra bundle $\vertex(C_w)$, whose expansion in the 
+$z$-patch is
 \begin{equation}
   a(w) = \sum_m a_m(w) (z-w)^m \, .
 \end{equation}
@@ -2358,7 +2359,7 @@ Then we have
 \end{equation}
 and thus
 \begin{equation}
-  [\partial_w, o(a)] = [\partial_z, \sum_m (a_m(z))_{(m)}] = \sum_{m} (m+1) (a_{m+1})_{(m)} + ((\partial_w a)_m)_{(m)} \, .
+  \partial_w (o(a)) = \sum_{m} (m+1) (a_{m+1})_{(m)} + o(\partial_w a) \, .
 \end{equation}
 On the other hand, we have
 \begin{equation}
@@ -2662,11 +2663,12 @@ Prove that $\Hom(\vrep_1, \vrep_2) = \Hom(\vrep_2^*, \vrep_1^*)$.
 So far we discussed how to vary conformal blocks when we move marked points, i.e.
 we got a connection on the bundle of conformal blocks over $C$.
 But the Virasoro action on $\vertex$ actually allows us to do more: we can vary the curve $C$ itself,
-thus obtaining (roughly) a connection over the moduli space of curves.
+thus obtaining a connection over the moduli space of curves (or more precisely a slightly twisted
+connection as we discuss below.)
 
 Deformations of $C$ are realized by the cohomology $H^1(C,T)$.
 The details of how we describe this connection depends on exactly how we realize this 
-cohomology. 
+cohomology.
 
 \begin{enumerate}
 \item Suppose given a Cech cocycle $v$, i.e. cover $C$ by patches $U_\alpha$ and give
@@ -2698,7 +2700,9 @@ and \eqref{eq:complex-variation-cech} becomes an integral over a loop $c_{12}$ a
   \partial_v \IP{\cdots} = \oint_{z \in c} v_{12}(z) \IP{T(z) \cdots}
 \end{equation}
 
-\item Suppose given an infinitesimal Beltrami differential $\mu \in H^{0,1}(T)$.
+\item Suppose given an infinitesimal Beltrami differential $\mu \in \Omega^{0,1}(T)$, corresponding to an infinitesimal variation of
+the complex structure on $C$.\footnote{One fast way to say it: deform $\bar\partial \to \bar\partial - \epsilon \mu \partial$;
+since $\bar\partial \mu = 0$ this still gives a complex structure to first order in $\epsilon$.}
 Then
 \begin{equation} \label{eq:complex-variation-beltrami}
   \partial_\mu \IP{\cdots} = \frac{1}{2 \pi \I} \int_{z \in C} \mu(z) \IP{T(z) \cdots}
@@ -2726,7 +2730,7 @@ Therefore the local $(0,1)$-forms
   \mu|_{U_\alpha} = \bar \partial \xi_\alpha = \sum_\gamma (\bar \partial \rho_\gamma) v_{\alpha \gamma}
 \end{equation}
 glue to a global Beltrami differential $\mu \in \Omega^{0,1}(T)$.
-To compare the variation formulas more concretely, write $F(z) = \IP{T(z) \cdots}$.
+Now, to compare the variation formulas, write $F(z) = \IP{T(z) \cdots}$.
 Since the support of the deformation avoids the insertions, $F(z)$ is holomorphic on a neighborhood of each $R_\alpha$.
 Hence on $R_\alpha$ we have
 \begin{equation}
@@ -2753,55 +2757,70 @@ recovering \eqref{eq:complex-variation-cech}.
 Note that both formulas are well defined only as long as 
 the support of $\mu(z)$ or $v_{\alpha \beta}(z)$ avoids the points where the insertions $\cdots$ are placed.
 This is a good feature, not a bug; it allows us to make canonical sense of what we mean by varying
-the curve while ``holding the marked points fixed.'' Every deformation class can be 
+the curve while ``holding the insertions fixed.'' Every deformation class can be 
 represented by $\mu(z)$ or $v_{\alpha \beta}(z)$ 
 avoiding any particular set of points.
 
 Using either approach, there is something to prove: we need to check that this variation procedure actually maps conformal blocks to 
 conformal blocks,
 i.e. that it preserves the condition of vanishing on coinvariants. 
+We formulate the statement in the Cech language.
+
 \begin{prop}
 Let $\cM$ be a moduli space parameterizing deformations of $C$,
 and let $s$ be a section of the bundle $\cB_K$ over $\cM$.
-Let $v \in H^1(C,T)$,
+Let $v \in T_C \cM = H^1(C,T)$,
 let $(v_{\alpha \beta})$ be a Cech representative for $v$, 
-with support away from the marked points $p_i$,
 and let $T_v \in \End (\bigotimes_i \vrep_i)$ be the operator induced by
 \begin{equation}
   \frac{1}{2 \pi \I} \sum_{\alpha < \beta} \int_{z \in c_{\alpha \beta}} v_{\alpha \beta}(z) T(z) \, .
 \end{equation}
+(Note this operator is defined only modulo $K(C)$.)
 Then $(\partial_v + T_v) s \in K(C)$.
 \end{prop}
 
-% \begin{proof}
-% Choose smooth (not holomorphic) $(1,0)$
-% vector fields $\xi_\alpha$ on $U_\alpha$ 
-% % as in the construction above,
-% % for example
-% % \begin{equation}
-% %   \xi_\alpha = \sum_\gamma \rho_\gamma v_{\alpha\gamma}
-% % \end{equation}
-% % for a partition of unity $(\rho_\gamma)$ subordinate to $(U_\gamma)$.
-% such that $\xi_\alpha - \xi_\beta = v_{\alpha \beta}$ on $U_{\alpha\beta}$, and each $\xi_\alpha$
-% vanishes on a neighborhood of every marked point.
-Here is the idea of the proof.
-We have discussed the vertex algebra bundle $\vertex_C$
-over a fixed surface $C$. 
-Now we use its extension to a bundle $\vertex_\tC$ over 
-the universal curve $\tC$ over $\cM$.
-Given a section $a$ of $\vertex_\tC \otimes K_C$ 
-representing $s = o(a)\chi$, its first derivative 
-in the direction $v$
-is given by local holomorphic sections $\dot a_\alpha$ over each $U_\alpha$, obeying
+Here are some ideas of the proof.
+% Given a section $a$ of $\vertex_\tC \otimes K_C$ 
+% representing $s = o(a)\chi$, its first derivative 
+% in the direction $v$
+% is given by local holomorphic sections $\dot a_\alpha$ over each $U_\alpha$, obeying
+% \begin{equation}
+%  \dot{a}_\alpha - \dot{a}_\beta = \cL_{v_{\alpha \beta}} a \, . 
+% \end{equation}
+% Here $\cL_v a$ means the Lie derivative of $a$ along the
+% vector field $v$, which we can write as \fixme{...}
+% \begin{align}
+%   \cL_v a(z) &= \nabla_{v(z)} a(z) + \oint_{w \in c(z)} T(w) v(w) a(z) \\ 
+%     &= v(z) (\partial_z + L_{-1}) a(z) + \sum_{n \ge 1} \frac{v^{(n)}(z)}{n!} L_{n+1} a(z) .
+% \end{align}
+To make the notation easier, it is convenient to consider a special kind of representative:\footnote{Although I said that this is a special representative, actually every deformation can be realized in this way: this fact is called \ti{Virasoro uniformization}.}
+we take just two open sets, $U_1$ and $U_2$, where $U_1$ is a small coordinate disc around a marked
+point $p$, and $U_2$ is $C \setminus \{ p \}$, and we take $v_{12}$ to be a meromorphic
+vector field on the punctured disc $U_{12}$.
+Then we have a canonical representative for $T_v$, obtained by mode expansion at 
+the marked point $p$.
+
+Now let $a$ be a section of $\vertex_C$. We want to extend $a$ to nearby deformations of $C$, but we
+are not too ambitious: we try to extend only to first order along the deformation $v$.
+Then the first-order variation $\partial_v a$ is still given by 
+a section of $\vertex_C$. (It may have a
+higher-order pole at $p$ than $a$ has; think of the example of $\partial_w (1 / (z-w)) = 1/(z-w)^2$,
+where at $w = 0$ we have $a = 1/z$ but $\partial_w a = -1/z^2$. The general condition 
+is that $\partial_v a - \cL_{v_{12}} a$ should be regular around $p$.) Then we 
+compute directly
 \begin{equation}
- \dot{a}_\alpha - \dot{a}_\beta = \cL_{v_{\alpha \beta}} a \, . 
+  [\partial_v + T_v, o(a)] = o(\partial_v a) \, .
 \end{equation}
-Here $\cL_v a$ means the Lie derivative of $a$ along the
-vector field $v$, which we can write as
-\begin{align}
-  \cL_v a(z) &= \nabla_{v(z)} a(z) + \oint_{w \in c(z)} T(w) v(w) a(z) \\ 
-    &= v(z) (\partial_z + L_{-1}) a(z) + \sum_{n \ge 1} \frac{v^{(n)}(z)}{n!} L_{n+1} a(z) .
-\end{align}
+
+We actually proved a special case of this earlier, in \eqref{eq:deriv-check-tricky}. 
+That is the case where $v_{12}$ is the constant vector field $\partial_z$. 
+% It is particularly
+% simple, because in that case the variation of $C$ is only moving the marked point,
+% so $a$ is a family of meromorphic sections of a single bundle $\vertex_C$, with just the pole
+% moving; then we can meaningfully talk about $\partial_w a$; and we 
+% have the simple representative $\dot{a} = (\dot{a}_1 = 0, \dot{a}_2 = \partial_w a)$.
+
+
 % Since $\xi_\alpha - \xi_\beta = v_{\alpha\beta}$, the local sections
 % \begin{equation}
 %   \widetilde a_\alpha = \dot a_\alpha - \cL_{\xi_\alpha} a
@@ -2848,7 +2867,7 @@ But the truth is that $T(z)$ is not quite a quadratic differential, rather it ha
 the transformation law \eqref{eq:stress-tensor-transformation}. Using that formula we see that changing the local coordinate $z \to g(z)$ changes
 the integrand in \eqref{eq:complex-variation-beltrami} by
 \begin{equation}
-  \frac{c}{12} \mu(z) \{g(z),z\} \IP{\cdots}
+ \frac{1}{2 \pi \I} \frac{c}{12} \mu(z) \{g(z),z\} \IP{\cdots}
 \end{equation}
 There are a few ways of thinking about this problem.
 One, the most concrete, is to fix \ti{complex projective structures} on our surfaces:
@@ -2881,9 +2900,16 @@ of the bundle of
 complex projective structures, \eqref{eq:complex-variation-beltrami} defines an honest connection locally over the moduli of curves.
 The difference $S_1 - S_2$ is a section
 of the bundle of holomorphic quadratic differentials over $\cM$. 
-This bundle is also $T^* \cM$.
+This bundle is also $T^* \cM$: indeed we have a pairing between Beltrami differentials $\mu$ and holomorphic quadratic differentials
+$\phi_2$ given by $\int_C \mu \phi_2$.
+Thus, we can think of $S_1 - S_2$ as a $1$-form $\lambda$ on $\cM$.
 
-\fixme{twisted D-module}
+Altogether, then, for each choice of $S$ we get a connection $\nabla^S$ in the bundle of conformal blocks
+over $\cM$, with the rule that
+\begin{equation}
+  \nabla^{S + \lambda} = \nabla^S + \frac{c}{24 \pi \I} \lambda \, .
+\end{equation}
+This is also sometimes described by saying 
 
 \fixme{projective representation of mapping class group}
 
@@ -4907,9 +4933,10 @@ Prove the \ti{Verlinde formula}:
 
 \subsection{Chern-Simons theory}
 
-Fix a compact, simply connected Lie group $G$ and 
-level $k\in \mathbb Z$. Also fix a connection $\de + A$ on a (trivialized)\footnote{Fortunately, when $G$ is compact
-simply connected, every principal $G$-bundle over a $3$-manifold is trivializable.}
+Fix a compact, simple, simply connected Lie group $G$ and 
+level $k\in \mathbb Z$. Also fix a connection $\de + A$ on a (trivialized)\footnote{Fortunately, when $G$ is compact,
+simple, simply connected, we have $\pi_k(G) = 0$ for $k \le 2$, 
+and it follows that every principal $G$-bundle over a $3$-manifold is trivializable.}
 principal $G$-bundle over a closed oriented 
 $3$-manifold $M$. Then the \ti{Chern--Simons action} is
 \[
@@ -4934,7 +4961,8 @@ gave a method of computing the partition function, which was more fully develope
 in \cite{ReshetikhinTuraev1991}.
 
 There is a pesky detail we should discuss.
-In order to calculate the partition function one needs to introduce 
+In the most direct approach to calculating the partition function, 
+one needs to introduce a gauge-fixing, and this involves
 a Riemannian metric $g$ on $M$.
 Formally one would
 expect the partition function to be independent of $g$, but 
@@ -4955,11 +4983,9 @@ where $p_1$ denotes the first Pontryagin form,
 \[
 p_1(R) = -\frac{1}{8\pi^2}\Tr(R\wedge R) \, .
 \]
-
 \begin{exercise} Prove that $p_1$ is conformally invariant.
 \end{exercise}
-
-So $Z_{\CS}$ is ``almost topological:'' it depends on the metric, but 
+Thus $Z_{\CS}$ is ``almost topological:'' it depends on the metric, but 
 in a simple and controllable way.
 
 Now, on general QFT grounds, one expects:
