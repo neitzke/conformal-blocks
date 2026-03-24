@@ -413,6 +413,7 @@
 \DeclareMathOperator{\coev}{coev}
 \DeclareMathOperator{\Sk}{Sk}
 \DeclareMathOperator{\CS}{CS}
+\DeclareMathOperator{\Vol}{Vol}
 
 \newcommand{\insfig}[3]{
 
@@ -2838,6 +2839,7 @@ vector field $v$, which we can write as
 
 \fixme{...}
 
+
 \subsection{Virasoro twisting}
 
 One caution: the formula \eqref{eq:complex-variation-beltrami} depends on the local coordinate we use. If $T(z)$ transformed as a quadratic
@@ -5060,6 +5062,27 @@ the main idea is to introduce a \ti{boundary condition}
 
 
 
+\section{Random matrix models}
+
+Fix a polynomial $V$ of degree $K$.
+We consider an integral over random $N \times N$ matrices,
+\begin{equation}
+  Z_N = \frac{1}{\Vol\,U(N)} \int \de M \e^{\Tr\, V(M)}
+\end{equation}
+If $K$ is even and $V$ has negative leading coefficient, 
+then we could take $M$ to run over Hermitian matrices.
+In that case, we can reduce the integral to an integral over eigenvalues $w_i$,
+\begin{equation}
+  Z_N = \frac{1}{N!} \int\left[\prod_{i=1}^N \frac{\de w_i}{2 \pi \I} \,e^{V(w_i)} \right] \left[\prod_{i<j}(w_i-w_j)^2\right] \, ,  
+\end{equation}
+Even when $V$ is more general, we can \ti{define} the matrix model by an integral of this form,
+where the contour of integration need not be the real line: rather it is chosen to make the integral converge.
+
+\begin{example} If $V(w) = w^2$, then we are discussing the \ti{Gaussian} matrix model.
+The partition function is $Z_N = \fixme{...}$
+\end{example}
+
+In addition to the partition function, we can discuss correlation functions \fixme{...}
 
 \appendix
 
