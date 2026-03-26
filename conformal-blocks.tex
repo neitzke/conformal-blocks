@@ -4950,10 +4950,10 @@ and it follows that every principal $G$-bundle over a $3$-manifold is trivializa
 principal $G$-bundle over a closed oriented 
 $3$-manifold $M$. Then the \ti{Chern--Simons action} is an invariant
 of the connection, valued in $\bbR / 2 \pi \bbZ$.
-For $G = \fsl(N)$ we can write it as\footnote{For $\fg = \fsl_N$ 
+For $G = \fsl(N)$ we can write it as\footnote{For $\fg = \fsl(N)$ 
 the form $A \wedge A \wedge A$ means in components
-$(A_x A_y A_z) \de x \wedge \de y \wedge \de z$. For other $\fg$ we would have to write
-the formula in a slightly more abstract way.}
+$\frac16 \eps_{ijk} (A_i A_j A_k) \de x_i \wedge \de x_j \wedge \de x_k$. For general $\fg$ we could write
+the cubic term in $S_\CS$ as $\sum_{a,b,c=1}^{\dim \fg} \kappa(T_a, [T_b, T_c]) A^a \wedge A^b \wedge A^c$.}
 \[
 S_{\mathrm{CS}}(A)
 =
@@ -5000,6 +5000,11 @@ then
   \CS(P) = \frac{k}{4 \pi} \int_X F_Q \wedge F_Q = \frac{k}{4 \pi} \int_X \de(A \wedge \de A) = \frac{k}{4 \pi} \int_M A \wedge \de A
 \end{equation}
 so this agrees with the definition we gave before.
+
+For more general $G$ (not necessarily connected, and components not necessarily simply connected) 
+one can give a more abstract definition of $S_\CS$. It was originally given in
+\cite{DijkgraafWitten1990}, further developed in \cite{Freed1995}. The generalization of the ``level $k$''
+is a class $k \in H^4(BG, \bbZ)$.
 
 At any rate, once we have defined $S_\CS$, we can \ti{formally} write the \ti{Chern-Simons partition function}: it is
 \[
