@@ -2904,17 +2904,21 @@ This bundle is also $T^* \cM$: indeed we have a pairing between Beltrami differe
 $\phi_2$ given by $\int_C \mu \phi_2$.
 Thus, we can think of $S_1 - S_2$ as a $1$-form $\lambda$ on $\cM$.
 
-Altogether, then, for each choice of $S$ we get a connection $\nabla^S$ in the bundle of conformal blocks
+Altogether, then, for each choice of $S$ we get a covariant derivative operator $\nabla^S$ in the sheaf of conformal blocks
 over $\cM$, with the rule that
 \begin{equation}
   \nabla^{S + \lambda} = \nabla^S + \frac{c}{24 \pi \I} \lambda \, .
 \end{equation}
-This is also sometimes described by saying that conformal blocks form a \ti{twisted $D$-module}
-over $\cM$.
+\fixme{calculate the curvature}
 
-In particular, recall that $\pi_1(\cM)$ is the mapping class group of $C$. 
-Because of the twisting, integrating this connection does not produce an honest representation of the mapping class group,
-but it does produce a \ti{projective} representation.
+% This is also sometimes described by saying that conformal blocks form a \ti{twisted $D$-module}
+% over $\cM$. \fixme{explain this more} 
+
+In particular, recall that $\pi_1(\cM)$ is the mapping class group of $C$. Also, suppose we are in the nicest possible 
+situation, where the spaces of conformal blocks are finite-dimensional, so that we can find covariantly constant sections of $\nabla^S$ locally. 
+Then, were it not for the twisting, parallel transport of covariantly constant sections would produce a representation of
+$\pi_1(\cM)$. Because of the twisting, we get something slightly different: we get a \ti{projective} representation,
+i.e. a representation of a \ti{central extension} of $\pi_1(\cM)$.
 
 \subsection{Plumbing conformal blocks}
 
