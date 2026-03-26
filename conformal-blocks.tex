@@ -370,6 +370,7 @@
 \newcommand{\near}{\textrm{near}}
 \newcommand{\far}{\textrm{far}}
 \newcommand{\std}{\textrm{std}}
+\newcommand{\CS}{\textrm{CS}}
 
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
 
@@ -412,7 +413,6 @@
 \DeclareMathOperator{\ev}{ev}
 \DeclareMathOperator{\coev}{coev}
 \DeclareMathOperator{\Sk}{Sk}
-\DeclareMathOperator{\CS}{CS}
 \DeclareMathOperator{\Vol}{Vol}
 
 \newcommand{\insfig}[3]{
@@ -4930,18 +4930,24 @@ Prove the \ti{Verlinde formula}:
 \end{equation}
 \end{exercise}
 
-\subsection{The WZW model}
-\fixme{...}
+% \subsection{The WZW model}
+% \fixme{...}
 
 
 \subsection{Chern-Simons theory}
 
 Fix a compact, simple, simply connected Lie group $G$ and 
-level $k\in \mathbb Z$. Also fix a connection $\de + A$ on a (trivialized)\footnote{Fortunately, when $G$ is compact,
+level $k\in \mathbb Z$. Also fix a connection $\de + A$, with $A \in \Omega^1(\fg)$,
+on a (trivialized)\footnote{Fortunately, when $G$ is compact,
 simple, simply connected, we have $\pi_k(G) = 0$ for $k \le 2$, 
 and it follows that every principal $G$-bundle over a $3$-manifold is trivializable.}
 principal $G$-bundle over a closed oriented 
-$3$-manifold $M$. Then the \ti{Chern--Simons action} is
+$3$-manifold $M$. Then the \ti{Chern--Simons action} is an invariant
+of the connection, valued in $\bbR / 2 \pi \bbZ$.
+For $G = \fsl(N)$ we can write it as\footnote{For $\fg = \fsl_N$ 
+the form $A \wedge A \wedge A$ means in components
+$(A_x A_y A_z) \de x \wedge \de y \wedge \de z$. For other $\fg$ we would have to write
+the formula in a slightly more abstract way.}
 \[
 S_{\mathrm{CS}}(A)
 =
@@ -4949,19 +4955,36 @@ S_{\mathrm{CS}}(A)
 A\wedge \de A + \frac23 A \wedge A \wedge A
 \right).
 \]
+\begin{exercise}
+Prove that $S_\CS(A)$ is an invariant of the connection up to equivalence. 
+Concretely, this means that $S_\CS(A)$ is invariant under gauge transformations
+$A \to A^g = g^{-1} A g + g^{-1} \de g$, where $g: M \to G$.
+Note that this requires $k \in \bbZ$.
+(Hint: first prove that $S_\CS$ is invariant under 
+infinitesimal gauge
+transformations $\delta A = \de X + [A,X]$,
+$X \in \Omega^1(\fg)$;
+then prove that for finite gauge transformations
+$S_\CS(A^g) - S_\CS(A) = -\frac{k}{12 \pi} \int_M \Tr ((g^{-1} \de g)^3)$.)
+
+\end{exercise}
+
+\begin{exercise}
+Prove that the critical points of $S_\CS(A)$ are \ti{flat} 
+connections, i.e. connections for which $F_A = \de A + A \wedge A = 0$.
+\end{exercise}
+
 Then \ti{formally} the \ti{Chern-Simons partition function} is
 \[
 Z_{\mathrm{CS}}(M)
 =
 \int \mathcal D A \; e^{\, \I S_{\mathrm{CS}}(A)} \, .
 \]
-Here the integral is supposed to run over connections \ti{modulo gauge transformations}.
-It is important that the action $S_{\mathrm CS}(A)$ is invariant 
-under gauge transformations, up to a multiple of $2 \pi$; this is why we
-needed $k \in \bbZ$.
+Here the integral is supposed to run over connections \ti{modulo gauge transformations},
+to the invariance under gauge transformations is important.
 Witten \cite{Witten1989Jones} introduced this quantum field theory and
-gave a method of computing the partition function, which was more fully developed 
-in \cite{ReshetikhinTuraev1991}.
+gave a method of computing the partition function, which was more fully and rigorously 
+developed in many subsequent works, particularly \cite{ReshetikhinTuraev1991}.
 
 There is a pesky detail we should discuss.
 In the most direct approach to calculating the partition function, 
@@ -4977,11 +5000,11 @@ restricting to $g_0$ and $g_1$ at the two ends.
 Let $R\in \Omega^2(\widetilde{M},\End(T\widetilde{M}))$ be the
 curvature of $g$.
 Then we have
-\[
+\begin{equation} \label{eq:Z-cs-anomaly}
 \frac{Z_{\mathrm{CS}}(M,g_1)}{Z_{\mathrm{CS}}(M,g_0)}
 =
 \exp \left[ -\frac{2 \pi \I\, c}{24}\int_{M\times[0,1]} p_1(R) \right] \, .
-\]
+\end{equation}
 where $p_1$ denotes the first Pontryagin form,
 \[
 p_1(R) = -\frac{1}{8\pi^2}\Tr(R\wedge R) \, .
@@ -4990,6 +5013,9 @@ p_1(R) = -\frac{1}{8\pi^2}\Tr(R\wedge R) \, .
 \end{exercise}
 Thus $Z_{\CS}$ is ``almost topological:'' it depends on the metric, but 
 in a simple and controllable way.
+
+(I do not know a direct proof or even a good direct argument which explains the
+formula \eqref{eq:Z-cs-anomaly}.)
 
 Now, on general QFT grounds, one expects:
 \begin{itemize}
@@ -5010,8 +5036,18 @@ Witten made the following remarkable proposal:
 (In particular $V(Y)$ only depends on the conformal class of
 the metric, not the full metric.)
 
-To understand why this proposal could be true,
-the main idea is to introduce a \ti{boundary condition}
+Here are two (incomplete) ways to motivate this proposal.
+
+\begin{itemize}
+\item How would a physicist usually describe $V(Y)$?
+\fixme{canonical quantization...}
+
+\item Is there a more direct way of seeing a conformal block
+appear at the boundary?
+Yes, the main idea is to introduce a \ti{boundary condition} \fixme{...}
+\end{itemize}
+
+
 \fixme{...}
 
 % With the same convention, the gravitational Chern--Simons $3$-form is
