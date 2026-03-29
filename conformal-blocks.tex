@@ -3259,24 +3259,44 @@ known as the \ti{depth rule}, first derived in \cite{GepnerWitten1986}.
 This answer is a little weird. It means in particular that $\vrep(M_a) \boxtimes \vrep(M_b)$ cannot be $\vrep(M_a \otimes M_b)$.
 \begin{example}
 Suppose $\fg = \fsl_2$ and $k=3$.
-Then we have simple modules $\cS_0, \dots, \cS_3$ and for instance this rule would say
-\begin{equation}
-  \cS_2 \boxtimes \cS_2 \simeq \cS_0 \oplus \cS_2, \qquad \cS_3 \boxtimes \cS_3 \simeq \cS_0 \, .
-\end{equation}
-(Note that in $\cS_3 \boxtimes \cS_3$ the object $\cS_2$ does not appear, even though it would have 
-appeared in the naive tensor product, and it is an allowed object of the category!)
+Then we have simple modules $\cS_0, \dots, \cS_3$, and the depth rule gives the full product table:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{c|cccc}
+$\boxtimes$ & $\cS_0$ & $\cS_1$ & $\cS_2$ & $\cS_3$ \\ \hline
+$\cS_0$ & $\cS_0$ & $\cS_1$ & $\cS_2$ & $\cS_3$ \\
+$\cS_1$ & $\cS_1$ & $\cS_0 \oplus \cS_2$ & $\cS_1 \oplus \cS_3$ & $\cS_2$ \\
+$\cS_2$ & $\cS_2$ & $\cS_1 \oplus \cS_3$ & $\cS_0 \oplus \cS_2$ & $\cS_1$ \\
+$\cS_3$ & $\cS_3$ & $\cS_2$ & $\cS_1$ & $\cS_0$
+\end{tabular}
+\end{center}
+For example, $\cS_3 \boxtimes \cS_3 \simeq \cS_0$: the summand $\cS_2$ from the naive
+$\fsl_2$ tensor product is excluded by $a+b+c \le 2k$.
 \end{example}
 
 We can define the \ti{fusion semiring} as 
 the set of equivalence-classes of objects 
 of $\cC$, with addition given by $\oplus$ and product $\boxtimes$.
-It is commutative and associative (you could check this by hand
-in any particular case, or we will explain it below).
+It is commutative and associative (in this example one can check directly, e.g.
+\begin{equation}
+(\cS_1 \boxtimes \cS_1)\boxtimes \cS_2
+ = (\cS_0 \oplus \cS_2)\boxtimes \cS_2
+ = \cS_2 \oplus (\cS_0 \oplus \cS_2)
+ = \cS_0 \oplus 2\cS_2
+\end{equation}
+while
+\begin{equation}
+\cS_1\boxtimes(\cS_1\boxtimes \cS_2)
+ = \cS_1\boxtimes(\cS_1 \oplus \cS_3)
+ = (\cS_0 \oplus \cS_2)\oplus \cS_2
+ = \cS_0 \oplus 2\cS_2.
+\end{equation}
+)
 By formally adjoining negatives 
 of objects (Grothendieck ring) we get the \ti{fusion ring}.
 \begin{exercise}
-Suppose $\fg = \fsl_2$ and $k=3$. Check directly that the fusion ring
-is associative, and prove that it is isomorphic to $\bbZ[x] / (x^4 - 3x^2 + 1)$.
+Suppose $\fg = \fsl_2$ and $k=3$. Using the table above, prove that the fusion ring
+is isomorphic to $\bbZ[x] / (x^4 - 3x^2 + 1)$.
 \end{exercise}
 
 \begin{example}
