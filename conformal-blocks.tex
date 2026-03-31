@@ -5130,20 +5130,46 @@ In our case, we have
 % This is a symplectic manifold. It can be canonically quantized to $L^2(Z)$, which is the standard answer.)
 
 In our case, a critical point means a flat connection on $Y \times \bbR$.
-There is a finite-dimensional space $\cM^{flat}(C,G)$ of these (not quite a manifold, but at least a stack, which 
+There is a finite-dimensional space $\cM = \cM^{flat}(C,G)$ of these (not quite a manifold, but at least a stack, which 
 is a manifold away from some singular points).
 It gets a symplectic form which can be written
 \begin{equation}
-  \Omega(\delta_1, \delta_2) = \frac{k}{4 \pi} \int_C \Tr (\delta_1 \wedge \delta_2)
+  \Omega(a_1, a_2) = \frac{1}{4 \pi} \int_C \Tr (a_1 \wedge a_2)
 \end{equation}
-where $\delta_1$, $\delta_2$ are tangent vectors to $\cM^{flat}(C,G)$.
+where $a_1$, $a_2$ belong to $T_{(E,\nabla)} \cM^{flat}(C,G) = \{ a \in \End E \mid \de_\nabla a = 0 \}$.
+(More precisely this is the answer for $k=1$, and for other $k$ we would get $k \Omega$.)
 
 To carry out the quantization of a symplectic manifold $\cM$, one standard device is \ti{geometric quantization}.
-This requires us to choose a complex structure on $\cM$ and then find a holomorphic line bundle $\cL \to \cM$
-with connection, whose curvature is the symplectic form $\Omega$.
-For the particular $\cM$ we are considering, we can get a complex structure by choosing a complex structure on $C$
+This requires us to choose a \ti{complex polarization}, i.e. a
+ complex structure on $\cM$, and then find a holomorphic line bundle $\cL \to \cM$
+with connection, whose curvature is the symplectic form $\Omega$. Then $\cL^k$ similarly has a connection
+with curvature $k \Omega$.
+The output of geometric quantization then is the vector space $V = H^0(\cL)$.
+
+For the particular $\cM$ we are considering, we can get a complex structure on $\cM$ by choosing a complex structure on $C$
 itself: by a theorem of Narasimhan-Seshadri 
-this allows us to identify $\cM^{flat}(C,G)$ with the moduli space of holomorphic $G$-bundles over $C$. 
+this allows us to identify $\cM^{flat}(C,G)$ with the moduli space of holomorphic $G$-bundles over $C$.
+Over this space there is a distinguished holomorphic line bundle $\cL$ with connection (determinant bundle).
+Concretely, 
+
+\fixme{describe it concretely for $G = SU(n)$, lives naturally over the stack}
+This line bundle has $c_1(\cL) = [\Omega]$, so it admits a connection whose curvature is $\Omega$.
+Then, the output of geometric quantization in our setup is $V = H^0(\cL^k)$.
+This is sometimes called the space of \ti{nonabelian theta functions}. (In the case $G = U(1)$ they are
+ordinary theta functions.)
+
+So the space $H^0(\cL^k)$ has some reasonable claim to be the space of states of Chern-Simons theory on $C$.
+On the other hand, one has the following:
+\begin{thm} Suppose $G = SU(n)$. Then the space $H^0(\cL^k)$ is canonically isomorphic to the space of conformal blocks on $C$ for $L_k(\fg)$.
+\end{thm}
+\fixme{ref Beauville-Laszlo}
+
+Here is one way of thinking about this theorem. Fix a point $p \in C$, with a neighborhood $U_p$.
+Every $G$-bundle over $C$ can be trivialized over $U_p$ and $C \setminus \{p\}$, and thus determined
+by the data of a clutching function $\bbC^\times \to G$. This identifies $\cM$ as a quotient of the
+\ti{affine Grassmannian}
+$SL_r(\bbC((z)))/SL_r(\bbC[[z]])$. Then \fixme{...}
+
 
 \item Is there a more direct way of seeing a conformal block
 appear at the boundary?
