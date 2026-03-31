@@ -5075,7 +5075,7 @@ version of the story, where we require $M$ to carry some additional topological 
 $Z'_\CS(M,s)$ which depends on $s$ in a 
 controlled way, e.g. changing a framing by $1$ unit 
 (twisting the framing by the generator of $\pi_3(SO(3)) \simeq \bbZ$)
-changes the invariant by $\e^{2 \pi I c / 6}$.
+changes the invariant by $\e^{2 \pi \I c / 6}$.
 The relation between the two stories is that once given this data one can define a 
 \ti{gravitational Chern-Simons invariant} $Z_\grav(M,g,s)$ which depends on both, such that
 $Z_\CS(M,g) = Z'_\CS(M,s) Z_\grav(M,g,s)$.
@@ -5111,9 +5111,10 @@ The standard answer in quantum mechanics or quantum field theory
 is that one should perform \ti{canonical quantization} of the space of 
 critical points of the action on $Y \times \bbR$.
 Indeed this space carries a canonical symplectic structure.
+
 The standard local physicist's formula for this structure:
-writing $S = \int L$ and the fields $q^a(x)$, 
-define
+writing $S = \int L \, \de \vol$ and the fields $q^a(x)$, 
+define the ``canonical momenta''
 \begin{equation}
   \pi_a(x) = \frac{\partial L}{\partial \dot{q}^a(x)}
 \end{equation}
@@ -5121,10 +5122,12 @@ and then the symplectic form on the space of classical solutions will be
 \begin{equation}
   \Omega = \int_Y \delta \pi_a(x) \wedge \delta q^a(x)
 \end{equation}
+In our case, we have
 
-(Basic example: study the quantum mechanics of a single particle propagating on a Riemannian manifold $Z$.
-Then the space of critical points of the action is the space of classical trajectories, i.e. $T^* Z$.
-This is a symplectic manifold. It can be canonically quantized to $L^2(Z)$, which is the standard answer.)
+
+% (Basic example: study the quantum mechanics of a single particle propagating on a Riemannian manifold $Z$.
+% Then the space of critical points of the action is the space of classical trajectories, i.e. $T^* Z$.
+% This is a symplectic manifold. It can be canonically quantized to $L^2(Z)$, which is the standard answer.)
 
 In our case, a critical point means a flat connection on $Y \times \bbR$.
 There is a finite-dimensional space $\cM^{flat}(C,G)$ of these (not quite a manifold, but at least a stack, which 
