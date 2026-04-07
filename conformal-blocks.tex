@@ -2808,7 +2808,36 @@ a section of $\vertex_C$. (It may have a
 higher-order pole at $p$ than $a$ has; think of the example of $\partial_w (1 / (z-w)) = 1/(z-w)^2$,
 where at $w = 0$ we have $a = 1/z$ but $\partial_w a = -1/z^2$. The general condition 
 is that $\partial_v a - \cL_{v_{12}} a$ should be regular around $p$.) Then we 
-compute directly
+compute directly. Write in the local coordinate around $p$
+\begin{equation}
+  a(z) = \sum_{m \in \bbZ} a_m z^m \, \de z, \qquad
+  \cL_{v_{12}} a(z) = \sum_{m \in \bbZ} \ell_m z^m \, \de z,
+\end{equation}
+so by definition
+\begin{equation}
+  o(a) = \sum_m (a_m)_{(m)}, \qquad o(\cL_{v_{12}} a) = \sum_m (\ell_m)_{(m)}.
+\end{equation}
+For $T_v$ (the mode expansion of $\frac{1}{2\pi\I}\oint v_{12}(z)T(z)$ at $p$),
+the same contour manipulation used above for \eqref{eq:deriv-check-tricky}, now with the weight
+$v_{12}(z)$ in the contour integral, gives
+\begin{equation}
+  [T_v, o(a)] = - \, o(\cL_{v_{12}} a) \, .
+\end{equation}
+Also, differentiating $o(a)=\sum_m (a_m)_{(m)}$ along the deformation\footnote{Write the first-order deformation as a map of local coordinates
+$z \mapsto z + \epsilon \, v_{12}(z)$.
+Then
+$a(z+\epsilon v_{12}(z)) = a(z) + \epsilon \, \cL_{v_{12}} a(z) + O(\epsilon^2)$,
+so the coefficient of $z^m\de z$ in the deformed expansion acquires two contributions:
+one from the intrinsic variation $\partial_v a$, and one from re-expanding in the fixed coordinate $z$
+(the same moving-pole term as in \eqref{eq:deriv-check-tricky}).
+Applying $o(\cdot)$ to these first-order coefficients gives exactly
+$\partial_v(o(a)) = o(\partial_v a) + o(\cL_{v_{12}} a)$.},
+\begin{equation}
+  [\partial_v, o(a)] = \partial_v(o(a)) = o(\partial_v a) + o(\cL_{v_{12}} a) \, .
+\end{equation}
+(Here the extra $o(\cL_{v_{12}} a)$ term is exactly the same ``moving-pole'' term as in
+\eqref{eq:deriv-check-tricky}; only $L_{-1}$ is replaced by the full generator $T_v$.)
+Adding the two identities gives
 \begin{equation}
   [\partial_v + T_v, o(a)] = o(\partial_v a) \, .
 \end{equation}
