@@ -5036,7 +5036,9 @@ Prove the \ti{Verlinde formula}:
 % \fixme{...}
 
 
-\subsection{Chern-Simons theory}
+\section{Chern-Simons theory}
+
+\subsection{The Chern-Simons action}
 
 Fix a compact, simple, simply connected Lie group $G$ and 
 level $k\in \mathbb Z$. Also fix a 
@@ -5103,6 +5105,9 @@ one can give a more abstract definition of $S_\CS$. It was originally given in
 \cite{DijkgraafWitten1990}, further developed in \cite{Freed1995}. The generalization of the ``level $k$''
 is a class $k \in H^4(BG, \bbZ)$.
 
+
+\subsection{The partition function}
+
 At any rate, once we have defined $S_\CS$, we can \ti{formally} write the \ti{Chern-Simons partition function}: it is
 \[
 Z_{\mathrm{CS}}(M)
@@ -5158,6 +5163,10 @@ The relation between the two stories is that once given this data one can define
 $Z_\CS(M,g) = Z'_\CS(M,s) Z_\grav(M,g,s)$.
 \end{itemize}
 
+
+
+\subsection{The topological field theory}
+
 Now, what do we expect when we allow $M$ to be a compact $3$-manifold with boundary?
 On general QFT grounds, one expects:\footnote{This is a slight modification of Atiyah's axioms for topological field theory,
 to include some mild metric dependence.}
@@ -5174,32 +5183,36 @@ vector $Z_{\mathrm CS}(M) \in V(Y)$.
   $Z_{\CS(N)} = \ev_Y (Z_{\CS(M)})$
 \end{itemize}
 
+
+\subsection{The relation to conformal blocks}
+
 Witten made the following remarkable proposal:
-\ti{$V(Y)$ is the space of conformal blocks of $L_k(\fg)$ on $Y$}.
+\ti{For $k > 0$, $V(Y)$ is the space of conformal blocks of $L_k(\fg)$ on $Y$}.
 (In particular $V(Y)$ only depends on the conformal class of
 the metric, not the full metric.)
 
-Here are two (incomplete) ways to motivate this proposal.
 
-\begin{itemize}
+\subsection{Canonical quantization}
 
-\item How would a physicist usually describe $V(Y)$?
+How would a physicist usually describe $V(Y)$?
 The standard answer in quantum mechanics or quantum field theory
 is that one should perform \ti{canonical quantization} of the space of 
 critical points of the action on $Y \times \bbR$.
 Indeed this space carries a canonical symplectic structure.
 
-The standard local physicist's formula for this structure:
-writing $S = \int L \, \de \vol$ and the fields $q^a(x)$, 
-define the ``canonical momenta''
-\begin{equation}
-  \pi_a(x) = \frac{\partial L}{\partial \dot{q}^a(x)}
-\end{equation}
-and then the symplectic form on the space of classical solutions will be
-\begin{equation}
-  \Omega = \int_Y \delta \pi_a(x) \wedge \delta q^a(x)
-\end{equation}
-In our case, we have
+\fixme{include a basic explanation}
+
+% The standard local physicist's formula for this structure:
+% writing $S = \int L \, \de \vol$ and the fields $q^a(x)$, 
+% define the ``canonical momenta''
+% \begin{equation}
+%   \pi_a(x) = \frac{\partial L}{\partial \dot{q}^a(x)}
+% \end{equation}
+% and then the symplectic form on the space of classical solutions will be
+% \begin{equation}
+%   \Omega = \int_Y \delta \pi_a(x) \wedge \delta q^a(x)
+% \end{equation}
+% In our case, we have
 
 
 % (Basic example: study the quantum mechanics of a single particle propagating on a Riemannian manifold $Z$.
@@ -5228,17 +5241,26 @@ For the particular $\cM$ we are considering, we can get a complex structure on $
 itself: by a theorem of Narasimhan-Seshadri 
 this allows us to identify $\cM^{flat}(C,G)$ with the moduli space $\Bun_G(C)$
 parameterizing \ti{holomorphic} $G$-bundles $\cE$ over $C$, which is a complex manifold\footnote{almost: it has some singularities}
-Over $\Bun_G(C)$ there is a distinguished holomorphic line bundle $\cL_\Theta$ (sometimes called determinant bundle):
-by definition, it is the line bundle associated to the divisor
-\begin{equation}
-  \Theta = \{ \cE \in \Bun_G(C) \mid h^0(\cE) > 0 \} \, \subset \Bun_G(C) \, .
-\end{equation}
 
-\fixme{describe it concretely for $G = SU(n)$, lives naturally over the stack}
+\begin{defn}[Theta line bundle]
+Over $\Bun_G(C)$ there is a distinguished holomorphic line bundle $\cL_\Theta$.
+We can define it as follows. Pick a line bundle $\cL$ over $C$, with $\deg \cL = g-1$.
+By the Riemann-Roch formula we then have $\chi(\cL \otimes \cE) = 0$,
+for any $\cE \in \Bun_G(C)$. A generic $\cE$ has $h^0(\cE \otimes \cL) = 0$.
+Then, $\cL_\Theta$ is the line bundle associated to the divisor
+\begin{equation}
+  \Theta = \{ \cE \in \Bun_G(C) \mid h^0(\cE \otimes \cL) > 0 \} \, \subset \Bun_G(C) \, .
+\end{equation}
+(It is independent of the choice of $\cL$.)
+\end{defn}
+
 This line bundle has $c_1(\cL) = [\Omega]$, so it admits a connection whose curvature is $\Omega$.
 Then, the output of geometric quantization in our setup is $V = H^0(\cL^k)$.
 This is sometimes called the space of \ti{nonabelian theta functions}. (In the case $G = U(1)$ they are
 ordinary theta functions.)
+
+
+\subsection{The abelian case}
 
 It is worth writing out the abelian case in detail, since all ingredients can be made fully explicit.
 
@@ -5278,7 +5300,7 @@ $\nabla$ to the holomorphic bundle $(L,\bar\partial_\nabla)$ identifies
 On a curve, $c_1(L)$ is represented by $(\I/2\pi)F_{\nabla_h}$.
 
 (2) Topological complex line bundles are classified by $c_1 \in H^2(C,\bbZ)$.
-Since $H^2(C,\bbZ)\cong \bbZ$, degree is the complete topological invariant.
+Since $H^2(C,\bbZ)\cong \bbZ$, the degree is a complete topological invariant.
 
 (3) Fix one unitary connection $\nabla_0$ on $L$ (not necessarily flat). Any other unitary connection is
 $\nabla_0+a$ with $a\in \Omega^1(C;\I\bbR)$.
@@ -5286,8 +5308,8 @@ Flatness for $\nabla=\nabla_0+a$ is $F_{\nabla_0}+\de a=0$.
 When $\deg L=0$, there exist flat solutions; choosing one such $\nabla_f$, all flat unitary connections are
 $\nabla_f+a$ with $\de a=0$.
 Unitary gauge transformations $g:C\to U(1)$ act by
-$a\mapsto a-g^{-1}\de g$, so we quotient closed imaginary-valued $1$-forms by the lattice of integral
-period forms. This gives $H^1(C,\bbR)/H^1(C,\bbZ)$.
+$a\mapsto a-g^{-1}\de g$, so we quotient the space of closed imaginary-valued $1$-forms by the lattice of forms
+for which all periods are integral. This gives $\cM^{flat}(C) = H^1(C,\bbR)/H^1(C,\bbZ)$.
 
 (4) A flat connection has path-independent parallel transport up to homotopy, hence a character of $\pi_1(C)$.
 Conversely, a character $\rho:\pi_1(C)\to U(1)$ defines
@@ -5299,18 +5321,17 @@ These constructions are inverse.
 \[
 \deg L=\frac{\I}{2\pi}\int_C F_\nabla=0.
 \]
-So we get a map $\cM^{flat}_{U(1)}(C)\to \operatorname{Pic}^0(C)$.
-For surjectivity, let $(L,\bar\partial)$ have degree $0$, and choose any Hermitian metric $h$.
-Its Chern connection $\nabla_h$ has curvature $F_h$ of type $(1,1)$ and integral $0$.
-Since $c_1(L)=0$ in de Rham cohomology, $F_h$ is exact.
-On a compact K\"ahler curve, the $\partial\bar\partial$-lemma implies
+So we get a map $\cM^{flat}(C)\to \operatorname{Pic}^0(C)$.
+To see this map is surjective, suppose given $(L,\bar\partial)$ of degree $0$, and choose any Hermitian metric $h$
+in $L$. Its Chern connection $\nabla_h$ has curvature $F_h$ of type $(1,1)$ and integral $0$.
+Since $c_1(L) = 0$ in de Rham cohomology, $F_h$ is exact. Then the $\partial\bar\partial$-lemma implies
 \[
 F_h=\partial\bar\partial \varphi
 \]
-for some real function $\varphi$ (up to the conventional scalar $\I$-factor).
-Rescaling the metric by $h'=\e^{-\varphi}h$ changes Chern curvature by
-$F_{h'}=F_h-\partial\bar\partial\varphi=0$.
-Hence $h'$ has flat Chern connection, producing a preimage.
+for some real function $\varphi$.
+Rescaling the metric by $h' = \e^{-\varphi}h$ gives
+$F_{h'} = F_h - \partial\bar\partial\varphi = 0$.
+Hence $h'$ has flat Chern connection, giving the desired preimage of $(L,\bar\partial)$.
 Injectivity follows because two flat unitary connections defining the same holomorphic structure
 differ by a unitary gauge transformation.
 \end{proof}
@@ -5320,7 +5341,7 @@ Let
 \[
 \Jac(C)=\operatorname{Pic}^0(C)\cong H^1(C,\bbR)/H^1(C,\bbZ).
 \]
-Choose a theta characteristic $\kappa$ (a square root of $K_C$) and use translation
+Choose a spin structure $\kappa$ (a square root of $K_C$) and use translation
 $L\mapsto L\otimes \kappa^{-1}$ to identify $\operatorname{Pic}^{g-1}(C)$ with $\operatorname{Pic}^0(C)$.
 The \ti{theta divisor} is
 \[
@@ -5414,8 +5435,12 @@ From the CFT side, this same connection is the one produced by Virasoro Ward ide
 in the $U(1)$ WZW theory the stress tensor is quadratic in the current, so its insertion acts as a
 second-order differential operator, and the conformal-block connection reduces exactly to this heat-operator connection.
 
-So the space $H^0(\cL^k)$ has some reasonable claim to be the space of states of Chern-Simons theory on $C$.
+
+\subsection{Relation to conformal blocks}
+
+Above I tried to convince you that $H^0(\cL^k)$ has some reasonable claim to be the space of states of Chern-Simons theory on $C$.
 On the other hand, one has the following:
+
 \begin{thm} Suppose $G = SU(n)$. Then the space $H^0(\cL^k)$ is canonically isomorphic to the space of conformal blocks on $C$ for $L_k(\fg)$.
 \end{thm}
 \fixme{ref Beauville-Laszlo}
@@ -5426,15 +5451,10 @@ by the data of a clutching function $\bbC^\times \to G$. This identifies $\cM$ a
 \ti{affine Grassmannian}
 $SL_r(\bbC((z)))/SL_r(\bbC[[z]])$. Then \fixme{...}
 
-
-\item Is there a more direct way of seeing a conformal block
-appear at the boundary?
-Yes, by introducing a \ti{chiral boundary condition} \fixme{...}
-
-\end{itemize}
-
-
 \fixme{...}
+
+
+\subsection{Chiral boundary conditions}
 
 % With the same convention, the gravitational Chern--Simons $3$-form is
 % \[
