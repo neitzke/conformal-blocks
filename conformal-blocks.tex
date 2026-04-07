@@ -5200,7 +5200,7 @@ is that one should perform \ti{canonical quantization} of the space of
 critical points of the action on $Y \times \bbR$.
 Indeed this space carries a canonical symplectic structure.
 
-\fixme{include a basic explanation}
+\fixme{include a basic explanation of how you compute this symplectic structure}
 
 % The standard local physicist's formula for this structure:
 % writing $S = \int L \, \de \vol$ and the fields $q^a(x)$, 
@@ -5222,40 +5222,58 @@ Indeed this space carries a canonical symplectic structure.
 In our case, a critical point means a flat connection on $Y \times \bbR$.
 There is a finite-dimensional space $\cM = \cM^{flat}(C,G)$ of these (not quite a manifold, but at least a stack, which 
 is a manifold away from some singular points).
-It gets a symplectic form which can be written
+It gets a symplectic form which can be written $\Omega = k \Omega_{AB}$, where
 \begin{equation}
-  \Omega(a_1, a_2) = \frac{1}{4 \pi} \int_C \Tr (a_1 \wedge a_2)
+  \Omega_{AB}(a_1, a_2) = \frac{1}{4 \pi} \int_C \Tr (a_1 \wedge a_2)
 \end{equation}
 where $a_1$, $a_2$ belong to $T_{(E,\nabla)} \cM^{flat}(C,G) = \{ a \in \End E \mid \de_\nabla a = 0 \}$.
-(More precisely this is the answer for $k=1$, and for other $k$ we would get $k \Omega$.)
 
 To carry out the quantization of a symplectic manifold $\cM$, one standard device is \ti{geometric quantization}.
 This requires us to choose a \ti{complex polarization}, i.e. a
  complex structure on $\cM$, and then find a holomorphic line bundle $\cL \to \cM$
-with connection, whose curvature is the symplectic form $\Omega$. Then $\cL^k$ similarly has a connection
-with curvature $k \Omega$.
-The output of geometric quantization then is the vector space $V = H^0(\cL)$.
+with connection, whose curvature is the symplectic form $k \Omega_{AB}$.
+The output of geometric quantization then is the vector space of holomorphic sections, $V = H^0(\cL)$.
 
 Let us now specialize to $G = SU(n)$ to be most concrete.
 For the particular $\cM$ we are considering, we can get a complex structure on $\cM$ by choosing a complex structure on $C$
-itself: by a theorem of Narasimhan-Seshadri 
-this allows us to identify $\cM^{flat}(C,G)$ with the moduli space $\Bun_G(C)$
-parameterizing \ti{holomorphic} $G$-bundles $\cE$ over $C$, which is a complex manifold\footnote{almost: it has some singularities}
+itself: 
+% by a theorem of Narasimhan-Seshadri 
+% this allows us to identify $\cM^{flat}(C,G)$ with the moduli space $\Bun_G(C)$
+% parameterizing \ti{holomorphic} $G$-bundles $\cE$ over $C$, which is a complex manifold.\footnote{almost: it has some singularities}
 
-\begin{defn}[Theta line bundle]
-Over $\Bun_G(C)$ there is a distinguished holomorphic line bundle $\cL_\Theta$.
-We can define it as follows. Pick a line bundle $\cL$ over $C$, with $\deg \cL = g-1$.
-By the Riemann-Roch formula we then have $\chi(\cL \otimes \cE) = 0$,
-for any $\cE \in \Bun_G(C)$. A generic $\cE$ has $h^0(\cE \otimes \cL) = 0$.
-Then, $\cL_\Theta$ is the line bundle associated to the divisor
-\begin{equation}
-  \Theta = \{ \cE \in \Bun_G(C) \mid h^0(\cE \otimes \cL) > 0 \} \, \subset \Bun_G(C) \, .
-\end{equation}
-(It is independent of the choice of $\cL$.)
+\begin{defn}[Moduli of holomorphic bundles]
+Let $\Bun_G(C)$ be the moduli space parameterizing holomorphic $G$-bundles over $C$.
 \end{defn}
 
-This line bundle has $c_1(\cL) = [\Omega]$, so it admits a connection whose curvature is $\Omega$.
-Then, the output of geometric quantization in our setup is $V = H^0(\cL^k)$.
+$\Bun_G(C)$ is a smooth algebraic stack, and the corresponding
+coarse moduli space has a (Zariski) open subset $\Bun^\circ_G(C)$ which is
+a complex manifold. The space $\Bun_G^\circ(C)$ parameterizes \ti{stable} holomorphic
+$G$-bundles.
+
+(Of course we should say much more about it, give a reference for its construction, etc...)
+
+\begin{thm}[Narasimhan-Seshadri]
+We have an isomorphism
+\begin{equation}
+ \cM^{flat}(C,G) \simeq \Bun_G(C)
+\end{equation}
+
+\end{thm}
+
+\begin{defn}[Theta line bundle]
+Pick a line bundle $\kappa$ over $C$, with $\deg \cL = g-1$.
+(For instance, we could choose a spin structure on $C$; this gives a choice of $\kappa$.)
+By the Riemann-Roch formula we then have $\chi(\cE \otimes \kappa) = 0$,
+for any $\cE \in \Bun_G(C)$. A generic $\cE$ has $h^0(\cE \otimes \kappa) = 0$.
+Then, $\cL_\Theta$ is the line bundle over $\Bun_G(C)$ associated to the divisor
+\begin{equation}
+  \Theta = \{ \cE \in \Bun_G(C) \mid h^0(\cE \otimes \kappa) > 0 \} \, \subset \Bun_G(C) \, .
+\end{equation}
+\end{defn}
+
+Note that $\cL_\Theta$ depends on the choice of $\kappa$, though its isomorphism class doesn't.
+This line bundle has $c_1(\cL_\Theta) = [\Omega]$, so it admits a connection whose curvature is $\Omega$.
+Then, the output of geometric quantization in our setup is $V = H^0(\cL_\Theta^k)$.
 This is sometimes called the space of \ti{nonabelian theta functions}. (In the case $G = U(1)$ they are
 ordinary theta functions.)
 
@@ -5336,104 +5354,104 @@ Injectivity follows because two flat unitary connections defining the same holom
 differ by a unitary gauge transformation.
 \end{proof}
 
-Now we describe the prequantum line bundle in this abelian case.
-Let
-\[
-\Jac(C)=\operatorname{Pic}^0(C)\cong H^1(C,\bbR)/H^1(C,\bbZ).
-\]
-Choose a spin structure $\kappa$ (a square root of $K_C$) and use translation
-$L\mapsto L\otimes \kappa^{-1}$ to identify $\operatorname{Pic}^{g-1}(C)$ with $\operatorname{Pic}^0(C)$.
-The \ti{theta divisor} is
-\[
-\Theta_\kappa=\{\,L\in \operatorname{Pic}^0(C)\mid h^0(C,L\otimes \kappa)\neq 0\,\},
-\]
-and the corresponding \ti{theta line bundle} is
-\[
-\cO_{\Jac}(\Theta_\kappa)\longrightarrow \Jac(C).
-\]
-Its first Chern class is the principal polarization on $\Jac(C)$.
+% Now we describe the prequantum line bundle in this abelian case.
+% Let
+% \[
+% \Jac(C)=\operatorname{Pic}^0(C)\cong H^1(C,\bbR)/H^1(C,\bbZ).
+% \]
+% Choose a spin structure $\kappa$ (a square root of $K_C$) and use translation
+% $L\mapsto L\otimes \kappa^{-1}$ to identify $\operatorname{Pic}^{g-1}(C)$ with $\operatorname{Pic}^0(C)$.
+% The \ti{theta divisor} is
+% \[
+% \Theta_\kappa=\{\,L\in \operatorname{Pic}^0(C)\mid h^0(C,L\otimes \kappa)\neq 0\,\},
+% \]
+% and the corresponding \ti{theta line bundle} is
+% \[
+% \cO_{\Jac}(\Theta_\kappa)\longrightarrow \Jac(C).
+% \]
+% Its first Chern class is the principal polarization on $\Jac(C)$.
 
-From gauge theory one can realize this line bundle as a determinant line bundle (Quillen line bundle)
-over the affine space of unitary connections, descending to $\Jac(C)$.
-The Quillen connection has curvature
-\[
-F_{\nabla^{Q}} = 2\pi \I\,\omega_{AB},
-\]
-where in rank $1$ the Atiyah--Bott symplectic form is
-\[
-\omega_{AB}(a_1,a_2)=\frac{1}{2\pi}\int_C a_1\wedge a_2
-\qquad
-(a_i\in \Omega^1(C;\I\bbR),\ \de a_i=0\ \text{mod gauge}).
-\]
-Therefore $\cO_{\Jac}(\Theta_\kappa)$ is a prequantum line bundle for $(\Jac(C),\omega_{AB})$.
-Consequently geometric quantization yields
-\[
-H^0\!\left(\Jac(C),\cO_{\Jac}(k\Theta_\kappa)\right),
-\]
-the classical level-$k$ theta functions.
+% From gauge theory one can realize this line bundle as a determinant line bundle (Quillen line bundle)
+% over the affine space of unitary connections, descending to $\Jac(C)$.
+% The Quillen connection has curvature
+% \[
+% F_{\nabla^{Q}} = 2\pi \I\,\omega_{AB},
+% \]
+% where in rank $1$ the Atiyah--Bott symplectic form is
+% \[
+% \omega_{AB}(a_1,a_2)=\frac{1}{2\pi}\int_C a_1\wedge a_2
+% \qquad
+% (a_i\in \Omega^1(C;\I\bbR),\ \de a_i=0\ \text{mod gauge}).
+% \]
+% Therefore $\cO_{\Jac}(\Theta_\kappa)$ is a prequantum line bundle for $(\Jac(C),\omega_{AB})$.
+% Consequently geometric quantization yields
+% \[
+% H^0\!\left(\Jac(C),\cO_{\Jac}(k\Theta_\kappa)\right),
+% \]
+% the classical level-$k$ theta functions.
 
-It is useful to make these sections explicit. Choose a symplectic basis of $H_1(C,\bbZ)$,
-let $\tau \in \bbH_g$ be the corresponding period matrix, and identify
-\[
-\Jac(C)\cong \bbC^g/(\bbZ^g+\tau\bbZ^g).
-\]
-On $\bbC^g\times \bbC$, define the factor of automorphy
-\[
-j_k(m+\tau n,z)=
-\exp\!\Big(-\pi \I k\, n^T\tau n -2\pi \I k\, n^T z\Big),
-\qquad m,n\in \bbZ^g.
-\]
-Then $\cO_{\Jac}(k\Theta_\kappa)$ is represented by the quotient
-$(\bbC^g\times \bbC)/\sim$, where
-\[
-(z,\xi)\sim \big(z+m+\tau n,\; j_k(m+\tau n,z)\,\xi\big).
-\]
-A holomorphic section is therefore a holomorphic function $f:\bbC^g\to\bbC$ satisfying
-the quasiperiodicity relations
-\[
-f(z+m)=f(z),\qquad
-f(z+\tau n)=\exp\!\Big(-\pi \I k\, n^T\tau n-2\pi \I k\, n^Tz\Big)f(z).
-\]
-For $k=1$, one standard section is the Riemann theta function
-\[
-\vartheta(z,\tau)=\sum_{n\in\bbZ^g}\exp\!\big(\pi \I\, n^T\tau n+2\pi \I\, n^T z\big),
-\]
-and with characteristic $(a,b)\in (\frac1k\bbZ^g/\bbZ^g)^2$ one has
-\[
-\vartheta\!\begin{bmatrix} a\\ b\end{bmatrix}(z,\tau)
-=
-\sum_{n\in\bbZ^g}
-\exp\!\Big(\pi \I\,(n+a)^T\tau(n+a)+2\pi \I\,(n+a)^T(z+b)\Big).
-\]
-For fixed $k$, suitable characteristics give a basis of
-$H^0(\Jac(C),\cO_{\Jac}(k\Theta_\kappa))$, and
-\[
-\dim H^0(\Jac(C),\cO_{\Jac}(k\Theta_\kappa))=k^g
-\]
-by Riemann--Roch on abelian varieties.
-So the ``theta functions'' are exactly the holomorphic sections of the prequantum line bundle
-defined above (or its $k$-th tensor power), with their transformation law encoding the line bundle's
-descent data.
+% It is useful to make these sections explicit. Choose a symplectic basis of $H_1(C,\bbZ)$,
+% let $\tau \in \bbH_g$ be the corresponding period matrix, and identify
+% \[
+% \Jac(C)\cong \bbC^g/(\bbZ^g+\tau\bbZ^g).
+% \]
+% On $\bbC^g\times \bbC$, define the factor of automorphy
+% \[
+% j_k(m+\tau n,z)=
+% \exp\!\Big(-\pi \I k\, n^T\tau n -2\pi \I k\, n^T z\Big),
+% \qquad m,n\in \bbZ^g.
+% \]
+% Then $\cO_{\Jac}(k\Theta_\kappa)$ is represented by the quotient
+% $(\bbC^g\times \bbC)/\sim$, where
+% \[
+% (z,\xi)\sim \big(z+m+\tau n,\; j_k(m+\tau n,z)\,\xi\big).
+% \]
+% A holomorphic section is therefore a holomorphic function $f:\bbC^g\to\bbC$ satisfying
+% the quasiperiodicity relations
+% \[
+% f(z+m)=f(z),\qquad
+% f(z+\tau n)=\exp\!\Big(-\pi \I k\, n^T\tau n-2\pi \I k\, n^Tz\Big)f(z).
+% \]
+% For $k=1$, one standard section is the Riemann theta function
+% \[
+% \vartheta(z,\tau)=\sum_{n\in\bbZ^g}\exp\!\big(\pi \I\, n^T\tau n+2\pi \I\, n^T z\big),
+% \]
+% and with characteristic $(a,b)\in (\frac1k\bbZ^g/\bbZ^g)^2$ one has
+% \[
+% \vartheta\!\begin{bmatrix} a\\ b\end{bmatrix}(z,\tau)
+% =
+% \sum_{n\in\bbZ^g}
+% \exp\!\Big(\pi \I\,(n+a)^T\tau(n+a)+2\pi \I\,(n+a)^T(z+b)\Big).
+% \]
+% For fixed $k$, suitable characteristics give a basis of
+% $H^0(\Jac(C),\cO_{\Jac}(k\Theta_\kappa))$, and
+% \[
+% \dim H^0(\Jac(C),\cO_{\Jac}(k\Theta_\kappa))=k^g
+% \]
+% by Riemann--Roch on abelian varieties.
+% So the ``theta functions'' are exactly the holomorphic sections of the prequantum line bundle
+% defined above (or its $k$-th tensor power), with their transformation law encoding the line bundle's
+% descent data.
 
-One can also see directly the differential equation controlling the variation in complex structure.
-For genus $g=1$ (elliptic curve, coordinate $z$ and modulus $\tau$), level-$k$ theta functions satisfy the heat equation
-\[
-\left(2\pi \I k\,\frac{\partial}{\partial \tau}-\frac{\partial^2}{\partial z^2}\right)\vartheta(z,\tau)=0.
-\]
-In higher genus, with $\tau=(\tau_{ij})\in \bbH_g$, one similarly has
-\[
-\left(
-\frac{\partial}{\partial \tau_{ij}}
-\;-\;
-\frac{1}{4\pi \I k}\frac{\partial^2}{\partial z_i\,\partial z_j}
-\right)\vartheta=0
-\]
-(up to equivalent convention choices for constants/signs).
-This is the abelian form of the projectively flat connection on the bundle of spaces
-$H^0(\Jac(C_\tau),\cO(k\Theta))$ over moduli of complex structures.
-From the CFT side, this same connection is the one produced by Virasoro Ward identities:
-in the $U(1)$ WZW theory the stress tensor is quadratic in the current, so its insertion acts as a
-second-order differential operator, and the conformal-block connection reduces exactly to this heat-operator connection.
+% One can also see directly the differential equation controlling the variation in complex structure.
+% For genus $g=1$ (elliptic curve, coordinate $z$ and modulus $\tau$), level-$k$ theta functions satisfy the heat equation
+% \[
+% \left(2\pi \I k\,\frac{\partial}{\partial \tau}-\frac{\partial^2}{\partial z^2}\right)\vartheta(z,\tau)=0.
+% \]
+% In higher genus, with $\tau=(\tau_{ij})\in \bbH_g$, one similarly has
+% \[
+% \left(
+% \frac{\partial}{\partial \tau_{ij}}
+% \;-\;
+% \frac{1}{4\pi \I k}\frac{\partial^2}{\partial z_i\,\partial z_j}
+% \right)\vartheta=0
+% \]
+% (up to equivalent convention choices for constants/signs).
+% This is the abelian form of the projectively flat connection on the bundle of spaces
+% $H^0(\Jac(C_\tau),\cO(k\Theta))$ over moduli of complex structures.
+% From the CFT side, this same connection is the one produced by Virasoro Ward identities:
+% in the $U(1)$ WZW theory the stress tensor is quadratic in the current, so its insertion acts as a
+% second-order differential operator, and the conformal-block connection reduces exactly to this heat-operator connection.
 
 
 \subsection{Relation to conformal blocks}
