@@ -5223,11 +5223,16 @@ with connection, whose curvature is the symplectic form $\Omega$. Then $\cL^k$ s
 with curvature $k \Omega$.
 The output of geometric quantization then is the vector space $V = H^0(\cL)$.
 
+Let us now specialize to $G = SU(n)$ to be most concrete.
 For the particular $\cM$ we are considering, we can get a complex structure on $\cM$ by choosing a complex structure on $C$
 itself: by a theorem of Narasimhan-Seshadri 
-this allows us to identify $\cM^{flat}(C,G)$ with the moduli space of holomorphic $G$-bundles over $C$.
-Over this space there is a distinguished holomorphic line bundle $\cL$ with connection (determinant bundle).
-Concretely, 
+this allows us to identify $\cM^{flat}(C,G)$ with the moduli space $\Bun_G(C)$
+parameterizing \ti{holomorphic} $G$-bundles $\cE$ over $C$, which is a complex manifold\footnote{almost: it has some singularities}
+Over $\Bun_G(C)$ there is a distinguished holomorphic line bundle $\cL_\Theta$ (sometimes called determinant bundle):
+by definition, it is the line bundle associated to the divisor
+\begin{equation}
+  \Theta = \{ \cE \in \Bun_G(C) \mid h^0(\cE) > 0 \} \, \subset \Bun_G(C) \, .
+\end{equation}
 
 \fixme{describe it concretely for $G = SU(n)$, lives naturally over the stack}
 This line bundle has $c_1(\cL) = [\Omega]$, so it admits a connection whose curvature is $\Omega$.
