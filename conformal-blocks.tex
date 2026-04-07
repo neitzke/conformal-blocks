@@ -3102,6 +3102,8 @@ q\partial_q\Phi_q
 So the $q$-direction connection is expressed purely via $L_{-1}$.
 \end{prop}
 
+\fixme{check this prop and proof carefully}
+
 \begin{proof}
 Write \eqref{eq:block-gluing} as
 \[
@@ -3115,11 +3117,10 @@ q\partial_q\Phi_q
 \sum_{n,i} n q^n\Phi_1(\chi_1,\xi_{i,n})\Phi_2(\xi_{i,n}^*,\chi_2).
 \]
 
-At this point we use \autoref{ex:global-vf-connection} only on the \emph{component} block $\Phi_1$,
+Now use \autoref{ex:global-vf-connection} on the component block $\Phi_1$,
 before gluing: $\Phi_1$ is a conformal block on the sphere $C_1$ with punctures
 $x_1,\dots,x_r$ and the node puncture at $z_1=0$, so the exercise applies directly to that sphere.
-We are not applying the exercise to the already-glued curve.
-Now apply \autoref{ex:global-vf-connection} to $\Phi_1$ with $v=z_1\partial_{z_1}$.
+We apply it with $v=z_1\partial_{z_1}$.
 The node insertion on $C_1$ is at coordinate $u=0$, and the geometric part of the derivative at a puncture is
 $v(u)\partial_u$; here $v(0)=0$, so the node contributes no position-derivative term.
 For a homogeneous node state $\xi_{i,n}$ of degree $n$, the action of this infinitesimal dilation at the node is multiplication by $n$.
@@ -3364,7 +3365,7 @@ while
  = (\cS_0 \oplus \cS_2)\oplus \cS_2
  = \cS_0 \oplus 2\cS_2.
 \end{equation}
-)
+
 By formally adjoining negatives 
 of objects (Grothendieck ring) we get the \ti{fusion ring}.
 \begin{exercise}
@@ -3502,6 +3503,8 @@ See \cite{HuangLepowsky1995TensorI} for this definition, \cite{HuangLepowsky1995
 (It's unpleasantly technical, but the idea is to realize $\vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ through how it behaves in correlation functions,
 i.e. define an element $\eta \in \vrep_1 \boxtimes_{z_1,z_2} \vrep_2$ as a linear map on a certain large space of
 ``possible insertions outside the disc.'')
+
+\fixme{we should add much more discussion here about how to think about the tensor product}
 
 One immediate consequence of this universal property is that
 $\Hom(\vrep_1 \boxtimes_{z_1,z_2} \vrep_2, W)$
@@ -4605,7 +4608,7 @@ Prove that $\nu_X = \theta_X R_{XX}^\bid$. \fixme{check sign}
 \end{exercise}
 
 \begin{prop}
-Suppose $X$ is simple and self-dual. Then
+Suppose $X$ is simple and self-dual. Then \fixme{need to explain the basis choices here to make this equation sensible}
 \[
 (F_{XXX}^X)_{\bid\bid}
 =
@@ -4701,7 +4704,7 @@ But in the unitary situation it is, because of the following:
 \end{prop}
 
 \begin{example}
-In \fixme{...} we have 
+In \fixme{refer to the correct example} we have 
 \begin{equation}
   N_0 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}, \quad N_1 = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}, \quad N_2 = \begin{pmatrix} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \end{pmatrix}
 \end{equation}
@@ -4775,7 +4778,7 @@ of a simple loop in $C$, this is sometimes called a \ti{Verlinde loop operator}.
 The Verlinde loop operators generate a \ti{skein algebra} which we call $\Sk(\vertex, C)$.
 In the case $\vertex = L_k(\fsl_2)$ we wrote explicitly the relations defining the skein 
 algebra above.
-So each space $\Conf(C)$ is naturally a representation of $\Conf(C)$.
+So each space $\Conf(C)$ is naturally a representation of $\Sk(\vertex,C)$.
 
 
 
@@ -5218,57 +5221,62 @@ Indeed this space carries a canonical symplectic structure.
 In our case, a critical point means a flat connection on $Y \times \bbR$.
 There is a finite-dimensional space $\cM = \cM^{flat}(C,G)$ of these (not quite a manifold, but at least a stack, which 
 is a manifold away from some singular points).
-It gets a symplectic form which can be written $\Omega = k \Omega_{AB}$, where
+It gets a symplectic form which can be written $\Omega = k \omega_{AB}$, where
 \begin{equation}
-  \Omega_{AB}(a_1, a_2) = \frac{1}{4 \pi} \int_C \Tr (a_1 \wedge a_2)
+  \omega_{AB}(a_1, a_2) = \frac{1}{4 \pi} \int_C \Tr (a_1 \wedge a_2)
 \end{equation}
 where $a_1$, $a_2$ belong to $T_{(E,\nabla)} \cM^{flat}(C,G) = \{ a \in \End E \mid \de_\nabla a = 0 \}$.
 
 To carry out the quantization of a symplectic manifold $\cM$, one standard device is \ti{geometric quantization}.
-This requires us to choose a \ti{complex polarization}, i.e. a
- complex structure on $\cM$, and then find a holomorphic line bundle $\cL \to \cM$
-with connection, whose curvature is the symplectic form $k \Omega_{AB}$.
-The output of geometric quantization then is the vector space of holomorphic sections, $V = H^0(\cL)$.
+This requires us to choose a \ti{polarization}, and we will choose a complex one: this means we have to find
+a complex structure on $\cM$, and then find a holomorphic line bundle $\cL \to \cM$
+with a Hermitian connection, whose curvature is $F = \I k \omega_{AB}$.
+The output of geometric quantization then is the vector space of holomorphic sections, $V = H^0(\cL)$. \fixme{watch out for metaplectic correction!}
+One could also ask which operators act on this space, quantizing the smooth functions on $\cM$; here the first 
+answer is somewhat disappointing: geometric quantization only guarantees to quantize Hamiltonians $H$ 
+generating (real parts of) 
+holomorphic automorphisms, and there will be very few of these \fixme{maybe we should think instead about
+Berezin-Toeplitz?}
+Nevertheless, we will see that the space does carry a lot of interesting structure.
 
 Let us now specialize to $G = SU(n)$ to be most concrete.
 For the particular $\cM$ we are considering, we can get a complex structure on $\cM$ by choosing a complex structure on $C$
 itself: 
 % by a theorem of Narasimhan-Seshadri 
-% this allows us to identify $\cM^{flat}(C,G)$ with the moduli space $\Bun_G(C)$
+% this allows us to identify $\cM^{flat}(C,G)$ with the moduli space $\Bun_{G_\bbC}(C)$
 % parameterizing \ti{holomorphic} $G$-bundles $\cE$ over $C$, which is a complex manifold.\footnote{almost: it has some singularities}
 
 \begin{defn}[Moduli of holomorphic bundles]
-Let $\Bun_G(C)$ be the moduli space parameterizing holomorphic $G$-bundles over $C$.
+Let $\Bun_{G_\bbC}(C)$ be the moduli space parameterizing holomorphic $G_\bbC$-bundles over $C$.
 \end{defn}
 
-$\Bun_G(C)$ is a smooth algebraic stack, and the corresponding
-coarse moduli space has a (Zariski) open subset $\Bun^\circ_G(C)$ which is
-a complex manifold. The space $\Bun_G^\circ(C)$ parameterizes \ti{stable} holomorphic
-$G$-bundles.
-
-(Of course we should say much more about it, give a reference for its construction, etc...)
+$\Bun_{G_\bbC}(C)$ is a smooth algebraic stack. It has an associated
+coarse moduli space of semistable bundles, which is an algebraic variety; we'll also call that $\Bun_{G_\bbC}(C)$
+(sorry). This coarse moduli space has a (Zariski) open subset parameterizing \ti{stable} holomorphic
+$G_\bbC$-bundles; that subset is a complex manifold. \fixme{add refs}
 
 \begin{thm}[Narasimhan-Seshadri]
-We have an isomorphism
+We have an isomorphism of coarse moduli spaces
 \begin{equation}
- \cM^{flat}(C,G) \simeq \Bun_G(C)
+ \cM^{flat}(C,G) \simeq \Bun_{G_\bbC}(C) \, .
 \end{equation}
-
+This isomorphism maps the locus of stable bundles to the locus of irreducible connections.
 \end{thm}
 
 \begin{defn}[Theta line bundle]
-Pick a line bundle $\kappa$ over $C$, with $\deg \cL = g-1$.
-(For instance, we could choose a spin structure on $C$; this gives a choice of $\kappa$.)
+Pick a line bundle $\kappa$ over $C$, with $\deg \cL = g-1$.\footnote{For instance, we could choose a spin structure on $C$, i.e. choose $\kappa$ such that $\kappa \otimes \kappa \simeq K_C$.}
 By the Riemann-Roch formula we then have $\chi(\cE \otimes \kappa) = 0$,
-for any $\cE \in \Bun_G(C)$. A generic $\cE$ has $h^0(\cE \otimes \kappa) = 0$.
-Then, $\cL_\Theta$ is the line bundle over $\Bun_G(C)$ associated to the divisor
+for any $\cE \in \Bun_{G_\bbC}(C)$. A generic $\cE$ has $h^0(\cE \otimes \kappa) = 0$;
+the locus
 \begin{equation}
-  \Theta = \{ \cE \in \Bun_G(C) \mid h^0(\cE \otimes \kappa) > 0 \} \, \subset \Bun_G(C) \, .
+  \Theta = \{ \cE \in \Bun_{G_\bbC}(C) \mid h^0(\cE \otimes \kappa) > 0 \} \, \subset \Bun_{G_\bbC}(C)
 \end{equation}
+forms a divisor in $\Bun_{G_\bbC}(C)$.
+Then, $\cL_\Theta$ is the line bundle over $\Bun_{G_\bbC}(C)$ associated to this divisor.
 \end{defn}
 
 Note that $\cL_\Theta$ depends on the choice of $\kappa$, though its isomorphism class doesn't.
-This line bundle has $c_1(\cL_\Theta) = [\Omega]$, so it admits a connection whose curvature is $\Omega$.
+This line bundle has $c_1(\cL_\Theta) = [\omega_{AB}]$, so it admits a connection whose curvature is $\omega_{AB}$.
 Then, the output of geometric quantization in our setup is $V = H^0(\cL_\Theta^k)$.
 This is sometimes called the space of \ti{nonabelian theta functions}. (In the case $G = U(1)$ they are
 ordinary theta functions.)
@@ -5276,7 +5284,7 @@ ordinary theta functions.)
 
 \subsection{The abelian case}
 
-It is worth writing out the abelian case in detail, since all ingredients can be made fully explicit.
+In the abelian case all these ingredients can be made fully explicit.
 
 \begin{prop}[The $U(1)$ case and the Jacobian]
 Let $C$ be a compact connected Riemann surface of genus $g$.
@@ -5338,7 +5346,8 @@ These constructions are inverse.
 So we get a map $\cM^{flat}(C)\to \operatorname{Pic}^0(C)$.
 To see this map is surjective, suppose given $(L,\bar\partial)$ of degree $0$, and choose any Hermitian metric $h$
 in $L$. Its Chern connection $\nabla_h$ has curvature $F_h$ of type $(1,1)$ and integral $0$.
-Since $c_1(L) = 0$ in de Rham cohomology, $F_h$ is exact. Then the $\partial\bar\partial$-lemma implies
+Since $c_1(L) = 0$ in de Rham cohomology, $F_h$ is exact. Now comes the key analytic input, a little piece of
+Hodge theory: the $\partial\bar\partial$-lemma implies
 \[
 F_h=\partial\bar\partial \varphi
 \]
@@ -5452,23 +5461,25 @@ differ by a unitary gauge transformation.
 
 \subsection{Relation to conformal blocks}
 
-Above I tried to convince you that $H^0(\cL^k)$ has some reasonable claim to be the space of states of Chern-Simons theory on $C$.
+Above I tried to convince you that $H^0(\cL_\Theta^k)$ has some reasonable claim to be the space of states of Chern-Simons theory on $C$.
 On the other hand, one has the following:
 
-\begin{thm} Suppose $G = SU(n)$. Then the space $H^0(\cL^k)$ is canonically isomorphic to the space of conformal blocks on $C$ for $L_k(\fg)$.
+\begin{thm} Suppose $G = SU(n)$. Then the space $H^0(\cL_\Theta^k)$ is canonically isomorphic to the space of conformal blocks on $C$ for $L_k(\fg)$.
 \end{thm}
 This identification is due to Beauville and Laszlo~\cite{BeauvilleLaszlo1994}.
 
-Here is one way of thinking about this theorem. Fix a point $p \in C$, with a neighborhood $U_p$.
-Every $G$-bundle over $C$ can be trivialized over $U_p$ and $C \setminus \{p\}$, and thus determined
-by the data of a clutching function $\bbC^\times \to G$. This identifies $\cM$ as a quotient of the
-\ti{affine Grassmannian}
-$SL_r(\bbC((z)))/SL_r(\bbC[[z]])$. Then \fixme{...}
+\fixme{try to explain it, using }
 
-\fixme{...}
+% Here is one way of thinking about this theorem. Fix a point $p \in C$, with a neighborhood $U_p$.
+% Every $G$-bundle over $C$ can be trivialized over $U_p$ and $C \setminus \{p\}$, and thus determined
+% by the data of a clutching function $\bbC^\times \to G$. This identifies $\cM$ as a quotient of the
+% \ti{affine Grassmannian}
+% $SL_r(\bbC((z)))/SL_r(\bbC[[z]])$. Then \fixme{...}
+
+% \fixme{...}
 
 
-\subsection{Chiral boundary conditions}
+\subsection{Chiral boundary conditions} \fixme{...}
 
 % With the same convention, the gravitational Chern--Simons $3$-form is
 % \[
