@@ -247,6 +247,7 @@
 
 \newcommand{\Heis}{{\mathrm{Heis}}}
 \newcommand{\Vir}{{\mathrm{Vir}}}
+\newcommand{\FF}{{\mathrm{FF}}}
 
 \newcommand{\bbR}{\ensuremath{\mathbb R}}
 \newcommand{\bbC}{\ensuremath{\mathbb C}}
@@ -5497,7 +5498,20 @@ On the other hand, one has the following:
 \end{thm}
 This identification is due to Beauville and Laszlo~\cite{BeauvilleLaszlo1994}.
 
-\fixme{try to explain it, using }
+\fixme{analogue for $U(1)$: $H^0(\cL_\Theta^k)$ is space of free fermion blocks}
+\fixme{free fermion vertex superalgebra}
+The vertex superalgebra $\FF$ is defined by a simple operator product:
+\begin{equation}
+  \psi_+(z) \psi_-(w) = \frac{1}{z-w} + \regular
+\end{equation}
+\fixme{it contains the Heisenberg vertex algebra}
+\fixme{definition of conformal blocks, depending on extra datum of a spin structure}
+\fixme{description of free fermion blocks via Szego kernel and determinant formulas}
+\fixme{twisted free fermion blocks}
+So the twisted free fermion blocks form a line bundle over $\Jac C$. Moreover
+this line bundle carries a natural holomorphic structure.
+Its dual has a canonical section, which maps a block to $\IP{1}$.
+\fixme{...}
 
 % Here is one way of thinking about this theorem. Fix a point $p \in C$, with a neighborhood $U_p$.
 % Every $G$-bundle over $C$ can be trivialized over $U_p$ and $C \setminus \{p\}$, and thus determined
@@ -5584,6 +5598,200 @@ This identification is due to Beauville and Laszlo~\cite{BeauvilleLaszlo1994}.
 % should be $1$-forms on $C$.
 
 % To get rid of these problems we need a new ingredient:
+
+
+
+\section{Some other things}
+
+\subsection{Holomorphic factorization} 
+
+This is a short answer to the question ``why did people think about conformal blocks in the first place?''
+
+In a 2-dimensional conformal field theory
+one computes correlation functions of observables. 
+These correlation functions are almost factorized into products of ``holomorphic'' and ``antiholomorphic'' parts,
+but not exactly factorized; the nontrivial space of conformal blocks is the obstruction to factorization.
+
+For example, in the CFT of the \ti{free boson} $\Phi$,
+one is interested in correlation functions of the form
+\begin{equation}
+  \DIP{J(z_1) \cdots J(z_n) \bJ(w_1) \cdots \bJ(w_m)} 
+\end{equation}
+where classically $J = \partial \Phi$ and $\bJ = \overline\partial \Phi$.
+Then one finds an approximate factorization
+\begin{equation}
+  \DIP{J(z_1) \cdots J(z_n) \bJ(w_1) \cdots \bJ(w_m)} = \int \de a \, \IP{J(z_1) \cdots J(z_n)}_{\Psi_a} \IP{\bJ(w_1) \cdots \bJ(w_m)}_{\overline\Psi_a}
+\end{equation}
+where $\IP{J(z_1) \cdots J(z_n)}_{\Psi_a}$ are holomorphic in a strong sense --- they
+are holomorphic in the $z_i$, in $a$, and in the moduli of $C$.
+They arise as part of the data of a conformal block $\Psi_a \in \Conf(C, \Heis)$.
+So the conformal blocks $\Psi_a$ are the basic building-blocks one uses to build the 
+correlation functions of the CFT.
+
+For the simplest example of this, suppose $C$ is the flat torus with modulus 
+$\tau$, $C = \bbC / (\bbZ \oplus \bbZ \tau)$, and any area $A$.
+The simplest correlation function of the free boson is the ``$0$-point function'' $\DIP{1}$, which turns out to be given by
+(after zeta-function regularization and deleting the zero mode,
+see e.g. \cite{McIntyreTakhtajan2006})\footnote{In a CFT of central charge $c$, the partition function on a surface of Euler characteristic $\chi$ scales 
+as $A^{\frac{c}{12} \chi}$ under overall rescaling of the metric. Here $\chi = 0$ so we should have no $A$ dependence in the end;
+but $\det \Delta'$ 
+scales as $A$, because $\zeta_\Delta(0) = \frac{1}{6} \chi - 1$,
+the $-1$ coming from the zero mode;
+this requirement tells us that we should compensate the removal
+of the zero mode by inserting the factor $\sqrt{A}$ in the 
+numerator. 
+We can probably get the same factor from proper treatment of
+the shift symmetry $\Phi \to \Phi + \alpha$? 
+}
+
+
+% BRST treatment
+% of the shift symmetry?
+% Write $Q \Phi = c$, $Q \bar{c} = b$, $Q c = Q b = 0$,
+% $G(\Phi) = \int_C \star \Phi$, so 
+% $S_{GF} = Q (\bar{c} G(\Phi)) = b \int_C \star \Phi - A \overline{c} c$,
+
+
+% Or, slightly more abstractly: 
+% we attempt to define the path integral using the $L^2$ measure
+% over all modes. Then the integral over nonzero modes produces
+% the factor $1 / \sqrt{\det \Delta'}$, and we still have
+% remaining the $L^2$ measure on the zero modes.
+% So the result of the path integral is best understood as
+% $\frac{\mu_{L^2}}{\sqrt{\det \Delta'}}$. The zero mode field 
+% $\phi = 1 / \sqrt{A}$ is properly normalized, so
+% if we write $\phi = x_0 / \sqrt{A} + \cdots$ then 
+% $\mu_{L^2} = \de x_0$. The total integral of such $\phi$
+% against the area measure is $y_0 = \sqrt{A} x_0$,
+% so $\mu_{L^2} = \sqrt{A} \, \de y_0$.
+% Thus the result of the path integral is
+% $\frac{\sqrt{A}}{\sqrt{\det \Delta'}} \de y_0$,
+% and $\DIP{1}$ is scale invariant when measured
+% in units of $\de y_0$.
+
+\begin{equation} \label{eq:free-boson-partition-function-torus}
+  \DIP{1} = \frac{\sqrt{A}}{\sqrt{\det \Delta'}} = \frac{1}{\sqrt{\im \tau} \abs{\eta(\tau)}^2}
+  \end{equation}
+Here $\eta(\tau)$ is the Dedekind eta-function,
+\begin{equation}
+  \eta(\tau) = q^{1/24} \prod_{n \ge 1} (1 - q^n), \qquad q = \e^{2 \pi \I \tau} \, .
+\end{equation}
+The answer \eqref{eq:free-boson-partition-function-torus} is \ti{almost} factorized into holomorphic and antiholomorphic, 
+but not quite, because
+of the factor $\sqrt{\im \tau}$.
+The explanation of this in terms of conformal blocks is: the Heisenberg algebra on $C$
+has conformal blocks $\Psi_a$ parameterized by $a \in \bbC$, with the correlation function
+\begin{equation}
+  \IP{1}_{\Psi_a} = \frac{1}{\eta(\tau)} \exp\left(\frac{1}{4 \pi \I} a^2 \tau\right)
+\end{equation}
+The blocks relevant for the free boson are the ones with $a \in \I \bbR$.
+Then we have
+\begin{equation} \label{eq:factorization-free-boson}
+  \DIP{1} = \int_{a \in \I \bbR} \left(  \frac{\de a}{2 \pi \I} \right) \, \abs{\IP{1}_{\Psi_a}}^2  = \frac{1}{\sqrt{2 \im \tau} \abs{\eta(\tau)}^2}
+\end{equation}
+There is a similar, but more elaborate, story for 
+higher genus surfaces \cite{McIntyreTakhtajan2006}.
+
+
+\subsection{Liouville theory}
+
+A more sophisticated example is provided by another 2d
+CFT, \ti{Liouville theory}. In this case the relevant
+vertex algebra is $\Vir^c$ rather than $\Heis$.
+
+One needs a bit of notation: introduce a parameter $b$
+related to the central charge by
+\begin{equation}
+c = 1 + 6 Q^2, \qquad Q = b + \frac{1}{b}
+\end{equation}
+and also let
+\begin{equation}
+  \Delta = j(Q-j) \, , j = \frac12 Q + \I p
+\end{equation}
+
+Now, for a simple example,
+consider $C_q = \bbC \bbP^1$ with $4$ punctures at 
+$0,q,1,\infty$, with Verma modules placed at the punctures.
+Then there exists a family of conformal blocks
+$\Psi_p \in \Conf(C_q, \Vir^c)$ \fixme{...}
+for which we have a factorization formula similar to
+\eqref{eq:factorization-free-boson}:\footnote{This is not the most common way of writing the factorization formula, but it can be found e.g. in \cite{Jackson:2014nla}.}
+\begin{equation}
+  \DIP{1} = \int_{p \in \bbR} (\rho(p) \, \de p) \, \abs{\IP{1}_{\Psi_p}}^2
+\end{equation}
+where we have the ``Plancherel measure''
+\begin{equation}
+  \rho(p) = 4 \sinh(2 \pi b p) \sinh(2 \pi b^{-1} p) \, ,
+\end{equation}
+and similar formulas for correlation functions.
+\fixme{try to be more explicit, write DOZZ etc, understand better the issues about absorbing structure constant}
+
+
+\subsection{Tau functions}
+
+Let $\vertex$ be the Virasoro algebra with central charge $c=1$, $\vertex = \Vir_{c=1}$.
+Then $\Conf(C, \vertex)$ is a module over a commutative algebra $\cA$, the algebra of
+\ti{Verlinde loop operators}.
+The joint eigenvectors of $\cA$ are particularly interesting.
+
+For instance, let $C_q$ be $\bbC\bbP^1$ with $4$ punctures
+placed at points $(z_1, z_2, z_3, z_4) = (0,1,\infty,q)$. At $z_i$ we place a simple module for $\Vir_{c=1}$:
+a Verma module with highest weight $h_i$.
+Then consider a 1-parameter family of conformal blocks $\Psi(q) \in \Conf(C_q, \Vir_{c=1})$
+which are parallel, $\nabla_{\partial_q} \Psi(q) = 0$. 
+Suppose moreover that $\Psi(q)$ is a joint eigenvector of $\cA$ for some $q$;
+then it is a joint eigenvector for all $q$.\footnote{The algebra $\cA$ depends on the surface $C$, so here it should
+really be written $\cA_q$ rather than just $\cA$; but the dependence is locally constant as we vary the surface.}
+Let $\tau(q)$ be the $0$-point function
+\begin{equation}
+\tau(q) = \IP{1}_{\Psi(q)}
+\end{equation}
+Then $\tau(q)$ is a $\tau$-function of Painleve VI.
+This means it is a solution of an interesting differential equation \fixme{...}
+
+
+
+
+\subsection{The AGT correspondence} \fixme{...}
+
+The AGT correspondence gives a very different interpretation of
+the conformal blocks which showed up in Liouville theory.
+We describe it in the concrete case of the 4-punctured
+sphere $C_q$ which appeared above. Then
+\begin{equation}
+  \IP{1}_{\Psi_a} = Z_\Nek(a,q,m,\eps_1,\eps_2)
+\end{equation}
+The right side is the \ti{Nekrasov instanton partition function}
+for $\cN=2$ supersymmetric Yang-Mills theory, with
+gauge group $G = \SU(2)$, and matter content given by
+$4$ copies of the fundamental representation:
+\begin{equation}
+  Z_\Nek = Z_{\oneloop} Z_\inst
+\end{equation}
+Here $Z_{\oneloop}$ is a $q$-independent function
+\begin{equation}
+Z_{\oneloop}
+= \exp \Big(
+\gamma_{{\eps_1},{\eps_2}}(2a;\Lambda)+\gamma_{{\eps_1},{\eps_2}}(-2a;\Lambda)
++\sum_{f=1}^4 \gamma_{{\eps_1},{\eps_2}}(a+m_f;\Lambda)+\gamma_{{\eps_1},{\eps_2}}(-a+m_f;\Lambda) \Big) \, ,
+\end{equation}
+in terms of a special function $\gamma_{\eps_1,\eps_2}(x;\Lambda)$
+defined in \fixme{...},
+and $Z_{\inst}$ is an explicit series in powers of $q$,
+whose coefficients are rational functions of 
+$a, \eps_1, \eps_2, m_f$. The surprising thing is that the
+series $Z_{\inst}$ also arises in a totally different way,
+as a generating series of integrals over the moduli space of
+$\SU(2)$-instantons in $\bbR^4$.
+
+The dictionary is
+\begin{equation}
+b = \frac{\eps_1}{\eps_2}
+\end{equation}
+
+
+
+\fixme{give explicit formula}
 
 
 
@@ -5848,194 +6056,6 @@ is the \ti{Jones polynomial} $J_L(q)$, with $q = \exp(2 \pi \I / (k+2))$.
 In this case
 the representations $\vrep$ are objects of a \ti{modular tensor category}.
 
-
-\subsection{Holomorphic factorization} 
-
-In a 2-dimensional conformal field theory
-one computes correlation functions of observables. 
-These correlation functions are almost factorized into products of ``holomorphic'' and ``antiholomorphic'' parts,
-but not exactly factorized; the nontrivial space of conformal blocks is the obstruction to factorization.
-
-For example, in the CFT of the \ti{free boson} $\Phi$,
-one is interested in correlation functions of the form
-\begin{equation}
-  \DIP{J(z_1) \cdots J(z_n) \bJ(w_1) \cdots \bJ(w_m)} 
-\end{equation}
-where classically $J = \partial \Phi$ and $\bJ = \overline\partial \Phi$.
-Then one finds an approximate factorization
-\begin{equation}
-  \DIP{J(z_1) \cdots J(z_n) \bJ(w_1) \cdots \bJ(w_m)} = \int \de a \, \IP{J(z_1) \cdots J(z_n)}_{\Psi_a} \IP{\bJ(w_1) \cdots \bJ(w_m)}_{\overline\Psi_a}
-\end{equation}
-where $\IP{J(z_1) \cdots J(z_n)}_{\Psi_a}$ are holomorphic in a strong sense --- they
-are holomorphic in the $z_i$, in $a$, and in the moduli of $C$.
-They arise as part of the data of a conformal block $\Psi_a \in \Conf(C, \Heis)$.
-So the conformal blocks $\Psi_a$ are the basic building-blocks one uses to build the 
-correlation functions of the CFT.
-
-For the simplest example of this, suppose $C$ is the flat torus with modulus 
-$\tau$, $C = \bbC / (\bbZ \oplus \bbZ \tau)$, and any area $A$.
-The simplest correlation function of the free boson is the ``$0$-point function'' $\DIP{1}$, which turns out to be given by
-(after zeta-function regularization and deleting the zero mode,
-see e.g. \cite{McIntyreTakhtajan2006})\footnote{In a CFT of central charge $c$, the partition function on a surface of Euler characteristic $\chi$ scales 
-as $A^{\frac{c}{12} \chi}$ under overall rescaling of the metric. Here $\chi = 0$ so we should have no $A$ dependence in the end;
-but $\det \Delta'$ 
-scales as $A$, because $\zeta_\Delta(0) = \frac{1}{6} \chi - 1$,
-the $-1$ coming from the zero mode;
-this requirement tells us that we should compensate the removal
-of the zero mode by inserting the factor $\sqrt{A}$ in the 
-numerator. 
-We can probably get the same factor from proper treatment of
-the shift symmetry $\Phi \to \Phi + \alpha$? 
-}
-
-
-% BRST treatment
-% of the shift symmetry?
-% Write $Q \Phi = c$, $Q \bar{c} = b$, $Q c = Q b = 0$,
-% $G(\Phi) = \int_C \star \Phi$, so 
-% $S_{GF} = Q (\bar{c} G(\Phi)) = b \int_C \star \Phi - A \overline{c} c$,
-
-
-% Or, slightly more abstractly: 
-% we attempt to define the path integral using the $L^2$ measure
-% over all modes. Then the integral over nonzero modes produces
-% the factor $1 / \sqrt{\det \Delta'}$, and we still have
-% remaining the $L^2$ measure on the zero modes.
-% So the result of the path integral is best understood as
-% $\frac{\mu_{L^2}}{\sqrt{\det \Delta'}}$. The zero mode field 
-% $\phi = 1 / \sqrt{A}$ is properly normalized, so
-% if we write $\phi = x_0 / \sqrt{A} + \cdots$ then 
-% $\mu_{L^2} = \de x_0$. The total integral of such $\phi$
-% against the area measure is $y_0 = \sqrt{A} x_0$,
-% so $\mu_{L^2} = \sqrt{A} \, \de y_0$.
-% Thus the result of the path integral is
-% $\frac{\sqrt{A}}{\sqrt{\det \Delta'}} \de y_0$,
-% and $\DIP{1}$ is scale invariant when measured
-% in units of $\de y_0$.
-
-\begin{equation} \label{eq:free-boson-partition-function-torus}
-  \DIP{1} = \frac{\sqrt{A}}{\sqrt{\det \Delta'}} = \frac{1}{\sqrt{\im \tau} \abs{\eta(\tau)}^2}
-  \end{equation}
-Here $\eta(\tau)$ is the Dedekind eta-function,
-\begin{equation}
-  \eta(\tau) = q^{1/24} \prod_{n \ge 1} (1 - q^n), \qquad q = \e^{2 \pi \I \tau} \, .
-\end{equation}
-The answer \eqref{eq:free-boson-partition-function-torus} is \ti{almost} factorized into holomorphic and antiholomorphic, 
-but not quite, because
-of the factor $\sqrt{\im \tau}$.
-The explanation of this in terms of conformal blocks is: the Heisenberg algebra on $C$
-has conformal blocks $\Psi_a$ parameterized by $a \in \bbC$, with the correlation function
-\begin{equation}
-  \IP{1}_{\Psi_a} = \frac{1}{\eta(\tau)} \exp\left(\frac{1}{4 \pi \I} a^2 \tau\right)
-\end{equation}
-The blocks relevant for the free boson are the ones with $a \in \I \bbR$.
-Then we have
-\begin{equation} \label{eq:factorization-free-boson}
-  \DIP{1} = \int_{a \in \I \bbR} \left(  \frac{\de a}{2 \pi \I} \right) \, \abs{\IP{1}_{\Psi_a}}^2  = \frac{1}{\sqrt{2 \im \tau} \abs{\eta(\tau)}^2}
-\end{equation}
-There is a similar, but more elaborate, story for 
-higher genus surfaces \cite{McIntyreTakhtajan2006}.
-
-
-\subsection{Liouville theory}
-
-A more sophisticated example is provided by another 2d
-CFT, \ti{Liouville theory}. In this case the relevant
-vertex algebra is $\Vir^c$ rather than $\Heis$.
-
-One needs a bit of notation: introduce a parameter $b$
-related to the central charge by
-\begin{equation}
-c = 1 + 6 Q^2, \qquad Q = b + \frac{1}{b}
-\end{equation}
-and also let
-\begin{equation}
-  \Delta = j(Q-j) \, , j = \frac12 Q + \I p
-\end{equation}
-
-Now, for a simple example,
-consider $C_q = \bbC \bbP^1$ with $4$ punctures at 
-$0,q,1,\infty$, with Verma modules placed at the punctures.
-Then there exists a family of conformal blocks
-$\Psi_p \in \Conf(C_q, \Vir^c)$ \fixme{...}
-for which we have a factorization formula similar to
-\eqref{eq:factorization-free-boson}:\footnote{This is not the most common way of writing the factorization formula, but it can be found e.g. in \cite{Jackson:2014nla}.}
-\begin{equation}
-  \DIP{1} = \int_{p \in \bbR} (\rho(p) \, \de p) \, \abs{\IP{1}_{\Psi_p}}^2
-\end{equation}
-where we have the ``Plancherel measure''
-\begin{equation}
-  \rho(p) = 4 \sinh(2 \pi b p) \sinh(2 \pi b^{-1} p) \, ,
-\end{equation}
-and similar formulas for correlation functions.
-\fixme{try to be more explicit, write DOZZ etc, understand better the issues about absorbing structure constant}
-
-
-\subsection{Tau functions}
-
-Let $\vertex$ be the Virasoro algebra with central charge $c=1$, $\vertex = \Vir_{c=1}$.
-Then $\Conf(C, \vertex)$ is a module over a commutative algebra $\cA$, the algebra of
-\ti{Verlinde loop operators}.
-The joint eigenvectors of $\cA$ are particularly interesting.
-
-For instance, let $C_q$ be $\bbC\bbP^1$ with $4$ punctures
-placed at points $(z_1, z_2, z_3, z_4) = (0,1,\infty,q)$. At $z_i$ we place a simple module for $\Vir_{c=1}$:
-a Verma module with highest weight $h_i$.
-Then consider a 1-parameter family of conformal blocks $\Psi(q) \in \Conf(C_q, \Vir_{c=1})$
-which are parallel, $\nabla_{\partial_q} \Psi(q) = 0$. 
-Suppose moreover that $\Psi(q)$ is a joint eigenvector of $\cA$ for some $q$;
-then it is a joint eigenvector for all $q$.\footnote{The algebra $\cA$ depends on the surface $C$, so here it should
-really be written $\cA_q$ rather than just $\cA$; but the dependence is locally constant as we vary the surface.}
-Let $\tau(q)$ be the $0$-point function
-\begin{equation}
-\tau(q) = \IP{1}_{\Psi(q)}
-\end{equation}
-Then $\tau(q)$ is a $\tau$-function of Painleve VI.
-This means it is a solution of an interesting differential equation \fixme{...}
-
-
-
-
-\subsection{The AGT correspondence} \fixme{...}
-
-The AGT correspondence gives a very different interpretation of
-the conformal blocks which showed up in Liouville theory.
-We describe it in the concrete case of the 4-punctured
-sphere $C_q$ which appeared above. Then
-\begin{equation}
-  \IP{1}_{\Psi_a} = Z_\Nek(a,q,m,\eps_1,\eps_2)
-\end{equation}
-The right side is the \ti{Nekrasov instanton partition function}
-for $\cN=2$ supersymmetric Yang-Mills theory, with
-gauge group $G = \SU(2)$, and matter content given by
-$4$ copies of the fundamental representation:
-\begin{equation}
-  Z_\Nek = Z_{\oneloop} Z_\inst
-\end{equation}
-Here $Z_{\oneloop}$ is a $q$-independent function
-\begin{equation}
-Z_{\oneloop}
-= \exp \Big(
-\gamma_{{\eps_1},{\eps_2}}(2a;\Lambda)+\gamma_{{\eps_1},{\eps_2}}(-2a;\Lambda)
-+\sum_{f=1}^4 \gamma_{{\eps_1},{\eps_2}}(a+m_f;\Lambda)+\gamma_{{\eps_1},{\eps_2}}(-a+m_f;\Lambda) \Big) \, ,
-\end{equation}
-in terms of a special function $\gamma_{\eps_1,\eps_2}(x;\Lambda)$
-defined in \fixme{...},
-and $Z_{\inst}$ is an explicit series in powers of $q$,
-whose coefficients are rational functions of 
-$a, \eps_1, \eps_2, m_f$. The surprising thing is that the
-series $Z_{\inst}$ also arises in a totally different way,
-as a generating series of integrals over the moduli space of
-$\SU(2)$-instantons in $\bbR^4$.
-
-The dictionary is
-\begin{equation}
-b = \frac{\eps_1}{\eps_2}
-\end{equation}
-
-
-
-\fixme{give explicit formula}
 
 
 \subsection{Random matrix models} \fixme{...}
