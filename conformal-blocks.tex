@@ -1809,10 +1809,12 @@ But let us try to spell this out a bit more.
 Let $\cG$ denote the group of changes of coordinates on the formal disc.
 The elements of $\cG$ are formal power series $a_1 z + a_2 z^2 + \cdots$ with $a_1 \neq 0$,
 which multiply by formal composition. Then there is an action $\rho: \cG \to \End \vertex$, 
-which is compatible with the vertex algebra structure in the sense that
+which is compatible with the vertex algebra structure in the sense that \fixme{prove this!}
 \begin{equation}
-  \rho(g) Y(a,z) \rho(g)^{-1} = Y(\rho(g) a, g(z)) \, .
+  \rho(g) Y(a,z) \rho(g)^{-1} = Y(\rho(g_z) a, g(z)) \, .
 \end{equation}
+Here $g_z$ is the ``pointed'' version of the transformation
+$g$, defined by $g_z(\zeta) = g(z + \zeta) - g(z)$.
 
 % and (we will see) 
 % the different functionals $\Phi$ differ by precomposition with this action.
@@ -1866,7 +1868,7 @@ In a similar fashion we can define compatibility for a $\cG$-action on a $\vrep$
 this means we require
 $\rho^\vrep: \cG \to \End \vrep$ with
 \begin{equation}
-  \rho^\vrep(g) Y^\vrep(a,z) \rho^\vrep(g)^{-1} = Y^\vrep(\rho(g) a, g(z)) \, .
+  \rho^\vrep(g) Y^\vrep(a,z) \rho^\vrep(g)^{-1} = Y^\vrep(\rho(g_z) a, g(z)) \, .
 \end{equation}
 
 \begin{prop}[Coordinate covariance of conformal blocks, with more general modules] 
@@ -2584,10 +2586,8 @@ and define $Y^{\vrep^*}(a,z) \in \End \vrep^*[[z]]$ by
 \end{equation}
 \end{defn}
 
-This definition looks a little complicated, but it is
-codifying something that was implicit in our definition of
-conformal blocks for a general vertex algebra.
-Indeed, around a point $z \in \bbC^\times$ there are two natural
+To motivate this definition recall that
+around a point $z \in \bbC^\times$ there are two natural
 pointed coordinate systems: $t(w) = w - z$ and $t'(w) = 1/w - 1/z$.
 The transformation $g(z) = \e^{z L_1} (-z^{-2})^{L_0}$ appearing in
 \eqref{eq:dual-vertex-operator} is the action of the
@@ -2596,6 +2596,7 @@ Then \eqref{eq:dual-vertex-operator} is
 \begin{equation} \label{eq:dual-vertex-operator-abstract}
   (Y^{\vrep^*}(a,z) \alpha)  \cdot  \chi = \alpha \cdot (Y^\vrep(\rho(g(z)) a, z^{-1}) \chi) \, .
 \end{equation}
+\fixme{prove that it is really a vertex algebra module}
 
 In the case of $\vertex = V^k(\fg)$ it becomes more familiar:
 \begin{example}
