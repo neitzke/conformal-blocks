@@ -1808,18 +1808,22 @@ But let us try to spell this out a bit more.
 
 Let $\cG$ denote the group of changes of coordinates on the formal disc.
 The elements of $\cG$ are formal power series $a_1 z + a_2 z^2 + \cdots$ with $a_1 \neq 0$,
-which multiply by formal composition. Then there is an action $\rho: \cG \to \End \vertex$, 
-which is compatible with the vertex algebra structure in the sense that \fixme{prove this!}
-\begin{equation}
+which multiply by formal composition.
+\begin{defn}
+We say $\cG$ acts on a vertex algebra $\vertex$
+if we have $\rho: \cG \to \End \vertex$ obeying
+\begin{equation} \label{eq:vertex-coordinate-compatibility}
   \rho(g) Y(a,z) \rho(g)^{-1} = Y(\rho(g_z) a, g(z)) \, .
 \end{equation}
-Here $g_z$ is the ``pointed'' version of the transformation
-$g$, defined by $g_z(\zeta) = g(z + \zeta) - g(z)$.
+Here $g_z \in \cG$ is defined by 
+$g_z(\zeta) = g(z + \zeta) - g(z)$.
+\end{defn}
 
 % and (we will see) 
 % the different functionals $\Phi$ differ by precomposition with this action.
 
-We start with the infinitesimal version, i.e.
+To construct such a $\cG$ action
+we can start with the infinitesimal version, i.e.
 consider the \ti{Witt algebra}, the 
 Lie algebra $\fG$ of vector fields on the formal disc which
 vanish at the origin.
@@ -1827,7 +1831,9 @@ If $\ell_n$ denotes the vector field $- z^{n+1} \partial_z$ then we have for all
 \begin{equation} \label{eq:witt-algebra}
   [\ell_n, \ell_m] = (n-m) \ell_{n+m} \, .
 \end{equation}
-To figure out what action we should write, take
+
+Now, to construct a $\fG$ action on 
+$\vertex = V^k(\fg)$, write
 \begin{equation}
   J^X_{(m)} = \oint z^m J^X(z)  
 \end{equation}
@@ -1836,7 +1842,15 @@ giving
 \begin{equation} \label{eq:witt-action-on-affine}
   [\ell_n, J^X_{(m)}] = -\oint z^{n+1} \partial_z z^m J^X(z) = -m J^X_{(m+n)} \, . 
 \end{equation}
-Combining this with $\ell_n \vac = 0$ determines an action of $\fG$ on $\vertex$.
+Combining this with $\ell_n \vac = 0$ determines an action of $\fG$ on $\vertex$, which can be integrated to an action
+of $\cG$.
+
+\begin{exercise}
+Prove that this action of $\cG$ on $\vertex$ 
+obeys \eqref{eq:vertex-coordinate-compatibility}.
+\fixme{check, give an appropriate hint!}
+\end{exercise}
+
 It follows directly from our iterated contour-integral construction that 
 the conformal blocks we construct are compatible with this action:
 \begin{prop}[Coordinate covariance of conformal blocks, with the vacuum module]
@@ -1885,7 +1899,7 @@ If we define
 then
 \[
 \Phi_{(\tilde z_i)}
-= \Phi_{(z_i)} \circ \bigl(\rho(g_1)\otimes\cdots\otimes \rho(g_n)\bigr) \, .
+= \Phi_{(z_i)} \circ \bigl(\rho(g_1)\otimes\cdots\otimes \rho(g_n)\bigr)
 \]
 is also a conformal block, now with the local coordinates $\tilde z_i$.
 \end{prop}
@@ -1998,7 +2012,7 @@ where we use the local coordinate $z_i$ to identify $\vrep_i$ with $(\vrep_i)_{p
 
 We could alternatively write this
 \begin{equation}
-  o(a) \chi = \sum_{i=1}^n \sum_{m \in \bbZ} \bid \otimes \cdots \Res_{p_i} a \otimes \cdots \otimes \bid
+  o(a) = \sum_{i=1}^n \bid \otimes \cdots \otimes \Res_{p_i} a \otimes \cdots \otimes \bid
 \end{equation}
 
 \begin{defn}[Conformal blocks for a vertex algebra and modules with $\cG$-action] \label{defn:conformal-block}
