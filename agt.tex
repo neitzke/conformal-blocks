@@ -323,7 +323,36 @@ To fix parameters explicitly, pass
 \end{verbatim}
 and rerun the same command.
 
-\section*{5. Code-to-formula map}
+\section*{5. Geometric meaning of the Nekrasov sum}
+
+The fixed-point sum over pairs of partitions $(Y_1,Y_2)$ is the localization formula for an equivariant integral on the instanton moduli space. Very schematically:
+\begin{itemize}[leftmargin=2em]
+\item For gauge group U(2) (and then SU(2) by decoupling the center), one studies framed torsion-free sheaves on $\mathbb P^2$ or, equivalently, ADHM data modulo gauge equivalence.
+\item The instanton number $k$ is the second Chern class, and the moduli space $\mathcal M_k$ carries a natural torus action
+\[
+T=(\mathbb C^\times)^2_{\epsilon_1,\epsilon_2}\times (\mathbb C^\times)^2_{a_1,a_2}.
+\]
+\item The $(\mathbb C^\times)^2_{\epsilon_1,\epsilon_2}$ factor rotates $\mathbb C^2$ (the $\Omega$-background), while $(a_1,a_2)$ is the maximal torus of U(2), i.e.\ Coulomb parameters. For SU(2) we set $(a_1,a_2)=(a,-a)$.
+\end{itemize}
+
+At isolated $T$-fixed points, the sheaf/ADHM data decomposes into monomial ideals, and this data is equivalent to a pair of Young diagrams. The total box count gives the instanton number:
+\[
+k=|Y_1|+|Y_2|.
+\]
+So the partition function becomes
+\[
+Z_{\mathrm{inst}}(q)=\sum_{Y_1,Y_2}q^{|Y_1|+|Y_2|}\,(\text{fixed-point weight}).
+\]
+
+The fixed-point weight is an equivariant characteristic class built from natural bundles on $\mathcal M_k$:
+\begin{itemize}[leftmargin=2em]
+\item \emph{Vector multiplet factor} $Z_{\mathrm{vec}}$: inverse equivariant Euler class of the virtual tangent complex (equivalently the one-loop determinant from fluctuations of the gauge multiplet). In localization language, this is the denominator.
+\item \emph{Fundamental matter factor} $Z_{\mathrm{fund}}$: equivariant Euler/Chern character contribution from the hypermultiplet bundle associated to the universal sheaf and flavor mass $\mu$. With four hypers one multiplies four such factors.
+\end{itemize}
+
+Thus the products written in terms of arm/leg lengths are not ad hoc combinatorics: they are the explicit characters of those virtual bundles evaluated at the fixed point labeled by $(Y_1,Y_2)$.
+
+\section*{6. Code-to-formula map}
 
 For auditability against \texttt{agt.py}:
 \begin{itemize}[leftmargin=2em]
