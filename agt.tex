@@ -3,227 +3,339 @@
 \usepackage{amsmath,amssymb,mathtools}
 \usepackage[margin=1in]{geometry}
 \usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
 
-\title{What the code computes: Virasoro sewing vs.\ Nekrasov/AGT (to level 2)}
+\title{What \texttt{agt.py} computes: Virasoro sewing vs. Nekrasov/AGT on the 4-punctured sphere}
 \author{}
 \date{}
 
 \begin{document}
 \maketitle
 
-\section*{1.\ Setup and normalization}
+\section*{0. Conventions and target identity}
 
-Fix central charge $c$. Consider the Virasoro 4-point conformal block on $\mathbb{P}^1$
-with primary insertions at
+This note documents the precise mathematics implemented in \texttt{agt.py}. The script computes, and compares term-by-term, two reduced $q$-series:
+\[
+\mathcal F_{\mathrm{Vir}}(q)=1+\sum_{k\ge1}c^{\mathrm{Vir}}_k q^k,
+\qquad
+\mathcal F_{\mathrm{AGT}}(q)=1+\sum_{k\ge1}c^{\mathrm{AGT}}_k q^k,
+\]
+for the 4-point setup on $\mathbb P^1$ with punctures at
 \[
 (0,q,1,\infty)
 \]
-of conformal dimensions
+and external momenta ordered as
 \[
-(h_2,h_1,h_3,h_4),
-\]
-and intermediate (internal) highest weight of dimension $h$ in the $s$-channel.
-The code computes the \emph{reduced} block
-\[
-\mathcal{F}(q)= 1+\sum_{n\ge 1} c_n\,q^n,
-\]
-i.e.\ after removing the overall prefactor $q^{\,h-h_1-h_2}$ (and using the convention $c_0=1$).
-
-\section*{2.\ Virasoro side: sewing with the Shapovalov form}
-
-Let $M_h$ be the Verma module with highest weight vector $\lvert h\rangle$.
-At level $n$ we use the PBW basis labelled by partitions $\lambda\vdash n$:
-\[
-L_{-\lambda}\lvert h\rangle:=L_{-\lambda_1}L_{-\lambda_2}\cdots L_{-\lambda_\ell}\lvert h\rangle,
-\qquad \lambda_1\ge\lambda_2\ge\cdots\ge\lambda_\ell\ge 1.
+(\beta_0,\alpha_0,\alpha_1,\beta_2).
 \]
 
-\subsection*{2.1 Gram (Shapovalov) matrix}
-The level-$n$ Gram matrix is
+Write
 \[
-G^{(n)}_{\lambda\mu} := \langle h \rvert \, L_{\lambda}\,L_{-\mu}\,\lvert h\rangle,
-\qquad
-L_\lambda := L_{\lambda_\ell}\cdots L_{\lambda_1},
-\]
-computed using
-\[
-[L_m,L_n]=(m-n)L_{m+n}+\frac{c}{12}m(m^2-1)\delta_{m+n,0},
-\qquad
-L_0\lvert h\rangle = h\lvert h\rangle,
-\qquad
-\langle h\rvert h\rangle=1,
-\]
-and the code inverts $G^{(n)}$.
-
-\subsection*{2.2 Vertex vectors from Ward identities}
-For the left trivalent vertex define
-\[
-F_u(z):=\frac{\langle h_2\rvert\,V_{h_1}(z)\,u\rangle}{\langle h_2\rvert\,V_{h_1}(z)\,\lvert h\rangle},
-\qquad u\in M_h,
-\]
-so $F_{\lvert h\rangle}(z)=1$. Since $\langle h_2\rvert L_{-n}=0$ for $n>0$, the Ward identity
-\[
-[L_m,V_{h_1}(z)] = z^m\bigl(z\partial_z+(m+1)h_1\bigr)V_{h_1}(z)
-\]
-implies, for $n>0$,
-\[
-F_{L_{-n}u}(z) = -z^{-n}\bigl(z\partial_z+(1-n)h_1\bigr)F_u(z).
-\]
-Using the primary scaling $\langle h_2\rvert V_{h_1}(z)\lvert h\rangle\propto z^{h_2-h_1-h}$, the recursion
-reduces to multiplying by linear factors (the code evaluates at $z=1$):
-\[
-v^{(12)}_\lambda := F_{L_{-\lambda}\lvert h\rangle}(1).
-\]
-Similarly, for the right vertex
-\[
-v^{(34)}_\lambda := \frac{\langle h_4\rvert\,V_{h_3}(1)\,L_{-\lambda}\lvert h\rangle}{\langle h_4\rvert\,V_{h_3}(1)\,\lvert h\rangle}.
-\]
-
-\subsection*{2.3 Sewing formula}
-At each level $n$,
-\[
-c_n = \sum_{\lambda,\mu\vdash n} v^{(12)}_\lambda \,(G^{(n)})^{-1}_{\lambda\mu}\, v^{(34)}_\mu
-\;=\;
-\bigl(v^{(12)}\bigr)^{T}(G^{(n)})^{-1}v^{(34)}.
-\]
-
-\subsection*{2.4 Explicit answers at levels $0,1,2$ (Virasoro)}
-\paragraph{Level 0.} $c_0=1$.
-
-\paragraph{Level 1.}
-The basis is $\{L_{-1}\lvert h\rangle\}$,
-\[
-G^{(1)} = (2h),
-\qquad
-v^{(12)}_{[1]} = h+h_1-h_2,
-\qquad
-v^{(34)}_{[1]} = h+h_3-h_4,
-\]
-so
-\[
-c_1 = \frac{(h+h_1-h_2)(h+h_3-h_4)}{2h}.
-\]
-
-\paragraph{Level 2.}
-Use the basis $\{L_{-2}\lvert h\rangle,\; L_{-1}^2\lvert h\rangle\}$.
-The Gram matrix is
-\[
-G^{(2)}=
-\begin{pmatrix}
-\frac{c}{2}+4h & 6h\\
-6h & 4h(2h+1)
-\end{pmatrix},
-\qquad
-\det G^{(2)} = \Bigl(\frac{c}{2}+4h\Bigr)\,4h(2h+1)-(6h)^2.
-\]
-The vertex components are
-\[
-v^{(12)}_{[2]}=h+2h_1-h_2,
-\qquad
-v^{(12)}_{[11]}=(h+h_1-h_2)(h+h_1-h_2+1),
-\]
-\[
-v^{(34)}_{[2]}=h+2h_3-h_4,
-\qquad
-v^{(34)}_{[11]}=(h+h_3-h_4)(h+h_3-h_4+1).
-\]
-Writing $A:=h+h_1-h_2$, $B:=h+h_3-h_4$, $A_2:=h+2h_1-h_2$, $B_2:=h+2h_3-h_4$, one finds
-\[
-c_2
-=
-\frac{1}{\det G^{(2)}}
-\Bigl(
-4h(2h+1)\,A_2B_2
--6h\,A_2\,B(B+1)
--6h\,A(A+1)\,B_2
-+\Bigl(\frac{c}{2}+4h\Bigr)A(A+1)B(B+1)
-\Bigr).
-\]
-
-\section*{3.\ Gauge theory side: Nekrasov instanton sum and AGT dictionary}
-
-Fix equivariant parameters $\epsilon_1,\epsilon_2$ and set $Q:=\epsilon_1+\epsilon_2$.
-For a Young diagram $Y$, write boxes as $s=(i,j)$ with arm/leg lengths $A_Y(s),L_Y(s)$.
-Define
-\begin{align*}
-N_{Y,W}(x)
-&:=
-\prod_{s\in Y}\Bigl(x+\epsilon_1(A_Y(s)+1)-\epsilon_2L_W(s)\Bigr)
-\prod_{t\in W}\Bigl(x-\epsilon_1A_W(t)+\epsilon_2(L_Y(t)+1)\Bigr),\\
-Z_{\mathrm{vec}}(Y_1,Y_2)
-&:=
-\prod_{A,B=1}^2 \frac{1}{N_{Y_A,Y_B}(a_A-a_B)},
-\qquad (a_1,a_2)=(a,-a),\\
-Z_{\mathrm{fund}}(Y_1,Y_2;\mu)
-&:=
-\prod_{A=1}^2\ \prod_{(i,j)\in Y_A}\Bigl(a_A+\mu+\epsilon_1(j-1)+\epsilon_2(i-1)\Bigr).
-\end{align*}
-Then for four masses $\mu_1,\dots,\mu_4$ the instanton series is
-\[
-Z_{\mathrm{inst}}(q)
-=
-\sum_{Y_1,Y_2} q^{|Y_1|+|Y_2|}
-\;Z_{\mathrm{vec}}(Y_1,Y_2)\;\prod_{f=1}^4 Z_{\mathrm{fund}}(Y_1,Y_2;\mu_f)
-=
-\sum_{k\ge 0} Z_k\,q^k.
-\]
-
-\subsection*{3.1 AGT map used by the code}
-The code uses
-\[
-c = 1+\frac{6Q^2}{\epsilon_1\epsilon_2},
-\qquad
-h(\alpha)=\frac{\alpha(Q-\alpha)}{\epsilon_1\epsilon_2}.
-\]
-External ``momenta'' $(\beta_0,\alpha_0,\alpha_1,\beta_2)$ are assigned to $(0,q,1,\infty)$:
-\[
-h_2=h(\beta_0),\quad h_1=h(\alpha_0),\quad h_3=h(\alpha_1),\quad h_4=h(\beta_2).
+\epsilon_1=e_1,\quad \epsilon_2=e_2,\quad Q=\epsilon_1+\epsilon_2,
+\quad
+h(\alpha)=\frac{\alpha(Q-\alpha)}{\epsilon_1\epsilon_2},
+\quad
+c=1+\frac{6Q^2}{\epsilon_1\epsilon_2}.
 \]
 The internal momentum is
 \[
-\beta_1=a+\frac{Q}{2},\qquad h=h(\beta_1).
+\beta_1=a+\frac Q2,
+\qquad
+h_{\mathrm{int}}=h(\beta_1).
 \]
-Masses and the $U(1)$ exponent are
+The AGT statement checked by the script is
 \[
-\mu_1=-\frac{Q}{2}+\alpha_0+\beta_0,\quad
-\mu_2=\phantom{-}\frac{Q}{2}+\alpha_0-\beta_0,\quad
-\mu_3=\frac{3Q}{2}-\alpha_1-\beta_2,\quad
-\mu_4=\phantom{-}\frac{Q}{2}-\alpha_1+\beta_2,
+c^{\mathrm{Vir}}_k=c^{\mathrm{AGT}}_k\quad \text{for }k=0,1,\dots,N,
 \]
+for the requested truncation level $N$, away from singular parameter loci.
+
+\section*{1. Nekrasov instanton partition function (SU(2), $N_f=4$)}
+
+\subsection*{1.1 Geometric definition (equivariant localization viewpoint)}
+
+For 4d $\mathcal N=2$ SU(2) theory with four fundamental hypermultiplets, the instanton partition function is the generating series
 \[
-\nu=\frac{2\alpha_0(Q-\alpha_1)}{\epsilon_1\epsilon_2}.
+Z_{\mathrm{inst}}(q)
+=\sum_{k\ge0}q^k Z_k,
 \]
-Finally, the AGT-side reduced series is
+where, formally,
 \[
-\mathcal{F}_{\mathrm{AGT}}(q):=(1-q)^{-\nu}\,Z_{\mathrm{inst}}(q)
-=
-1+\sum_{n\ge1} c^{\mathrm{AGT}}_n q^n.
+Z_k
+=\int_{\mathcal M_k}1
+\]
+is the equivariant integral over the framed instanton moduli space $\mathcal M_k$ of instanton number $k$.
+Under the torus action with equivariant parameters $(\epsilon_1,\epsilon_2)$ and Coulomb parameter $a$, localization reduces each $Z_k$ to a finite sum over fixed points.
+
+For SU(2), fixed points are pairs of Young diagrams $(Y_1,Y_2)$ with
+\[
+|Y_1|+|Y_2|=k.
+\]
+Hence
+\[
+Z_{\mathrm{inst}}(q)
+=\sum_{Y_1,Y_2}q^{|Y_1|+|Y_2|}
+\,Z_{\mathrm{vec}}(Y_1,Y_2)
+\prod_{f=1}^4 Z_{\mathrm{fund}}(Y_1,Y_2;\mu_f).
 \]
 
-\subsection*{3.2 Explicit answers at levels $0,1,2$ (AGT form)}
-Expanding $(1-q)^{-\nu}=\sum_{m\ge0}\frac{(\nu)_m}{m!}q^m$ gives:
+\subsection*{1.2 Combinatorial building blocks used in \texttt{agt.py}}
+
+For a box $s=(i,j)$ in a diagram $Y$, define arm and leg lengths
 \[
-c^{\mathrm{AGT}}_0=1,\qquad
-c^{\mathrm{AGT}}_1=Z_1+\nu,\qquad
-c^{\mathrm{AGT}}_2=Z_2+\nu Z_1+\frac{\nu(\nu+1)}{2}.
+A_Y(s)=Y_i-j,
+\qquad
+L_Y(s)=\#\{r\mid Y_r\ge j\}-i.
 \]
-At one-instanton level, only $(Y_1,Y_2)=([1],\varnothing)$ and $(\varnothing,[1])$ contribute, and the code’s conventions give
+The script uses
+\begin{align*}
+N_{Y,W}(x)
+&=
+\prod_{s\in Y}\bigl(x+\epsilon_1(A_Y(s)+1)-\epsilon_2 L_W(s)\bigr)
+\prod_{t\in W}\bigl(x-\epsilon_1 A_W(t)+\epsilon_2(L_Y(t)+1)\bigr),\\
+Z_{\mathrm{vec}}(Y_1,Y_2)
+&=
+\prod_{A,B=1}^2
+\frac{1}{N_{Y_A,Y_B}(a_A-a_B)},
+\qquad (a_1,a_2)=(a,-a),\\
+Z_{\mathrm{fund}}(Y_1,Y_2;\mu)
+&=
+\prod_{A=1}^2\prod_{(i,j)\in Y_A}
+\bigl(a_A+\mu+\epsilon_1(j-1)+\epsilon_2(i-1)\bigr).
+\end{align*}
+
+With four masses $\mu_1,\mu_2,\mu_3,\mu_4$, the coefficient $Z_k$ is the sum of these weights over all $(Y_1,Y_2)$ of total size $k$.
+
+\subsection*{1.3 First coefficients in the instanton expansion}
+
+\paragraph{Level $k=0$.}
+Only $(\varnothing,\varnothing)$ contributes, so
+\[
+Z_0=1.
+\]
+
+\paragraph{Level $k=1$.}
+Two fixed points contribute:
+\[
+([1],\varnothing),\qquad (\varnothing,[1]).
+\]
+With the conventions above,
 \[
 Z_1
 =
-\frac{\prod_{f=1}^4(a+\mu_f)}{\epsilon_1\epsilon_2\,(2a)\,(2a+Q)}
+\frac{\prod_{f=1}^4(a+\mu_f)}{\epsilon_1\epsilon_2\,(2a)(2a+Q)}
 +
-\frac{\prod_{f=1}^4(-a+\mu_f)}{\epsilon_1\epsilon_2\,(2a)\,(2a-Q)}.
+\frac{\prod_{f=1}^4(-a+\mu_f)}{\epsilon_1\epsilon_2\,(2a)(2a-Q)}.
 \]
-At two-instanton level, $Z_2$ is computed by summing the five pairs with $|Y_1|+|Y_2|=2$:
-\[
-([2],\varnothing),\ ([1,1],\varnothing),\ ([1],[1]),\ (\varnothing,[2]),\ (\varnothing,[1,1]),
-\]
-each weighted by $Z_{\mathrm{vec}}\prod_f Z_{\mathrm{fund}}$ as above.
+The two summands come directly from the two diagram pairs:
+\begin{align*}
+([1],\varnothing):\quad&
+Z_{\mathrm{vec}}=\frac{1}{\epsilon_1\epsilon_2(2a)(2a+Q)},\qquad
+\prod_f Z_{\mathrm{fund}}=\prod_f(a+\mu_f),\\
+(\varnothing,[1]):\quad&
+Z_{\mathrm{vec}}=\frac{1}{\epsilon_1\epsilon_2(2a)(2a-Q)},\qquad
+\prod_f Z_{\mathrm{fund}}=\prod_f(-a+\mu_f).
+\end{align*}
+This is often the easiest place to confirm sign conventions against code.
 
-\section*{4.\ What the code checks}
-Given parameters, the code computes $\{c_n\}$ from sewing (Section 2) and independently computes
-$\{c^{\mathrm{AGT}}_n\}$ from $\mathcal{F}_{\mathrm{AGT}}(q)$ (Section 3), and compares them through the requested level,
-skipping singular loci where the relevant denominators vanish.
+\paragraph{Level $k=2$.}
+Five fixed points contribute:
+\[
+([2],\varnothing),\;([1,1],\varnothing),\;([1],[1]),\;(\varnothing,[2]),\;(\varnothing,[1,1]).
+\]
+Thus
+\[
+Z_2=
+\sum_{(Y_1,Y_2):\,|Y_1|+|Y_2|=2}
+Z_{\mathrm{vec}}(Y_1,Y_2)\prod_{f=1}^4 Z_{\mathrm{fund}}(Y_1,Y_2;\mu_f),
+\]
+with each term computed directly by the same arm/leg formulas.
+
+\subsection*{1.4 AGT-side reduced block and $U(1)$ prefactor}
+
+The script compares Virasoro coefficients to
+\[
+\mathcal F_{\mathrm{AGT}}(q)=(1-q)^{-\nu}Z_{\mathrm{inst}}(q),
+\qquad
+\nu=\frac{2\alpha_0(Q-\alpha_1)}{\epsilon_1\epsilon_2}.
+\]
+Using
+\[
+(1-q)^{-\nu}=\sum_{m\ge0}\frac{(\nu)_m}{m!}q^m,
+\]
+the coefficients are
+\[
+c^{\mathrm{AGT}}_0=1,
+\qquad
+c^{\mathrm{AGT}}_1=Z_1+\nu,
+\qquad
+c^{\mathrm{AGT}}_2=Z_2+\nu Z_1+\frac{\nu(\nu+1)}{2}.
+\]
+
+\section*{2. Virasoro block from plumbing/sewing}
+
+Let external conformal weights be
+\[
+h_2=h(\beta_0),\quad
+h_1=h(\alpha_0),\quad
+h_3=h(\alpha_1),\quad
+h_4=h(\beta_2),
+\]
+and internal weight $h_{\mathrm{int}}=h(a+Q/2)$.
+
+\subsection*{2.1 Level-by-level sewing formula}
+
+At level $n$, use PBW basis vectors
+\[
+L_{-\lambda}|h_{\mathrm{int}}\rangle,\qquad \lambda\vdash n.
+\]
+Define the Gram/Shapovalov matrix
+\[
+G^{(n)}_{\lambda\mu}
+=\langle h_{\mathrm{int}}|L_{\lambda}L_{-\mu}|h_{\mathrm{int}}\rangle,
+\]
+with Virasoro commutator
+\[
+[L_m,L_n]=(m-n)L_{m+n}+\frac{c}{12}m(m^2-1)\delta_{m+n,0}.
+\]
+Define left/right vertex vectors $v^{(12)}_\lambda$ and $v^{(34)}_\lambda$.
+In the script this is implemented by the fast Ward-identity recursion
+(\texttt{vertex\_value\_fast}), equivalent to evaluating
+\[
+v_\lambda=\prod_{r\in\lambda}\Bigl(-\bigl(p_{\text{prev}}+(1-r)h_{\text{ins}}\bigr)\Bigr),
+\qquad
+p=h_{\mathrm{bra}}-h_{\mathrm{ins}}-h_{\mathrm{ket}},
+\]
+with $p_{\text{prev}}$ updated by subtracting the previously used mode numbers.
+Concretely, the script uses
+\[
+v^{(12)}_\lambda=\texttt{vertex\_value\_fast}(\lambda,h_2,h_1,h_{\mathrm{int}}),
+\qquad
+v^{(34)}_\lambda=\texttt{vertex\_value\_fast}(\lambda,h_4,h_3,h_{\mathrm{int}}).
+\]
+Then
+\[
+c_n^{\mathrm{Vir}}=(v^{(12)})^T\,(G^{(n)})^{-1}\,v^{(34)}.
+\]
+
+\subsection*{2.2 Explicit levels $n=1,2$}
+
+\paragraph{Level 1.}
+The basis is $\{L_{-1}|h_{\mathrm{int}}\rangle\}$, so
+\[
+G^{(1)}=(2h_{\mathrm{int}}),
+\]
+\[
+v^{(12)}_{[1]}=h_{\mathrm{int}}+h_1-h_2,\qquad
+v^{(34)}_{[1]}=h_{\mathrm{int}}+h_3-h_4.
+\]
+Hence
+\[
+c^{\mathrm{Vir}}_1=
+\frac{(h_{\mathrm{int}}+h_1-h_2)(h_{\mathrm{int}}+h_3-h_4)}{2h_{\mathrm{int}}}.
+\]
+
+\paragraph{Level 2.}
+Use basis $\{L_{-2}|h_{\mathrm{int}}\rangle,\;L_{-1}^2|h_{\mathrm{int}}\rangle\}$.
+Then
+\[
+G^{(2)}=
+\begin{pmatrix}
+\frac c2+4h_{\mathrm{int}} & 6h_{\mathrm{int}}\\
+6h_{\mathrm{int}} & 4h_{\mathrm{int}}(2h_{\mathrm{int}}+1)
+\end{pmatrix},
+\]
+\[
+\det G^{(2)}=
+\Bigl(\frac c2+4h_{\mathrm{int}}\Bigr)\,4h_{\mathrm{int}}(2h_{\mathrm{int}}+1)
+-(6h_{\mathrm{int}})^2.
+\]
+The vertex components are
+\[
+v^{(12)}_{[2]}=h_{\mathrm{int}}+2h_1-h_2,\qquad
+v^{(12)}_{[11]}=(h_{\mathrm{int}}+h_1-h_2)(h_{\mathrm{int}}+h_1-h_2+1),
+\]
+\[
+v^{(34)}_{[2]}=h_{\mathrm{int}}+2h_3-h_4,\qquad
+v^{(34)}_{[11]}=(h_{\mathrm{int}}+h_3-h_4)(h_{\mathrm{int}}+h_3-h_4+1).
+\]
+Write
+\[
+A:=h_{\mathrm{int}}+h_1-h_2,\quad
+B:=h_{\mathrm{int}}+h_3-h_4,\quad
+A_2:=h_{\mathrm{int}}+2h_1-h_2,\quad
+B_2:=h_{\mathrm{int}}+2h_3-h_4.
+\]
+Then, in readable multiline form,
+\begin{align*}
+c^{\mathrm{Vir}}_2
+=\frac{1}{\det G^{(2)}}\Bigl[
+&4h_{\mathrm{int}}(2h_{\mathrm{int}}+1)A_2B_2
+-6h_{\mathrm{int}}A_2B(B+1)\\
+&-6h_{\mathrm{int}}A(A+1)B_2
++\Bigl(\frac c2+4h_{\mathrm{int}}\Bigr)A(A+1)B(B+1)
+\Bigr].
+\end{align*}
+
+\section*{3. AGT dictionary exactly as encoded in \texttt{agt.py}}
+
+The mass map used is
+\[
+\mu_1=-\frac Q2+\alpha_0+\beta_0,
+\quad
+\mu_2=\frac Q2+\alpha_0-\beta_0,
+\quad
+\mu_3=\frac{3Q}{2}-\alpha_1-\beta_2,
+\quad
+\mu_4=\frac Q2-\alpha_1+\beta_2.
+\]
+The script computes both truncated series up to level $N$ and checks equality coefficient by coefficient.
+
+\section*{4. Detailed comparison through order $q^2$}
+
+On the AGT side, with
+\[
+\mathcal F_{\mathrm{AGT}}(q)=(1-q)^{-\nu}Z_{\mathrm{inst}}(q),
+\quad
+Z_{\mathrm{inst}}(q)=1+Z_1q+Z_2q^2+\cdots,
+\]
+we have
+\[
+c^{\mathrm{AGT}}_1=Z_1+\nu,\qquad
+c^{\mathrm{AGT}}_2=Z_2+\nu Z_1+\frac{\nu(\nu+1)}{2}.
+\]
+Under the dictionary of Sections 0 and 3,
+\[
+c^{\mathrm{Vir}}_1=c^{\mathrm{AGT}}_1,\qquad
+c^{\mathrm{Vir}}_2=c^{\mathrm{AGT}}_2.
+\]
+This is the first nontrivial check involving both the level-2 inverse Shapovalov matrix and the full two-instanton Young-diagram sum.
+
+\subsection*{4.1 Reproducible script-level check}
+
+A direct way to see the comparison numerically is to run:
+\begin{verbatim}
+python agt.py --N 2 --print-params --show both --output plain
+\end{verbatim}
+which prints $c^{\mathrm{Vir}}_k$ and $c^{\mathrm{AGT}}_k$ for $k=0,1,2$ at a random nonsingular rational point.
+To fix parameters explicitly, pass
+\begin{verbatim}
+--e1 ... --e2 ... --a ... --alpha0 ... --alpha1 ... --beta0 ... --beta2 ...
+\end{verbatim}
+and rerun the same command.
+
+\section*{5. Code-to-formula map}
+
+For auditability against \texttt{agt.py}:
+\begin{itemize}[leftmargin=2em]
+\item Integer partitions / PBW labels: \texttt{partitions\_int}.
+\item Gram matrix entries and commutator reduction:
+\texttt{vir\_comm}, \texttt{reduce\_word\_on\_ket}, \texttt{inner\_prod}, \texttt{gram\_matrix}.
+\item Vertex recursion: \texttt{vertex\_value\_fast}.
+\item Virasoro coefficients: \texttt{virasoro\_block\_coeffs}.
+\item Nekrasov building blocks:
+\texttt{N\_factor}, \texttt{Z\_vector}, \texttt{Z\_fund}, \texttt{nekrasov\_Z\_series}.
+\item AGT assembly and convolution with $(1-q)^{-\nu}$:
+\texttt{agt\_coeffs}, \texttt{poch\_series}.
+\end{itemize}
 
 \end{document}
