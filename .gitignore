@@ -159,3 +159,7 @@ math-*-repository.html
 
 # other junk created by github build process
 gha-creds-*.json
+
+# python
+__pycache__/
+*.pyc
