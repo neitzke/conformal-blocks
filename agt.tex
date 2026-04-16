@@ -122,20 +122,21 @@ With the conventions above,
 \[
 Z_1
 =
-\frac{\prod_{f=1}^4(a+\mu_f)}{\epsilon_1\epsilon_2\,(2a)(2a+Q)}
-+
-\frac{\prod_{f=1}^4(-a+\mu_f)}{\epsilon_1\epsilon_2\,(2a)(2a-Q)}.
+-\frac{\prod_{f=1}^4(a+\mu_f)}{\epsilon_1\epsilon_2\,(2a)(2a+Q)}
+-\frac{\prod_{f=1}^4(-a+\mu_f)}{\epsilon_1\epsilon_2\,(2a)(2a-Q)}.
 \]
 The two summands come directly from the two diagram pairs:
 \begin{align*}
 ([1],\varnothing):\quad&
-Z_{\mathrm{vec}}=\frac{1}{\epsilon_1\epsilon_2(2a)(2a+Q)},\qquad
+Z_{\mathrm{vec}}=-\frac{1}{\epsilon_1\epsilon_2(2a)(2a+Q)},\qquad
 \prod_f Z_{\mathrm{fund}}=\prod_f(a+\mu_f),\\
 (\varnothing,[1]):\quad&
-Z_{\mathrm{vec}}=\frac{1}{\epsilon_1\epsilon_2(2a)(2a-Q)},\qquad
+Z_{\mathrm{vec}}=-\frac{1}{\epsilon_1\epsilon_2(2a)(2a-Q)},\qquad
 \prod_f Z_{\mathrm{fund}}=\prod_f(-a+\mu_f).
 \end{align*}
-This is often the easiest place to confirm sign conventions against code.
+The two minus signs come from the ``leg over an empty diagram''
+contributions $N_{\varnothing,[1]}(-2a)=-2a$ and $N_{[1],\varnothing}(-2a)=-(2a-Q)$,
+which arise because $L_\varnothing(1,1)=-1$ in the leg formula.
 
 \paragraph{Level $k=2$.}
 Five fixed points contribute:
