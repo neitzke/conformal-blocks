@@ -1,0 +1,198 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{lemma}{Lemma}
+
+\title{A direct level-one AGT check on the 4-punctured sphere}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Setup}
+
+We take $\mathbb{P}^1$ with punctures at $(0,q,1,\infty)$ and external Liouville
+momenta $(\beta_0,\alpha_0,\alpha_1,\beta_2)$. Write
+\[
+Q=\epsilon_1+\epsilon_2,\qquad
+h(\alpha)=\frac{\alpha(Q-\alpha)}{\epsilon_1\epsilon_2},
+\]
+and set
+\[
+h_1=h(\alpha_0),\quad h_2=h(\beta_0),\quad h_3=h(\alpha_1),\quad h_4=h(\beta_2),
+\quad h_{\mathrm{int}}=h\!\left(a+\tfrac{Q}{2}\right).
+\]
+Note $\epsilon_1\epsilon_2\,h_{\mathrm{int}}=\frac{Q^2}{4}-a^2$.
+
+\section*{The two sides at instanton order one}
+
+\paragraph{Virasoro side.}
+At level~$1$ the only descendant is $L_{-1}|h_{\mathrm{int}}\rangle$; the sewing
+formula gives
+\begin{equation}
+\label{eq:vir}
+c_1^{\mathrm{Vir}}
+=\frac{(h_{\mathrm{int}}+h_1-h_2)(h_{\mathrm{int}}+h_3-h_4)}{2h_{\mathrm{int}}}.
+\end{equation}
+
+\paragraph{Gauge-theory side.}
+For SU$(2)$ $N_f=4$, the $k=1$ instanton moduli space has two torus-fixed
+points, $([1],\varnothing)$ and $(\varnothing,[1])$. Evaluating the vector and
+fundamental localization factors gives
+\[
+Z_1
+=-\frac{\prod_{f=1}^{4}(a+\mu_f)}{\epsilon_1\epsilon_2\,(2a)(2a+Q)}
+-\frac{\prod_{f=1}^{4}(-a+\mu_f)}{\epsilon_1\epsilon_2\,(2a)(2a-Q)},
+\]
+and the reduced block is $(1-q)^{-\nu}Z_{\mathrm{inst}}(q)$ with
+$\nu=2\alpha_0(Q-\alpha_1)/(\epsilon_1\epsilon_2)$, so
+\begin{equation}
+\label{eq:agt}
+c_1^{\mathrm{AGT}}=Z_1+\nu.
+\end{equation}
+
+\paragraph{AGT dictionary for the masses.}
+\begin{equation}
+\label{eq:dict}
+\mu_1=-\tfrac{Q}{2}+\alpha_0+\beta_0,\quad
+\mu_2=\tfrac{Q}{2}+\alpha_0-\beta_0,\quad
+\mu_3=\tfrac{3Q}{2}-\alpha_1-\beta_2,\quad
+\mu_4=\tfrac{Q}{2}-\alpha_1+\beta_2.
+\end{equation}
+
+\medskip
+
+\noindent
+The claim is $c_1^{\mathrm{Vir}}=c_1^{\mathrm{AGT}}$ under~\eqref{eq:dict}.
+This is not trivial: \eqref{eq:vir} is a single rational function, while
+\eqref{eq:agt} is a sum of three terms. The point of the check is to see how
+the three-term structure collapses.
+
+\section*{Key factorizations}
+
+Set
+\[
+A(x):=(x+\mu_1)(x+\mu_2),\qquad B(x):=(x+\mu_3)(x+\mu_4),
+\]
+so $\prod_f(\pm a+\mu_f)=A(\pm a)\,B(\pm a)$.
+Using~\eqref{eq:dict}, $\mu_1+\mu_2=2\alpha_0$ and
+$\mu_1\mu_2=\alpha_0^2-(\beta_0-Q/2)^2$, so completing the square gives
+\[
+A(x)=(x+\alpha_0)^2-(\beta_0-\tfrac{Q}{2})^2,
+\qquad
+B(x)=(x+Q-\alpha_1)^2-(\beta_2-\tfrac{Q}{2})^2.
+\]
+
+Introduce the abbreviations
+\[
+P:=\epsilon_1\epsilon_2(h_{\mathrm{int}}+h_1-h_2),\qquad
+R:=\epsilon_1\epsilon_2(h_{\mathrm{int}}+h_3-h_4),
+\]
+\[
+s:=2a+Q,\qquad t:=2a-Q,\qquad
+\sigma:=\alpha_0,\qquad \tau:=Q-\alpha_1.
+\]
+Note $s+t=4a$, $st=4a^2-Q^2=-2\epsilon_1\epsilon_2\,(2h_{\mathrm{int}})$, and
+$\nu=2\sigma\tau/(\epsilon_1\epsilon_2)$.
+
+\begin{lemma}
+\label{lem:linear}
+Under~\eqref{eq:dict},
+\begin{align*}
+A(a)  &= \sigma\,s - P, & A(-a) &= -\sigma\,t - P,\\
+B(a)  &= \tau\,s - R,   & B(-a) &= -\tau\,t - R.
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+A direct expansion:
+\[
+P=\epsilon_1\epsilon_2 h_{\mathrm{int}}+\alpha_0(Q-\alpha_0)-\beta_0(Q-\beta_0)
+ =\tfrac{Q^2}{4}-a^2+\alpha_0(Q-\alpha_0)-\beta_0(Q-\beta_0),
+\]
+hence
+\[
+\sigma s - P
+=\alpha_0(2a+Q)-\tfrac{Q^2}{4}+a^2-\alpha_0(Q-\alpha_0)+\beta_0(Q-\beta_0)
+=a^2+2\alpha_0 a+\alpha_0^2-(\beta_0-\tfrac{Q}{2})^2
+=A(a).
+\]
+Sending $a\to -a$ gives $A(-a)=-\sigma t-P$ (note $P$ is even in $a$).
+The $B$ identities are the same computation with $(\alpha_0,\beta_0)\to(Q-\alpha_1,\beta_2)$
+and $(h_1,h_2)\to(h_3,h_4)$.
+\end{proof}
+
+\section*{Collapse of the three-term sum}
+
+With Lemma~\ref{lem:linear},
+\[
+A(a)B(a)=(\sigma s-P)(\tau s-R)=\sigma\tau s^2-(\sigma R+\tau P)s+PR,
+\]
+\[
+A(-a)B(-a)=(-\sigma t-P)(-\tau t-R)=\sigma\tau t^2+(\sigma R+\tau P)t+PR.
+\]
+Combine $Z_1$ over the common denominator $\epsilon_1\epsilon_2(2a)\,s\,t$:
+\[
+Z_1=-\frac{A(a)B(a)\,t+A(-a)B(-a)\,s}{\epsilon_1\epsilon_2\,(2a)\,s\,t}.
+\]
+The numerator telescopes:
+\begin{align*}
+A(a)B(a)\,t+A(-a)B(-a)\,s
+&= \sigma\tau\,st(s+t)
+  +(\sigma R+\tau P)\bigl(-st+ts\bigr)
+  +PR\,(s+t)\\
+&= (s+t)\bigl(\sigma\tau\,st+PR\bigr)
+ = 4a\bigl(\sigma\tau\,st+PR\bigr).
+\end{align*}
+Therefore
+\[
+Z_1
+=-\frac{4a\bigl(\sigma\tau\,st+PR\bigr)}{\epsilon_1\epsilon_2\,(2a)\,st}
+=-\frac{2\sigma\tau}{\epsilon_1\epsilon_2}-\frac{2PR}{\epsilon_1\epsilon_2\,st}
+=-\nu-\frac{2PR}{\epsilon_1\epsilon_2\,(4a^2-Q^2)}.
+\]
+Adding $\nu$ kills the first term exactly:
+\begin{equation}
+\label{eq:agt-simplified}
+c_1^{\mathrm{AGT}}=Z_1+\nu=-\frac{2PR}{\epsilon_1\epsilon_2\,(4a^2-Q^2)}.
+\end{equation}
+
+\section*{Comparison with the Virasoro side}
+
+Since $\epsilon_1\epsilon_2\,(2h_{\mathrm{int}})=\tfrac{Q^2}{2}-2a^2=-\tfrac12(4a^2-Q^2)$,
+\[
+c_1^{\mathrm{Vir}}
+=\frac{(h_{\mathrm{int}}+h_1-h_2)(h_{\mathrm{int}}+h_3-h_4)}{2h_{\mathrm{int}}}
+=\frac{PR/(\epsilon_1\epsilon_2)^2}{2h_{\mathrm{int}}}
+=\frac{PR}{\epsilon_1\epsilon_2}\cdot\frac{1}{\epsilon_1\epsilon_2(2h_{\mathrm{int}})}
+=-\frac{2PR}{\epsilon_1\epsilon_2\,(4a^2-Q^2)}.
+\]
+This matches~\eqref{eq:agt-simplified}:
+\[
+c_1^{\mathrm{Vir}}=c_1^{\mathrm{AGT}}.
+\]
+
+\section*{Remarks}
+
+\begin{enumerate}
+\item The $U(1)$ factor $\nu$ is precisely what is needed to cancel the
+$\sigma\tau\,st=\alpha_0(Q-\alpha_1)\,(4a^2-Q^2)$ piece in $Z_1$. This piece is
+$a$-independent (after division by $4a^2-Q^2$), reflecting the fact that $\nu$
+does not depend on the internal momentum $a$.
+\item The identity $A(a)=\sigma s-P$ is simply a repackaging of the
+3-point coefficient into ``propagator pole'' $\times$ ``external momentum'' plus
+the Virasoro building block $\epsilon_1\epsilon_2(h_{\mathrm{int}}+h_1-h_2)$.
+A parallel statement holds for the right vertex $(h_3,h_4)$, with
+$\tau=Q-\alpha_1$ playing the role of $\sigma=\alpha_0$; the asymmetry
+$\alpha_0\leftrightarrow Q-\alpha_1$ reflects the two different mass
+assignments in~\eqref{eq:dict}.
+\item The numerical identity has been double-checked symbolically against the
+Nekrasov/Shapovalov series produced by \texttt{agt.py} (both sides agree as
+rational functions of $\epsilon_1,\epsilon_2,a,\alpha_0,\alpha_1,\beta_0,\beta_2$).
+\end{enumerate}
+
+\end{document}
