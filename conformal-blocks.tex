@@ -312,6 +312,7 @@
 \newcommand\bid{{\mathbf 1}}
 \newcommand\vac{{|\Omega\rangle}}
 \newcommand\vacu{{|\Omega_u\rangle}}
+\newcommand\vach{{|\Omega_h\rangle}}
 \newcommand\triv{{\mathbf {triv}}}
 \newcommand{\De}{\mathrm{D}}
 \newcommand{\de}{\mathrm{d}}
@@ -5714,22 +5715,58 @@ A more sophisticated example is provided by another 2d
 CFT, \ti{Liouville theory}. In this case the relevant
 vertex algebra is $\Vir^c$ rather than $\Heis$.
 
-One needs a bit of notation: introduce a parameter $b$
+We will need a bit of notation. First, introduce a parameter $b$
 related to the central charge by
 \begin{equation}
 c = 1 + 6 Q^2, \qquad Q = b + \frac{1}{b}
 \end{equation}
-and also let
+
+As usual we want to consider conformal blocks with 
+$\vertex$-modules inserted. For $\vertex = \Vir^c$
+the basic ordinary module is a Verma
+module $\vrep_h$, defined by induction from a single
+highest-weight state $\vach$ obeying
 \begin{equation}
-  \Delta = j(Q-j) \, , j = \frac12 Q + \I p
+  L_n \vach = 0 \, (n > 0), \qquad L_0 \vach = h \vach \, .
+\end{equation}
+
+\begin{exercise}
+Take $C = \bbC \bbP^1$ with three marked points,
+carrying ordinary modules 
+$\vrep_h$. Prove that the space of conformal
+blocks is $1$-dimensional, independent of the $h_i$.
+\end{exercise}
+
+\begin{exercise}
+Prove that $\vrep_h^* \simeq \vrep_h$.
+\end{exercise}
+
+Combining these two exercises, we see that the structure
+of tensor products for $\Vir^c$ is very different from
+the rational examples we have discussed: 
+it is some kind of direct integral rather than direct sum,
+like
+\begin{equation}
+  \vrep_{h_1} \boxtimes \vrep_{h_2} = \int \de h \, \vrep_h
 \end{equation}
 
 Now, for a simple example,
 consider $C_q = \bbC \bbP^1$ with $4$ punctures at 
-$0,q,1,\infty$, with Verma modules placed at the punctures.
-Then there exists a family of conformal blocks
-$\Psi_p \in \Conf(C_q, \Vir^c)$ \fixme{...}
-for which we have a factorization formula similar to
+$z_i = 0,q,1,\infty$, with Verma modules $\vrep_{h_i}$ placed at the punctures.
+In this case we can attempt to construct blocks
+$\Psi_p \in \Conf(C_q, \Vir^c)$ by plumbing.
+More precisely I should say we can \ti{attempt} to 
+construct them by plumbing; the plumbing formula \fixme{...} produces an infinite
+series, and it is not at all clear whether it will converge. Remarkably this problem was
+settled recently by the probabilists \fixme{...}.
+
+Now introduce a parameter $p$ related to $h$ by
+\begin{equation}
+  h = j(Q-j) \, , j = \frac12 Q + \I p
+\end{equation}
+
+The full Liouville partition function can be expressed in terms of these conformal blocks.
+Namely we have a factorization formula similar to
 \eqref{eq:factorization-free-boson}:\footnote{This is not the most common way of writing the factorization formula, but it can be found e.g. in \cite{Jackson:2014nla}.}
 \begin{equation}
   \DIP{1} = \int_{p \in \bbR} (\rho(p) \, \de p) \, \abs{\IP{1}_{\Psi_p}}^2
@@ -5799,12 +5836,10 @@ series $Z_{\inst}$ also arises in a totally different way,
 as a generating series of integrals over the moduli space of
 $\SU(2)$-instantons in $\bbR^4$.
 
-The dictionary is
-\begin{equation}
-b = \frac{\eps_1}{\eps_2}
-\end{equation}
-
-
+% The dictionary is
+% \begin{equation}
+% b = \frac{\eps_1}{\eps_2}
+% \end{equation}
 
 \fixme{give explicit formula}
 
