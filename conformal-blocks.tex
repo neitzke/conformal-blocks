@@ -249,6 +249,10 @@
 \newcommand{\Vir}{{\mathrm{Vir}}}
 \newcommand{\FF}{{\mathrm{FF}}}
 
+\newcommand{\Derdisc}{\ensuremath{\Der \bbC[[t]]}}
+\newcommand{\Autdisc}{\ensuremath{\Aut \bbC[[t]]}}
+\newcommand{\Coord}{\ensuremath{\mathrm{Coord}}}
+
 \newcommand{\bbR}{\ensuremath{\mathbb R}}
 \newcommand{\bbC}{\ensuremath{\mathbb C}}
 \newcommand{\bbP}{\ensuremath{\mathbb P}}
@@ -417,6 +421,7 @@
 \DeclareMathOperator{\coev}{coev}
 \DeclareMathOperator{\Sk}{Sk}
 \DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\Der}{Der}
 
 \newcommand{\insfig}[3]{
 
@@ -468,17 +473,16 @@ Andrew Neitzke
 \end{center}
 
 {These are notes from a spring 2026
-course at Yale University, in progress.
-\ti{Right now they are basically wreckage, but
-should stabilize over the term.} They probably contain
-a lot of errors; I am learning some of this material 
-alongside the students in the course.
+course at Yale University.
+The course is now over, but the notes do not yet reflect
+everything that was discussed. In addition,
+they probably contain a lot of errors.
 
 Please send corrections/improvements to
 {\tt\href{mailto:andrew.neitzke@yale.edu}{andrew.neitzke@yale.edu}}.
 }
 
-% \tableofcontents
+\tableofcontents
 
 % \renewcommand{\listtheoremname}{Quick reference}
 % \listoftheorems[onlynamed, numwidth=2.2em]
@@ -1799,7 +1803,7 @@ from chiral correlation systems.
 
 \subsection{Changes of coordinate, by hand}
 
-Given a chiral correlation system for $V^k(\fg)$ and \ti{any} choice of marked points with local coordinate systems,
+Given a chiral correlation system for $V^k(\fg)$ and any choice of marked points with local coordinate systems,
 we found a corresponding conformal block $\Phi: \otimes_i \vertex \to \bbC$. Now we can ask: what is the relation
 between these blocks for different choices of marked points and coordinates?
 We already know the answer, in a sense: we built into our definition of chiral correlation systems
@@ -1807,33 +1811,33 @@ that the $J^X$ are global 1-forms; and all the other elements of $\vertex$
 are built out of $J^X$; so their transformation laws are all in principle determined. 
 But let us try to spell this out a bit more.
 
-Let $\cG$ denote the group of changes of coordinates on the formal disc.
-The elements of $\cG$ are formal power series $a_1 z + a_2 z^2 + \cdots$ with $a_1 \neq 0$,
+Let $\Autdisc$ denote the group of changes of coordinates on the formal disc.
+The elements of $\Autdisc$ are formal power series $a_1 t + a_2 t^2 + \cdots$ with $a_1 \neq 0$,
 which multiply by formal composition.
 \begin{defn}
-We say $\cG$ acts on a vertex algebra $\vertex$
-if we have $\rho: \cG \to \End \vertex$ obeying
+We say $\Autdisc$ acts on a vertex algebra $\vertex$
+if we have $\rho: \Autdisc \to \End \vertex$ obeying
 \begin{equation} \label{eq:vertex-coordinate-compatibility}
   \rho(g) Y(a,z) \rho(g)^{-1} = Y(\rho(g_z) a, g(z)) \, .
 \end{equation}
-Here $g_z \in \cG$ is defined by 
-$g_z(\zeta) = g(z + \zeta) - g(z)$.
+Here $g_z \in \Autdisc$ is the pointed version of $g$ at $z$, defined by 
+$g_z(t) = g(z + t) - g(z)$.
 \end{defn}
 
 % and (we will see) 
 % the different functionals $\Phi$ differ by precomposition with this action.
 
-To construct such a $\cG$ action
+To construct such a $\Autdisc$ action
 we can start with the infinitesimal version, i.e.
 consider the \ti{Witt algebra}, the 
-Lie algebra $\fG$ of vector fields on the formal disc which
+Lie algebra $\Derdisc$ of vector fields on the formal disc which
 vanish at the origin.
-If $\ell_n$ denotes the vector field $- z^{n+1} \partial_z$ then we have for all $n, m \ge 0$
+If $\ell_n$ denotes the vector field $- t^{n+1} \partial_t$ then we have for all $n, m \ge 0$
 \begin{equation} \label{eq:witt-algebra}
   [\ell_n, \ell_m] = (n-m) \ell_{n+m} \, .
 \end{equation}
 
-Now, to construct a $\fG$ action on 
+Now, to construct a $\Derdisc$ action on 
 $\vertex = V^k(\fg)$, write
 \begin{equation}
   J^X_{(m)} = \oint z^m J^X(z)  
@@ -1843,17 +1847,31 @@ giving
 \begin{equation} \label{eq:witt-action-on-affine}
   [\ell_n, J^X_{(m)}] = -\oint z^{n+1} \partial_z z^m J^X(z) = -m J^X_{(m+n)} \, . 
 \end{equation}
-Combining this with $\ell_n \vac = 0$ determines an action of $\fG$ on $\vertex$, which can be integrated to an action
-of $\cG$.
+Combining this with $\ell_n \vac = 0$ determines an action of $\Derdisc$ on $\vertex$, which can be integrated to an action
+of $\Autdisc$.
 
 \begin{exercise}
-Prove that this action of $\cG$ on $\vertex$ 
+Prove that this action of $\Autdisc$ on $\vertex$ 
 obeys \eqref{eq:vertex-coordinate-compatibility}.
 \fixme{check, give an appropriate hint!}
 \end{exercise}
 
+An element $a \in \vertex$ 
+which is annihilated by all positive modes $\ell_n$, and obeys $\ell_0 a = h a$,
+is called a \ti{primary field} of \ti{conformal weight} $h$. 
+For example, the elements $J^X \in \vertex$ are primary fields of conformal weight $1$.
+The transformation law of primary fields 
+under changes of coordinate is relatively simple: if $g(t) = c_1 t + c_2 t^2 + \cdots$ then
+$\rho(g) a = (c_1)^h a$.
+% (note this is well defined only when $h \in \bbZ$, as we discussed in the last
+% paragraph; we can try to make sense
+% of it for other $h$, but we will need some extra structure, e.g. a spin structure for $h = \frac12$). 
+Said otherwise, $a$ ``transforms as an $h$-differential.''
+So if $h=1$ then $a$ transforms as a $1$-form (this is the case
+for $a = J^X$), if $h=2$ then $a$ transforms as a quadratic differential, and so on.
+
 It follows directly from our iterated contour-integral construction that 
-the conformal blocks we construct are compatible with this action:
+the conformal blocks we construct are compatible with the $\Autdisc$-action:
 \begin{prop}[Coordinate covariance of conformal blocks, with the vacuum module]
 Fix a chiral correlation system on a curve $C$.
 For any choice of local coordinates $z_i$ at marked points $p_i$, let
@@ -1876,18 +1894,18 @@ then the corresponding block is given by
 % =
 % \Phi_{(z_i)}\bigl(\rho(g_1)v_1\otimes\cdots\otimes \rho(g_n)v_n\bigr).
 % \]
-% Equivalently, the assignment $(z_i)\mapsto \Phi_{(z_i)}$ is $\cG^n$-equivariant.
+% Equivalently, the assignment $(z_i)\mapsto \Phi_{(z_i)}$ is $\Autdisc^n$-equivariant.
 \end{prop}
 
-In a similar fashion we can define compatibility for a $\cG$-action on a $\vrep$-module:
+In a similar fashion we can define compatibility for a $\Autdisc$-action on a $\vrep$-module:
 this means we require
-$\rho^\vrep: \cG \to \End \vrep$ with
+$\rho^\vrep: \Autdisc \to \End \vrep$ with
 \begin{equation}
   \rho^\vrep(g) Y^\vrep(a,z) \rho^\vrep(g)^{-1} = Y^\vrep(\rho(g_z) a, g(z)) \, .
 \end{equation}
 
 \begin{prop}[Coordinate covariance of conformal blocks, with more general modules] 
-Suppose $\vrep_i$ are $\vertex$-modules, with a compatible $\cG$-action.
+Suppose $\vrep_i$ are $\vertex$-modules, with a compatible $\Autdisc$-action.
 Suppose $C$ is a Riemann surface with marked points $p_i$ and local coordinates $z_i$, and
 \begin{equation}
   \Phi: \bigotimes_{i=1}^n \vrep_i \to \bbC
@@ -1906,46 +1924,82 @@ is also a conformal block, now with the local coordinates $\tilde z_i$.
 \end{prop}
 
 
-\subsection{Chiral correlation systems and conformal blocks for vertex algebras with \tops{$\cG$}{G}-action}
+\subsection{Chiral correlation systems and conformal blocks for vertex algebras with \tops{$\Autdisc$}{G}-action}
 
 Using this we can finally define chiral correlation systems and conformal blocks, now for any vertex algebra
-with a compatible $\cG$-action, instead of just $\vertex = V^k(\fg)$.  
+with a compatible $\Autdisc$-action, instead of just $\vertex = V^k(\fg)$.  
 There are variants depending on how we treat the coordinate
 systems around the marked points.
 
 \begin{defn}[Torsor of formal local coordinates]
-Fix $p \in C$. Let $F_p$ be the set of
+Fix $p \in C$. Let $\Coord_p$ be the set of
 formal local coordinate systems $z$ around $p$, with $z(p) = 0$.
 \end{defn}
 
-$F_p$ is a torsor for $\cG$. Moreover, 
-the $F_p$ fit together into a principal
-$\cG$-bundle $F_C$ over $C$. Local trivializations are
+$\Coord_p$ is a torsor for $\Autdisc$. Moreover, 
+the $\Coord_p$ fit together into a principal
+$\Autdisc$-bundle $\Coord_C$ over $C$. There are distinguished local trivializations
 given as follows: fix a local coordinate $z$ on a patch $U$,
 then assign to $p \in U$ the local coordinate 
-$z_p = z-z(p)$, which has $z_p(p) = 0$ as needed.
+$t_p = z-z(p)$, which has $t_p(p) = 0$ as needed.
 % \footnote{
-% In fact, $F_C$ is a bundle with connection,
+% In fact, $\Coord_C$ is a bundle with connection,
 % for which the above trivializations are parallel.
 % But this connection is not compatible with the
-% action of $\cG$.}
+% action of $\Autdisc$.}
 
-\begin{defn}[Twisting of $\vertex$-modules by local coordinate systems] Fix $p \in C$ and $\vrep$ a $\vertex$-module with compatible $\cG$-action. Then define
+\begin{defn}[Twisting of $\vertex$-modules by local coordinate systems] Fix $\vrep$ a $\vertex$-module with compatible $\Autdisc$-action. Then define an associated (infinite rank) vector bundle
 \begin{equation}
-\vrep_p = \vrep \times_{\cG} F_p \, .
+\vrep_C = \Coord_C \times_{\Autdisc} \vrep  \, .
 \end{equation}
 (In particular we can apply this when $\vrep = \vertex$.)
 \end{defn}
-Each space $\vrep_p$ can be identified with $\vrep$, but not canonically: one gets an identification only
-after choosing an element in $F_p$.
-Because $F_p$ is a principal $\cG$-bundle, 
-the spaces $\vrep_p$ are fibers of an associated 
-(infinite rank) vector bundle $\vrep_C$, whose transition
-maps lie in $\cG$.
+Each fiber $\vrep_p$ can be identified with $\vrep$, but not canonically: one gets an identification only
+after choosing an element in the fiber $\Coord_p$, i.e., a formal local coordinate at $p$.
+
+\begin{example}[Basic sections of the bundle of vertex algebras]
+Suppose $C = \bbC$. 
+Then $\Coord_C$ can be globally trivialized over $\bbC$ by the standard local coordinate $z$.
+This trivializes the bundle $\vertex_C$, so any holomorphic $\vertex$-valued function 
+$a(z)$ gives a section; in particular any element $a \in \vertex$ gives a section.
+\end{example}
+
+\begin{example}[A change of coordinates in the bundle of vertex algebras]
+Suppose $C = \bbC \bbP^1$ and $a \in \vertex$. 
+Then $\Coord_C$ can be globally trivialized over the south-pole patch by the standard local coordinate $z$,
+and over the north-pole patch by $\zeta = z^{-1}$.
+The element $a$ induces a section of $\vertex_C$ over the south-pole patch.
+For $p$ in the overlap, write
+$t_S = z-z(p)$,
+$t_N = \zeta-\zeta(p)$.
+The pointed change of coordinate from $t_N$ to $t_S$ at $p$ is
+$$
+\gamma_p(t)
+=
+\frac{1}{\zeta(p)+t}-\frac{1}{\zeta(p)}
+\in \Autdisc .
+$$
+In the north-pole trivialization, the section is represented by $\rho(\gamma_p) a$.
+% Equivalently, the inverse pointed change of coordinate is
+% \[
+% \gamma_p^{-1}(t)
+% =
+% \zeta(z(p)+t)-\zeta(z(p))
+% =
+% \frac{1}{z(p)+t}-\frac{1}{z(p)}.
+% \]
+In particular, if $a$ is primary of weight $h$, then this action is determined by
+the $1$-jet $\de \gamma_p(t) / \de t \vert_{t=0} = - \zeta(p)^{-2}$, giving
+$$
+\rho(\gamma_p)a
+=
+\left(-\zeta(p)^{-2}\right)^h a.
+$$
+\end{example}
 
 Now suppose $\vrep$ is graded.
 In this case we can consider the filtered components
-$\vrep_{\le n}$. Each of these is also acted on by $\cG$\footnote{The action of $\cG$ does not preserve the grading, but does preserve this filtration.}
+$\vrep_{\le n}$. Each of these is also acted on by $\Autdisc$\footnote{The action of $\Autdisc$ does not preserve the grading, but does preserve this filtration.}
 so we have a corresponding filtration of $\vrep_p$ by
 $\vrep_{p, \le n}$.
 For any $n$, the $\vrep_{p, \le n}$
@@ -1960,15 +2014,15 @@ by the finite rank bundles $\vrep_{C,\le n}$.
 
 % the spaces $\vrep_p$ are fibers of an ind-vector bundle $\vrep_C$
 % over $C$: roughly this means a quasicoherent sheaf which is 
-% filtered by holomorphic (finite-rank) vector bundles (note that the action of $\cG$ on
+% filtered by holomorphic (finite-rank) vector bundles (note that the action of $\Autdisc$ on
 % $\vrep$ does not preserve the graded components $\vrep_n$ 
 % but does preserve the filtration $\vrep_{\le n}$.)
 
 We can use these constructions to define chiral correlation systems in a way that is independent of the local coordinate:
 
-\begin{defn}[Chiral correlation systems for a vertex algebra and modules with $\cG$-action] \label{defn:chiral-correlation-system}
-Suppose $\vertex$ is a vertex algebra with a compatible $\cG$-action, and $C$ is a Riemann surface, with marked points $p_i$, and $\vertex$-modules $\vrep_i$
-with compatible $\cG$-actions. 
+\begin{defn}[Chiral correlation systems for a vertex algebra and modules with $\Autdisc$-action] \label{defn:chiral-correlation-system}
+Suppose $\vertex$ is a vertex algebra with a compatible $\Autdisc$-action, and $C$ is a Riemann surface, with marked points $p_i$, and $\vertex$-modules $\vrep_i$
+with compatible $\Autdisc$-actions. 
 Then a \ti{chiral correlation system} is a collection
 \begin{equation}
   \IP{ \prod_{i=1}^n a_i(q_i) \prod_{i=1}^k \chi_i(p_i) } \in \bbC
@@ -1993,8 +2047,8 @@ where each $a_i \in \vertex_{q_i}$, $\chi_i \in \vrep_{p_i}$, such that:
 Likewise we can define conformal blocks in a way that is independent of the local coordinate:
 
 \begin{defn}
-Suppose $\vertex$ is a vertex algebra with $\cG$-action.
-Suppose $C$ is a Riemann surface with marked points $p_i$, and $\vertex$-modules $\vrep_i$ with compatible $\cG$-action.
+Suppose $\vertex$ is a vertex algebra with $\Autdisc$-action.
+Suppose $C$ is a Riemann surface with marked points $p_i$, and $\vertex$-modules $\vrep_i$ with compatible $\Autdisc$-action.
 Let $\vertex(C)$ denote the space of global meromorphic sections of $\vertex_C \otimes K_C$, 
 with poles only at the $p_i$.
 Fix a local coordinate $z_i$ around each $p_i$, and
@@ -2016,7 +2070,7 @@ We could alternatively write this
   o(a) = \sum_{i=1}^n \bid \otimes \cdots \otimes \Res_{p_i} a \otimes \cdots \otimes \bid
 \end{equation}
 
-\begin{defn}[Conformal blocks for a vertex algebra and modules with $\cG$-action] \label{defn:conformal-block}
+\begin{defn}[Conformal blocks for a vertex algebra and modules with $\Autdisc$-action] \label{defn:conformal-block}
 Define the subspace
 \begin{equation} \label{eq:K-subspace}
  K(C) = \Span \{ \im o(a) \mid  a \in \vertex(C) \}
@@ -2050,7 +2104,7 @@ use iterated Laurent expansions
 of the correlation functions to define $\Phi$.)
 \end{exercise}
 
-There is also a variant of all the above where we consider only an action of the subgroup $\fG_+$,
+There is also a variant of all the above where we consider only an action of the subgroup $\Derdisc_+$,
 consisting of power series with $a_1 = 1$, i.e. $z + a_2 z^2 + a_3 z^3 + \cdots$ In this case we cannot completely eliminate the coordinate dependence, but we can reduce it to a dependence
 on the $1$-jet of the coordinate, or dually a nonzero 
 tangent vector at the marked point.
@@ -2065,10 +2119,10 @@ tangent vector at the marked point.
 
 \subsection{Changes of coordinate, by Virasoro}
 
-Now let us reconsider the $\cG$-action on $V^k(\fg)$ from a different point of view.
+Now let us reconsider the $\Autdisc$-action on $V^k(\fg)$ from a different point of view.
 We specialize very slightly to the case $k \neq - h^\vee$.
 The idea is to 
-find a copy of $\fG$ inside $\vertex$, and then use the general fact that 
+find a copy of $\Derdisc$ inside $\vertex$, and then use the general fact that 
 $\vertex$ acts on itself. For this consider $\omega \in \vertex$ defined by
 \begin{equation}
   \omega = \frac{1}{2(k + h^\vee)} \sum_i J^{X^i}_{(-1)} J^{X_i}_{(-1)} \vac
@@ -2233,33 +2287,21 @@ agree with \eqref{eq:witt-action-on-affine}.
 
 Moreover, once we realize the action of the Witt algebra ``internally'' via the element $\omega \in \vertex$,
 it automatically acts not only on $\vertex$ but on all $\vertex$-modules $\vrep$.
-Now we should ask whether it integrates from $\fG$ to the group $\cG$ of coordinate changes.
+Now we should ask whether it integrates from $\Derdisc$ to the group $\Autdisc$ of coordinate changes.
 The answer  depends on $\vrep$.
 
 The best possible situation arises if $L_0$ acts diagonalizably on $\vrep$,
 with all eigenvalues integers and bounded below. 
 In that case $L_0$ provides a grading on $\vrep$. Moreover
-$\fG_+$ acts locally nilpotently\footnote{\ti{Locally nilpotently} means that for every $v \in \fG_+$ and $\chi \in \vrep$ there exists $N$ such that $v^N \chi = 0$.} and $\fG_0$
+$\Derdisc_+$ acts locally nilpotently\footnote{\ti{Locally nilpotently} means that for every $v \in \Derdisc_+$ and $\chi \in \vrep$ there exists $N$ such that $v^N \chi = 0$.} and $\Derdisc_0$
 acts diagonally respecting the relation $\exp(2 \pi \I L_0) = 1$.
-Thus both indeed integrate to $\rho: \cG \to \End \vrep$.
+Thus both indeed integrate to $\rho: \Autdisc \to \End \vrep$.
 
 The next best situation arises if $\vrep$ is still graded by $L_0$ but 
-the eigenvalues are not necessarily integers. Then at least $\fG_+$ integrates
-to $\rho: \cG_+ \to \End \vrep$.
+the eigenvalues are not necessarily integers. Then at least $\Derdisc_+$ integrates
+to $\rho: \Autdisc_+ \to \End \vrep$.
 
-An element $\chi \in \vrep$ which is annihilated by all positive modes $L_n$, and obeys $L_0 \chi = h \chi$,
-is called a \ti{primary field} of \ti{conformal weight} $h$. 
-For example, the elements $J^X \in \vertex$ are primary fields of conformal weight $1$.
-The transformation law of primary fields 
-under changes of coordinate is relatively simple: if $g(z) = a_1 z + a_2 z^2 + \cdots$ then
-$\rho(g) \chi = (a_1)^h \chi$ (note this is well defined only when $h \in \bbZ$, as we discussed in the last
-paragraph; we can try to make sense
-of it for other $h$, but we will need some extra structure, e.g. a spin structure for $h = \frac12$). 
-Said otherwise, $\chi$ ``transforms as an $h$-differential.''
-So if $h=1$ then $\chi$ transforms as a $1$-form (we have already used this 
-for $\chi = J^X$), if $h=2$ then $\chi$ transforms as a quadratic differential, and so on.
-
-One other interesting case is the Virasoro field $\omega = L_{-2} \vac$ 
+It is interesting to consider the transformation property of the Virasoro field $\omega = L_{-2} \vac$ 
 itself. This one has $L_0 \omega = 2 \omega$, so you might think it would transform as a 
 quadratic differential, but it is not primary for $c \neq 0$: 
 indeed $L_2 \omega = [L_2, L_{-2}] \vac = \frac{c}{2} \vac$.
@@ -5583,12 +5625,12 @@ Its dual has a canonical section, which maps a block to $\IP{1}$.
 \fixme{we get an object $T(z)$ which transforms as an oper}
 
 
-% This \ti{almost} works, but for one subtlety: in the group $\cG$ we have the relation $\exp(2 \pi \I L_0) = 1$,
-% which need not hold in a general $\vrep$-module. Thus the action of $\fG$ on $\vrep$ need not integrate
-% to $\cG$. Still we can consider the subgroup $\cG_1 \subset \cG$, consisting of 
+% This \ti{almost} works, but for one subtlety: in the group $\Autdisc$ we have the relation $\exp(2 \pi \I L_0) = 1$,
+% which need not hold in a general $\vrep$-module. Thus the action of $\Derdisc$ on $\vrep$ need not integrate
+% to $\Autdisc$. Still we can consider the subgroup $\Autdisc_1 \subset \Autdisc$, consisting of 
 
 
-% Rather it will integrate to a $\bbZ$-covering $\tcG$ of $\cG$, consisting of power series
+% Rather it will integrate to a $\bbZ$-covering $\tcG$ of $\Autdisc$, consisting of power series
 % $a_1 z + a_2 z^2 + \cdots$ equipped with a choice of $\log a_1$.
 
 
